@@ -27,12 +27,24 @@
     ]
   },
   "projects": {
+    "data-access": {
+      "tags": []
+    },
+    "feature": {
+      "tags": []
+    },
     "rng-app": {
       "tags": []
     },
     "rng-app-e2e": {
       "tags": [],
       "implicitDependencies": ["rng-app"]
+    },
+    "ui": {
+      "tags": []
+    },
+    "util": {
+      "tags": []
     }
   }
 }

@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@rng/data-access": ["libs/data-access/src/index.ts"],
+      "@rng/feature": ["libs/feature/src/index.ts"],
+      "@rng/ui": ["libs/ui/src/index.ts"],
+      "@rng/util": ["libs/util/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
