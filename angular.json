@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "projects": {
+    "rng-app": {
+      "projectType": "application",
+      "root": "apps/rng-app",
+      "sourceRoot": "apps/rng-app/src",
+      "prefix": "rng",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/rng-app",
+            "index": "apps/rng-app/src/index.html",
+            "main": "apps/rng-app/src/main.ts",
+            "polyfills": "apps/rng-app/src/polyfills.ts",
+            "tsConfig": "apps/rng-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/rng-app/src/favicon.ico",
+              "apps/rng-app/src/assets"
+            ],
+            "styles": ["apps/rng-app/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/rng-app/src/environments/environment.ts",
+                  "with": "apps/rng-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "rng-app:build:production"
+            },
+            "development": {
+              "browserTarget": "rng-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "rng-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/rng-app/src/**/*.ts",
+              "apps/rng-app/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/rng-app"],
+          "options": {
+            "jestConfig": "apps/rng-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "rng-app-e2e": {
+      "root": "apps/rng-app-e2e",
+      "sourceRoot": "apps/rng-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/rng-app-e2e/cypress.json",
+            "tsConfig": "apps/rng-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "rng-app:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "rng-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/rng-app-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "rng-app"
+}
