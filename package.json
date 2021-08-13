@@ -26,7 +26,9 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "add-auth-module":"npm run workspace-schematic -- auth-module module-name --project=rng-project"
+    "add-auth-module":"npm run workspace-schematic -- auth-module module-name --project=rng-project",
+    "main_build_github": "nx build --project rng-app --output-path docs --base-href https://rime-dev.github.io/rng/"
+
   },
   "private": true,
   "dependencies": {
