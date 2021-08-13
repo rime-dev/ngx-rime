@@ -63,25 +63,32 @@
   <p>Here are some links to help you get started.</p>
   <ul class="resources">
     <li class="col-span-2">
-      <a class="resource flex" href="https://nxplaybook.com/p/nx-workspaces">
+      <button
+        mat-button
+        class="resource flex"
+        href="https://nxplaybook.com/p/nx-workspaces"
+      >
         Nx video course
-      </a>
+      </button>
     </li>
     <li class="col-span-2">
-      <a
-        class="resource flex"
+      <button
+        mat-button
+        color="primary"
+        class="flex"
         href="https://nx.dev/latest/angular/getting-started/intro"
       >
         Nx video tutorial
-      </a>
+      </button>
     </li>
     <li class="col-span-2">
-      <a
+      <button
+        mat-button
         class="resource flex"
         href="https://nx.dev/latest/angular/tutorial/01-create-application"
       >
         Interactive tutorial
-      </a>
+      </button>
     </li>
     <li class="col-span-2">
       <a class="resource flex" href="https://nx.app/">
@@ -112,7 +119,7 @@
     <pre>
   # Generate UI lib
   nx g @nrwl/angular:lib ui
-  
+
   # Add a component
   nx g @nrwl/angular:component xyz --project ui</pre
     >
@@ -126,10 +133,10 @@
     <pre>
   # see what's been affected by changes
   nx affected:dep-graph
-  
+
   # run tests for current changes
   nx affected:test
-  
+
   # run e2e tests for current changes
   nx affected:e2e
   </pre
