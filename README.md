@@ -1,10 +1,8 @@
 # RNG - utilities for Angular
 
-The Rime team develops components, directives, services and schematics to build Angular applications.
+<p style="text-align: center;"><img src="https://raw.githubusercontent.com/rime-dev/rng/main/images/rng-logo.png" width="250"></p>
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/rime-dev/rng/main/images/rng-logo.png" width="450"></p>
-
-The team maintains several npm packages.
+The Rime team develops components, directives, services and schematics to build Angular applications. The team maintains several npm packages.
 
 | Package            | Description                                                                                                                                                  | Docs                     |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ |
@@ -15,9 +13,10 @@ The team maintains several npm packages.
 
 #### Quick links
 
-[Documentation, demos, and guides][data-access-docs] |
-[Contributing](https://github.com/rime-dev/components/blob/main/CONTRIBUTING.md) |
+[Documentation, demos, and guides][rng-docs] |
+[Contributing](https://github.com/rime-dev/components/blob/main/CONTRIBUTING.md)
 
+[rng-docs]: https://rime-dev.github.io/rng
 [data-access-docs]: https://rime-dev.github.io/rng
 [feature-docs]: https://rime-dev.github.io/rng
 [ui-docs]: https://rime-dev.github.io/rng
