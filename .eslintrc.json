@@ -1,117 +1,141 @@
 {
-    "root" : true,
-    "ignorePatterns": [
-      "!**/*",
-      "*.d.ts"
-    ],
-    "overrides": [
-      {
-        "files": ["*.ts"],
-        "extends": [
-          "plugin:@angular-eslint/ng-cli-compat",
-          "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
-          "plugin:@angular-eslint/recommended",
-          "plugin:@angular-eslint/template/process-inline-templates"
+  "root": true,
+  "ignorePatterns": [
+    "!**/*",
+    "*.d.ts"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "project": [
+          "./tsconfig.*?.json"
         ],
-        "rules": {
-          "@angular-eslint/directive-selector": [
-            "error",
-            {
-              "type": "attribute",
-              "prefix": "m",
-              "style": "kebab-case"
-            }
-          ],
-          "@angular-eslint/component-selector": [
-            "error",
-            {
-              "type": "element",
-              "prefix": "m",
-              "style": "kebab-case"
-            }
-          ],
-          "@typescript-eslint/no-inferrable-types": 0,
-          "@typescript-eslint/no-non-null-assertion": 0,
-          "no-underscore-dangle": "off",
-          "@angular-eslint/no-input-rename": "off",
-          "no-duplicate-imports": "error",
-          "@typescript-eslint/naming-convention": [
-            "error",
-            {
-              "selector": "classProperty",
-              "modifiers": ["private"],
-              "format": ["camelCase"],
-              "leadingUnderscore": "allowSingleOrDouble"
-            }
-          ],
-          "@typescript-eslint/no-unused-expressions": [
-            "error",
-            {
-              "allowTernary": true,
-              "allowShortCircuit": true
-            }
-          ],
-          "no-shadow": "off",
-          "@typescript-eslint/no-shadow": "error"
-        }
+        "createDefaultProgram": true
       },
-      {
-        "files": ["*.spec.ts"],
-        "extends": [
-          "plugin:@angular-eslint/template/process-inline-templates"
+      "extends": [
+        "plugin:@angular-eslint/ng-cli-compat",
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "m",
+            "style": "kebab-case"
+          }
         ],
-        "rules": {
-          "arrow-body-style": ["off"],
-          "prefer-arrow/prefer-arrow-functions": [
-            "warn",
-            {
-              "disallowPrototype": true,
-              "singleReturnOnly": false,
-              "classPropertiesAllowed": false,
-              "allowStandaloneDeclarations": true
-            }
-          ],
-          "@typescript-eslint/no-non-null-assertion": 0,
-          "@typescript-eslint/no-inferrable-types": 0,
-          "no-restricted-globals": [
-            "error",
-            {
-              "name": "fdescribe",
-              "message": "Do not commit with fdescribe. Use describe instead."
-            },
-            {
-              "name": "fit",
-              "message": "Do not commit with fit. Use it instead."
-            }
-          ]
-        }
-      },
-      {
-        "files": ["*.util.ts"],
-        "extends": [
-          "plugin:@angular-eslint/recommended"
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "m",
+            "style": "kebab-case"
+          }
         ],
-        "rules": {
-          "arrow-body-style": ["off"],
-          "prefer-arrow/prefer-arrow-functions": [
-            "warn",
-            {
-              "disallowPrototype": true,
-              "singleReturnOnly": false,
-              "classPropertiesAllowed": false,
-              "allowStandaloneDeclarations": true
-            }
-          ],
-          "@typescript-eslint/no-non-null-assertion": 0,
-          "@typescript-eslint/no-inferrable-types": 0
-        }
-      },
-      {
-        "files": ["*.html"],
-        "extends": [
-          "plugin:@angular-eslint/template/recommended"
+        "@typescript-eslint/no-inferrable-types": 0,
+        "@typescript-eslint/no-non-null-assertion": 0,
+        "no-underscore-dangle": "off",
+        "@angular-eslint/no-input-rename": "off",
+        "no-duplicate-imports": "error",
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "classProperty",
+            "modifiers": [
+              "private"
+            ],
+            "format": [
+              "camelCase"
+            ],
+            "leadingUnderscore": "allowSingleOrDouble"
+          }
         ],
-        "rules": {}
+        "@typescript-eslint/no-unused-expressions": [
+          "error",
+          {
+            "allowTernary": true,
+            "allowShortCircuit": true
+          }
+        ],
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": "error"
       }
-    ]
-  }
+    },
+    {
+      "files": [
+        "*.spec.ts"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "arrow-body-style": [
+          "off"
+        ],
+        "prefer-arrow/prefer-arrow-functions": [
+          "warn",
+          {
+            "disallowPrototype": true,
+            "singleReturnOnly": false,
+            "classPropertiesAllowed": false,
+            "allowStandaloneDeclarations": true
+          }
+        ],
+        "@typescript-eslint/no-non-null-assertion": 0,
+        "@typescript-eslint/no-inferrable-types": 0,
+        "no-restricted-globals": [
+          "error",
+          {
+            "name": "fdescribe",
+            "message": "Do not commit with fdescribe. Use describe instead."
+          },
+          {
+            "name": "fit",
+            "message": "Do not commit with fit. Use it instead."
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.util.ts"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/recommended"
+      ],
+      "rules": {
+        "arrow-body-style": [
+          "off"
+        ],
+        "prefer-arrow/prefer-arrow-functions": [
+          "warn",
+          {
+            "disallowPrototype": true,
+            "singleReturnOnly": false,
+            "classPropertiesAllowed": false,
+            "allowStandaloneDeclarations": true
+          }
+        ],
+        "@typescript-eslint/no-non-null-assertion": 0,
+        "@typescript-eslint/no-inferrable-types": 0
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}
