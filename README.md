@@ -1,6 +1,21 @@
-# RNG - utilities for Angular
+# RNG - Utilities for Angular from RIME
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/rime-dev/rng/main/images/rng-logo.png" width="250"></p>
+<p align="center">
+  <img src="./images/rng-logo.png" alt="rng-logo" width="120px" height="120px"/>
+  <br>
+  <i>
+    RNG is a set of tools to develop applications faster.
+  </i>
+  <br>
+</p>
+
+<p align="center">
+  <a href="https://rime-dev.github.io"><strong>From Rime</strong></a>
+  <br>
+</p>
+
+
+<hr>
 
 The Rime team develops components, directives, services and schematics to build Angular applications. The team maintains several npm packages.
 
