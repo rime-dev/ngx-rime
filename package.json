@@ -32,7 +32,8 @@
     "run_story_for_project": "nx run project-name:storybook",
     "run_story_for_ui": "nx run ui:storybook",
     "generate_tailwind": "nx generate @ngneat/tailwind:nx-setup",
-    "add_material": "ng add @angular/material"
+    "add_material": "ng add @angular/material",
+    "generate_directive": "npx nx g directive lazy-load-image/lazy-load-image --project=util --export"
   },
   "private": true,
   "dependencies": {
