@@ -1,4 +1,4 @@
-# RNG - Utilities for Angular from RIME
+# RNG - Utilities for Angular
 
 <p align="center">
   <img src="./images/rng-logo.png" alt="rng-logo" width="120px" height="120px"/>
