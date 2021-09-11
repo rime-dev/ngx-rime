@@ -1,7 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {QuizModule} from './quiz/quiz.module';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, QuizModule],
+  exports: [QuizModule],
 })
 export class UiModule {}

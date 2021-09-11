@@ -1,12 +1,15 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import {UiModule} from '@rng/ui';
+import {QuizModule} from 'libs/ui/src/lib/quiz/quiz.module';
+import {QuizModule} from '@rng/ui/quiz';
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, MatButtonModule],
+  imports: [BrowserModule, BrowserAnimationsModule, MatButtonModule, UiModule, QuizModule],
   providers: [],
   bootstrap: [AppComponent],
 })

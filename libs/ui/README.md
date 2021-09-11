@@ -6,6 +6,6 @@ This library was generated with [Nx](https://nx.dev).
 
 Run `nx test ui` to execute the unit tests.
 
-## Info
+##  Info
 
 A UI library contains only presentational components.
