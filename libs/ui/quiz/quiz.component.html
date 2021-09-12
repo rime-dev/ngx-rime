@@ -1,1 +1,21 @@
-<p>quiz works!</p>
+<mat-progress-bar
+  *ngIf="showProgressBar"
+  mode="determinate"
+  [value]="progress"
+  class="mb-4"
+></mat-progress-bar>
+
+<div *ngFor="let question of questions; let i = index">
+  <rng-quiz-question
+    *ngIf="i === currentIndex"
+    [question]="question"
+    [index]="i"
+    (selected)="onSelectQuestion($event)"
+  >
+  </rng-quiz-question>
+</div>
+<div class="flex flex-row">
+  <button mat-stroked-button (clik)="previousQuestion()">Anterior</button>
+  <button mat-stroked-button (clik)="nextQuestion()" *ngIf="!canBeFinalized">Siguiente</button>
+  <button mat-stroked-button (clik)="finaliceQuiz()" *ngIf="canBeFinalized">Finalizar</button>
+</div>
