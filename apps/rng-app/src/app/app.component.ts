@@ -45,4 +45,8 @@ export class AppComponent {
     },
   ];
   constructor() {}
+
+  onFinalized(event: boolean): void {
+    console.log(event);
+  }
 }

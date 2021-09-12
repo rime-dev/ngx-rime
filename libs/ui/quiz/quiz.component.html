@@ -1,3 +1,17 @@
+<div class="mb-4 block">
+  <button mat-icon-button class="float-left" [matTooltip]="'Cerrar'" (click)="closeQuiz()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="float-right"
+    [matTooltip]="'Finalizar'"
+    (click)="finaliceQuiz()"
+    [disabled]="!canBeFinalized"
+  >
+    <mat-icon>flaky</mat-icon>
+  </button>
+</div>
 <mat-progress-bar
   *ngIf="showProgressBar"
   mode="determinate"
@@ -14,8 +28,21 @@
   >
   </rng-quiz-question>
 </div>
-<div class="flex flex-row">
-  <button mat-stroked-button (clik)="previousQuestion()">Anterior</button>
-  <button mat-stroked-button (clik)="nextQuestion()" *ngIf="!canBeFinalized">Siguiente</button>
-  <button mat-stroked-button (clik)="finaliceQuiz()" *ngIf="canBeFinalized">Finalizar</button>
+<div class="mt-4 block">
+  <button
+    mat-icon-button
+    class="float-left"
+    (click)="previousQuestion()"
+    [disabled]="currentIndex === 0"
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="float-right"
+    (click)="nextQuestion()"
+    [disabled]="currentIndex === questions.length - 1"
+  >
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
 </div>

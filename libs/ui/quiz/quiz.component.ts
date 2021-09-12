@@ -1,6 +1,6 @@
 import {coerceArray, coerceBooleanProperty} from '@angular/cdk/coercion';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Question} from './models/quiz.model';
+import {Question, QuestionOption} from './models/quiz.model';
 
 @Component({
   selector: 'rng-quiz',
@@ -35,6 +35,8 @@ export class QuizComponent {
   }
   private _questions!: any[];
 
+  @Output() closed: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   @Output() finalized: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {}
@@ -43,22 +45,42 @@ export class QuizComponent {
     const totalIndex = this.questions.length;
     if ((event.index as number) < totalIndex - 1) {
       const currentIndex = (event.index as number) + 1;
-      const currentProgress = (currentIndex * 100) / totalIndex;
       this.currentIndex = currentIndex;
-      this.progress = currentProgress;
+      if (this.progress < 100) {
+        const currentProgress = (currentIndex * 100) / totalIndex;
+        this.progress = currentProgress;
+      }
     } else if ((event.index as number) === totalIndex - 1) {
       this.progress = 100;
+    }
+    if (this.checkIfCanBeFinlized()) {
       this.canBeFinalized = true;
     }
-    console.log('Question', this.currentIndex);
-    console.log('totalIndex', this.questions.length);
   }
 
-  previousQuestion(): void {}
+  previousQuestion(): void {
+    if (this.currentIndex > 0) {
+      this.currentIndex = this.currentIndex - 1;
+    }
+  }
 
-  nextQuestion(): void {}
+  nextQuestion(): void {
+    if (this.currentIndex < this.questions.length - 1) {
+      this.currentIndex = this.currentIndex + 1;
+    }
+  }
+
+  closeQuiz(): void {
+    this.closed.next(true);
+  }
 
   finaliceQuiz(): void {
     this.finalized.next(true);
+  }
+
+  private checkIfCanBeFinlized(): boolean {
+    return this.questions.every((question: Question) =>
+      question.options.some((option: QuestionOption) => option.response)
+    ) as boolean;
   }
 }

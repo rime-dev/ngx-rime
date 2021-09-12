@@ -34,7 +34,7 @@
   <h1>Welcome to {{ title }}!</h1>
 </header> -->
 
-<rng-quiz [questions]="questions"></rng-quiz>
+<rng-quiz [questions]="questions" (finalized)="onFinalized($event)"></rng-quiz>
 
 <!-- <main>
   <h2>Resources &amp; Tools</h2>
