@@ -1,5 +1,15 @@
+import {FocusMonitor} from '@angular/cdk/a11y';
 import {coerceArray, coerceBooleanProperty} from '@angular/cdk/coercion';
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core';
 import {Question, QuestionOption} from './models/quiz.model';
 
 @Component({
@@ -7,7 +17,7 @@ import {Question, QuestionOption} from './models/quiz.model';
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
 })
-export class QuizComponent {
+export class QuizComponent implements AfterViewInit, OnDestroy {
   public progress = 0;
   public currentIndex = 0;
   public canBeFinalized = false;
@@ -35,11 +45,41 @@ export class QuizComponent {
   }
   private _questions!: any[];
 
+  /**
+   * Closed emitter behaviour
+   */
   @Output() closed: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  /**
+   * Finalized emitter behaviour
+   */
   @Output() finalized: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor() {}
+  @HostListener('keydown.ArrowLeft', ['$event'])
+  _handleKeydownLeft(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log(event);
+
+    this.previousQuestion();
+  }
+
+  @HostListener('keydown.ArrowRight', ['$event'])
+  _handleKeydownRight(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.nextQuestion();
+  }
+
+  constructor(private _focusMonitor: FocusMonitor, private _elementRef: ElementRef) {}
+
+  ngAfterViewInit(): void {
+    this._focusMonitor.monitor(this._elementRef, true);
+  }
+
+  ngOnDestroy(): void {
+    this._focusMonitor.stopMonitoring(this._elementRef);
+  }
 
   onSelectQuestion(event: Question): void {
     const totalIndex = this.questions.length;
