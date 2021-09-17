@@ -12,6 +12,7 @@
     <mat-icon>flaky</mat-icon>
   </button>
 </div>
+
 <mat-progress-bar
   *ngIf="showProgressBar"
   mode="determinate"
@@ -19,16 +20,18 @@
   class="mb-4"
 ></mat-progress-bar>
 
-<div *ngFor="let question of questions; let i = index">
-  <rng-quiz-question
-    *ngIf="i === currentIndex"
-    [question]="question"
-    [index]="i"
-    (selected)="onSelectQuestion($event)"
-  >
-  </rng-quiz-question>
+<div class="questions-container h-full">
+  <div *ngFor="let question of questions; let i = index">
+    <rng-quiz-question
+      *ngIf="i === currentIndex"
+      [question]="question"
+      [index]="i"
+      (selected)="onSelectQuestion($event)"
+    >
+    </rng-quiz-question>
+  </div>
 </div>
-<div class="mt-4 block">
+<div class="block">
   <button
     mat-icon-button
     class="float-left"

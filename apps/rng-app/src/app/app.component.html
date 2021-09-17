@@ -34,7 +34,9 @@
   <h1>Welcome to {{ title }}!</h1>
 </header> -->
 
-<rng-quiz [questions]="questions" (finalized)="onFinalized($event)"></rng-quiz>
+<div class="container h-full" style="height: 75vh">
+  <rng-quiz [questions]="questions" (finalized)="onFinalized($event)"></rng-quiz>
+</div>
 
 <!-- <main>
   <h2>Resources &amp; Tools</h2>

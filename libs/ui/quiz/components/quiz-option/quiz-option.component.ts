@@ -1,14 +1,4 @@
-import {FocusMonitor} from '@angular/cdk/a11y';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Input,
-  OnDestroy,
-  Output,
-} from '@angular/core';
+import {Component, EventEmitter, HostBinding, HostListener, Input, Output} from '@angular/core';
 import {QuestionOption} from '../../models/quiz.model';
 
 @Component({
@@ -16,7 +6,7 @@ import {QuestionOption} from '../../models/quiz.model';
   templateUrl: './quiz-option.component.html',
   styleUrls: ['./quiz-option.component.scss'],
 })
-export class QuizOptionComponent implements AfterViewInit, OnDestroy {
+export class QuizOptionComponent {
   @Input()
   get option(): QuestionOption {
     return this._option;
@@ -35,6 +25,8 @@ export class QuizOptionComponent implements AfterViewInit, OnDestroy {
   }
   private _index!: number;
 
+  @HostBinding('option-selected') private optionSelected = this.option?.response;
+
   @Output() selected: EventEmitter<QuestionOption> = new EventEmitter<QuestionOption>();
 
   @HostListener('click', ['$event'])
@@ -49,17 +41,9 @@ export class QuizOptionComponent implements AfterViewInit, OnDestroy {
     this.selectOption();
   }
 
-  constructor(private _focusMonitor: FocusMonitor, private _elementRef: ElementRef) {}
-
-  ngAfterViewInit(): void {
-    this._focusMonitor.monitor(this._elementRef, true);
-  }
+  constructor() {}
 
   selectOption() {
     this.selected.next({...this.option, index: this.index, response: true});
-  }
-
-  ngOnDestroy(): void {
-    this._focusMonitor.stopMonitoring(this._elementRef);
   }
 }

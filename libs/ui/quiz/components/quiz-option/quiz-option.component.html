@@ -1,6 +1,9 @@
 <button mat-button class="w-full">
   <span class="flex flex-row text-left p-2">
-    <span class="font-mono text-base font-medium mr-4">{{ index + 1 }}</span>
+    <span *ngIf="!option.response" class="font-mono text-base font-medium mr-4">{{
+      index + 1
+    }}</span>
+    <mat-icon class="text-base font-medium" *ngIf="option.response">done</mat-icon>
     <span class="font-mono text-base font-medium">{{ option.text }}</span>
   </span>
 </button>
