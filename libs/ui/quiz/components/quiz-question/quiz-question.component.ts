@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  NgZone,
   OnDestroy,
   Output,
   QueryList,
@@ -42,19 +43,25 @@ export class QuizQuestionComponent implements OnDestroy {
   // Query all child elements
   @ViewChildren(QuizOptionComponent) options!: QueryList<QuizOptionComponent>;
 
+  constructor(private ngZone: NgZone) {}
+
   onSelectOption(event: QuestionOption) {
-    from(this.question.options)
-      .pipe(
-        map((option: QuestionOption) =>
-          option.text === event.text ? (option.response = true) : (option.response = false)
-        ),
-        delay(500),
-        finalize(() => this.selected.next({...this.question, index: this.index})),
-        delay(500),
-        finalize(() => (this.question.dirty = true)),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
+    this.ngZone.runOutsideAngular(() => {
+      from(this.question.options)
+        .pipe(
+          map((option: QuestionOption) =>
+            option.text === event.text ? (option.response = true) : (option.response = false)
+          ),
+          delay(1000),
+          finalize(() =>
+            this.ngZone.runTask(() => this.selected.next({...this.question, index: this.index}))
+          ),
+          delay(1000),
+          finalize(() => this.ngZone.runTask(() => (this.question.dirty = true))),
+          takeUntil(this.destroy$)
+        )
+        .subscribe();
+    });
   }
 
   ngOnDestroy(): void {

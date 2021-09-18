@@ -1,10 +1,11 @@
+import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {QuizModule} from '@rng/ui/quiz';
 import {AppComponent} from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule],
+  imports: [CommonModule, QuizModule],
   providers: [],
   bootstrap: [AppComponent],
 })

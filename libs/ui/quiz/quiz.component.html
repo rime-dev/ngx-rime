@@ -8,6 +8,7 @@
     [matTooltip]="'Finalizar'"
     (click)="finaliceQuiz()"
     [disabled]="!canBeFinalized"
+    [class.animate-pulse]="canBeFinalized"
   >
     <mat-icon>flaky</mat-icon>
   </button>
@@ -20,7 +21,7 @@
   class="mb-4"
 ></mat-progress-bar>
 
-<div class="questions-container h-full">
+<div class="questions-container h-full p-4">
   <div *ngFor="let question of questions; let i = index">
     <rng-quiz-question
       *ngIf="i === currentIndex"

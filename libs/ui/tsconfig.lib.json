@@ -10,6 +10,7 @@
     "lib": ["dom", "es2018"]
   },
   "exclude": [
+    "test.ts", "**/*.spec.ts",
     "src/test-setup.ts",
     "**/*.spec.ts",
     "**/*.stories.ts",

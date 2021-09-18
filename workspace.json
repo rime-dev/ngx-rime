@@ -45,6 +45,122 @@
         }
       }
     },
+    "quiz-app": {
+      "projectType": "application",
+      "root": "apps/demos/quiz-app",
+      "sourceRoot": "apps/demos/quiz-app/src",
+      "prefix": "rng",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/demos/quiz-app",
+            "index": "apps/demos/quiz-app/src/index.html",
+            "main": "apps/demos/quiz-app/src/main.ts",
+            "polyfills": "apps/demos/quiz-app/src/polyfills.ts",
+            "tsConfig": "apps/demos/quiz-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/demos/quiz-app/src/favicon.ico", "apps/demos/quiz-app/src/assets"],
+            "styles": ["apps/demos/quiz-app/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/demos/quiz-app/src/environments/environment.ts",
+                  "with": "apps/demos/quiz-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "quiz-app:build:production"
+            },
+            "development": {
+              "browserTarget": "quiz-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "quiz-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/demos/quiz-app/src/**/*.ts",
+              "apps/demos/quiz-app/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/demos/quiz-app"],
+          "options": {
+            "jestConfig": "apps/demos/quiz-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "quiz-app-e2e": {
+      "root": "apps/demos/quiz-app-e2e",
+      "sourceRoot": "apps/demos/quiz-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/demos/quiz-app-e2e/cypress.json",
+            "tsConfig": "apps/demos/quiz-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "quiz-app:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "quiz-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/demos/quiz-app-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "rng-app": {
       "projectType": "application",
       "root": "apps/rng-app",
@@ -165,10 +281,8 @@
       "prefix": "rng",
       "architect": {
         "build": {
-          "executor": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/ui"
-          ],
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/ui"],
           "options": {
             "project": "libs/ui/ng-package.json"
           },

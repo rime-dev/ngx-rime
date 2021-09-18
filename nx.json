@@ -4,6 +4,7 @@
     "defaultBase": "master"
   },
   "implicitDependencies": {
+    "workspace.json": "*",
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
@@ -33,6 +34,13 @@
     },
     "feature": {
       "tags": []
+    },
+    "quiz-app": {
+      "tags": []
+    },
+    "quiz-app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["quiz-app"]
     },
     "rng-app": {
       "tags": []

@@ -1,6 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {QuizOptionComponent} from './quiz-option.component';
+import {QuizOptionComponent} from '../quiz-option/quiz-option.component';
 
 describe('QuizOptionComponent', () => {
   let component: QuizOptionComponent;
