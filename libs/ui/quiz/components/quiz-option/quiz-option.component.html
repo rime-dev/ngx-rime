@@ -1,0 +1,9 @@
+<button mat-raised-button class="quiz-option-button" [class.mat-elevation-z9]="option.response">
+  <span class="flex flex-row text-left p-2">
+    <span *ngIf="!option.response" class="font-mono text-base font-medium mr-4">{{
+      index + 1
+    }}</span>
+    <mat-icon class="text-lg font-bold" *ngIf="option.response">done</mat-icon>
+    <span class="font-mono text-base font-medium">{{ option.text }}</span>
+  </span>
+</button>

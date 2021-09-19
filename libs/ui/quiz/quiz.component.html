@@ -1,0 +1,52 @@
+<div class="mb-4 block">
+  <button mat-icon-button class="float-left" [matTooltip]="'Cerrar'" (click)="closeQuiz()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="float-right"
+    [matTooltip]="'Finalizar'"
+    (click)="finaliceQuiz()"
+    [disabled]="!canBeFinalized"
+    [class.animate-pulse]="canBeFinalized"
+  >
+    <mat-icon>flaky</mat-icon>
+  </button>
+</div>
+
+<mat-progress-bar
+  *ngIf="showProgressBar"
+  mode="determinate"
+  [value]="progress"
+  class="mb-4"
+></mat-progress-bar>
+
+<div class="questions-container h-full p-4">
+  <div *ngFor="let question of questions; let i = index">
+    <rng-quiz-question
+      *ngIf="i === currentIndex"
+      [question]="question"
+      [index]="i"
+      (selected)="onSelectQuestion($event)"
+    >
+    </rng-quiz-question>
+  </div>
+</div>
+<div class="block">
+  <button
+    mat-icon-button
+    class="float-left"
+    (click)="previousQuestion()"
+    [disabled]="currentIndex === 0"
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="float-right"
+    (click)="nextQuestion()"
+    [disabled]="currentIndex === questions.length - 1"
+  >
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
+</div>

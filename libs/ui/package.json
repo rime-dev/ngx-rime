@@ -1,0 +1,8 @@
+{
+  "name": "@rng/ui",
+  "version": "0.0.0",
+  "description": "User Interface uitilities",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

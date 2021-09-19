@@ -17,9 +17,24 @@
     "paths": {
       "@rng/data-access": ["libs/data-access/src/index.ts"],
       "@rng/feature": ["libs/feature/src/index.ts"],
-      "@rng/ui": ["libs/ui/src/index.ts"],
+      "@rng/ui": ["libs/ui/index.ts"],
+      "@rng/ui/*": ["libs/ui/*"],
       "@rng/util": ["libs/util/src/index.ts"]
-    }
+    },
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true,
+    "fullTemplateTypeCheck": true,
+    "strictInputAccessModifiers": true,
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "enableResourceInlining": true
   },
   "exclude": ["node_modules", "tmp"]
 }

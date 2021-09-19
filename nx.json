@@ -4,11 +4,13 @@
     "defaultBase": "master"
   },
   "implicitDependencies": {
+    "workspace.json": "*",
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
     },
-    ".eslintrc.json": "*"
+    ".eslintrc.json": "*",
+    "tsconfig.base.json": "*"
   },
   "tasksRunnerOptions": {
     "default": {
@@ -32,6 +34,13 @@
     },
     "feature": {
       "tags": []
+    },
+    "quiz-app": {
+      "tags": []
+    },
+    "quiz-app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["quiz-app"]
     },
     "rng-app": {
       "tags": []
