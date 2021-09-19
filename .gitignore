@@ -45,3 +45,4 @@ Thumbs.db
 .vscode/settings.json
 
 debug.log
+/package-lock.json
