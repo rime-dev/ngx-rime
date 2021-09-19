@@ -45,6 +45,119 @@
         }
       }
     },
+    "map-app": {
+      "projectType": "application",
+      "root": "apps/demos/map-app",
+      "sourceRoot": "apps/demos/map-app/src",
+      "prefix": "rng",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/demos/map-app",
+            "index": "apps/demos/map-app/src/index.html",
+            "main": "apps/demos/map-app/src/main.ts",
+            "polyfills": "apps/demos/map-app/src/polyfills.ts",
+            "tsConfig": "apps/demos/map-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/demos/map-app/src/favicon.ico", "apps/demos/map-app/src/assets"],
+            "styles": ["apps/demos/map-app/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/demos/map-app/src/environments/environment.ts",
+                  "with": "apps/demos/map-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "map-app:build:production"
+            },
+            "development": {
+              "browserTarget": "map-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "map-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/demos/map-app/src/**/*.ts", "apps/demos/map-app/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/demos/map-app"],
+          "options": {
+            "jestConfig": "apps/demos/map-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "map-app-e2e": {
+      "root": "apps/demos/map-app-e2e",
+      "sourceRoot": "apps/demos/map-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/demos/map-app-e2e/cypress.json",
+            "tsConfig": "apps/demos/map-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "map-app:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "map-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/demos/map-app-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "quiz-app": {
       "projectType": "application",
       "root": "apps/demos/quiz-app",

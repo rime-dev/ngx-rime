@@ -4,5 +4,8 @@
   "description": "User Interface uitilities",
   "dependencies": {
     "tslib": "^2.0.0"
-  }
+  },
+  "style": [
+    "node_modules/ol/ol.css"
+  ]
 }

@@ -35,6 +35,13 @@
     "feature": {
       "tags": []
     },
+    "map-app": {
+      "tags": []
+    },
+    "map-app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["map-app"]
+    },
     "quiz-app": {
       "tags": []
     },
