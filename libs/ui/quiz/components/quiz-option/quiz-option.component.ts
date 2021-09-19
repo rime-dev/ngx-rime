@@ -14,7 +14,7 @@ export class QuizOptionComponent {
   set option(value: QuestionOption) {
     this._option = value;
   }
-  private _option!: QuestionOption;
+  private _option: QuestionOption = {text: '', state: false};
 
   @Input()
   get index(): number {
@@ -23,9 +23,15 @@ export class QuizOptionComponent {
   set index(value: number) {
     this._index = value;
   }
-  private _index!: number;
+  private _index = 0;
 
-  @HostBinding('option-selected') private optionSelected = this.option?.response;
+  @HostBinding('option-selected') get valid() {
+    if (this.option) {
+      return this.option.response;
+    } else {
+      return;
+    }
+  }
 
   @Output() selected: EventEmitter<QuestionOption> = new EventEmitter<QuestionOption>();
 

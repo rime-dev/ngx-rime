@@ -42,13 +42,13 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
    * Defines the questions
    */
   @Input()
-  get questions(): any[] {
+  get questions(): Question[] {
     return this._questions;
   }
-  set questions(value: any[]) {
+  set questions(value: Question[]) {
     this._questions = coerceArray(value);
   }
-  private _questions!: any[];
+  private _questions: Question[] = [];
 
   /**
    * Closed emitter behaviour

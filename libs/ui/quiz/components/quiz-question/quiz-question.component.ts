@@ -8,8 +8,8 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import {from, of, Subject, timer} from 'rxjs';
-import {debounce, debounceTime, delay, finalize, map, takeUntil} from 'rxjs/operators';
+import {from, Subject} from 'rxjs';
+import {delay, finalize, map, takeUntil} from 'rxjs/operators';
 import {Question, QuestionOption} from '../../models/quiz.model';
 import {QuizOptionComponent} from '../quiz-option/quiz-option.component';
 @Component({
@@ -27,7 +27,7 @@ export class QuizQuestionComponent implements OnDestroy {
   set question(value: Question) {
     this._question = value;
   }
-  private _question!: Question;
+  private _question: Question = {title: '', options: []};
 
   @Input()
   get index(): number {
@@ -36,7 +36,7 @@ export class QuizQuestionComponent implements OnDestroy {
   set index(value: number) {
     this._index = value;
   }
-  private _index!: number;
+  private _index = 0;
 
   @Output() selected: EventEmitter<Question> = new EventEmitter<Question>();
 
@@ -50,7 +50,9 @@ export class QuizQuestionComponent implements OnDestroy {
       from(this.question.options)
         .pipe(
           map((option: QuestionOption) =>
-            option.text === event.text ? (option.response = true) : (option.response = false)
+            option.text === event.text && option
+              ? (option.response = true)
+              : (option.response = false)
           ),
           delay(1000),
           finalize(() =>
