@@ -346,7 +346,7 @@
     "util": {
       "projectType": "library",
       "root": "libs/util",
-      "sourceRoot": "libs/util/src",
+      "sourceRoot": "libs/util",
       "prefix": "rng",
       "architect": {
         "test": {
@@ -360,7 +360,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/util/src/**/*.ts", "libs/util/src/**/*.html"]
+            "lintFilePatterns": ["libs/util/**/*.ts", "libs/util/**/*.html"]
           }
         },
         "storybook": {
