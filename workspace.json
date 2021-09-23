@@ -349,6 +349,22 @@
       "sourceRoot": "libs/util",
       "prefix": "rng",
       "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/util"],
+          "options": {
+            "project": "libs/util/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/util/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/util/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/util"],
