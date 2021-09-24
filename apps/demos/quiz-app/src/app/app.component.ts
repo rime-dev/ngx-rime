@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Question} from '@rng/ui/quiz';
 import {Subject} from 'rxjs';
-import {finalize, takeUntil, tap} from 'rxjs/operators';
+import {takeUntil, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'rng-root',
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.httpClient
       .get('questions')
       .pipe(tap({next: (value: any) => (this.questions = value)}), takeUntil(this.destroy$))
-      .subscribe(console.log);
+      .subscribe();
   }
   ngOnDestroy(): void {
     this.destroy$.complete();
