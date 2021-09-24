@@ -37,12 +37,14 @@ export class MockInterceptor implements HttpInterceptor {
     };
 
     const updateValue = () => {
+      let value: any;
       this.values = this.values.map((x: any, index: number) => {
         if (index === indexByURL()) {
           x = body;
+          value = x;
         }
       });
-      return ok();
+      return ok(value);
     };
 
     const deleteValue = () => {
