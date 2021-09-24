@@ -89,7 +89,6 @@ export class MockInterceptor implements HttpInterceptor {
       .pipe(dematerialize());
   }
 }
-
 export class Mock {
   static provider(values: any): import('@angular/core').Provider {
     return [
