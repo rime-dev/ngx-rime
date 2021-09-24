@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {
   HttpRequest,
   HttpResponse,
@@ -10,67 +10,43 @@ import {
 import {Observable, of, throwError} from 'rxjs';
 import {delay, mergeMap, materialize, dematerialize} from 'rxjs/operators';
 
-let users: any[] = [];
-
 @Injectable()
 export class MockInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(@Inject('VALUES') private _values: any) {}
+
+  get values(): any {
+    return this._values;
+  }
+  set values(value: any) {
+    this._values = value;
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const {url, method, headers, body} = request;
 
-    const register = () => {
-      const user = body;
-
-      if (users.find((x) => x.username === user.username)) {
-        return error('Username "' + user.username + '" is already taken');
-      }
-
-      user.id = users.length ? Math.max(...users.map((x) => x.id)) + 1 : 1;
-      users.push(user);
-      localStorage.setItem('users', JSON.stringify(users));
-
+    const createValue = () => {
+      this.values.push(body);
       return ok();
     };
 
-    const authenticate = () => {
-      const {username, password} = body;
-      const user = users.find((x) => x.username === username && x.password === password);
-      if (!user) {
-        return error('Username or password is incorrect');
-      }
-      return ok({
-        id: user.id,
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        token: 'fake-jwt-token',
+    const readValues = () => ok(this.values);
+
+    const readValue = () => {
+      const value = this.values.filter((x: any, index: number) => index === indexByURL());
+      return ok(value);
+    };
+
+    const updateValue = () => {
+      this.values = this.values.map((x: any, index: number) => {
+        if (index === indexByURL()) {
+          x = body;
+        }
       });
+      return ok();
     };
 
-    const getUsers = () => {
-      if (!isLoggedIn()) {
-        return unauthorized();
-      }
-      return ok(users);
-    };
-
-    const getUserById = () => {
-      if (!isLoggedIn()) {
-        return unauthorized();
-      }
-
-      const user = users.find((x) => x.id === idFromUrl());
-      return ok(user);
-    };
-
-    const deleteUser = () => {
-      if (!isLoggedIn()) {
-        return unauthorized();
-      }
-
-      users = users.filter((x) => x.id !== idFromUrl());
-      localStorage.setItem('users', JSON.stringify(users));
+    const deleteValue = () => {
+      this.values = this.values.filter((x: any, index: number) => index !== indexByURL());
       return ok();
     };
 
@@ -82,23 +58,23 @@ export class MockInterceptor implements HttpInterceptor {
 
     const isLoggedIn = () => headers.get('Authorization') === 'Bearer fake-jwt-token';
 
-    const idFromUrl = () => {
+    const indexByURL = () => {
       const urlParts = url.split('/');
       return parseInt(urlParts[urlParts.length - 1], 2);
     };
 
     const handleRoute = () => {
       switch (true) {
-        case url.endsWith('/users/register') && method === 'POST':
-          return register();
-        case url.endsWith('/users/authenticate') && method === 'POST':
-          return authenticate();
-        case url.endsWith('/users') && method === 'GET':
-          return getUsers();
-        case url.match(/\/users\/\d+$/) && method === 'GET':
-          return getUserById();
+        case !url.match(/\/\d+$/) && method === 'POST':
+          return createValue();
+        case url.match(/\/\d+$/) && method === 'POST':
+          return updateValue();
+        case !url.match(/\/\d+$/) && method === 'GET':
+          return readValues();
+        case url.match(/\/\d+$/) && method === 'GET':
+          return readValue();
         case url.match(/\/users\/\d+$/) && method === 'DELETE':
-          return deleteUser();
+          return deleteValue();
         default:
           return next.handle(request);
       }
@@ -113,12 +89,17 @@ export class MockInterceptor implements HttpInterceptor {
 }
 
 export class Mock {
-  static provider(value: any): import('@angular/core').Provider {
-    return {
-      provide: HTTP_INTERCEPTORS,
-      useClass: MockInterceptor,
-      multi: true,
-      useValue: value,
-    };
+  static provider(values: any): import('@angular/core').Provider {
+    return [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: MockInterceptor,
+        multi: true,
+      },
+      {
+        provide: 'VALUES',
+        useValue: values,
+      },
+    ];
   }
 }
