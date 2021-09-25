@@ -19,7 +19,8 @@
       "@rng/feature": ["libs/feature/src/index.ts"],
       "@rng/ui": ["libs/ui/index.ts"],
       "@rng/ui/*": ["libs/ui/*"],
-      "@rng/util": ["libs/util/src/index.ts"]
+      "@rng/util": ["libs/util/index.ts"],
+      "@rng/util/*": ["libs/util/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": true,

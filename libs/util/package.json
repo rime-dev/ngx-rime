@@ -1,7 +1,7 @@
 {
-  "name": "@rng/ui",
+  "name": "@rng/util",
   "version": "0.0.0",
-  "description": "User Interface utilities",
+  "description": "Common utilities",
   "dependencies": {
     "tslib": "^2.0.0"
   }
