@@ -28,7 +28,7 @@
     "help": "nx help",
     "lint:all": "nx workspace-lint && nx run-many --all --target=lint",
     "test:all": "nx run-many --all --target=test --browsers ChromeHeadless",
-    "build:all": "nx workspace-build && nx run-many --all --target=build",
+    "build:all": "nx run-many --all --target=build",
     "prepare": "nx clear-cache && npm run lint:all && npm run test:all && npm run build:all",
     "add-auth-module": "npm run workspace-schematic -- auth-module module-name --project=rng-project",
     "main_build_github": "nx build --project rng-app --output-path docs --base-href https://rime-dev.github.io/rng/",
