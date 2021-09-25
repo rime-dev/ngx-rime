@@ -1,15 +1,15 @@
-import {Inject, Injectable} from '@angular/core';
 import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
   HttpRequest,
   HttpResponse,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
+import {Inject, Injectable} from '@angular/core';
 import {Observable, of, throwError} from 'rxjs';
-import {delay, mergeMap, materialize, dematerialize} from 'rxjs/operators';
-
+import {delay, dematerialize, filter, materialize, mergeMap, switchMap} from 'rxjs/operators';
+import {coerceNumberProperty} from '@angular/cdk/coercion';
 @Injectable()
 export class MockInterceptor implements HttpInterceptor {
   constructor(@Inject('VALUES') private _values: any) {}
@@ -26,7 +26,7 @@ export class MockInterceptor implements HttpInterceptor {
 
     const createValue = () => {
       this.values.push(body);
-      return ok();
+      return ok(this.values);
     };
 
     const readValues = () => ok(this.values);
@@ -36,20 +36,19 @@ export class MockInterceptor implements HttpInterceptor {
       return ok(value);
     };
 
-    const updateValue = () => {
-      let value: any;
-      this.values = this.values.map((x: any, index: number) => {
-        if (index === indexByURL()) {
-          x = body;
-          value = x;
-        }
-      });
-      return ok(value);
-    };
+    const updateValue = () =>
+      ok(this.values).pipe(
+        switchMap((x: any) =>
+          of(x.body).pipe(
+            filter((y: any) => (y[indexByURL()] ? (y[indexByURL()] = body) : y)),
+            switchMap((values) => ok(values))
+          )
+        )
+      );
 
     const deleteValue = () => {
       this.values = this.values.filter((x: any, index: number) => index !== indexByURL());
-      return ok();
+      return ok(this.values);
     };
 
     const ok = (body2?: any) => of(new HttpResponse({status: 200, body: body2}));
@@ -62,7 +61,7 @@ export class MockInterceptor implements HttpInterceptor {
 
     const indexByURL = () => {
       const urlParts = url.split('/');
-      return parseInt(urlParts[urlParts.length - 1], 2);
+      return coerceNumberProperty(urlParts[urlParts.length - 1]);
     };
 
     const handleRoute = () => {
@@ -75,7 +74,7 @@ export class MockInterceptor implements HttpInterceptor {
           return readValues();
         case url.match(/\/\d+$/) && method === 'GET':
           return readValue();
-        case url.match(/\/users\/\d+$/) && method === 'DELETE':
+        case url.match(/\/\d+$/) && method === 'DELETE':
           return deleteValue();
         default:
           return next.handle(request);
