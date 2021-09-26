@@ -107,8 +107,6 @@ $rng-dark-theme: mat.define-dark-theme(
   )
 );
 
-// @include mat.all-component-themes($rng-default-theme);
-
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
@@ -136,7 +134,7 @@ $rng-app-theme: mat.define-light-theme(
 @include mat.all-component-themes($rng-default-theme);
 
 .dark {
-  @include mat.all-component-themes($rng-dark-theme);
+  @include mat.core-color($rng-dark-theme);
 }
 
 html,
