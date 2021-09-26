@@ -91,7 +91,7 @@ export class MockInterceptor implements HttpInterceptor {
   }
 }
 export class Mock {
-  static provider(values: any): import('@angular/core').Provider {
+  static provider(values: any) {
     return [
       {
         provide: HTTP_INTERCEPTORS,
