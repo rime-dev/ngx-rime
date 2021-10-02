@@ -1,1 +1,5 @@
-<rng-quiz [questions]="questions" (finalized)="onFinalized($event)"></rng-quiz>
+<rng-quiz
+  [questions]="questions"
+  (finalized)="onFinalized($event)"
+  (closed)="onClosed($event)"
+></rng-quiz>

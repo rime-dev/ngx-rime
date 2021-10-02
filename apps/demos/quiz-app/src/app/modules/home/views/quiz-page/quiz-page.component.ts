@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Question} from '@rng/ui/quiz';
 import {Subject} from 'rxjs';
 import {takeUntil, tap} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'rng-quiz-page',
@@ -12,10 +13,13 @@ import {takeUntil, tap} from 'rxjs/operators';
 export class QuizPageComponent implements OnInit, OnDestroy {
   questions: Question[] = [];
   private destroy$: Subject<void> = new Subject<void>();
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   onFinalized(event: boolean): void {
     console.log(event);
+  }
+  onClosed(event: any) {
+    this.router.navigate(['/']);
   }
   ngOnInit(): void {
     this.httpClient
