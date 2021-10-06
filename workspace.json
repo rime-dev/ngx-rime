@@ -4,12 +4,32 @@
     "data-access": {
       "projectType": "library",
       "root": "libs/data-access",
-      "sourceRoot": "libs/data-access/src",
+      "sourceRoot": "libs/data-access",
       "prefix": "rng",
       "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": [
+            "dist/libs/data-access"
+          ],
+          "options": {
+            "project": "libs/data-access/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/data-access/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/data-access/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/data-access"],
+          "outputs": [
+            "coverage/libs/data-access"
+          ],
           "options": {
             "jestConfig": "libs/data-access/jest.config.js",
             "passWithNoTests": true
@@ -18,7 +38,10 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/data-access/src/**/*.ts", "libs/data-access/src/**/*.html"]
+            "lintFilePatterns": [
+              "libs/data-access/**/*.ts",
+              "libs/data-access/**/*.html"
+            ]
           }
         }
       }
@@ -26,12 +49,32 @@
     "feature": {
       "projectType": "library",
       "root": "libs/feature",
-      "sourceRoot": "libs/feature/src",
+      "sourceRoot": "libs/feature",
       "prefix": "rng",
       "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": [
+            "dist/libs/feature"
+          ],
+          "options": {
+            "project": "libs/feature/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/feature/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/feature/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/feature"],
+          "outputs": [
+            "coverage/libs/feature"
+          ],
           "options": {
             "jestConfig": "libs/feature/jest.config.js",
             "passWithNoTests": true
@@ -40,7 +83,10 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/feature/src/**/*.ts", "libs/feature/src/**/*.html"]
+            "lintFilePatterns": [
+              "libs/feature/**/*.ts",
+              "libs/feature/**/*.html"
+            ]
           }
         }
       }
@@ -53,7 +99,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/demos/quiz-app",
             "index": "apps/demos/quiz-app/src/index.html",
@@ -61,8 +109,13 @@
             "polyfills": "apps/demos/quiz-app/src/polyfills.ts",
             "tsConfig": "apps/demos/quiz-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/demos/quiz-app/src/favicon.ico", "apps/demos/quiz-app/src/assets"],
-            "styles": ["apps/demos/quiz-app/src/styles.scss"],
+            "assets": [
+              "apps/demos/quiz-app/src/favicon.ico",
+              "apps/demos/quiz-app/src/assets"
+            ],
+            "styles": [
+              "apps/demos/quiz-app/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -127,7 +180,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/demos/quiz-app"],
+          "outputs": [
+            "coverage/apps/demos/quiz-app"
+          ],
           "options": {
             "jestConfig": "apps/demos/quiz-app/jest.config.js",
             "passWithNoTests": true
@@ -156,7 +211,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/demos/quiz-app-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/demos/quiz-app-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -169,7 +226,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/rng-app",
             "index": "apps/rng-app/src/index.html",
@@ -177,8 +236,13 @@
             "polyfills": "apps/rng-app/src/polyfills.ts",
             "tsConfig": "apps/rng-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/rng-app/src/favicon.ico", "apps/rng-app/src/assets"],
-            "styles": ["apps/rng-app/src/styles.scss"],
+            "assets": [
+              "apps/rng-app/src/favicon.ico",
+              "apps/rng-app/src/assets"
+            ],
+            "styles": [
+              "apps/rng-app/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -235,12 +299,17 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/rng-app/src/**/*.ts", "apps/rng-app/src/**/*.html"]
+            "lintFilePatterns": [
+              "apps/rng-app/src/**/*.ts",
+              "apps/rng-app/src/**/*.html"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/rng-app"],
+          "outputs": [
+            "coverage/apps/rng-app"
+          ],
           "options": {
             "jestConfig": "apps/rng-app/jest.config.js",
             "passWithNoTests": true
@@ -269,7 +338,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/rng-app-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/rng-app-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -282,7 +353,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": ["dist/libs/ui"],
+          "outputs": [
+            "dist/libs/ui"
+          ],
           "options": {
             "project": "libs/ui/ng-package.json"
           },
@@ -298,7 +371,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ui"],
+          "outputs": [
+            "coverage/libs/ui"
+          ],
           "options": {
             "jestConfig": "libs/ui/jest.config.js",
             "passWithNoTests": true
@@ -307,7 +382,10 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/ui/**/*.ts", "libs/ui/**/*.html"]
+            "lintFilePatterns": [
+              "libs/ui/**/*.ts",
+              "libs/ui/**/*.html"
+            ]
           }
         },
         "storybook": {
@@ -327,7 +405,9 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/ui",
@@ -351,7 +431,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": ["dist/libs/util"],
+          "outputs": [
+            "dist/libs/util"
+          ],
           "options": {
             "project": "libs/util/ng-package.json"
           },
@@ -367,7 +449,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/util"],
+          "outputs": [
+            "coverage/libs/util"
+          ],
           "options": {
             "jestConfig": "libs/util/jest.config.js",
             "passWithNoTests": true
@@ -376,7 +460,10 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/util/**/*.ts", "libs/util/**/*.html"]
+            "lintFilePatterns": [
+              "libs/util/**/*.ts",
+              "libs/util/**/*.html"
+            ]
           }
         },
         "storybook": {
@@ -396,7 +483,9 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/util",
@@ -433,7 +522,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/util-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/util-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
