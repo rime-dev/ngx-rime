@@ -14,6 +14,11 @@
   <br>
 </p>
 
+<p align="center">
+  <a href="https://circleci.com/gh/CarlosBayarri/rng/tree/main.svg">
+    <img src="https://circleci.com/gh/CarlosBayarri/rng/tree/main.svg?style=shield" alt="CI status" />
+  </a>&nbsp;
+</p>
 
 <hr>
 
