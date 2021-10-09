@@ -15,8 +15,8 @@
 </p>
 
 <p align="center">
-  <a href="https://circleci.com/gh/CarlosBayarri/rng/tree/main">
-    <img src="https://circleci.com/gh/CarlosBayarri/rng/tree/main.svg?style=shield" alt="CI status" />
+  <a href="https://circleci.com/gh/rime-dev/rng/tree/main">
+    <img src="https://circleci.com/gh/rime-dev/rng/tree/main.svg?style=shield" alt="CI status" />
   </a>&nbsp;
   <a href="https://github.com/rime-dev/rng/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/rime-dev/rng"></a>&nbsp;
 </p>
