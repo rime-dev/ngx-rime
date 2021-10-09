@@ -12,9 +12,7 @@ import {delay, dematerialize, filter, materialize, mergeMap, switchMap} from 'rx
 import {coerceNumberProperty} from '@angular/cdk/coercion';
 @Injectable()
 export class MockInterceptor implements HttpInterceptor {
-  constructor(@Inject('VALUES') private _values: any) {
-    console.log('Init mock');
-  }
+  constructor(@Inject('VALUES') private _values: any) {}
 
   get values(): any {
     return this._values;
