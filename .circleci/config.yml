@@ -41,7 +41,7 @@ deploy_cache: &deploy_cache
 
 yarn_install: &yarn_install
   name: Install Dependencies
-  command: yarn install --frozen-lockfile --non-interactive
+  command: yarn install --non-interactive
 
 jobs:
   install:
