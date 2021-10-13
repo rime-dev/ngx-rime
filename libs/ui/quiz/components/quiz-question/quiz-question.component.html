@@ -7,7 +7,7 @@
     *ngFor="let option of question.options; let i = index"
     [option]="option"
     [index]="i"
-    (selected)="onSelectOption($event)"
+    (selected)="onSelectOption(i)"
   >
   </rng-quiz-option>
 </div>

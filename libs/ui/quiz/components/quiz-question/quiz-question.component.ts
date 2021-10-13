@@ -25,9 +25,15 @@ export class QuizQuestionComponent implements OnDestroy {
     return this._question;
   }
   set question(value: Question) {
-    this._question = value;
+    this._question = new Question(value);
   }
-  private _question: Question = {title: '', options: []};
+  private _question: Question = {
+    title: '',
+    options: [],
+    type: 'single',
+    tags: [],
+    level: 1,
+  };
 
   @Input()
   get index(): number {
@@ -45,14 +51,12 @@ export class QuizQuestionComponent implements OnDestroy {
 
   constructor(private ngZone: NgZone) {}
 
-  onSelectOption(event: QuestionOption) {
-    this.ngZone.runOutsideAngular(() => {
+  onSelectOption(event: number) {
+    this.ngZone.runOutsideAngular(() =>
       from(this.question.options)
         .pipe(
           map((option: QuestionOption) =>
-            option.text === event.text && option
-              ? (option.response = true)
-              : (option.response = false)
+            option.index === event && option ? (option.response = true) : (option.response = false)
           ),
           delay(1000),
           finalize(() =>
@@ -62,8 +66,8 @@ export class QuizQuestionComponent implements OnDestroy {
           finalize(() => this.ngZone.runTask(() => (this.question.dirty = true))),
           takeUntil(this.destroy$)
         )
-        .subscribe();
-    });
+        .subscribe()
+    );
   }
 
   ngOnDestroy(): void {

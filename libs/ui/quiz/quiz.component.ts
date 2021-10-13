@@ -69,21 +69,21 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   @HostListener('keydown.1', ['$event'])
   _handleKeydownDigit1(event: Event) {
     event.preventDefault();
-    this.questionsComponent.first.onSelectOption(this.questions[this.currentIndex].options[0]);
+    this.questionsComponent.first.onSelectOption(0);
     this.restoreFocus();
   }
 
   @HostListener('keydown.2', ['$event'])
   _handleKeydownDigit2(event: Event) {
     event.preventDefault();
-    this.questionsComponent.first.onSelectOption(this.questions[this.currentIndex].options[1]);
+    this.questionsComponent.first.onSelectOption(1);
     this.restoreFocus();
   }
 
   @HostListener('keydown.3', ['$event'])
   _handleKeydownDigit3(event: Event) {
     event.preventDefault();
-    this.questionsComponent.first.onSelectOption(this.questions[this.currentIndex].options[2]);
+    this.questionsComponent.first.onSelectOption(2);
     this.restoreFocus();
   }
 
@@ -114,6 +114,8 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
     this.focusMonitor.stopMonitoring(this.elementRef);
   }
   onSelectQuestion(question: Question): void {
+    console.log(question);
+
     if (!question.dirty) {
       const totalIndex = this.questions.length;
       if ((question.index as number) < totalIndex - 1) {
@@ -160,8 +162,6 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   }
 
   private checkIfCanBeFinlized(): boolean {
-    return this.questions.every((question: Question) =>
-      question.options.some((option: QuestionOption) => option.response)
-    ) as boolean;
+    return this.questions.every((question: Question) => question.response) as boolean;
   }
 }

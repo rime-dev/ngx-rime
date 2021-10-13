@@ -14,7 +14,7 @@ export class QuizOptionComponent {
   set option(value: QuestionOption) {
     this._option = value;
   }
-  private _option: QuestionOption = {text: '', state: false};
+  private _option!: QuestionOption;
 
   @Input()
   get index(): number {

@@ -5,7 +5,7 @@ import {HomeComponent} from './home.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {
-    path: 'quiz-page',
+    path: 'quiz-page/:id',
     loadChildren: () => import('./views/quiz-page/quiz-page.module').then((m) => m.QuizPageModule),
   },
 ];

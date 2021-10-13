@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class HomeComponent {
   public allQuiz: any[] = [
     {
-      title: 'Angular',
+      title: 'ANGULAR',
       subtitle: 'Javascript',
       // eslint-disable-next-line @typescript-eslint/quotes
       description: "The modern web developer's platform",
@@ -18,7 +18,7 @@ export class HomeComponent {
   ];
   constructor(private router: Router, private route: ActivatedRoute) {}
 
-  handleSelectedQuiz(quiz: string): void {
-    this.router.navigate(['quiz-page'], {relativeTo: this.route});
+  handleSelectedQuiz(quiz: any): void {
+    this.router.navigate(['quiz-page', quiz.title], {relativeTo: this.route});
   }
 }
