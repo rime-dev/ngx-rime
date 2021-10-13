@@ -19,6 +19,7 @@
     <img src="https://circleci.com/gh/rime-dev/rng/tree/main.svg?style=shield" alt="CI status" />
   </a>&nbsp;
   <a href="https://github.com/rime-dev/rng/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/rime-dev/rng"></a>&nbsp;
+  <a href="https://img.shields.io/github/checks-status/rime-dev/rng/main"><img alt="GitHub license" src="https://img.shields.io/github/checks-status/rime-dev/rng/main"></a>&nbsp;
 </p>
 
 <hr>
