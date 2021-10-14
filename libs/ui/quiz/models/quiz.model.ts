@@ -26,7 +26,7 @@ export class Question {
       for (const key in question) {
         if (Object.prototype.hasOwnProperty.call(question, key)) {
           const element = question[key as never];
-          if (key.includes('option')) {
+          if (key.includes('option') && element !== null && element !== undefined) {
             const option: QuestionOption = {text: element, index};
             this.options.push(option);
             index++;
