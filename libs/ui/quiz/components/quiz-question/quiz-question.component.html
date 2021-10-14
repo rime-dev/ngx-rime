@@ -1,3 +1,7 @@
+<mat-chip-list aria-label="Tags" class="ml-2 mb-4 block">
+  <mat-chip color="primary" selected *ngFor="let tag of question.tags">{{ tag }}</mat-chip>
+</mat-chip-list>
+
 <div class="flex flex-row mb-4">
   <span class="font-mono text-lg font-black mr-4">{{ index + 1 }}</span>
   <span class="font-mono text-xl font-medium">{{ question.title }}</span>

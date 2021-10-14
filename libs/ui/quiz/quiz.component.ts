@@ -13,6 +13,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
+import {from} from 'rxjs';
 import {QuizOptionComponent} from './components/quiz-option/quiz-option.component';
 import {QuizQuestionComponent} from './components/quiz-question/quiz-question.component';
 import {Question, QuestionOption} from './models/quiz.model';
@@ -113,10 +114,16 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.focusMonitor.stopMonitoring(this.elementRef);
   }
+  private updateQuestion(question: Question) {
+    this.questions = this.questions.map((question0: Question, i: number) => {
+      if (i === question.index) {
+        return question;
+      }
+      return question0;
+    });
+  }
   onSelectQuestion(question: Question): void {
-    console.log(question);
-
-    if (!question.dirty) {
+    if (question.dirty) {
       const totalIndex = this.questions.length;
       if ((question.index as number) < totalIndex - 1) {
         const currentIndex = (question.index as number) + 1;
@@ -131,6 +138,7 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
       if (this.checkIfCanBeFinlized()) {
         this.canBeFinalized = true;
       }
+      this.updateQuestion(question);
     }
   }
 

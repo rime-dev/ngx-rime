@@ -7,7 +7,7 @@ export class Question {
   public tags: string[];
   public level: number;
   public answer?: any;
-  public response?: boolean;
+  public response?: number;
 
   constructor(question: Question) {
     this.index = question.index;
