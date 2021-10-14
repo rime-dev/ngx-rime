@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Question} from '@rng/ui/quiz';
+import {Question, QuizMode} from '@rng/ui/quiz';
 import {Subject} from 'rxjs';
 import {filter, map, takeUntil, tap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -13,6 +13,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class QuizPageComponent implements OnInit, OnDestroy {
   questions: Question[] = [];
   public quiz: string | null = null;
+  public quizMode: QuizMode = 'solution';
+
   private destroy$: Subject<void> = new Subject<void>();
   constructor(
     private httpClient: HttpClient,

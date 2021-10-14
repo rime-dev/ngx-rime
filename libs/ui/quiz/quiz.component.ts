@@ -13,10 +13,9 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import {from} from 'rxjs';
 import {QuizOptionComponent} from './components/quiz-option/quiz-option.component';
 import {QuizQuestionComponent} from './components/quiz-question/quiz-question.component';
-import {Question, QuestionOption} from './models/quiz.model';
+import {Question, QuizMode} from './models/quiz.model';
 
 @Component({
   selector: 'rng-quiz',
@@ -52,6 +51,18 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   private _questions: Question[] = [];
 
   /**
+   * Defines the quiz mode
+   */
+  @Input()
+  get mode(): QuizMode {
+    return this._mode;
+  }
+  set mode(value: QuizMode) {
+    this._mode = value;
+  }
+  private _mode: QuizMode = 'exam';
+
+  /**
    * Closed emitter behaviour
    */
   @Output() closed: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -70,6 +81,9 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   @HostListener('keydown.1', ['$event'])
   _handleKeydownDigit1(event: Event) {
     event.preventDefault();
+    if (this.mode !== 'exam') {
+      return;
+    }
     this.questionsComponent.first.onSelectOption(0);
     this.restoreFocus();
   }
@@ -77,6 +91,9 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   @HostListener('keydown.2', ['$event'])
   _handleKeydownDigit2(event: Event) {
     event.preventDefault();
+    if (this.mode !== 'exam') {
+      return;
+    }
     this.questionsComponent.first.onSelectOption(1);
     this.restoreFocus();
   }
@@ -84,6 +101,9 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   @HostListener('keydown.3', ['$event'])
   _handleKeydownDigit3(event: Event) {
     event.preventDefault();
+    if (this.mode !== 'exam') {
+      return;
+    }
     this.questionsComponent.first.onSelectOption(2);
     this.restoreFocus();
   }

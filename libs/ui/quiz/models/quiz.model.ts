@@ -39,6 +39,7 @@ export class Question {
 
 export type QuestionType = 'single' | 'boolean' | 'multiple';
 
+export type QuizMode = 'exam' | 'solution';
 export interface QuestionOption {
   index?: number;
   text: string;
