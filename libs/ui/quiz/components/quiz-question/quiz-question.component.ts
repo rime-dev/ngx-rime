@@ -1,6 +1,8 @@
 import {
   Component,
   EventEmitter,
+  forwardRef,
+  Inject,
   Input,
   NgZone,
   OnDestroy,
@@ -11,6 +13,7 @@ import {
 import {from, Subject} from 'rxjs';
 import {delay, finalize, map, takeUntil} from 'rxjs/operators';
 import {Question, QuestionOption, QuizMode} from '../../models/quiz.model';
+import {QuizComponent} from '../../quiz.component';
 import {QuizOptionComponent} from '../quiz-option/quiz-option.component';
 @Component({
   selector: 'rng-quiz-question',
@@ -44,24 +47,16 @@ export class QuizQuestionComponent implements OnDestroy {
   }
   private _index = 0;
 
-  /**
-   * Defines the quiz mode
-   */
-  @Input()
-  get mode(): QuizMode {
-    return this._mode;
-  }
-  set mode(value: QuizMode) {
-    this._mode = value;
-  }
-  private _mode: QuizMode = 'exam';
-
   @Output() selected: EventEmitter<Question> = new EventEmitter<Question>();
 
   // Query all child elements
   @ViewChildren(QuizOptionComponent) options!: QueryList<QuizOptionComponent>;
 
-  constructor(private ngZone: NgZone) {}
+  constructor(
+    @Inject(forwardRef(() => QuizComponent))
+    private _quizComponent: QuizComponent,
+    private ngZone: NgZone
+  ) {}
 
   private onResponseOption(option: QuestionOption, event: number): QuestionOption {
     if (option.index === event && option) {
@@ -73,7 +68,7 @@ export class QuizQuestionComponent implements OnDestroy {
     return option;
   }
   onSelectOption(event: number) {
-    if (this.mode !== 'exam') {
+    if (this._quizComponent.mode !== 'exam') {
       return;
     }
     this.ngZone.runOutsideAngular(() =>

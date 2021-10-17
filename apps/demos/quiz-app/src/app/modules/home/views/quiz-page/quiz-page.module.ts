@@ -5,7 +5,7 @@ import {QuizModule} from '@rng/ui/quiz';
 import {Mock} from '@rng/data-access/mock';
 import {QuizPageRoutingModule} from './quiz-page-routing.module';
 import {QuizPageComponent} from './quiz-page.component';
-import questions from 'apps/demos/quiz-app/src/assets/questions.json';
+import questions from 'apps/demos/quiz-app/src/assets/questions_2.json';
 
 @NgModule({
   declarations: [QuizPageComponent],

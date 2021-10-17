@@ -1,3 +1,5 @@
+import {THIS_EXPR} from '@angular/compiler/src/output/output_ast';
+
 export class Question {
   public index?: number;
   public title: string;
@@ -19,7 +21,17 @@ export class Question {
     this.answer = question.answer;
     this.response = question.response;
     if (question.options) {
-      this.options = question.options;
+      if (!question.options[0].text) {
+        const options = question.options
+          .filter((option0) => option0 !== null && option0 !== undefined)
+          .map((option0, index: number) => {
+            const option1 = {text: option0 as unknown as string, index};
+            return option1;
+          });
+        this.options = options;
+      } else {
+        this.options = question.options;
+      }
     } else {
       this.options = [];
       let index = 0;
