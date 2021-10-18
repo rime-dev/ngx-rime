@@ -1,6 +1,18 @@
-<mat-chip-list aria-label="Tags" class="ml-2 mb-4 block">
-  <mat-chip color="primary" selected *ngFor="let tag of question.tags">{{ tag }}</mat-chip>
-</mat-chip-list>
+<div class="flex flex-row">
+  <mat-chip-list aria-label="Tags" class="ml-2 mb-4 block">
+    <mat-chip color="primary" selected *ngFor="let tag of question.tags">{{ tag }}</mat-chip>
+  </mat-chip-list>
+  <span class="flex-auto"></span>
+  <div>
+    <span
+      [ngClass]="{
+        'level-icon-easy': question.level === 1,
+        'level-icon-medium': question.level === 2,
+        'level-icon-hard': question.level === 3
+      }"
+    ></span>
+  </div>
+</div>
 
 <div class="flex flex-row mb-4">
   <span class="font-mono text-lg font-black mr-4">{{ index + 1 }}</span>

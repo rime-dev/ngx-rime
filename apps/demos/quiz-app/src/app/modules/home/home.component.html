@@ -2,11 +2,41 @@
   <span>DEV QUIZ</span>
 </mat-toolbar>
 <div class="container mx-auto h-full pt-8">
-  <div class="max-w-md mx-auto md:max-w-2xl">
+  <div class="max-w-md mx-auto md:max-w-2xl" *ngIf="!quizSelected">
     <rng-target-card
       *ngFor="let quiz of allQuiz"
       [quiz]="quiz"
       (selected)="handleSelectedQuiz($event)"
     ></rng-target-card>
+  </div>
+  <div class="max-w-md mx-auto md:max-w-2xl" *ngIf="quizSelected">
+    <div class="flex flex-row mb-4">
+      <button mat-icon-button color="accent" (click)="quizSelected = null">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <span class="flex-auto"></span>
+    </div>
+    <div class="flex flex-col">
+      <div class="flex flex-col mb-8">
+        <div class="flex flex-col mb-8">
+          <span class="quiz-question-option-title">Difficulty</span>
+          <mat-radio-group aria-label="Select a difficulty" [(ngModel)]="difficulty">
+            <mat-radio-button value="0">Random</mat-radio-button>
+            <mat-radio-button value="1">Only easy</mat-radio-button>
+            <mat-radio-button value="2">Only medium</mat-radio-button>
+            <mat-radio-button value="3">Only hard</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="flex flex-col mb-8">
+          <span class="quiz-question-option-title">Tags</span>
+          <mat-radio-group aria-label="Select a difficulty" [(ngModel)]="tags">
+            <mat-radio-button value="random">Random</mat-radio-button>
+            <mat-radio-button value="general">General</mat-radio-button>
+            <mat-radio-button value="components">Components</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <button mat-raised-button color="primary" (click)="goToQuiz(quizSelected)">Start</button>
+    </div>
   </div>
 </div>

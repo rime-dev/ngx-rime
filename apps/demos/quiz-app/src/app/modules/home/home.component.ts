@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+  public quizSelected: any;
   public allQuiz: any[] = [
     {
       title: 'ANGULAR',
@@ -16,9 +17,17 @@ export class HomeComponent {
       image: 'https://angular.io/assets/images/logos/angular/angular.svg',
     },
   ];
+  public difficulty = '0';
+  public tags = 'random';
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   handleSelectedQuiz(quiz: any): void {
-    this.router.navigate(['quiz-page', quiz.title], {relativeTo: this.route});
+    this.quizSelected = quiz;
+  }
+  goToQuiz(quiz: any) {
+    this.router.navigate(['quiz-page', quiz.title], {
+      relativeTo: this.route,
+      queryParams: {difficulty: this.difficulty, tags: [this.tags]},
+    });
   }
 }
