@@ -147,19 +147,39 @@ workflows:
   version: 2
   pr_check:
     jobs:
-      - install
+      - install:
+          filters:
+            branches:
+              only:
+                - main
       - check-formatting:
           requires:
             - install
+          filters:
+            branches:
+              only:
+                - main
       - lint:
           requires:
             - install
+          filters:
+            branches:
+              only:
+                - main
       - test:
           requires:
             - install
+          filters:
+            branches:
+              only:
+                - main
       - build:
           requires:
             - install
+          filters:
+            branches:
+              only:
+                - main
       # - e2e:
       #    requires:
       #      - install
