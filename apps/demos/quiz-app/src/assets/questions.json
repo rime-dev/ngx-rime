@@ -1,0 +1,212 @@
+{
+  "ANGULAR": [
+    {
+      "id": 1,
+      "title": "Angular is a developer platform built on:",
+      "type": "single",
+      "options1": "typescript",
+      "options2": "java",
+      "options3": "php",
+      "tags": [
+        "general"
+      ],
+      "answer": 1,
+      "level": 1
+    },
+    {
+      "id": 2,
+      "title": "As a platform, Angular includes:",
+      "type": "single",
+      "options1": "A component-based framework for building scalable server applications",
+      "options2": "A collection of well-integrated libraries that cover a wide variety of features, including routing, forms management, client-server communication, and more",
+      "options3": "A suite of developer tools to help you develop, build, deploy and implement CI/CD.",
+      "tags": [
+        "general"
+      ],
+      "answer": 2,
+      "level": 1
+    },
+    {
+      "id": 3,
+      "title": "Components are building blocks that includes:",
+      "type": "single",
+      "options1": "A typescript class with a @Component() decorator, an HTML template and styles",
+      "options2": "A typescript class without decorators, an HTML and SCSS file.",
+      "options3": "A JavaScript class with a @Component decorator, a YAML template and styles.",
+      "tags": [
+        "components"
+      ],
+      "answer": 1,
+      "level": 1
+    },
+    {
+      "id": 4,
+      "title": "Every component requires a CSS selector. Why?",
+      "type": "single",
+      "options1": "A selector instructs Angular to instantiate this component wherever it finds the corresponding tag in template HTML",
+      "options2": "A selector tells Angular to create and insert an instance of this component wherever it finds the corresponding tag in template HTML",
+      "options3": "Both are correct",
+      "tags": [
+        "components"
+      ],
+      "answer": 3,
+      "level": 1
+    },
+    {
+      "id": 5,
+      "title": "A template is a block of:",
+      "type": "single",
+      "options1": "HTML",
+      "options2": "YAML",
+      "options3": "Whatever markup language",
+      "tags": [
+        "components"
+      ],
+      "answer": 1,
+      "level": 1
+    },
+    {
+      "id": 6,
+      "title": "A template is used to:",
+      "type": "single",
+      "options1": "tells Angular how to render the component in your application",
+      "options2": null,
+      "options3": null,
+      "tags": [
+        "components"
+      ],
+      "answer": 1,
+      "level": 1
+    },
+    {
+      "id": 7,
+      "title": "What are the ways to define a template:",
+      "type": "single",
+      "options1": "by referencing an external file, adding a templateUrl property to the @Component decorator.",
+      "options2": "directly within the component, adding the templateUrl property to the @Component decorator.",
+      "options3": "Both are correct",
+      "tags": [
+        "components"
+      ],
+      "answer": 3,
+      "level": 1
+    },
+    {
+      "id": 8,
+      "title": "Is it possible to use a template and templateUrl properties in the @Component decorator at the same time?",
+      "type": "boolean",
+      "options1": true,
+      "options2": false,
+      "options3": null,
+      "tags": [
+        "components"
+      ],
+      "answer": false,
+      "level": 1
+    },
+    {
+      "id": 9,
+      "title": "Declare component styles uses for its template:",
+      "type": "single",
+      "options1": "by referencing an external file",
+      "options2": "directly within the component in the constructor",
+      "options3": "Both are correct implementing at the same time.",
+      "tags": [
+        "components"
+      ],
+      "answer": 1,
+      "level": 1
+    },
+    {
+      "id": 10,
+      "title": "The styles property takes an array of strings that contain the CSS rule declarations.",
+      "type": "boolean",
+      "options1": true,
+      "options2": false,
+      "options3": null,
+      "tags": [
+        "components"
+      ],
+      "answer": true,
+      "level": 1
+    },
+    {
+      "id": 11,
+      "title": "Angular creates, updates, and destroys components as the user moves through the application. Your application can take action at each moment in this lifecycle through optional lifecycle hooks, like ngOnInit().",
+      "type": "boolean",
+      "options1": true,
+      "options2": false,
+      "options3": null,
+      "tags": [
+        "components"
+      ],
+      "answer": true,
+      "level": 1
+    },
+    {
+      "id": 12,
+      "title": "The @Component decorator:",
+      "type": "single",
+      "options1": "Identifies the class immediately below it as a component class, and specifies its metadata",
+      "options2": "It is the unique decorator that uses lifecycle hooks.",
+      "options3": "Identifies the class inmediately below and the inyected services",
+      "tags": [
+        "components"
+      ],
+      "answer": 1,
+      "level": 1
+    },
+    {
+      "id": 13,
+      "title": "The metadata for a component tells Angular where to get the major building blocks that it needs to create and present the component and its view. Together, the component and its template describe a view.",
+      "type": "boolean",
+      "options1": true,
+      "options2": false,
+      "options3": null,
+      "tags": [
+        "components"
+      ],
+      "answer": true,
+      "level": 1
+    },
+    {
+      "id": 14,
+      "title": "The @Component metadata configures, for example:",
+      "type": "single",
+      "options1": "How the component can be referenced in HTML and what services it requires",
+      "options2": "Containing or pointing to the services",
+      "options3": "The selector to define in the module",
+      "tags": [
+        "components"
+      ],
+      "answer": 1,
+      "level": 1
+    },
+    {
+      "id": 15,
+      "title": "The property templateUrl is the module-relative address of the component's HTML template:",
+      "type": "boolean",
+      "options1": true,
+      "options2": false,
+      "options3": null,
+      "tags": [
+        "components"
+      ],
+      "answer": true,
+      "level": 1
+    },
+    {
+      "id": 16,
+      "title": "The providers property as a component metadata is defined as:",
+      "type": "single",
+      "options1": "An array of providers for services that the component requires",
+      "options2": "An array of providers only for singleton services to provide the service instance that the component's constructor uses.",
+      "options3": "Both are correct",
+      "tags": [
+        "components"
+      ],
+      "answer": 1,
+      "level": 1
+    }
+  ]
+}

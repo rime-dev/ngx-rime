@@ -25,8 +25,8 @@
   <div *ngFor="let question of questions; let i = index">
     <rng-quiz-question
       *ngIf="i === currentIndex"
-      [question]="question"
       [index]="i"
+      [question]="question"
       (selected)="onSelectQuestion($event)"
     >
     </rng-quiz-question>

@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import {QuizOptionComponent} from './components/quiz-option/quiz-option.component';
 import {QuizQuestionComponent} from './components/quiz-question/quiz-question.component';
-import {Question, QuestionOption} from './models/quiz.model';
+import {Question, QuizMode} from './models/quiz.model';
 
 @Component({
   selector: 'rng-quiz',
@@ -51,6 +51,18 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   private _questions: Question[] = [];
 
   /**
+   * Defines the quiz mode
+   */
+  @Input()
+  get mode(): QuizMode {
+    return this._mode;
+  }
+  set mode(value: QuizMode) {
+    this._mode = value;
+  }
+  private _mode: QuizMode = 'exam';
+
+  /**
    * Closed emitter behaviour
    */
   @Output() closed: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -69,21 +81,30 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   @HostListener('keydown.1', ['$event'])
   _handleKeydownDigit1(event: Event) {
     event.preventDefault();
-    this.questionsComponent.first.onSelectOption(this.questions[this.currentIndex].options[0]);
+    if (this.mode !== 'exam') {
+      return;
+    }
+    this.questionsComponent.first.onSelectOption(0);
     this.restoreFocus();
   }
 
   @HostListener('keydown.2', ['$event'])
   _handleKeydownDigit2(event: Event) {
     event.preventDefault();
-    this.questionsComponent.first.onSelectOption(this.questions[this.currentIndex].options[1]);
+    if (this.mode !== 'exam') {
+      return;
+    }
+    this.questionsComponent.first.onSelectOption(1);
     this.restoreFocus();
   }
 
   @HostListener('keydown.3', ['$event'])
   _handleKeydownDigit3(event: Event) {
     event.preventDefault();
-    this.questionsComponent.first.onSelectOption(this.questions[this.currentIndex].options[2]);
+    if (this.mode !== 'exam') {
+      return;
+    }
+    this.questionsComponent.first.onSelectOption(2);
     this.restoreFocus();
   }
 
@@ -113,8 +134,16 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.focusMonitor.stopMonitoring(this.elementRef);
   }
+  private updateQuestion(question: Question) {
+    this.questions = this.questions.map((question0: Question, i: number) => {
+      if (i === question.index) {
+        return question;
+      }
+      return question0;
+    });
+  }
   onSelectQuestion(question: Question): void {
-    if (!question.dirty) {
+    if (question.dirty) {
       const totalIndex = this.questions.length;
       if ((question.index as number) < totalIndex - 1) {
         const currentIndex = (question.index as number) + 1;
@@ -129,6 +158,7 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
       if (this.checkIfCanBeFinlized()) {
         this.canBeFinalized = true;
       }
+      this.updateQuestion(question);
     }
   }
 
@@ -160,8 +190,6 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   }
 
   private checkIfCanBeFinlized(): boolean {
-    return this.questions.every((question: Question) =>
-      question.options.some((option: QuestionOption) => option.response)
-    ) as boolean;
+    return this.questions.every((question: Question) => question.response) as boolean;
   }
 }

@@ -5,11 +5,11 @@ import {QuizModule} from '@rng/ui/quiz';
 import {Mock} from '@rng/data-access/mock';
 import {QuizPageRoutingModule} from './quiz-page-routing.module';
 import {QuizPageComponent} from './quiz-page.component';
-import {angular_questions} from 'apps/demos/quiz-app/src/assets/questions';
+import questions_angular from 'apps/demos/quiz-app/src/assets/questions_angular.json';
 
 @NgModule({
   declarations: [QuizPageComponent],
   imports: [CommonModule, HttpClientModule, QuizModule, QuizPageRoutingModule],
-  providers: [Mock.provider(angular_questions)],
+  providers: [Mock.provider(questions_angular)],
 })
 export class QuizPageModule {}
