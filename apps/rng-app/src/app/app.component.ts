@@ -7,4 +7,8 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'rng-app';
+  logo = {
+    src: 'assets/rng-logo.png',
+    alt: 'RNG APP',
+  };
 }
