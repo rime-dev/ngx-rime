@@ -1,4 +1,5 @@
-import {Component, Input} from '@angular/core';
+import {Component, HostListener, Input, ViewChild} from '@angular/core';
+import {MatDrawerMode, MatSidenav} from '@angular/material/sidenav';
 
 export interface ShellLogo {
   src: string;
@@ -15,6 +16,9 @@ export interface Routes {
   styleUrls: ['./shell.component.scss'],
 })
 export class ShellComponent {
+  public sidenavOpened = true;
+  public sidenavMode: MatDrawerMode = 'side';
+
   /**
    * Sets an elevation
    */
@@ -62,5 +66,17 @@ export class ShellComponent {
   }
   private _sideRoutes!: Routes[];
 
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
+  @HostListener('window:resize')
+  onResize() {
+    if (!(window.innerWidth < 768 ? true : false)) {
+      this.sidenavMode = 'side';
+      this.sidenavOpened = true;
+    } else {
+      this.sidenavMode = 'over';
+      this.sidenavOpened = false;
+    }
+  }
   constructor() {}
 }

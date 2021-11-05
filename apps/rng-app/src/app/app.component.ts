@@ -21,6 +21,7 @@ export class AppComponent {
     {
       path: '/home',
       text: 'Home',
+      icon: 'home',
     },
   ];
   userRoutes = [

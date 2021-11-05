@@ -3,12 +3,17 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center">
-          <div class="flex-shrink-0">
+          <div class="flex-shrink-0 block md:hidden">
+            <button mat-icon-button (click)="sidenavOpened = !sidenavOpened">
+              <mat-icon>menu</mat-icon>
+            </button>
+          </div>
+          <div class="flex-shrink-0 ml-4">
             <img class="h-8 w-8" [src]="logo.src" [alt]="logo.alt" />
           </div>
           <div>
             <!-- class="hidden md:block" -->
-            <div class="ml-10 flex items-baseline space-x-4">
+            <div class="ml-4 flex items-baseline space-x-4">
               <button mat-button *ngFor="let route of topRoutes" [routerLink]="route.path">
                 <mat-icon *ngIf="route.icon" class="mr-4">{{ route.icon }}</mat-icon>
                 <span *ngIf="route.text">{{ route.text }}</span>
@@ -28,7 +33,19 @@
       </div>
     </div>
   </mat-toolbar>
-  <div class="relative w-100 overflow-scroll">
-    <ng-content></ng-content>
-  </div>
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav [mode]="sidenavMode" [opened]="sidenavOpened" class="md:block">
+      <mat-action-list>
+        <mat-list-item [routerLink]="route.path" *ngFor="let route of sideRoutes">
+          <mat-icon matListIcon>{{ route.icon }}</mat-icon>
+          <p matLine>{{ route.text }}</p>
+        </mat-list-item>
+      </mat-action-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="relative w-100 overflow-scroll">
+        <ng-content></ng-content>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

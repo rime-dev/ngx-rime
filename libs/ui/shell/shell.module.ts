@@ -10,6 +10,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDividerModule} from '@angular/material/divider';
 import {UserAccountPopupModule} from '@rng/ui/user-account-popup';
 import {RouterModule} from '@angular/router';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+
 @NgModule({
   declarations: [ShellComponent],
   imports: [
@@ -23,6 +26,8 @@ import {RouterModule} from '@angular/router';
     MatDividerModule,
     UserAccountPopupModule,
     RouterModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   exports: [ShellComponent],
 })
