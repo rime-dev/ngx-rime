@@ -8,7 +8,7 @@
               <mat-icon>menu</mat-icon>
             </button>
           </div>
-          <div class="flex-shrink-0 ml-4">
+          <div *ngIf="logo" class="flex-shrink-0 ml-4">
             <img class="h-8 w-8" [src]="logo.src" [alt]="logo.alt" />
           </div>
           <div>
@@ -33,14 +33,57 @@
       </div>
     </div>
   </mat-toolbar>
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav [mode]="sidenavMode" [opened]="sidenavOpened" class="md:block">
-      <mat-action-list>
-        <mat-list-item [routerLink]="route.path" *ngFor="let route of sideRoutes">
-          <mat-icon matListIcon>{{ route.icon }}</mat-icon>
-          <p matLine>{{ route.text }}</p>
-        </mat-list-item>
-      </mat-action-list>
+  <mat-sidenav-container [hasBackdrop]="hasBackdrop">
+    <mat-sidenav
+      #sidenav
+      [mode]="sidenavMode"
+      [opened]="sidenavOpened"
+      class="md:block"
+      [ngClass]="{
+        'fixed-sidenav-minimized': !fixedSidenavOpened
+      }"
+    >
+      <div class="flex flex-col relative w-full h-full">
+        <mat-action-list class="h-full w-full overflow-y-auto">
+          <ng-container *ngFor="let route of sideRoutes">
+            <ng-container *ngIf="!route.children && route.path">
+              <mat-list-item [routerLink]="route.path">
+                <mat-icon matListIcon>{{ route.icon }}</mat-icon>
+                <p matLine>{{ route.text }}</p>
+              </mat-list-item>
+            </ng-container>
+
+            <ng-container *ngIf="route.children">
+              <mat-list-item *ngIf="fixedSidenavOpened" (click)="route.opened = !route.opened">
+                <mat-icon matListIcon>{{ route.icon }}</mat-icon>
+                <p matLine>{{ route.text }}</p>
+                <mat-icon>{{ route.opened ? 'expand_less' : 'expand_more' }}</mat-icon>
+              </mat-list-item>
+              <ng-container *ngFor="let childRoute of route.children">
+                <mat-list-item
+                  [routerLink]="childRoute.path"
+                  *ngIf="route.opened"
+                  [ngStyle]="{'paddingLeft': fixedSidenavOpened ? '48px' : '0px'}"
+                >
+                  <mat-icon matListIcon>{{ childRoute.icon }}</mat-icon>
+                  <p matLine>{{ childRoute.text }}</p>
+                </mat-list-item>
+              </ng-container>
+            </ng-container>
+            <mat-divider *ngIf="route.divider"></mat-divider>
+          </ng-container>
+        </mat-action-list>
+
+        <mat-action-list *ngIf="!isMobile" class="w-full p-0">
+          <mat-divider></mat-divider>
+          <mat-list-item mat-button (click)="toggleFixedSidenav()">
+            <span class="w-full"></span>
+            <mat-icon>{{
+              fixedSidenavOpened ? 'keyboard_arrow_left' : 'keyboard_arrow_right'
+            }}</mat-icon>
+          </mat-list-item>
+        </mat-action-list>
+      </div>
     </mat-sidenav>
     <mat-sidenav-content>
       <div class="relative w-100 overflow-scroll">

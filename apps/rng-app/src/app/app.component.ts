@@ -22,6 +22,25 @@ export class AppComponent {
       path: '/home',
       text: 'Home',
       icon: 'home',
+      divider: true,
+    },
+    {
+      text: 'Tools',
+      children: [
+        {
+          path: '/tools/1',
+          text: 'Tool 1',
+          icon: 'build',
+        },
+        {
+          path: '/tools/2',
+          text: 'Tool 2',
+          icon: 'build',
+        },
+      ],
+    },
+    {
+      divider: true,
     },
   ];
   userRoutes = [
