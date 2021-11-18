@@ -9,16 +9,16 @@
 </button>
 <mat-menu #userMenu="matMenu">
   <div (click)="$event.stopPropagation(); $event.preventDefault()">
-    <div class="flex items-center px-5 flex-col mb-2">
+    <div class="flex items-center px-10 pt-5 pb-5 flex-col mb-2">
       <div class="flex flex-shrink-0 w-full p-2">
         <img
-          class="h-10 w-10 rounded-full m-auto"
+          class="h-20 w-20 rounded-full m-auto"
           [src]="userInfo.avatar"
           [alt]="userInfo.username"
         />
       </div>
-      <div class="ml-3">
-        <div class="text-base font-medium leading-none mb-2">
+      <div>
+        <div class="text-lg font-medium leading-none mb-2 mt-2">
           {{ userInfo.name }} {{ userInfo.lastname }}
         </div>
         <div class="text-sm font-medium leading-none text-gray-700 mb-1 text-center">

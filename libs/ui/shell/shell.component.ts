@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -26,7 +27,7 @@ export interface Routes {
   styleUrls: ['./shell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShellComponent {
+export class ShellComponent implements AfterContentInit {
   public sidenavOpened = false;
   public fixedSidenavOpened = true;
   public sidenavMode: MatDrawerMode = 'side';
@@ -107,15 +108,29 @@ export class ShellComponent {
       this.fixedSidenavOpened = true;
       this.isMobile = true;
     }
+    this.updateSidenav();
   }
   constructor(private _changeDetectorRef: ChangeDetectorRef) {
     this.onResize();
   }
-
+  updateSidenav(): void {
+    setTimeout(() => {
+      if (this.sidenav && this.sidenav._container) {
+        this._changeDetectorRef.detectChanges();
+        this.sidenav._container.updateContentMargins();
+      }
+    }, 0);
+  }
   toggleFixedSidenav() {
     this.fixedSidenavOpened = !this.fixedSidenavOpened;
-    this._changeDetectorRef.detectChanges();
-
-    this.sidenav._container?.updateContentMargins();
+    this.updateSidenav();
+  }
+  ngAfterContentInit(): void {
+    this.updateSidenav();
+    setTimeout(() => {
+      if (!this.sidenav._container?._contentMargins.left) {
+        this.updateSidenav();
+      }
+    }, 500);
   }
 }
