@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  .mat-sidenav {
+    width: 256px;
+
+    p.mat-line {
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 500;
+    }
+  }
+  .fixed-sidenav-minimized {
+    width: 64px;
+  }
+}
