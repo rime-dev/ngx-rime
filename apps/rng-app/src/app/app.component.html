@@ -1,4 +1,10 @@
 <rng-shell [topRoutes]="topRoutes" [sideRoutes]="sideRoutes" [logo]="logo">
   <rng-user-account-popup [userInfo]="userInfo" [routes]="userRoutes"></rng-user-account-popup>
-  <router-outlet></router-outlet>
+
+  <router-outlet>
+    {{ user$ | async | json }}
+    <p *ngFor="let task of tasks$ | async">
+      {{ task.data.title }}
+    </p>
+  </router-outlet>
 </rng-shell>
