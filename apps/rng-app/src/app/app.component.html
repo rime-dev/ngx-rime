@@ -3,8 +3,7 @@
 
   <router-outlet>
     {{ user$ | async | json }}
-    <p *ngFor="let task of tasks$ | async">
-      {{ task.data.title }}
-    </p>
+    <p>Taks: {{ (tasks$ | async).length }}</p>
+    <p>Groups: {{ (groups$ | async).length }}</p>
   </router-outlet>
 </rng-shell>

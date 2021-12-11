@@ -6,13 +6,13 @@ import {
   DefaultDataServiceConfig,
   EntityCollectionDataService,
   HttpMethods,
-  HttpUrlGenerator,
   QueryParams,
   RequestData,
 } from '@ngrx/data';
 import {Update} from '@ngrx/entity';
 import {Observable, of, throwError} from 'rxjs';
-import {buffer, catchError, delay, map, tap, timeout} from 'rxjs/operators';
+import {catchError, delay, map, timeout} from 'rxjs/operators';
+import {entityConfig} from '../base.module';
 export const ENTITY_NAME = new InjectionToken<string>('entityName');
 export class FireDataObject {
   public id: string;
@@ -65,11 +65,6 @@ export class FireDataService<T> implements EntityCollectionDataService<T> {
     this.timeout = to;
   }
 
-  select(entityName: string) {
-    console.log('SELECT - FireDataService: ' + entityName);
-    this.entityName = entityName;
-    return this;
-  }
   add(entity: T): Observable<any> {
     const entityOrError = entity || new Error(`No "${this.entityName}" entity to add`);
     return of(this.angularFirestore.collection(this.entityName).add(entity));
@@ -141,9 +136,11 @@ export class FireDataService<T> implements EntityCollectionDataService<T> {
         break;
       }
       case 'GET': {
-        console.log('GET:' + this.entityName);
+        const plurals: Record<string, string> = entityConfig.pluralNames;
+        const collection = plurals[this.entityName].toLowerCase();
+        console.log('GET:' + collection);
         result$ = this.angularFirestore
-          .collection(this.entityName)
+          .collection(collection)
           .snapshotChanges()
           .pipe(map((data0) => data0.map((object) => new FireDataObject(object)))); // this.http.get(url, options);
         if (this.getDelay) {
@@ -223,7 +220,7 @@ export class FireDataServiceFactory {
    * @param entityName {string} Name of the entity type for this data service
    */
   create<T>(entityName: string): EntityCollectionDataService<T> {
-    console.log('FACTORY');
+    console.log('FACTORY', entityName);
     return new FireDataService<T>(
       entityName,
       this.http,

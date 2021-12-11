@@ -20,16 +20,16 @@ interface FirebaseConfig {
 }
 
 const entityMetadata: EntityMetadataMap = {
-  State: {},
   House: {},
   Client: {},
-  tasks: {},
+  Group: {},
+  Task: {},
 };
 const pluralNames = {
-  State: 'States',
   House: 'Houses',
   Client: 'Clients',
-  tasks: 'taskss',
+  Group: 'Groups',
+  Task: 'Tasks',
 };
 export class State {}
 export const entityConfig = {
@@ -71,10 +71,6 @@ export class BaseModule {
         {
           provide: FIREBASE_OPTIONS,
           useValue: firebaseOptions,
-        },
-        {
-          provide: ENTITY_NAME,
-          useValue: 'store',
         },
         // ScreenTrackingService,
         // UserTrackingService,

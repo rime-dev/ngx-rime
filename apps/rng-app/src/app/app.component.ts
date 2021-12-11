@@ -70,7 +70,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public user$: Observable<User>;
   // public houses$: Observable<any>;
   // public clients$: Observable<any>;
-  // public groups$: Observable<any>;
+  public groups$: Observable<any>;
   public tasks$: Observable<any>;
   showLoginButton = false;
   showLogoutButton = false;
@@ -82,8 +82,11 @@ export class AppComponent implements OnInit, OnDestroy {
     // this.groups$ = this.fireDataService.select('groups').getAll();
     // this.tasks$ = (this.dataService as any).select('tasks').getAll();
     // this.tasks$.pipe(takeUntil(this.destroy$)).subscribe(console.log);
-    this.dataService.getAll();
-    this.tasks$ = this.dataService.entities$;
+    this.dataService.select('Task').getAll();
+    this.tasks$ = this.dataService.select('Task').entities$;
+    this.dataService.select('Group').getAll();
+
+    this.groups$ = this.dataService.select('Group').entities$;
   }
 
   ngOnInit() {
