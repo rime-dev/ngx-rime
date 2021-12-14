@@ -1,45 +1,33 @@
 import {HttpClientModule} from '@angular/common/http';
-import {ModuleWithProviders, NgModule} from '@angular/core';
+import {InjectionToken, ModuleWithProviders, NgModule} from '@angular/core';
 import {FirebaseOptions} from '@angular/fire/app';
 import {AngularFireModule, FIREBASE_OPTIONS} from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {
-  DefaultDataServiceConfig,
   DefaultDataServiceFactory,
   EntityDataModule,
   EntityMetadataMap,
+  ENTITY_METADATA_TOKEN,
+  PLURAL_NAMES_TOKEN,
 } from '@ngrx/data';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-import {ENTITY_NAME, FireDataServiceFactory} from './services/fire-data.service';
-import {UserService} from './services/user.service';
-interface FirebaseConfig {
+import {FireDataServiceFactory} from './services/fire-data.service';
+
+export const ENTITY_NAME = new InjectionToken<string>('entityName');
+
+export interface StateEntityConfig {
+  entityMetadata: EntityMetadataMap;
+  pluralNames: any;
+}
+export interface FirebaseConfig {
   options: FirebaseOptions;
+  entityConfig: StateEntityConfig;
 }
 
-const entityMetadata: EntityMetadataMap = {
-  House: {},
-  Client: {},
-  Group: {},
-  Task: {},
-};
-const pluralNames = {
-  House: 'Houses',
-  Client: 'Clients',
-  Group: 'Groups',
-  Task: 'Tasks',
-};
-export class State {}
-export const entityConfig = {
-  entityMetadata,
-  pluralNames,
-};
-const defaultDataServiceConfig: DefaultDataServiceConfig = {
-  root: '',
-  timeout: 0, // request timeout
-};
+export const ENTITY_CONFIG = new InjectionToken<StateEntityConfig>('entityConfig');
 
 @NgModule({
   imports: [
@@ -47,30 +35,40 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
     AngularFireModule.initializeApp({}),
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
-    EntityDataModule.forRoot(entityConfig),
+    EntityDataModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
-      // logOnly: environment.production, // Restrict extension to log-only mode
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
-  providers: [
-    UserService,
-    {provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig},
-    {provide: DefaultDataServiceFactory, useClass: FireDataServiceFactory},
-  ],
+  providers: [{provide: DefaultDataServiceFactory, useClass: FireDataServiceFactory}],
 })
 export class BaseModule {
   static firebase(firebaseConfig: FirebaseConfig): ModuleWithProviders<BaseModule> {
     const firebaseOptions = firebaseConfig.options;
+    const firebaseEntityConfig = firebaseConfig.entityConfig;
     return {
       ngModule: BaseModule,
       providers: [
         {
           provide: FIREBASE_OPTIONS,
           useValue: firebaseOptions,
+        },
+        {
+          provide: ENTITY_CONFIG,
+          useValue: firebaseEntityConfig,
+        },
+        {
+          provide: ENTITY_METADATA_TOKEN,
+          multi: true,
+          useValue: firebaseEntityConfig.entityMetadata ? firebaseEntityConfig.entityMetadata : [],
+        },
+        {
+          provide: PLURAL_NAMES_TOKEN,
+          multi: true,
+          useValue: firebaseEntityConfig.pluralNames ? firebaseEntityConfig.pluralNames : {},
         },
         // ScreenTrackingService,
         // UserTrackingService,

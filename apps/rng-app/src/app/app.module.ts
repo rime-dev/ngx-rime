@@ -6,9 +6,11 @@ import {UserAccountPopupModule} from '@rng/ui/user-account-popup';
 import {environment} from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
 import {BaseModule} from '@rng/data-access/base';
+import {AuthModule} from '@rng/data-access/auth';
 
 const firebaseConfig = {
   options: environment.firebaseOptions,
+  entityConfig: environment.firebaseEntityConfig,
 };
 
 @NgModule({
@@ -18,6 +20,7 @@ const firebaseConfig = {
     AppRoutingModule,
     ShellModule,
     UserAccountPopupModule,
+    AuthModule,
     BaseModule.firebase(firebaseConfig),
   ],
   providers: [],

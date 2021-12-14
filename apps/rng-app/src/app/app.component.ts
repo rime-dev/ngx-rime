@@ -1,10 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
+import {AuthService, User} from '@rng/data-access/auth/services/auth.service';
 import {DataService} from '@rng/data-access/base';
-import {FireDataService} from '@rng/data-access/base/services/fire-data.service';
-import {User, UserService} from '@rng/data-access/base/services/user.service';
 import {Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
 import {environment} from '../environments/environment';
 
 @Component({
@@ -53,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
   userRoutes = [
     {
       click: () => {
-        alert('logout');
+        this.authService.signOut();
       },
       text: 'Logout',
       icon: 'logout',
@@ -67,7 +64,7 @@ export class AppComponent implements OnInit, OnDestroy {
     email: 'email.email.com',
   };
   private destroy$: Subject<void> = new Subject();
-  public user$: Observable<User>;
+  public user$: Observable<User | null>;
   // public houses$: Observable<any>;
   // public clients$: Observable<any>;
   public groups$: Observable<any>;
@@ -75,17 +72,11 @@ export class AppComponent implements OnInit, OnDestroy {
   showLoginButton = false;
   showLogoutButton = false;
 
-  constructor(private userService: UserService, private dataService: DataService) {
-    this.user$ = this.userService.user$;
-    // this.houses$ = this.fireDataService.select('houses').getAll();
-    // this.clients$ = this.fireDataService.select('clients').getAll();
-    // this.groups$ = this.fireDataService.select('groups').getAll();
-    // this.tasks$ = (this.dataService as any).select('tasks').getAll();
-    // this.tasks$.pipe(takeUntil(this.destroy$)).subscribe(console.log);
+  constructor(private authService: AuthService, private dataService: DataService) {
+    this.user$ = this.authService.user$;
     this.dataService.select('Task').getAll();
     this.tasks$ = this.dataService.select('Task').entities$;
     this.dataService.select('Group').getAll();
-
     this.groups$ = this.dataService.select('Group').entities$;
   }
 
@@ -97,9 +88,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
   login() {
-    this.userService.login(environment.userCredentials.email, environment.userCredentials.password);
+    this.authService.signIn(
+      environment.userCredentials.email,
+      environment.userCredentials.password
+    );
   }
   logout() {
-    this.userService.logout();
+    this.authService.signOut();
   }
 }

@@ -1,21 +1,6 @@
-import {Inject, Injectable, InjectionToken} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {EntityCollectionServiceBase, EntityCollectionServiceElementsFactory} from '@ngrx/data';
-import {entityConfig} from '../base.module';
-
-// @Injectable({providedIn: 'root'})
-// export class DataService extends EntityCollectionServiceBase<any> {
-//   constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
-//     super('Task', serviceElementsFactory);
-//     const plurals: Record<string, string> = entityConfig.pluralNames;
-//     for (const key in plurals) {
-//       if (Object.prototype.hasOwnProperty.call(plurals, key)) {
-//         serviceElementsFactory.create(key);
-//       }
-//     }
-//   }
-// }
-
-const ENTITY_NAME = new InjectionToken<string>('entityName');
+import {ENTITY_CONFIG, ENTITY_NAME, StateEntityConfig} from '../base.module';
 
 class DataEntity extends EntityCollectionServiceBase<any> {
   constructor(
@@ -28,9 +13,11 @@ class DataEntity extends EntityCollectionServiceBase<any> {
 @Injectable({providedIn: 'root'})
 export class DataService {
   entitiesInstaces: Record<string, any> = {};
-
-  constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
-    const plurals: Record<string, string> = entityConfig.pluralNames;
+  constructor(
+    @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,
+    serviceElementsFactory: EntityCollectionServiceElementsFactory
+  ) {
+    const plurals: Record<string, string> = this.entityConfig.pluralNames;
     for (const key in plurals) {
       if (Object.prototype.hasOwnProperty.call(plurals, key)) {
         this.entitiesInstaces[key] = new DataEntity(key, serviceElementsFactory);
