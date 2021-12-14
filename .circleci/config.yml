@@ -78,8 +78,7 @@ jobs:
       - restore_cache:
           <<: *yarn_cache
       - run: ./node_modules/.bin/nx workspace-lint
-      - run: yarn affected:lint ${AFFECTED_ARGS} --parallel
-      # - run: yarn lint:all --parallel
+      - run: yarn lint:all --parallel
   build:
     <<: *defaults
     steps:
@@ -90,8 +89,7 @@ jobs:
           <<: *set_env
       - restore_cache:
           <<: *yarn_cache
-      - run: yarn affected:build -- ${AFFECTED_ARGS} --parallel --configuration production
-      #- run: yarn build:all --parallel --configuration production
+      - run: yarn build:all --parallel --configuration production
       - save_cache:
           key: build-{{ .Environment.CIRCLE_WORKFLOW_ID }}
           paths:
@@ -108,8 +106,7 @@ jobs:
           <<: *set_env
       - restore_cache:
           <<: *yarn_cache
-      - run: yarn affected:test -- ${AFFECTED_ARGS} --parallel -- --ci --code-coverage
-      # - run: yarn test:all --parallel -- --ci --code-coverage
+      - run: yarn test:all --parallel -- --ci --code-coverage
   e2e:
     <<: *defaults
     steps:
