@@ -9,83 +9,54 @@
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
         Sign in to your account
       </h2>
-      <p class="mt-2 text-center text-sm text-gray-600">
-        Or
-        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-          start your 14-day free trial
-        </a>
-      </p>
     </div>
-    <form class="mt-8 space-y-6">
+    <form [formGroup]="form" class="mt-8 space-y-6" (ngSubmit)="submit()">
       <input type="hidden" name="remember" value="true" />
-      <div class="rounded-md shadow-sm -space-y-px">
-        <div>
-          <label for="email-address" class="sr-only">Email address</label>
+      <div class="rounded-md -space-y-px">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Email</mat-label>
           <input
-            id="email-address"
+            matInput
+            placeholder="Email"
             name="email"
             type="email"
+            formControlName="email"
             autocomplete="email"
             required
-            class="
-              appearance-none
-              rounded-none
-              relative
-              block
-              w-full
-              px-3
-              py-2
-              border border-gray-300
-              placeholder-gray-500
-              text-gray-900
-              rounded-t-md
-              focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10
-              sm:text-sm
-            "
-            placeholder="Email address"
           />
-        </div>
-        <div>
-          <label for="password" class="sr-only">Password</label>
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Password</mat-label>
           <input
-            id="password"
+            matInput
+            placeholder="Password"
             name="password"
             type="password"
+            formControlName="password"
             autocomplete="current-password"
             required
-            class="
-              appearance-none
-              rounded-none
-              relative
-              block
-              w-full
-              px-3
-              py-2
-              border border-gray-300
-              placeholder-gray-500
-              text-gray-900
-              rounded-b-md
-              focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10
-              sm:text-sm
-            "
-            placeholder="Password"
           />
-        </div>
+        </mat-form-field>
       </div>
 
       <div class="flex items-center justify-between">
         <div class="flex items-center">
-          <input
-            id="remember-me"
-            name="remember-me"
-            type="checkbox"
-            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-          />
-          <label for="remember-me" class="ml-2 block text-sm text-gray-900"> Remember me </label>
+          <span
+            >Don't have an account?
+            <a
+              routerLink="/register-user"
+              class="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              Sign Up
+            </a>
+          </span>
         </div>
 
         <div class="text-sm">
-          <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+          <a
+            routerLink="/forgot-password"
+            class="font-medium text-indigo-600 hover:text-indigo-500"
+          >
             Forgot your password?
           </a>
         </div>
@@ -112,25 +83,37 @@
             focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
           "
         >
-          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-            <!-- Heroicon name: solid/lock-closed -->
-            <svg
-              class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </span>
+          <span class="absolute left-0 inset-y-0 flex items-center pl-3"> </span>
           Sign in
         </button>
       </div>
+
+      <!-- <mat-divider></mat-divider>
+
+      <div class="text-center">
+        <button type="button" mat-stroked-button (click)="loginWithGoogle()">
+          <div class="mt-1 mb-1 mx-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="36px" height="36px">
+              <path
+                fill="#FFC107"
+                d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
+              />
+              <path
+                fill="#FF3D00"
+                d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
+              />
+              <path
+                fill="#4CAF50"
+                d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
+              />
+              <path
+                fill="#1976D2"
+                d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
+              />
+            </svg>
+          </div>
+        </button>
+      </div> -->
     </form>
   </div>
 </div>

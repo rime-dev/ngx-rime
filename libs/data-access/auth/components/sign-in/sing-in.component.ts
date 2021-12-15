@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
@@ -7,5 +8,21 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./sign-in.component.scss'],
 })
 export class signInComponent {
-  constructor(private authService: AuthService) {}
+  form: FormGroup;
+  constructor(private authService: AuthService, private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
+  submit(): void {
+    if (this.form.invalid) {
+      return;
+    }
+    this.authService.signIn(this.form.controls.email.value, this.form.controls.password.value);
+  }
+
+  loginWithGoogle(): void {
+    this.authService.googleAuth();
+  }
 }

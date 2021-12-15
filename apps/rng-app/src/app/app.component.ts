@@ -1,15 +1,14 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {AuthService, User} from '@rng/data-access/auth/services/auth.service';
 import {DataService} from '@rng/data-access/base';
 import {Observable, Subject} from 'rxjs';
-import {environment} from '../environments/environment';
 
 @Component({
   selector: 'rng-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnDestroy {
   title = 'rng-app';
   logo = {
     src: 'assets/rng-logo.png',
@@ -80,20 +79,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.groups$ = this.dataService.select('Group').entities$;
   }
 
-  ngOnInit() {
-    this.login();
-  }
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-  login() {
-    this.authService.signIn(
-      environment.userCredentials.email,
-      environment.userCredentials.password
-    );
-  }
-  logout() {
-    this.authService.signOut();
   }
 }
