@@ -8,11 +8,10 @@ export interface Routes {
 }
 
 export interface UserInfo {
-  username?: string;
-  name?: string;
-  lastname?: string;
+  displayName?: string;
   email?: string;
-  avatar?: string;
+  photoUrl?: string;
+  uid?: string;
 }
 
 @Component({
@@ -36,15 +35,13 @@ export class UserAccountPopupComponent {
    * Defines the user information
    */
   @Input()
-  set userInfo(value: UserInfo) {
-    console.log(value);
-
+  set userInfo(value: UserInfo | null) {
     this._userInfo = value;
   }
-  get userInfo(): UserInfo {
+  get userInfo(): UserInfo | null {
     return this._userInfo;
   }
-  private _userInfo!: UserInfo;
+  private _userInfo!: UserInfo | null;
   constructor() {}
   handleClickEvent(event: any) {
     event();

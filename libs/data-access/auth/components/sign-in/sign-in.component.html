@@ -24,6 +24,8 @@
             autocomplete="email"
             required
           />
+          <mat-error *ngIf="form.get('email')?.errors?.email">Enter a valid email</mat-error>
+          <mat-error *ngIf="form.get('email')?.errors?.required">This field is required</mat-error>
         </mat-form-field>
         <mat-form-field class="w-full" appearance="outline">
           <mat-label>Password</mat-label>
@@ -31,11 +33,17 @@
             matInput
             placeholder="Password"
             name="password"
-            type="password"
+            [type]="hide ? 'password' : 'text'"
             formControlName="password"
             autocomplete="current-password"
             required
           />
+          <mat-icon matSuffix class="cursor-pointer" (click)="hide = !hide">{{
+            hide ? 'visibility_off' : 'visibility'
+          }}</mat-icon>
+          <mat-error *ngIf="form.get('password')?.errors?.required"
+            >This field is required</mat-error
+          >
         </mat-form-field>
       </div>
 

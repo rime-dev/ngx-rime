@@ -1,28 +1,50 @@
 <button
   type="button"
   mat-mini-fab
+  *ngIf="userInfo && userInfo.photoUrl"
   class="bg-contain bg-center mat-elevation-z0"
   [matMenuTriggerFor]="userMenu"
-  [ngStyle]="{'background-image': 'url(' + userInfo.avatar + ')'}"
+  [ngStyle]="{'background-image': 'url(' + userInfo?.photoUrl + ')'}"
 >
   <span class="sr-only">Open user menu</span>
+</button>
+<button
+  type="button"
+  class="mat-elevation-z0 text-2xl"
+  mat-mini-fab
+  *ngIf="userInfo && !userInfo.photoUrl"
+  [matMenuTriggerFor]="userMenu"
+>
+  <span class="sr-only">Open user menu</span>
+  <span *ngIf="userInfo?.displayName">{{ userInfo?.displayName | slice: 0:1 | uppercase }}</span>
+  <span *ngIf="!userInfo?.displayName">{{ userInfo?.email | slice: 0:1 | uppercase }}</span>
 </button>
 <mat-menu #userMenu="matMenu">
   <div (click)="$event.stopPropagation(); $event.preventDefault()">
     <div class="flex items-center px-10 pt-5 pb-5 flex-col mb-2">
-      <div class="flex flex-shrink-0 w-full p-2">
+      <div class="flex flex-shrink-0 w-full p-2 justify-center">
         <img
+          *ngIf="userInfo?.photoUrl"
           class="h-20 w-20 rounded-full m-auto"
-          [src]="userInfo.avatar"
-          [alt]="userInfo.username"
+          [src]="userInfo?.photoUrl"
+          [alt]="userInfo?.displayName"
         />
+        <button mat-fab type="button" *ngIf="!userInfo?.photoUrl" class="mat-elevation-z0 text-3xl">
+          <span *ngIf="userInfo?.displayName">{{
+            userInfo?.displayName | slice: 0:1 | uppercase
+          }}</span>
+          <span *ngIf="!userInfo?.displayName">{{ userInfo?.email | slice: 0:1 | uppercase }}</span>
+        </button>
       </div>
-      <div>
-        <div class="text-lg font-medium leading-none mb-2 mt-2">
-          {{ userInfo.name }} {{ userInfo.lastname }}
+      <div class="mt-2">
+        <div *ngIf="userInfo?.displayName" class="text-lg font-medium leading-none mb-2">
+          {{ userInfo?.displayName }}
         </div>
-        <div class="text-sm font-medium leading-none text-gray-700 mb-1 text-center">
-          {{ userInfo.email }}
+        <div
+          *ngIf="userInfo?.email"
+          class="text-sm font-medium leading-none text-gray-700 mb-1 text-center"
+        >
+          {{ userInfo?.email }}
         </div>
       </div>
     </div>

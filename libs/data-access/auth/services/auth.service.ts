@@ -2,7 +2,7 @@ import {Injectable, NgZone, OnDestroy} from '@angular/core';
 import {GoogleAuthProvider} from '@angular/fire/auth';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import firebase from 'firebase/compat';
 import {BehaviorSubject, Subject} from 'rxjs';
 
@@ -22,6 +22,7 @@ export class AuthService implements OnDestroy {
   constructor(
     public angularFirestore: AngularFirestore,
     private angularFireAuth: AngularFireAuth,
+    private route: ActivatedRoute,
     public router: Router,
     public ngZone: NgZone
   ) {
@@ -39,14 +40,17 @@ export class AuthService implements OnDestroy {
   }
 
   // Sign in with email/password
-  signIn(email: string, password: string) {
+  signIn(email: string, password: string): Promise<void> {
     return this.angularFireAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         const user = result.user as User;
+        console.log('WWWWWW');
+
         if (user) {
           this.ngZone.run(() => {
             this.router.navigate(['/dashboard']);
+            console.log('UUUUUUUU');
           });
           this.setUserData(user);
         }
@@ -100,7 +104,10 @@ export class AuthService implements OnDestroy {
     const user = JSON.parse(String(localStorage.getItem('user')));
     return user !== null && user.emailVerified !== false ? true : false;
   }
-
+  get hasEmailVerified(): boolean {
+    const user = JSON.parse(String(localStorage.getItem('user')));
+    return user.emailVerified ? true : false;
+  }
   // Sign in with Google
   public googleAuth() {
     return this.authLogin(new GoogleAuthProvider());

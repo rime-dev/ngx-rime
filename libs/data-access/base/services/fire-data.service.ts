@@ -11,18 +11,34 @@ import {
 import {Update} from '@ngrx/entity';
 import {Observable, of, throwError} from 'rxjs';
 import {catchError, delay, map, timeout} from 'rxjs/operators';
-import {ENTITY_CONFIG, ENTITY_NAME, StateEntityConfig} from '../base.module';
+import {ENTITY_NAME, ENTITY_CONFIG} from '../constants/base.constant';
+import {FireDataObject, StateEntityConfig} from '../models/base.model';
 
-export class FireDataObject {
-  public id: string;
-  public data: Record<string, any>;
-  constructor(data: Record<string, any>) {
-    this.id = data.payload.doc.id;
-    this.data = data.payload.doc.data();
+/**
+ * A wrapper of DefaultDataServiceFactory.
+ * Creates the FireDataService instance for the given entity.
+ */
+@Injectable()
+export class FireDataServiceFactory {
+  constructor(
+    @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,
+    private angularFirestore: AngularFirestore
+  ) {}
+
+  /**
+   * Create a fire {EntityCollectionDataService} for the given entity type
+   *
+   * @param entityName {string} Name of the entity type for this data service
+   */
+  create<T>(entityName: string): EntityCollectionDataService<T> {
+    return new FireDataService<T>(entityName, this.entityConfig, this.angularFirestore);
   }
 }
 
-@Injectable({providedIn: 'root'})
+/**
+ * A basic service for CRUD operations connected with Firebase.
+ * Creates an instance of each entity.
+ */
 export class FireDataService<T> implements EntityCollectionDataService<T> {
   protected _name!: string;
   protected delete404OK!: boolean;
@@ -43,7 +59,6 @@ export class FireDataService<T> implements EntityCollectionDataService<T> {
     @Inject(ENTITY_CONFIG) entityConfig: StateEntityConfig,
     private angularFirestore: AngularFirestore
   ) {
-    console.log(entityConfig);
     this.entityConfig = entityConfig;
     this._name = `${entityName} FireDataService`;
     this.entityName = entityName;
@@ -127,20 +142,19 @@ export class FireDataService<T> implements EntityCollectionDataService<T> {
         result$ = this.angularFirestore
           .collection(this.getCollection(this.entityName))
           .snapshotChanges()
-          .pipe(map((data0) => data0.map((object) => new FireDataObject(object)))); // this.http.get(url, options);
+          .pipe(map((data0) => data0.map((object) => new FireDataObject(object))));
         if (this.getDelay) {
           result$ = result$.pipe(delay(this.getDelay));
         }
         break;
       }
       case 'POST': {
-        result$ = of(); // this.http.post(url, data, options);
+        result$ = of();
         if (this.saveDelay) {
           result$ = result$.pipe(delay(this.saveDelay));
         }
         break;
       }
-      // N.B.: It must return an Update<T>
       case 'PUT': {
         result$ = of(); // this.http.put(url, data, options);
         if (this.saveDelay) {
@@ -176,16 +190,5 @@ export class FireDataService<T> implements EntityCollectionDataService<T> {
       return of({});
     }
     return undefined;
-  }
-}
-
-@Injectable()
-export class FireDataServiceFactory {
-  constructor(
-    @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,
-    private angularFirestore: AngularFirestore
-  ) {}
-  create<T>(entityName: string): EntityCollectionDataService<T> {
-    return new FireDataService<T>(entityName, this.entityConfig, this.angularFirestore);
   }
 }

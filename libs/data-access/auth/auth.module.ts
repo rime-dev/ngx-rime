@@ -1,23 +1,29 @@
+import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
-import {AuthService} from './services/auth.service';
-import {Routes, RouterModule} from '@angular/router';
-import {signInComponent} from './components/sign-in/sing-in.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {RouterModule, Routes} from '@angular/router';
+import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
+import {SignInComponent} from './components/sign-in/sing-in.component';
+import {SignUpComponent} from './components/sign-up/sing-up.component';
+import {VerifyEmailComponent} from './components/verify-email/verify-email.component';
+import {AuthService} from './services/auth.service';
 const routes: Routes = [
-  {path: 'sign-in', component: signInComponent},
-  {path: 'register-user', component: 'SignUpComponent' as unknown as undefined},
-  {path: 'forgot-password', component: 'ForgotPasswordComponent' as unknown as undefined},
-  {path: 'verify-email-address', component: 'VerifyEmailComponent' as unknown as undefined},
+  {path: 'sign-in', component: SignInComponent},
+  {path: 'register-user', component: SignUpComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'verify-email-address', component: VerifyEmailComponent},
 ];
 @NgModule({
-  declarations: [signInComponent],
+  declarations: [SignInComponent, SignUpComponent, ForgotPasswordComponent, VerifyEmailComponent],
   imports: [
+    CommonModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     RouterModule.forRoot(routes),
@@ -27,6 +33,7 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatDividerModule,
+    MatIconModule,
   ],
   providers: [AuthService],
 })
