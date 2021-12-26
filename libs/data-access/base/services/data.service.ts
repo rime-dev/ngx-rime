@@ -8,18 +8,20 @@ import {StateEntityConfig} from '../models/base.model';
  * It allows to get entity subject and call methods to interact with Firebase.
  *
  * @example
-  @Component({
-    selector: 'app-products',
-    templateUrl: './products.component.html',
-    styleUrls: ['./products.component.scss'],
-  })
-  export class ProductsComponent {
-    public products$: Observable<any>;
-    constructor(private dataService: DataService) {
-      this.products$ = this.dataService.select('Product').entities$;
-      this.dataService.select('Product').getAll();
-    }
-  }
+ * ```
+ * \@Component({
+ *   selector: 'app-products',
+ *   templateUrl: './products.component.html',
+ *   styleUrls: ['./products.component.scss'],
+ * })
+ * export class ProductsComponent {
+ *   public products$: Observable<any>;
+ *   constructor(private dataService: DataService) {
+ *     this.products$ = this.dataService.select('Product').entities$;
+ *     this.dataService.select('Product').getAll();
+ *   }
+ * }
+ * ```
  */
 @Injectable({providedIn: 'root'})
 export class DataService {
