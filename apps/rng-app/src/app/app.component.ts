@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
-import {AuthService, User} from '@rng/data-access/auth/services/auth.service';
-import {DataService} from '@rng/data-access/base';
+import {User} from '@rng/data-access/auth';
+import {AuthService} from '@rng/data-access/auth/services/auth.service';
 import {Observable, Subject} from 'rxjs';
 
 @Component({

@@ -7,6 +7,7 @@ import {environment} from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
 import {BaseModule} from '@rng/data-access/base';
 import {AuthModule} from '@rng/data-access/auth';
+import {CommonModule} from '@angular/common';
 
 const firebaseConfig = {
   options: environment.firebaseOptions,
@@ -16,6 +17,7 @@ const firebaseConfig = {
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     ShellModule,

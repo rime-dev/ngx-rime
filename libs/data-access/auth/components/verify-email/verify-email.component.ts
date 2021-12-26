@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AuthService, User} from '../../services/auth.service';
+import {User} from '../../models/auth.model';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'rng-verify-email',

@@ -2,17 +2,10 @@ import {Injectable, NgZone, OnDestroy} from '@angular/core';
 import {GoogleAuthProvider} from '@angular/fire/auth';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import firebase from 'firebase/compat';
 import {BehaviorSubject, Subject} from 'rxjs';
-
-export interface User {
-  uid: string;
-  email: string;
-  displayName: string;
-  photoURL: string;
-  emailVerified: boolean;
-}
+import {User} from '../models/auth.model';
 
 @Injectable({providedIn: 'root'})
 export class AuthService implements OnDestroy {
@@ -22,7 +15,6 @@ export class AuthService implements OnDestroy {
   constructor(
     public angularFirestore: AngularFirestore,
     private angularFireAuth: AngularFireAuth,
-    private route: ActivatedRoute,
     public router: Router,
     public ngZone: NgZone
   ) {
