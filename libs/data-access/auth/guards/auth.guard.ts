@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(['verify-email-address']);
         return false;
       }
-      this.router.navigate(['sign-in']);
+      this.router.navigate(['sign-in'], {queryParams: {returnUrl: state.url}});
       return false;
     }
     return true;
