@@ -2,7 +2,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {AngularFireModule, FIREBASE_OPTIONS} from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
-import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import {AngularFirestoreModule, ENABLE_PERSISTENCE} from '@angular/fire/compat/firestore';
 import {
   DefaultDataServiceFactory,
   EntityDataModule,
@@ -24,6 +24,7 @@ import {FireDataServiceFactory} from './services/fire-data.service';
   imports: [
     HttpClientModule,
     AngularFireModule.initializeApp({}),
+    AngularFirestoreModule.enablePersistence(),
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
     EntityDataModule.forRoot({}),
@@ -47,6 +48,7 @@ export class BaseModule {
           provide: FIREBASE_OPTIONS,
           useValue: firebaseOptions,
         },
+        {provide: ENABLE_PERSISTENCE, useValue: firebaseEntityConfig.enablePersistence},
         {
           provide: ENTITY_CONFIG,
           useValue: firebaseEntityConfig,

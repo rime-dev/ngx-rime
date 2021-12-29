@@ -1,18 +1,19 @@
-import {HttpErrorResponse, HttpParams} from '@angular/common/http';
-import {Inject, Injectable, InjectionToken} from '@angular/core';
-import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {
-  DataServiceError,
-  EntityCollectionDataService,
-  HttpMethods,
-  QueryParams,
-  RequestData,
-} from '@ngrx/data';
-import {Update} from '@ngrx/entity';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Inject, Injectable} from '@angular/core';
+import {AngularFirestore, CollectionReference, FieldPath} from '@angular/fire/compat/firestore';
 import {Observable, of, throwError} from 'rxjs';
 import {catchError, delay, map, timeout} from 'rxjs/operators';
-import {ENTITY_NAME, ENTITY_CONFIG} from '../constants/base.constant';
-import {FireDataObject, StateEntityConfig} from '../models/base.model';
+import {ENTITY_CONFIG, ENTITY_NAME} from '../constants/base.constant';
+import {
+  ConditionalQueryFirestore,
+  FirebaseData,
+  FirebaseMethods,
+  FireDataObject,
+  FireDataServiceError,
+  FireEntityCollectionDataService,
+  OrderByDirection,
+  StateEntityConfig,
+} from '../models/base.model';
 
 /**
  * A wrapper of DefaultDataServiceFactory.
@@ -30,7 +31,7 @@ export class FireDataServiceFactory {
    *
    * @param entityName {string} Name of the entity type for this data service
    */
-  create<T>(entityName: string): EntityCollectionDataService<T> {
+  create<T>(entityName: string): FireEntityCollectionDataService<T> {
     return new FireDataService<T>(entityName, this.entityConfig, this.angularFirestore);
   }
 }
@@ -39,10 +40,11 @@ export class FireDataServiceFactory {
  * A basic service for CRUD operations connected with Firebase.
  * Creates an instance of each entity.
  */
-export class FireDataService<T> implements EntityCollectionDataService<T> {
-  protected _name!: string;
-  protected delete404OK!: boolean;
+export class FireDataService<T> implements FireEntityCollectionDataService<T> {
+  protected internalName!: string;
+  protected delete404OK: boolean;
   protected entityName!: string;
+  protected collectionName!: string;
   protected entityConfig!: StateEntityConfig;
   protected entityUrl!: string;
   protected entitiesUrl!: string;
@@ -50,122 +52,256 @@ export class FireDataService<T> implements EntityCollectionDataService<T> {
   protected saveDelay = 0;
   protected timeout = 0;
 
-  get name() {
-    return this._name;
-  }
-
   constructor(
     @Inject(ENTITY_NAME) entityName: string,
     @Inject(ENTITY_CONFIG) entityConfig: StateEntityConfig,
     private angularFirestore: AngularFirestore
   ) {
     this.entityConfig = entityConfig;
-    this._name = `${entityName} FireDataService`;
+    this.internalName = `${entityName} FireDataService`;
     this.entityName = entityName;
+    this.collectionName = this.getCollectionName(entityName);
+    this.delete404OK = true;
   }
 
+  /**
+   * Adds an object into a collection
+   *
+   * @param entity The entire object to set in.
+   */
   add(entity: T): Observable<any> {
     const entityOrError = entity || new Error(`No "${this.entityName}" entity to add`);
-    return of(this.angularFirestore.collection(this.entityName).add(entity));
+    return this.execute('set', undefined, entityOrError);
   }
 
-  delete(key: number | string): Observable<number | string> {
+  /**
+   * Deletes a document in a collection
+   *
+   * @param uid The document UID from Firestore
+   */
+  delete(uid: string): Observable<string> {
     let err: Error | undefined;
-    if (key == null) {
+    if (uid == null) {
       err = new Error(`No "${this.entityName}" key to delete`);
     }
-    return this.execute('DELETE', this.entityUrl + key, err).pipe(
-      map((result) => key as number | string)
-    );
+    return this.execute('delete', uid, err).pipe(map((result) => uid as string));
   }
 
+  /**
+   * Gets all documents from a collection
+   */
   getAll(): Observable<any> {
-    return this.execute('GET', 'all');
+    return this.execute('get', undefined);
   }
 
-  getById(key: number | string): Observable<T> {
+  /**
+   * Gets a document by his UID
+   *
+   * @param uid The document UID from Firestore
+   */
+  getById(uid: string): Observable<T> {
     let err: Error | undefined;
-    if (key == null) {
-      err = new Error(`No "${this.entityName}" key to get`);
+    if (uid == null) {
+      err = new Error(`No "${this.entityName}" uid to get`);
     }
-    return this.execute('GET', this.entityUrl + key, err);
+    return this.execute('get', uid, err);
   }
 
-  getWithQuery(queryParams: QueryParams | string): Observable<T[]> {
-    const qParams =
-      typeof queryParams === 'string' ? {fromString: queryParams} : {fromObject: queryParams};
-    const params = new HttpParams(qParams);
-    return this.execute('GET', this.entitiesUrl, undefined, {params});
+  /**
+   * Gets an array of documents from a queries.
+   *
+   * @param queries An array of ConditionalQueryFirestore
+   */
+  getWithQuery(queries: ConditionalQueryFirestore[]): Observable<T[]> {
+    return this.execute('get', undefined, {where: queries});
   }
 
-  update(update: Update<T>): Observable<any> {
-    const id = update && update.id;
-    const updateOrError =
-      id == null ? new Error(`No "${this.entityName}" update data or id`) : update.changes;
-    return of(this.angularFirestore.doc(`${this.entityName}/${update.id}`).update(update.changes));
+  /**
+   * Gets an array of documents with a limit that only returns the first matching
+   * documents.
+   *
+   * @param limit The maximum number of items to return.
+   */
+  getWithLimit(limit: number): Observable<T[]> {
+    return this.execute('get', undefined, {limit});
   }
 
-  // Important! Only call if the backend service supports upserts as a POST to the target URL
-  upsert(entity: T): Observable<T> {
-    const entityOrError = entity || new Error(`No "${this.entityName}" entity to upsert`);
-    return this.execute('POST', this.entityUrl, entityOrError);
+  /**
+   * Gets an array of documents that only returns the last matching
+   * documents.
+   *
+   * You must specify at least one `orderBy` clause for `limitToLast` queries,
+   * otherwise an exception will be thrown during execution.
+   *
+   * @param limit The maximum number of items to return.
+   */
+  limitToLast(limit: number): Observable<T[]> {
+    return this.execute('get', undefined, {limitToLast: limit});
   }
 
-  private getCollection(entityName: string) {
+  /**
+   * Updates an existing document
+   *
+   * @param update
+   */
+  update(document: T): Observable<any> {
+    const entityOrError = document || new Error(`No "${this.entityName}" entity to update`);
+    return this.execute('update', undefined, entityOrError);
+  }
+
+  /**
+   * Gets the collection name from the record of entities
+   *
+   * @param entityName The name of the entity selected
+   */
+  private getCollectionName(entityName: string) {
     const plurals: Record<string, string> = this.entityConfig.pluralNames;
     const collection = plurals[entityName].toLowerCase();
     return collection;
   }
-  protected execute(
-    method: HttpMethods,
-    url: string,
-    data?: any, // data, error, or undefined/null
-    options?: any
-  ): Observable<any> {
-    const req: RequestData = {method, url, data, options};
 
+  /**
+   * Checks if the method selected is allowed
+   *
+   * @param method A firebase method
+   */
+  private checkIfMethodIsImplemented(method: FirebaseMethods) {
+    return method === 'get' || method === 'set' || method === 'delete' || method === 'update';
+  }
+
+  /**
+   * Gets an observable of the delete promise from Firestore
+   *
+   * @param collection The collection name
+   */
+  private getObservableFromDelete(collection?: string) {
+    let action = null;
+    if (collection) {
+      action = this.angularFirestore.collection(collection).doc().delete();
+    }
+    return of(action);
+  }
+
+  /**
+   * Gets an observable of the set promise from Firestore
+   *
+   * @param data The object to be added in the collection as new document
+   * @param collection The collection name
+   */
+  private getObservableFromSet(data: any, collection?: string) {
+    let action = null;
+    if (collection) {
+      action = this.angularFirestore.collection(collection).add(data);
+    }
+    return of(action);
+  }
+
+  /**
+   * Gets an observable of the update promise fro Firestore
+   *
+   * @param document The object to be updated in the collection
+   * @param collection The collection name
+   */
+  private getObservableFromUpdate(document?: any, collection?: string) {
+    let action = null;
+    if (collection && document) {
+      delete document.uid;
+      action = this.angularFirestore.collection(collection).doc(document.uid).update(document);
+    } else {
+      action = new Error(`No "${this.entityName}" update data or id`);
+    }
+    return of(action);
+  }
+
+  private getCollectionReferenceByConditions(ref: CollectionReference<unknown>, data: any) {
+    const conditions: any = {
+      limit: (limit: number) => ref.limit(limit),
+      limitToLast: (limit: number) => ref.limitToLast(limit),
+      where: (queries: ConditionalQueryFirestore[]) => {
+        queries.forEach((query: ConditionalQueryFirestore) => {
+          ref.where(query.fieldPath, query.opStr, query.value);
+        });
+        return ref;
+      },
+      orderBy: (fieldPath: string | FieldPath, directionStr?: OrderByDirection) =>
+        ref.orderBy(fieldPath, directionStr),
+      startAt: (uid: string) =>
+        ref.startAt(this.angularFirestore.collection(this.collectionName).doc(uid)),
+      startAfter: (uid: string) =>
+        ref.startAfter(this.angularFirestore.collection(this.collectionName).doc(uid)),
+      endBefore: (uid: string) =>
+        ref.endBefore(this.angularFirestore.collection(this.collectionName).doc(uid)),
+      endAt: (uid: string) =>
+        ref.endAt(this.angularFirestore.collection(this.collectionName).doc(uid)),
+    };
+    for (const key in data) {
+      if (Object.prototype.hasOwnProperty.call(data, key)) {
+        const element = data[key];
+        ref = conditions[key](element);
+      }
+    }
+    return ref;
+  }
+
+  /**
+   * Gets an observable of the DocumentSnapshot or QuerySnapshot
+   *
+   * @param document The UID of the document
+   * @param data Additional data for the queries
+   * @param collection The collection name
+   */
+  private getObservableFromGet(document?: any, data?: any, collection?: string) {
+    let action = null;
+    if (collection) {
+      if (!document && !data) {
+        action = this.angularFirestore
+          .collection(collection)
+          .snapshotChanges()
+          .pipe(map((data0) => data0.map((object) => new FireDataObject(object))));
+      } else if (document && !data) {
+        action = this.angularFirestore
+          .collection(collection)
+          .doc(document)
+          .snapshotChanges()
+          .pipe(map((object) => new FireDataObject(object)));
+      } else if (!document && data) {
+        let ref: CollectionReference<unknown>;
+        ref = this.angularFirestore.collection(collection).ref;
+        ref = this.getCollectionReferenceByConditions(ref, data);
+        action = of(ref.get()).pipe(map((object) => new FireDataObject(object)));
+      }
+    }
+    return of(action);
+  }
+
+  /**
+   * Performs the firestore request.
+   *
+   * @param method The allowed firebase methods
+   * @param document The UID of a document
+   * @param data Additional data for the document (data, error, or undefined/null)
+   */
+  protected execute(method: FirebaseMethods, document?: string, data?: any): Observable<any> {
+    const req: FirebaseData = {method, document, data};
+    const collection: string = this.collectionName;
     if (data instanceof Error) {
       return this.handleError(req)(data);
     }
-
+    const observableFromMethod = {
+      delete: this.getObservableFromDelete(collection),
+      set: this.getObservableFromSet(req.data, collection),
+      update: this.getObservableFromUpdate(req.data, collection),
+      get: this.getObservableFromGet(req.data, collection),
+    };
     let result$: Observable<any>;
-
-    switch (method) {
-      case 'DELETE': {
-        result$ = of(); // this.http.delete(url, options);
-        if (this.saveDelay) {
-          result$ = result$.pipe(delay(this.saveDelay));
-        }
-        break;
+    result$ = observableFromMethod[method];
+    if (this.checkIfMethodIsImplemented(method)) {
+      if (this.saveDelay) {
+        result$ = result$.pipe(delay(this.saveDelay));
       }
-      case 'GET': {
-        result$ = this.angularFirestore
-          .collection(this.getCollection(this.entityName))
-          .snapshotChanges()
-          .pipe(map((data0) => data0.map((object) => new FireDataObject(object))));
-        if (this.getDelay) {
-          result$ = result$.pipe(delay(this.getDelay));
-        }
-        break;
-      }
-      case 'POST': {
-        result$ = of();
-        if (this.saveDelay) {
-          result$ = result$.pipe(delay(this.saveDelay));
-        }
-        break;
-      }
-      case 'PUT': {
-        result$ = of(); // this.http.put(url, data, options);
-        if (this.saveDelay) {
-          result$ = result$.pipe(delay(this.saveDelay));
-        }
-        break;
-      }
-      default: {
-        const error = new Error('Unimplemented HTTP method, ' + method);
-        result$ = throwError(error);
-      }
+    } else {
+      const error = new Error('Unimplemented Firebase method, ' + method);
+      result$ = throwError(error);
     }
     if (this.timeout) {
       result$ = result$.pipe(timeout(this.timeout + this.saveDelay));
@@ -173,20 +309,30 @@ export class FireDataService<T> implements EntityCollectionDataService<T> {
     return result$.pipe(catchError(this.handleError(req)));
   }
 
-  private handleError(reqData: RequestData) {
+  /**
+   * Emits the error
+   *
+   * @param reqData The FirebaseData configuration
+   */
+  private handleError(reqData: FirebaseData) {
     return (err: any) => {
       const ok = this.handleDelete404(err, reqData);
       if (ok) {
         return ok;
       }
-      const error = new DataServiceError(err, reqData);
-
+      const error = new FireDataServiceError(err, reqData);
       return throwError(error);
     };
   }
 
-  private handleDelete404(error: HttpErrorResponse, reqData: RequestData) {
-    if (error.status === 404 && reqData.method === 'DELETE' && this.delete404OK) {
+  /**
+   * Deletes the document if there is an error or it is removed.
+   *
+   * @param error A HttpErrorResponse
+   * @param reqData The FisebaseData configuration
+   */
+  private handleDelete404(error: HttpErrorResponse, reqData: FirebaseData) {
+    if (error.status === 404 && reqData.method === 'delete' && this.delete404OK) {
       return of({});
     }
     return undefined;
