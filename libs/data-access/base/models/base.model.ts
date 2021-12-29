@@ -36,11 +36,11 @@ export interface FirebaseData {
  * @param error the HttpErrorResponse or the error thrown by the service
  * @param requestData the HTTP request information such as the method and the url.
  */
-export declare class FireDataServiceError {
-  error: any;
-  requestData: FirebaseData | null;
-  message: string | null;
-  constructor(error: any, requestData: FirebaseData | null);
+export class FireDataServiceError {
+  error!: any;
+  requestData!: FirebaseData | null;
+  message!: string | null;
+  constructor(error: any, requestData: FirebaseData | null) {}
 }
 
 export interface ConditionalQueryFirestore {
