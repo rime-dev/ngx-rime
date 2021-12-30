@@ -1,5 +1,8 @@
 :host {
   display: block;
+  .mat-drawer-container {
+    height: 100vh;
+  }
   .mat-sidenav {
     width: 256px;
 
