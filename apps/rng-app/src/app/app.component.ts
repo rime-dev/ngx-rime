@@ -22,7 +22,7 @@ export class AppComponent implements OnDestroy {
   ];
   sideRoutes = [
     {
-      path: '/home',
+      path: '/dashboard',
       text: 'Home',
       icon: 'home',
       divider: true,
@@ -31,13 +31,8 @@ export class AppComponent implements OnDestroy {
       text: 'Tools',
       children: [
         {
-          path: '/tools/1',
-          text: 'Tool 1',
-          icon: 'build',
-        },
-        {
-          path: '/tools/2',
-          text: 'Tool 2',
+          path: '/tasks',
+          text: 'Tasks',
           icon: 'build',
         },
       ],

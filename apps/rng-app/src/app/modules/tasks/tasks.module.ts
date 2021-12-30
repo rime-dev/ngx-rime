@@ -8,14 +8,15 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {HomeRoutingModule} from './home-routing.module';
-import {HomeComponent} from './home.component';
+import {TasksRoutingModule} from './tasks-routing.module';
+import {TasksComponent} from './tasks.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [TasksComponent],
   imports: [
     CommonModule,
-    HomeRoutingModule,
+    TasksRoutingModule,
     MatButtonModule,
     MatToolbarModule,
     MatCardModule,
@@ -25,6 +26,7 @@ import {HomeComponent} from './home.component';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    MatListModule,
   ],
 })
-export class HomeModule {}
+export class TasksModule {}
