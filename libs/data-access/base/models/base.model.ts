@@ -1,7 +1,13 @@
 import {FirebaseOptions} from '@angular/fire/app';
 import {FieldPath} from '@angular/fire/compat/firestore';
 import {EntityMetadataMap} from '@ngrx/data';
+import {Update} from '@ngrx/entity';
 import {Observable} from 'rxjs';
+
+export interface EntityState {
+  id: string;
+  data: any;
+}
 export interface StateEntityConfig {
   enablePersistence?: boolean;
   entityMetadata: EntityMetadataMap;
@@ -80,5 +86,5 @@ export interface FireEntityCollectionDataService<T> {
   getById(id: any): Observable<T>;
   getWithLimit(limit: number): Observable<T[]>;
   getWithQuery(params: ConditionalQueryFirestore[]): Observable<T[]>;
-  update(entity: T): Observable<T>;
+  update(update: Update<T>): Observable<T>;
 }

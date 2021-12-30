@@ -1,11 +1,13 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
 import {AngularFirestore, CollectionReference, FieldPath} from '@angular/fire/compat/firestore';
+import {Update} from '@ngrx/entity';
 import {Observable, of, throwError} from 'rxjs';
-import {catchError, delay, map, timeout} from 'rxjs/operators';
+import {catchError, delay, map, tap, timeout} from 'rxjs/operators';
 import {ENTITY_CONFIG, ENTITY_NAME} from '../constants/base.constant';
 import {
   ConditionalQueryFirestore,
+  EntityState,
   FirebaseData,
   FirebaseMethods,
   FireDataObject,
@@ -91,7 +93,7 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
    * Gets all documents from a collection
    */
   getAll(): Observable<any> {
-    return this.execute('get', undefined);
+    return this.execute('get');
   }
 
   /**
@@ -144,9 +146,11 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
    *
    * @param update
    */
-  update(document: T): Observable<any> {
-    const entityOrError = document || new Error(`No "${this.entityName}" entity to update`);
-    return this.execute('update', undefined, entityOrError);
+  update(update: Update<T>): Observable<any> {
+    const id = update && update.id;
+    const updateOrError =
+      id == null ? new Error(`No "${this.entityName}" update data or id`) : update.changes;
+    return this.execute('update', id as string, updateOrError);
   }
 
   /**
@@ -199,14 +203,13 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
   /**
    * Gets an observable of the update promise fro Firestore
    *
-   * @param document The object to be updated in the collection
+   * @param update The object to be updated in the collection
    * @param collection The collection name
    */
-  private getObservableFromUpdate(document?: any, collection?: string) {
+  private getObservableFromUpdate(entity?: EntityState, collection?: string) {
     let action = null;
-    if (collection && document) {
-      delete document.uid;
-      action = this.angularFirestore.collection(collection).doc(document.uid).update(document);
+    if (collection && entity) {
+      action = this.angularFirestore.collection(collection).doc(entity.id).update(entity.data);
     } else {
       action = new Error(`No "${this.entityName}" update data or id`);
     }
@@ -268,10 +271,12 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
         let ref: CollectionReference<unknown>;
         ref = this.angularFirestore.collection(collection).ref;
         ref = this.getCollectionReferenceByConditions(ref, data);
-        action = of(ref.get()).pipe(map((object) => new FireDataObject(object)));
+        action = of(
+          ref.get().then((data0) => data0.docs.map((object) => new FireDataObject(object)))
+        );
       }
     }
-    return of(action);
+    return action;
   }
 
   /**
@@ -287,14 +292,16 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
     if (data instanceof Error) {
       return this.handleError(req)(data);
     }
-    const observableFromMethod = {
-      delete: this.getObservableFromDelete(collection),
-      set: this.getObservableFromSet(req.data, collection),
-      update: this.getObservableFromUpdate(req.data, collection),
-      get: this.getObservableFromGet(req.data, collection),
+    console.log(method, document, data);
+
+    const observableFromMethod: Record<string, any> = {
+      delete: () => this.getObservableFromDelete(collection),
+      set: () => this.getObservableFromSet(req.data, collection),
+      update: () => this.getObservableFromUpdate(req.data, collection),
+      get: () => this.getObservableFromGet(req.data?.uid, req.data, collection),
     };
     let result$: Observable<any>;
-    result$ = observableFromMethod[method];
+    result$ = observableFromMethod[`${method}`]();
     if (this.checkIfMethodIsImplemented(method)) {
       if (this.saveDelay) {
         result$ = result$.pipe(delay(this.saveDelay));
