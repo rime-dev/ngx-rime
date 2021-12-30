@@ -37,14 +37,11 @@ export class AuthService implements OnDestroy {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         const user = result.user as User;
-        console.log('WWWWWW');
-
         if (user) {
           this.ngZone.run(() => {
             this.router.navigate(['/dashboard']);
-            console.log('UUUUUUUU');
+            this.setUserData(user);
           });
-          this.setUserData(user);
         }
       })
       .catch((error) => {
@@ -94,11 +91,13 @@ export class AuthService implements OnDestroy {
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(String(localStorage.getItem('user')));
-    return user !== null && user.emailVerified !== false ? true : false;
+    return user !== null ? true : false;
   }
+
+  // Returns true when user has a verified email
   get hasEmailVerified(): boolean {
     const user = JSON.parse(String(localStorage.getItem('user')));
-    return user.emailVerified ? true : false;
+    return user && user.emailVerified ? true : false;
   }
   // Sign in with Google
   public googleAuth() {
