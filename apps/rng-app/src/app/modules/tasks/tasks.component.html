@@ -4,7 +4,7 @@
   </div>
 </header>
 <main>
-  <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
     <p>Taks: {{ (tasks$ | async)?.length }}</p>
     <button mat-icon-button (click)="addTask()">
       <mat-icon>add</mat-icon>
@@ -15,9 +15,14 @@
           <mat-icon mat-list-icon>folder</mat-icon>
           <div class="flex items-center w-full">
             {{ task.data.title }}
-            <button mat-icon-button style="margin-left: auto" (click)="editTask(task)">
-              <mat-icon>edit</mat-icon>
-            </button>
+            <div style="margin-left: auto">
+              <button mat-icon-button (click)="editTask(task)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="removeTask(task)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </div>
         </mat-list-item>
         <mat-list-item *ngIf="editMode && selectedTask?.id === task.id">
@@ -50,7 +55,7 @@
     </mat-list>
   </div>
 
-  <div class="flex flex-col" *ngIf="addMode">
+  <div class="flex flex-col mx-auto max-w-md" *ngIf="addMode">
     <h2>Add new one</h2>
     <form [formGroup]="form" class="mt-8 space-y-6" (ngSubmit)="submitAdd()">
       <input type="hidden" name="remember" value="true" />

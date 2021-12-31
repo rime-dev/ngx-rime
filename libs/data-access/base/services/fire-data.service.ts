@@ -2,7 +2,8 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
 import {AngularFirestore, CollectionReference, FieldPath} from '@angular/fire/compat/firestore';
 import {Update} from '@ngrx/entity';
-import {Observable, of, throwError} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {isObservable, observable, Observable, of, throwError} from 'rxjs';
 import {catchError, delay, map, tap, timeout} from 'rxjs/operators';
 import {ENTITY_CONFIG, ENTITY_NAME} from '../constants/base.constant';
 import {
@@ -176,12 +177,13 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
   /**
    * Gets an observable of the delete promise from Firestore
    *
+   * @param document The document UID
    * @param collection The collection name
    */
-  private getObservableFromDelete(collection?: string) {
+  private getObservableFromDelete(document: string, collection?: string) {
     let action = null;
     if (collection) {
-      action = this.angularFirestore.collection(collection).doc().delete();
+      action = this.angularFirestore.collection(collection).doc(document).delete();
     }
     return of(action);
   }
@@ -197,7 +199,7 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
     if (collection) {
       action = this.angularFirestore.collection(collection).add(data);
     }
-    return of(action);
+    return of(); // Empty observable. It is not possible to set the new Doc obs.
   }
 
   /**
@@ -292,10 +294,8 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
     if (data instanceof Error) {
       return this.handleError(req)(data);
     }
-    console.log(method, document, data);
-
     const observableFromMethod: Record<string, any> = {
-      delete: () => this.getObservableFromDelete(collection),
+      delete: () => this.getObservableFromDelete(req.document, collection),
       set: () => this.getObservableFromSet(req.data, collection),
       update: () => this.getObservableFromUpdate(req.data, collection),
       get: () => this.getObservableFromGet(req.data?.uid, req.data, collection),

@@ -1,7 +1,12 @@
 import {Inject, Injectable} from '@angular/core';
-import {EntityCollectionServiceBase, EntityCollectionServiceElementsFactory} from '@ngrx/data';
+import {
+  EntityCollectionDataService,
+  EntityCollectionServiceBase,
+  EntityCollectionServiceElementsFactory,
+} from '@ngrx/data';
 import {ENTITY_CONFIG} from '../constants/base.constant';
-import {StateEntityConfig} from '../models/base.model';
+import {FireEntityCollectionDataService, StateEntityConfig} from '../models/base.model';
+import {FireDataService} from './fire-data.service';
 
 /**
  * A data service to use as global data management service.
@@ -37,7 +42,7 @@ export class DataService {
       }
     }
   }
-  select(entityName: string) {
+  select(entityName: string): EntityCollectionServiceBase<any> {
     return this.entitiesInstaces[entityName];
   }
 }
