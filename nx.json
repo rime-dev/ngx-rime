@@ -16,7 +16,13 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e", "build-storybook"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ]
       }
     }
   },
@@ -38,26 +44,14 @@
     "quiz-app": {
       "tags": []
     },
-    "quiz-app-e2e": {
-      "tags": [],
-      "implicitDependencies": ["quiz-app"]
-    },
     "rng-app": {
       "tags": []
-    },
-    "rng-app-e2e": {
-      "tags": [],
-      "implicitDependencies": ["rng-app"]
     },
     "ui": {
       "tags": []
     },
     "util": {
       "tags": []
-    },
-    "util-e2e": {
-      "tags": [],
-      "implicitDependencies": ["util"]
     }
   }
 }
