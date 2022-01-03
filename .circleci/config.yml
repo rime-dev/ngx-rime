@@ -56,17 +56,6 @@ jobs:
           paths:
             - ~/.cache
             - node_modules
-  check-formatting:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          <<: *deploy_cache
-      - run:
-          <<: *set_env
-      - restore_cache:
-          <<: *yarn_cache
-      - run: yarn format:check ${AFFECTED_ARGS}
   lint:
     <<: *defaults
     steps:
@@ -149,13 +138,6 @@ workflows:
             branches:
               only:
                 - main
-      - check-formatting:
-          requires:
-            - install
-          filters:
-            branches:
-              only:
-                - main
       - lint:
           requires:
             - install
@@ -186,7 +168,6 @@ workflows:
               only:
                 - main
           requires:
-            - check-formatting
             - lint
             - test
             - build
