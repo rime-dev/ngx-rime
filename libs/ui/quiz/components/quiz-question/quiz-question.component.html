@@ -22,6 +22,7 @@
   <rng-quiz-option
     *ngFor="let option of question.options; let i = index"
     [option]="option"
+    [parentQuestion]="question"
     [index]="i"
     (selected)="onSelectOption(i)"
   >

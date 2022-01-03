@@ -1,5 +1,5 @@
 import {FocusMonitor} from '@angular/cdk/a11y';
-import {coerceArray, coerceBooleanProperty} from '@angular/cdk/coercion';
+import {coerceArray, coerceBooleanProperty, coerceNumberProperty} from '@angular/cdk/coercion';
 import {
   AfterViewInit,
   Component,
@@ -13,9 +13,9 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import {QuizOptionComponent} from './components/quiz-option/quiz-option.component';
 import {QuizQuestionComponent} from './components/quiz-question/quiz-question.component';
 import {Question, QuizMode} from './models/quiz.model';
+import {QuizService} from './services/quiz.service';
 
 @Component({
   selector: 'rng-quiz',
@@ -47,6 +47,7 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   }
   set questions(value: Question[]) {
     this._questions = coerceArray(value);
+    this.quizService.setQuestions(value);
   }
   private _questions: Question[] = [];
 
@@ -55,12 +56,13 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
    */
   @Input()
   get mode(): QuizMode {
-    return this._mode;
+    return this.internalMode;
   }
   set mode(value: QuizMode) {
-    this._mode = value;
+    this.internalMode = value;
+    this.quizService.setMode(value);
   }
-  private _mode: QuizMode = 'exam';
+  private internalMode: QuizMode = 'exam';
 
   /**
    * Closed emitter behaviour
@@ -73,7 +75,6 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   @Output() finalized: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   // Query all child elements
-  @ViewChildren(QuizOptionComponent) options!: QueryList<QuizOptionComponent>;
   @ViewChildren(QuizQuestionComponent) questionsComponent!: QueryList<QuizQuestionComponent>;
 
   @HostBinding('attr.tabIndex') tabIndex = 1;
@@ -125,7 +126,11 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
     event.preventDefault();
   }
 
-  constructor(private focusMonitor: FocusMonitor, private elementRef: ElementRef) {}
+  constructor(
+    private focusMonitor: FocusMonitor,
+    private elementRef: ElementRef,
+    private quizService: QuizService
+  ) {}
 
   ngAfterViewInit(): void {
     this.focusMonitor.monitor(this.elementRef);
@@ -141,6 +146,7 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
       }
       return question0;
     });
+    this.quizService.setQuestions(this.questions);
   }
   onSelectQuestion(question: Question): void {
     if (question.dirty) {
@@ -155,10 +161,12 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
       } else if ((question.index as number) === totalIndex - 1) {
         this.progress = 100;
       }
+
+      this.updateQuestion(question);
+
       if (this.checkIfCanBeFinlized()) {
         this.canBeFinalized = true;
       }
-      this.updateQuestion(question);
     }
   }
 
@@ -190,6 +198,8 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   }
 
   private checkIfCanBeFinlized(): boolean {
-    return this.questions.every((question: Question) => question.response) as boolean;
+    return this.questions.every(
+      (question: Question) => question.response || question.response === 0
+    ) as boolean;
   }
 }

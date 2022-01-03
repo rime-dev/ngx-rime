@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {coerceNumberProperty} from '@angular/cdk/coercion';
 import {HttpClient} from '@angular/common/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Question, QuizMode} from '@rng/ui/quiz';
 import {Subject} from 'rxjs';
-import {filter, map, takeUntil, tap} from 'rxjs/operators';
-import {ActivatedRoute, Router} from '@angular/router';
-import {coerceNumberProperty} from '@angular/cdk/coercion';
+import {map, takeUntil, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'rng-quiz-page',
@@ -14,7 +14,7 @@ import {coerceNumberProperty} from '@angular/cdk/coercion';
 export class QuizPageComponent implements OnInit, OnDestroy {
   questions: Question[] = [];
   public quiz: string | null = null;
-  public quizMode: QuizMode = 'solution';
+  public quizMode: QuizMode = 'exam';
   public difficulty = 0;
   public tags = 'random';
   private destroy$: Subject<void> = new Subject<void>();

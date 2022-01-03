@@ -1,4 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {QuizComponent} from '../../quiz.component';
+import {QuizModule} from '../../quiz.module';
+import {QuizQuestionComponent} from '../quiz-question/quiz-question.component';
 
 import {QuizOptionComponent} from './quiz-option.component';
 
@@ -9,6 +12,8 @@ describe('QuizOptionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [QuizOptionComponent],
+      imports: [QuizModule],
+      providers: [QuizComponent, QuizQuestionComponent],
     }).compileComponents();
   });
 

@@ -1,5 +1,3 @@
-import {THIS_EXPR} from '@angular/compiler/src/output/output_ast';
-
 export class Question {
   public index?: number;
   public title: string;
@@ -53,6 +51,7 @@ export type QuestionType = 'single' | 'boolean' | 'multiple';
 
 export type QuizMode = 'exam' | 'solution';
 export interface QuestionOption {
+  parentQuestion?: Question;
   index?: number;
   text: string;
   response?: boolean;
