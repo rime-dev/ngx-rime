@@ -570,18 +570,16 @@
         if ((e = t) && 'number' == typeof e.length && 'function' != typeof e) return S(t);
         var e, n, r, s;
         if ((n = t) && 'function' != typeof n.subscribe && 'function' == typeof n.then)
-          return (
-            (t) => (e) =>
-              t
-                .then(
-                  (t) => {
-                    e.closed || (e.next(t), e.complete());
-                  },
-                  (t) => e.error(t)
-                )
-                .then(null, i),
-              e
-          )(t);
+          return ((t) => (e) =>
+            t
+              .then(
+                (t) => {
+                  e.closed || (e.next(t), e.complete());
+                },
+                (t) => e.error(t)
+              )
+              .then(null, i),
+          e)(t);
         if (t && 'function' == typeof t[I])
           return (
             (r = t),

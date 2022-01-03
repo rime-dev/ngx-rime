@@ -1,3 +1,21 @@
 :host {
   display: block;
+
+  ::ng-deep {
+    .circle-profile {
+      border-radius: 50%;
+      height: 50px;
+      width: 50px;
+      margin: 25px;
+      margin-left: auto;
+      margin-right: auto;
+      color: white;
+      font-size: x-large;
+      text-align: center;
+      align-items: center;
+      display: grid;
+      //border: #006bd4 inset 5px;
+      cursor: pointer;
+    }
+  }
 }

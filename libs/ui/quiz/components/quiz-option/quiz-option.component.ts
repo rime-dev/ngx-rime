@@ -1,17 +1,14 @@
 import {
   Component,
   EventEmitter,
-  forwardRef,
   HostBinding,
   HostListener,
-  Inject,
   Input,
   OnInit,
   Output,
 } from '@angular/core';
 import {Question, QuestionOption, QuizMode} from '../../models/quiz.model';
-import {QuizComponent} from '../../quiz.component';
-import {QuizQuestionComponent} from '../quiz-question/quiz-question.component';
+import {QuizService} from '../../services/quiz.service';
 
 @Component({
   selector: 'rng-quiz-option',
@@ -19,8 +16,10 @@ import {QuizQuestionComponent} from '../quiz-question/quiz-question.component';
   styleUrls: ['./quiz-option.component.scss'],
 })
 export class QuizOptionComponent implements OnInit {
-  public mode: QuizMode = 'exam';
   public solution = false;
+  public mode: QuizMode;
+
+  @Input() parentQuestion!: Question;
 
   @Input()
   get option(): QuestionOption {
@@ -62,31 +61,35 @@ export class QuizOptionComponent implements OnInit {
     this.selectOption();
   }
 
-  constructor(
-    @Inject(forwardRef(() => QuizComponent))
-    private _quizComponent: QuizComponent,
-    @Inject(forwardRef(() => QuizQuestionComponent))
-    private _quizQuestionComponent: QuizQuestionComponent
-  ) {
-    this.mode = this._quizComponent.mode;
+  constructor(private quizService: QuizService) {
+    this.mode = this.quizService.getMode();
   }
 
   selectOption() {
     this.selected.next({...this.option, index: this.index, response: true});
   }
   private checkSingleQuestion() {
-    if ((this.option.index as number) + 1 === this._quizQuestionComponent.question.answer) {
+    if (!this.parentQuestion) {
+      return;
+    }
+    if ((this.option.index as number) + 1 === this.parentQuestion.answer) {
       this.solution = true;
     }
   }
   private checkBooleanQuestion() {
-    if (this.option.text === this._quizQuestionComponent.question.answer) {
+    if (!this.parentQuestion) {
+      return;
+    }
+    if (this.option.text === this.parentQuestion.answer) {
       this.solution = true;
     }
   }
   ngOnInit() {
+    if (!this.parentQuestion) {
+      return;
+    }
     if (this.mode === 'solution') {
-      switch (this._quizQuestionComponent.question.type) {
+      switch (this.parentQuestion.type) {
         case 'single':
           this.checkSingleQuestion();
           break;

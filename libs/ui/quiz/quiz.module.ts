@@ -8,6 +8,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {QuizOptionComponent} from './components/quiz-option/quiz-option.component';
 import {QuizQuestionComponent} from './components/quiz-question/quiz-question.component';
 import {QuizComponent} from './quiz.component';
+import {MATERIAL_SANITY_CHECKS} from '@angular/material/core';
+import {QuizService} from './services/quiz.service';
 
 @NgModule({
   declarations: [QuizComponent, QuizOptionComponent, QuizQuestionComponent],
@@ -20,5 +22,6 @@ import {QuizComponent} from './quiz.component';
     MatChipsModule,
   ],
   exports: [QuizComponent],
+  providers: [{provide: MATERIAL_SANITY_CHECKS, useValue: false}, QuizService],
 })
 export class QuizModule {}

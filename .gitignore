@@ -46,3 +46,6 @@ Thumbs.db
 
 debug.log
 package-lock.json
+
+**/environment.ts
+**/environment.prod.ts

@@ -1,8 +1,6 @@
 import {
   Component,
   EventEmitter,
-  forwardRef,
-  Inject,
   Input,
   NgZone,
   OnDestroy,
@@ -11,9 +9,9 @@ import {
   ViewChildren,
 } from '@angular/core';
 import {from, Subject} from 'rxjs';
-import {delay, finalize, map, takeUntil} from 'rxjs/operators';
-import {Question, QuestionOption, QuizMode} from '../../models/quiz.model';
-import {QuizComponent} from '../../quiz.component';
+import {delay, finalize, map, takeUntil, tap} from 'rxjs/operators';
+import {Question, QuestionOption} from '../../models/quiz.model';
+import {QuizService} from '../../services/quiz.service';
 import {QuizOptionComponent} from '../quiz-option/quiz-option.component';
 @Component({
   selector: 'rng-quiz-question',
@@ -52,11 +50,7 @@ export class QuizQuestionComponent implements OnDestroy {
   // Query all child elements
   @ViewChildren(QuizOptionComponent) options!: QueryList<QuizOptionComponent>;
 
-  constructor(
-    @Inject(forwardRef(() => QuizComponent))
-    private _quizComponent: QuizComponent,
-    private ngZone: NgZone
-  ) {}
+  constructor(private ngZone: NgZone, private quizService: QuizService) {}
 
   private onResponseOption(option: QuestionOption, event: number): QuestionOption {
     if (option.index === event && option) {
@@ -68,12 +62,13 @@ export class QuizQuestionComponent implements OnDestroy {
     return option;
   }
   onSelectOption(event: number) {
-    if (this._quizComponent.mode !== 'exam') {
+    if (this.quizService.getMode() !== 'exam') {
       return;
     }
     this.ngZone.runOutsideAngular(() =>
       from(this.question.options)
         .pipe(
+          tap((option: QuestionOption) => (option.parentQuestion = this.question)),
           map((option: QuestionOption) => this.onResponseOption(option, event)),
           delay(1000),
           finalize(() => this.ngZone.runTask(() => this.selected.next(this.question))),

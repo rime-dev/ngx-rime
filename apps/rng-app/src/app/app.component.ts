@@ -1,11 +1,14 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
+import {User} from '@rng/data-access/auth';
+import {AuthService} from '@rng/data-access/auth/services/auth.service';
+import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'rng-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'rng-app';
   logo = {
     src: 'assets/rng-logo.png',
@@ -19,7 +22,7 @@ export class AppComponent {
   ];
   sideRoutes = [
     {
-      path: '/home',
+      path: '/dashboard',
       text: 'Home',
       icon: 'home',
       divider: true,
@@ -28,13 +31,8 @@ export class AppComponent {
       text: 'Tools',
       children: [
         {
-          path: '/tools/1',
-          text: 'Tool 1',
-          icon: 'build',
-        },
-        {
-          path: '/tools/2',
-          text: 'Tool 2',
+          path: '/tasks',
+          text: 'Tasks',
           icon: 'build',
         },
       ],
@@ -46,17 +44,23 @@ export class AppComponent {
   userRoutes = [
     {
       click: () => {
-        alert('logout');
+        this.authService.signOut();
       },
       text: 'Logout',
       icon: 'logout',
     },
   ];
-  userInfo = {
-    name: 'Name',
-    lastname: 'Lastname',
-    // eslint-disable-next-line max-len
-    avatar: `https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`,
-    email: 'email.email.com',
-  };
+  private destroy$: Subject<void> = new Subject();
+  public user$: Observable<User | null>;
+  showLoginButton = false;
+  showLogoutButton = false;
+
+  constructor(private authService: AuthService) {
+    this.user$ = this.authService.user$;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

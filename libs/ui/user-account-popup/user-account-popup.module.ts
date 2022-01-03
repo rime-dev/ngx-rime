@@ -8,6 +8,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDividerModule} from '@angular/material/divider';
+import {MATERIAL_SANITY_CHECKS} from '@angular/material/core';
 @NgModule({
   declarations: [UserAccountPopupComponent],
   imports: [
@@ -21,5 +22,6 @@ import {MatDividerModule} from '@angular/material/divider';
     MatDividerModule,
   ],
   exports: [UserAccountPopupComponent],
+  providers: [{provide: MATERIAL_SANITY_CHECKS, useValue: false}],
 })
 export class UserAccountPopupModule {}
