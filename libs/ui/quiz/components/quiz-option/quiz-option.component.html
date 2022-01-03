@@ -1,27 +1,29 @@
-<button
-  mat-raised-button
-  *ngIf="mode === 'exam'"
-  class="quiz-option-button"
-  [class.mat-elevation-z9]="option.response"
->
-  <span class="flex flex-row text-left p-2">
-    <span *ngIf="!option.response" class="font-mono text-base font-medium mr-4">{{
-      index + 1
-    }}</span>
-    <mat-icon class="text-lg font-bold mr-2" *ngIf="option.response">done</mat-icon>
-    <span class="font-mono text-base font-medium whitespace-normal">{{ option.text }}</span>
-  </span>
-</button>
-<button mat-raised-button *ngIf="mode === 'solution'" class="quiz-option-button">
-  <span
-    class="flex flex-row text-left p-2"
-    [ngClass]="{
-      'text-blue-500': solution && !option.response,
-      'text-green-500': solution && option.response,
-      'text-red-500': !solution && option.response === false
-    }"
+<ng-container *ngIf="option">
+  <button
+    mat-raised-button
+    *ngIf="mode === 'exam'"
+    class="quiz-option-button"
+    [class.mat-elevation-z9]="option.response"
   >
-    <span class="font-mono text-base font-medium mr-4">{{ index + 1 }}</span>
-    <span class="font-mono text-base font-medium whitespace-normal">{{ option.text }}</span>
-  </span>
-</button>
+    <span class="flex flex-row text-left p-2">
+      <span *ngIf="!option.response" class="font-mono text-base font-medium mr-4">{{
+        index + 1
+      }}</span>
+      <mat-icon class="text-lg font-bold mr-2" *ngIf="option.response">done</mat-icon>
+      <span class="font-mono text-base font-medium whitespace-normal">{{ option.text }}</span>
+    </span>
+  </button>
+  <button mat-raised-button *ngIf="mode === 'solution'" class="quiz-option-button">
+    <span
+      class="flex flex-row text-left p-2"
+      [ngClass]="{
+        'text-blue-500': solution && !option.response,
+        'text-green-500': solution && option.response,
+        'text-red-500': !solution && option.response === false
+      }"
+    >
+      <span class="font-mono text-base font-medium mr-4">{{ index + 1 }}</span>
+      <span class="font-mono text-base font-medium whitespace-normal">{{ option.text }}</span>
+    </span>
+  </button>
+</ng-container>

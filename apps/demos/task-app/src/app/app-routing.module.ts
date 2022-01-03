@@ -5,13 +5,13 @@ import {AuthGuard} from '@rng/data-access/auth';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'tasks',
     pathMatch: 'full',
   },
   {
-    path: 'dashboard',
+    path: 'tasks',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule),
+    loadChildren: () => import('./modules/tasks/tasks.module').then((m) => m.TasksModule),
   },
 ];
 
