@@ -1,17 +1,54 @@
 <div class="container mx-auto p-4 h-full">
-  <h1>Dash</h1>
-  <div class="flex flex-col md:flex-row h-full">
-    <div class="flex flex-row w-full md:w-3/5 h-full max-h-48">
-      <div class="w-full h-full p-2">
-        <mat-card class="w-full h-full mat-elevation-z3"> Ganancias </mat-card>
+  <div class="flex flex-col h-full w-full">
+    <div class="flex flex-col md:flex-row mt-4">
+      <div class="flex flex-row w-full md:w-3/5 h-56">
+        <div class="w-full h-full p-2 px-4">
+          <mat-card class="w-full h-full mat-elevation-z3 bg-primary"> Ganancias </mat-card>
+        </div>
+        <div class="w-full h-full px-4 pt-2 pb-4">
+          <mat-card class="w-full h-1/2 mb-2 mat-elevation-z3">
+            <mat-card-header>
+              <button mat-raised-button mat-card-avatar color="primary" class="card-number">
+                55
+              </button>
+              <mat-card-title>Rango</mat-card-title>
+              <mat-card-subtitle>En el top 30%</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+          <mat-card class="w-full h-1/2 mt-2 mat-elevation-z3">
+            <mat-card-header>
+              <button mat-raised-button mat-card-avatar color="primary" class="card-number">
+                10
+              </button>
+              <mat-card-title>Proyectos</mat-card-title>
+              <mat-card-subtitle>8 este mes</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+        </div>
       </div>
-      <div class="w-full h-full px-2 pt-2 pb-4">
-        <mat-card class="w-full h-1/2 mb-2 mat-elevation-z3"> Rango </mat-card>
-        <mat-card class="w-full h-1/2 mt-2 mat-elevation-z3"> Projectos </mat-card>
+      <div class="flex flex-col w-full md:w-2/5 h-56 p-2 px-4">
+        <div class="flex flex-row mb-2">
+          <button mat-button class="w-full card-title" color="primary">Proyectos en curso</button>
+          <button mat-icon-button color="primary"><mat-icon>read_more</mat-icon></button>
+        </div>
+        <mat-card class="w-full h-full mat-elevation-z3"> ... </mat-card>
       </div>
     </div>
-    <div class="flex flex-col w-full h-full md:w-2/5 max-h-48 p-2">
-      <mat-card class="w-full h-full mat-elevation-z3"> cosas </mat-card>
+    <div class="flex flex-col md:flex-row w-full mt-4">
+      <div class="flex flex-col w-full md:w-1/2 p-2 px-4">
+        <div class="flex flex-row mb-2">
+          <button mat-button class="w-full card-title" color="primary">Proyectos públicos</button>
+          <button mat-icon-button color="primary"><mat-icon>read_more</mat-icon></button>
+        </div>
+        <mat-card class="w-full h-full mat-elevation-z3"> ... </mat-card>
+      </div>
+      <div class="flex flex-col w-full md:w-1/2 p-2 px-4">
+        <div class="flex flex-row mb-2">
+          <button mat-button class="w-full card-title" color="primary">Facturas recientes</button>
+          <button mat-icon-button color="primary"><mat-icon>read_more</mat-icon></button>
+        </div>
+        <mat-card class="w-full h-full mat-elevation-z3"> ... </mat-card>
+      </div>
     </div>
   </div>
 </div>

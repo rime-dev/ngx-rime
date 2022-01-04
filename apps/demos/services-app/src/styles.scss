@@ -147,3 +147,12 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+mat-card.mat-card {
+  border-radius: 8px;
+}
+
+.bg-primary {
+  background-color: #375984;
+  color: white;
+}
