@@ -1,12 +1,12 @@
+import {APP_BASE_HREF} from '@angular/common';
 import {TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
-import {RouterTestingModule} from '@angular/router/testing';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
       declarations: [AppComponent],
+      providers: [{provide: APP_BASE_HREF, useValue: '/'}],
     }).compileComponents();
   });
 
@@ -16,16 +16,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'services-app'`, () => {
+  it(`should have as title 'rng-app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('services-app');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Welcome to services-app!');
+    expect(app.title).toEqual('rng-app');
   });
 });

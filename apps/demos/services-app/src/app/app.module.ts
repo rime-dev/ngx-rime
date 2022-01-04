@@ -1,12 +1,28 @@
+import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AuthModule} from '@rng/data-access/auth';
+import {BaseModule} from '@rng/data-access/base';
+import {environment} from '../environments/environment';
+import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {RouterModule} from '@angular/router';
+
+const firebaseConfig = {
+  options: environment.firebaseOptions,
+  entityConfig: environment.firebaseEntityConfig,
+};
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, RouterModule.forRoot([], {initialNavigation: 'enabledBlocking'})],
+  imports: [
+    CommonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    BaseModule.firebase(firebaseConfig),
+    AuthModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
