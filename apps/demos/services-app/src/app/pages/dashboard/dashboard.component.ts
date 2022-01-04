@@ -3,40 +3,36 @@ import {AuthService, User} from '@rng/data-access/auth';
 import {Subject, Observable} from 'rxjs';
 
 @Component({
-  selector: 'rng-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'rng-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
 })
-export class HomeComponent implements OnDestroy {
+export class DashboardComponent implements OnDestroy {
   logo = {
     src: 'assets/rng-logo.png',
     alt: 'RNG APP',
   };
-  topRoutes = [
-    {
-      path: '/home',
-      text: 'Home',
-    },
-  ];
+  topRoutes = [];
   sideRoutes = [
     {
-      path: '/dashboard',
-      text: 'Home',
+      path: '/dashboard/home',
+      text: 'Inicio',
       icon: 'home',
-      divider: true,
     },
     {
-      text: 'Tools',
-      children: [
-        {
-          path: '/tasks',
-          text: 'Tasks',
-          icon: 'build',
-        },
-      ],
+      path: '/dashboard/projects',
+      text: 'Proyectos',
+      icon: 'work',
     },
     {
-      divider: true,
+      path: '/dashboard/invoices',
+      text: 'Facturas',
+      icon: 'receipt_long',
+    },
+    {
+      path: '/dashboard/reports',
+      text: 'Informes',
+      icon: 'analytics',
     },
   ];
   userRoutes = [

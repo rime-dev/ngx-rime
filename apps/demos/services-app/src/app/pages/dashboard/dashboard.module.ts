@@ -10,14 +10,14 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {ShellModule} from '@rng/ui/shell';
 import {UserAccountPopupModule} from '@rng/ui/user-account-popup';
-import {HomeRoutingModule} from './home-routing.module';
-import {HomeComponent} from './home.component';
+import {DashboardRoutingModule} from './dashboard-routing.module';
+import {DashboardComponent} from './dashboard.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
-    HomeRoutingModule,
+    DashboardRoutingModule,
     MatButtonModule,
     MatToolbarModule,
     MatCardModule,
@@ -31,4 +31,4 @@ import {HomeComponent} from './home.component';
     UserAccountPopupModule,
   ],
 })
-export class HomeModule {}
+export class DashboardModule {}
