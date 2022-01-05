@@ -151,8 +151,14 @@ body {
 mat-card.mat-card {
   border-radius: 8px;
 }
-
+mat-chip.mat-chip {
+  user-select: none;
+}
 .bg-primary {
   background-color: #375984;
+  color: white;
+}
+.bg-accent {
+  background-color: #537aac;
   color: white;
 }
