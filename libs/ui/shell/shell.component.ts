@@ -1,3 +1,4 @@
+import {BooleanInput} from '@angular/cdk/coercion';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -28,6 +29,8 @@ export interface Routes {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShellComponent implements AfterContentInit {
+  static ngAcceptInputType_elevation: BooleanInput;
+
   public sidenavOpened = false;
   public fixedSidenavOpened = true;
   public sidenavMode: MatDrawerMode = 'side';
@@ -59,6 +62,19 @@ export class ShellComponent implements AfterContentInit {
     return this._logo;
   }
   private _logo!: ShellLogo;
+
+  /**
+   * Defines the application name
+   */
+  @Input()
+  set appName(value: string) {
+    this._appName = value;
+    this._changeDetectorRef.detectChanges();
+  }
+  get appName(): string {
+    return this._appName;
+  }
+  private _appName = '';
 
   /**
    * Defines the routes in the top navigation bar

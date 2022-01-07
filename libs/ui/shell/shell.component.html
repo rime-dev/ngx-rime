@@ -1,5 +1,5 @@
 <div class="min-h-full relative flex flex-col" style="height: 100vh">
-  <mat-toolbar color="primary" class="w-full" [ngClass]="{'mat-elevation-z6': elevation}">
+  <mat-toolbar color="primary" class="w-full z-50" [ngClass]="{'mat-elevation-z3': elevation}">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center">
@@ -8,12 +8,14 @@
               <mat-icon>menu</mat-icon>
             </button>
           </div>
-          <div *ngIf="logo" class="flex-shrink-0 ml-4">
+          <div *ngIf="logo" class="flex-shrink-0 mr-4">
             <img class="h-8 w-8" [src]="logo.src" [alt]="logo.alt" />
           </div>
+          <div *ngIf="appName" class="flex-shrink-0 mr-4">
+            <span class="h-8 w-8 text-xl text">{{ appName }}</span>
+          </div>
           <div>
-            <!-- class="hidden md:block" -->
-            <div class="ml-4 flex items-baseline space-x-4">
+            <div class="mr-4 flex items-baseline space-x-4">
               <button mat-button *ngFor="let route of topRoutes" [routerLink]="route.path">
                 <mat-icon *ngIf="route.icon" class="mr-4">{{ route.icon }}</mat-icon>
                 <span *ngIf="route.text">{{ route.text }}</span>

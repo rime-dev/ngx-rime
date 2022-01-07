@@ -1,13 +1,13 @@
-<div class="container mx-auto p-4 h-full">
+<div class="lg:container mx-auto p-4 h-full">
   <div class="flex flex-col h-full w-full">
-    <div class="flex flex-col md:flex-row mt-4">
-      <div class="flex flex-col md:flex-row w-full md:w-3/5 md:h-64">
+    <div class="flex flex-col xl:flex-row mt-4">
+      <div class="flex flex-col md:flex-row w-full xl:w-3/5 lg:h-64">
         <div class="w-full h-full p-2 px-4">
           <mat-card class="w-full h-full mat-elevation-z3 bg-accent flex">
             <mat-card-header class="flex flex-col mt-auto mb-auto">
               <mat-card-title>Ganancias</mat-card-title>
               <mat-card-subtitle>
-                <span class="text-4xl text-white block mt-4">3000€</span>
+                <span class="text-4lg text-white block mt-4">3000€</span>
               </mat-card-subtitle>
               <mat-chip-list>
                 <mat-chip color="primary" selected>+10% respecto al mes anterior</mat-chip>
@@ -44,7 +44,7 @@
           </mat-card>
         </div>
       </div>
-      <div class="flex flex-col w-full md:w-2/5 md:h-64 p-2 px-4">
+      <div class="flex flex-col w-full xl:w-2/5 lg:h-64 p-2 px-4">
         <div class="flex flex-row mb-2">
           <button mat-button class="w-full card-title" color="primary">Proyectos en curso</button>
           <button mat-icon-button color="primary"><mat-icon>read_more</mat-icon></button>
@@ -52,12 +52,12 @@
         <mat-card class="w-full h-full mat-elevation-z3 overflow-auto">
           <mat-action-list style="padding: 0">
             <mat-list-item>
-              <mat-icon mat-list-icon>work</mat-icon>
+              <mat-icon mat-list-icon>format_paint</mat-icon>
               <div mat-line>Pintura de 4 habitaciones</div>
               <div mat-line class="mat-card-subtitle">Av. Malvarrosa, Valencia</div>
             </mat-list-item>
             <mat-list-item>
-              <mat-icon mat-list-icon>work</mat-icon>
+              <mat-icon mat-list-icon>format_paint</mat-icon>
               <div mat-line>Barnizado de porche de madera</div>
               <div mat-line class="mat-card-subtitle">C. Coronel Pérez, Torrent</div>
             </mat-list-item>
@@ -65,8 +65,8 @@
         </mat-card>
       </div>
     </div>
-    <div class="flex flex-col md:flex-row w-full mt-4">
-      <div class="flex flex-col w-full md:w-1/2 p-2 px-4">
+    <div class="flex flex-col lg:flex-row w-full mt-4">
+      <div class="flex flex-col w-full lg:w-1/2 p-2 px-4">
         <div class="flex flex-row mb-2">
           <button mat-button class="w-full card-title" color="primary">Proyectos ofertados</button>
           <button mat-icon-button color="primary"><mat-icon>read_more</mat-icon></button>
@@ -76,13 +76,13 @@
             <mat-list-item class="my-2 p-2 h-auto">
               <div mat-line class="flex flex-row">
                 <div class="flex items-center p-2">
-                  <mat-icon mat-list-icon>work</mat-icon>
+                  <mat-icon mat-list-icon>construction</mat-icon>
                 </div>
                 <div class="flex flex-col w-full">
                   <div class="mb-1">Rehabilitación de muebles de exterior</div>
                   <div class="mat-card-subtitle mb-2">C. Coronel Pérez, Torrent</div>
                 </div>
-                <div class="hidden md:block">
+                <div class="hidden lg:block">
                   <mat-chip-list>
                     <mat-chip color="accent" selected>Rehabilitación</mat-chip>
                   </mat-chip-list>
@@ -92,11 +92,8 @@
                 La parcela de la casa tiene 7 muebles que necesitan ser rehabilitados.
               </p>
               <div mat-line class="flex flex-row">
-                <mat-chip-list class="block md:hidden self-center">
-                  <mat-chip color="accent" selected>Rehabilitación</mat-chip>
-                </mat-chip-list>
                 <div
-                  class="text-xl my-2 p-1 text-center bg-gray-100 rounded-full w-full select-none"
+                  class="text-lg my-2 p-1 text-center bg-gray-100 rounded-full w-full select-none"
                 >
                   2000€
                 </div>
@@ -105,13 +102,13 @@
             <mat-list-item class="my-2 p-2 h-auto">
               <div mat-line class="flex flex-row">
                 <div class="flex items-center p-2">
-                  <mat-icon mat-list-icon>work</mat-icon>
+                  <mat-icon mat-list-icon>format_paint</mat-icon>
                 </div>
                 <div class="flex flex-col w-full">
                   <div class="mb-1">Pintura de piscina</div>
                   <div class="mat-card-subtitle mb-2">C. Coronel Pérez, Torrent</div>
                 </div>
-                <div class="hidden md:block">
+                <div class="hidden lg:block">
                   <mat-chip-list>
                     <mat-chip color="accent" selected>Pintura</mat-chip>
                   </mat-chip-list>
@@ -119,11 +116,8 @@
               </div>
               <p mat-line class="mb-2">La piscina necesita una capa de pintura</p>
               <div mat-line class="flex flex-row">
-                <mat-chip-list class="block md:hidden self-center">
-                  <mat-chip color="accent" selected>Pintura</mat-chip>
-                </mat-chip-list>
                 <div
-                  class="text-xl my-2 p-1 text-center bg-gray-100 rounded-full w-full select-none"
+                  class="text-lg my-2 p-1 text-center bg-gray-100 rounded-full w-full select-none"
                 >
                   300€
                 </div>
@@ -132,7 +126,7 @@
           </mat-action-list>
         </mat-card>
       </div>
-      <div class="flex flex-col w-full md:w-1/2 p-2 px-4">
+      <div class="flex flex-col w-full lg:w-1/2 p-2 px-4">
         <div class="flex flex-row mb-2">
           <button mat-button class="w-full card-title" color="primary">Facturas recientes</button>
           <button mat-icon-button color="primary"><mat-icon>read_more</mat-icon></button>

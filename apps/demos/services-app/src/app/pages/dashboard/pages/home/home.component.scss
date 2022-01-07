@@ -9,19 +9,3 @@
   font-size: x-large;
   font-weight: 100;
 }
-
-:host {
-  ::ng-deep {
-    div.mat-chip-list-wrapper {
-      overflow-y: hidden;
-      overflow-x: auto;
-      flex-wrap: nowrap;
-    }
-    @media screen and (max-width: 500px) {
-      div.mat-list-item-content,
-      div.mat-list-text {
-        padding: 0 !important;
-      }
-    }
-  }
-}

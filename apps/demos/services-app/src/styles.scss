@@ -150,9 +150,13 @@ body {
 
 mat-card.mat-card {
   border-radius: 8px;
+  min-width: 16rem;
 }
 mat-chip.mat-chip {
   user-select: none;
+}
+mat-chip.mat-chip.mat-chip-selected {
+  cursor: pointer;
 }
 .bg-primary {
   background-color: #375984;
@@ -161,4 +165,18 @@ mat-chip.mat-chip {
 .bg-accent {
   background-color: #537aac;
   color: white;
+}
+
+::ng-deep {
+  div.mat-chip-list-wrapper {
+    overflow-y: hidden;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+  @media screen and (max-width: 500px) {
+    div.mat-list-item-content,
+    div.mat-list-text {
+      padding: 0 !important;
+    }
+  }
 }

@@ -8,6 +8,7 @@ import {Subject, Observable} from 'rxjs';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnDestroy {
+  appName = 'E-Servicios';
   logo = {
     src: 'assets/rng-logo.png',
     alt: 'RNG APP',
@@ -33,6 +34,11 @@ export class DashboardComponent implements OnDestroy {
       path: '/dashboard/reports',
       text: 'Informes',
       icon: 'analytics',
+    },
+    {
+      path: '/dashboard/team',
+      text: 'Equipo',
+      icon: 'group',
     },
   ];
   userRoutes = [

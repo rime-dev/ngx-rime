@@ -35,6 +35,10 @@ const routes: Routes = [
         path: 'reports',
         loadChildren: () => import('./pages/reports/reports.module').then((m) => m.ReportsModule),
       },
+      {
+        path: 'team',
+        loadChildren: () => import('./pages/team/team.module').then((m) => m.TeamModule),
+      },
     ],
   },
 ];
