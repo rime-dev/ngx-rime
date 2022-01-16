@@ -33,7 +33,7 @@
               <mat-card-title>Proyectos</mat-card-title>
               <mat-card-subtitle>8 este mes</mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content class="w-full overflow-y-hidden overflow-x-auto">
+            <mat-card-content class="h-12 w-full overflow-y-hidden overflow-x-auto">
               <mat-chip-list>
                 <mat-chip color="accent" selected>Rehabilitación</mat-chip>
                 <mat-chip color="accent" selected>Pintura</mat-chip>
@@ -76,16 +76,11 @@
             <mat-list-item class="my-2 p-2 h-auto">
               <div mat-line class="flex flex-row">
                 <div class="flex items-center p-2">
-                  <mat-icon mat-list-icon>construction</mat-icon>
+                  <mat-icon mat-list-icon matTooltip="Rehabilitación">construction</mat-icon>
                 </div>
                 <div class="flex flex-col w-full">
                   <div class="mb-1">Rehabilitación de muebles de exterior</div>
                   <div class="mat-card-subtitle mb-2">C. Coronel Pérez, Torrent</div>
-                </div>
-                <div class="hidden lg:block">
-                  <mat-chip-list>
-                    <mat-chip color="accent" selected>Rehabilitación</mat-chip>
-                  </mat-chip-list>
                 </div>
               </div>
               <p mat-line class="mb-2">
@@ -102,16 +97,11 @@
             <mat-list-item class="my-2 p-2 h-auto">
               <div mat-line class="flex flex-row">
                 <div class="flex items-center p-2">
-                  <mat-icon mat-list-icon>format_paint</mat-icon>
+                  <mat-icon mat-list-icon matTooltip="Pintura">format_paint</mat-icon>
                 </div>
                 <div class="flex flex-col w-full">
                   <div class="mb-1">Pintura de piscina</div>
                   <div class="mat-card-subtitle mb-2">C. Coronel Pérez, Torrent</div>
-                </div>
-                <div class="hidden lg:block">
-                  <mat-chip-list>
-                    <mat-chip color="accent" selected>Pintura</mat-chip>
-                  </mat-chip-list>
                 </div>
               </div>
               <p mat-line class="mb-2">La piscina necesita una capa de pintura</p>

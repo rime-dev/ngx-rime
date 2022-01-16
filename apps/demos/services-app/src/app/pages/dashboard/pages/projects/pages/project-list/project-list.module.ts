@@ -3,16 +3,17 @@ import {NgModule} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
-import {ProjectsComponent} from './projects.component';
-import {ProjectsRoutingModule} from './projects-routing.module';
+import {ProjectListComponent} from './project-list.component';
+import {ProjectListRoutingModule} from './project-list-routing.module';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTabsModule} from '@angular/material/tabs';
+import {ProjectCardComponent} from './components/project-card/project-card.component';
 
 @NgModule({
-  declarations: [ProjectsComponent],
+  declarations: [ProjectListComponent, ProjectCardComponent],
   imports: [
     CommonModule,
-    ProjectsRoutingModule,
+    ProjectListRoutingModule,
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
@@ -20,4 +21,4 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatTabsModule,
   ],
 })
-export class ProjectsModule {}
+export class ProjectListModule {}

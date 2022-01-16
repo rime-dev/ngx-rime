@@ -1,0 +1,28 @@
+<div>
+  <div class="flex flex-row">
+    <button mat-icon-button class="self-center" [routerLink]="['../project-list']">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <header class="max-w-7xl w-full py-6 px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-semibold text-gray-700">Pintura de 4 habitaciones</h1>
+    </header>
+  </div>
+
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Info">
+      <ng-template matTabContent>
+        <rng-project-info></rng-project-info>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Actividad">
+      <ng-template matTabContent>
+        <rng-project-activity></rng-project-activity>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Documentos">
+      <ng-template matTabContent>
+        <rng-project-documents></rng-project-documents>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

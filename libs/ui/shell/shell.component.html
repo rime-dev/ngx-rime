@@ -1,6 +1,6 @@
 <div class="min-h-full relative flex flex-col" style="height: 100vh">
   <mat-toolbar color="primary" class="w-full z-50" [ngClass]="{'mat-elevation-z3': elevation}">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center">
           <div class="flex-shrink-0 block md:hidden">
@@ -46,7 +46,7 @@
       }"
     >
       <div class="flex flex-col relative w-full h-full">
-        <mat-action-list class="h-full w-full overflow-y-auto">
+        <mat-action-list class="h-full w-full overflow-y-auto overflow-x-hidden">
           <ng-container *ngFor="let route of sideRoutes">
             <ng-container *ngIf="!route.children && route.path">
               <mat-list-item [routerLink]="route.path">

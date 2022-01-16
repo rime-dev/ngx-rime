@@ -1,0 +1,37 @@
+<mat-card
+  class="grid w-full mb-2 mat-elevation-z1 cursor-pointer"
+  [routerLink]="['../project-view']"
+>
+  <div class="flex flex-row">
+    <div class="w-full flex flex-col md:flex-row">
+      <mat-card-header class="w-full md:w-4/5">
+        <div mat-card-avatar class="text-center items-center self-center">
+          <mat-icon>format_paint</mat-icon>
+        </div>
+        <mat-card-title>Pintura de 4 habitaciones </mat-card-title>
+        <mat-card-subtitle>Av. Malvarrosa, Valencia</mat-card-subtitle>
+      </mat-card-header>
+      <div class="flex flex-row w-full md:w-1/5 justify-center pr-2">
+        <div class="flex flex-col">
+          <div class="flex flex-row mb-2">
+            <img
+              class="rounded-full h-10 w-10 border-solid border-2 border-white"
+              src="https://i.picsum.photos/id/1031/200/200.jpg?hmac=E9kagTB6aHlVO8qmJYAQYYGJP3IvPT_v0N3ju0Rc4Gw"
+            />
+            <img
+              class="rounded-full h-10 w-10 border-solid border-2 border-white"
+              style="margin-left: -10px"
+              src="https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U"
+            />
+          </div>
+          <span class="text-sm font-thin">2 Personas</span>
+        </div>
+      </div>
+    </div>
+    <div class="w-auto md:relative absolute p-2 md:p-0 top-0 right-0">
+      <button mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card>
