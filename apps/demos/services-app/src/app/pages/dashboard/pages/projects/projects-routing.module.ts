@@ -8,6 +8,11 @@ const routes: Routes = [
     component: ProjectsComponent,
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'project-list',
+      },
+      {
         path: 'project-list',
         loadChildren: () =>
           import('./pages/project-list/project-list.module').then((m) => m.ProjectListModule),

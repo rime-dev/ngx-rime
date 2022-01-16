@@ -100,6 +100,18 @@ export class ShellComponent implements AfterContentInit {
     return this._sideRoutes;
   }
   private _sideRoutes!: Routes[];
+  /**
+   * Shell layout has sidenav
+   */
+  @Input()
+  set hasSidenav(value: boolean) {
+    this._hasSidenav = value;
+    this._changeDetectorRef.detectChanges();
+  }
+  get hasSidenav(): boolean {
+    return this._hasSidenav;
+  }
+  private _hasSidenav = false;
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
@@ -144,7 +156,7 @@ export class ShellComponent implements AfterContentInit {
   ngAfterContentInit(): void {
     this.updateSidenav();
     setTimeout(() => {
-      if (!this.sidenav._container?._contentMargins.left) {
+      if (this.sidenav && !this.sidenav._container?._contentMargins.left) {
         this.updateSidenav();
       }
     }, 500);

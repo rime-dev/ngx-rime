@@ -50,6 +50,7 @@ export class DashboardComponent implements OnDestroy {
       icon: 'logout',
     },
   ];
+  public hasSidenav = true;
   private destroy$: Subject<void> = new Subject();
   public user$: Observable<User | null>;
   showLoginButton = false;

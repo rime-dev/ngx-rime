@@ -1,51 +1,23 @@
 <div class="min-h-full relative flex flex-col" style="height: 100vh">
-  <mat-toolbar color="primary" class="w-full z-50" [ngClass]="{'mat-elevation-z3': elevation}">
-    <div class="mx-auto px-4 sm:px-6 lg:px-8 w-full">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center">
-          <div class="flex-shrink-0 block md:hidden">
-            <button mat-icon-button (click)="sidenavOpened = !sidenavOpened">
-              <mat-icon>menu</mat-icon>
-            </button>
-          </div>
-          <div *ngIf="logo" class="flex-shrink-0 mr-4">
-            <img class="h-8 w-8" [src]="logo.src" [alt]="logo.alt" />
-          </div>
-          <div *ngIf="appName" class="flex-shrink-0 mr-4">
-            <span class="h-8 w-8 text-xl text">{{ appName }}</span>
-          </div>
-          <div>
-            <div class="mr-4 flex items-baseline space-x-4">
-              <button mat-button *ngFor="let route of topRoutes" [routerLink]="route.path">
-                <mat-icon *ngIf="route.icon" class="mr-4">{{ route.icon }}</mat-icon>
-                <span *ngIf="route.text">{{ route.text }}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="block">
-          <div class="ml-4 flex items-center md:ml-6">
-            <div class="ml-3 relative">
-              <div>
-                <ng-content select="rng-user-account-popup"></ng-content>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </mat-toolbar>
   <mat-sidenav-container [hasBackdrop]="hasBackdrop">
     <mat-sidenav
+      *ngIf="hasSidenav"
       #sidenav
       [mode]="sidenavMode"
       [opened]="sidenavOpened"
       class="md:block"
+      color="primary"
       [ngClass]="{
         'fixed-sidenav-minimized': !fixedSidenavOpened
       }"
     >
-      <div class="flex flex-col relative w-full h-full">
+      <div class="flex flex-col relative w-full h-full overflow-x-hidden">
+        <mat-list>
+          <mat-list-item>
+            <img *ngIf="logo" class="h-8 w-8" matListIcon [src]="logo.src" [alt]="logo.alt" />
+            <p *ngIf="appName" matLine>{{ appName }}</p>
+          </mat-list-item>
+        </mat-list>
         <mat-action-list class="h-full w-full overflow-y-auto overflow-x-hidden">
           <ng-container *ngFor="let route of sideRoutes">
             <ng-container *ngIf="!route.children && route.path">
@@ -88,8 +60,46 @@
       </div>
     </mat-sidenav>
     <mat-sidenav-content>
-      <div class="relative w-full h-full overflow-scroll">
-        <ng-content></ng-content>
+      <div class="flex flex-col h-full">
+        <mat-toolbar class="w-full z-50" [color]="!hasSidenav ? 'primary' : ''">
+          <div class="mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex items-center justify-between h-16">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 block md:hidden">
+                  <button mat-icon-button (click)="sidenavOpened = !sidenavOpened">
+                    <mat-icon>menu</mat-icon>
+                  </button>
+                </div>
+                <div *ngIf="logo && !hasSidenav" class="flex-shrink-0 mr-4">
+                  <img class="h-8 w-8" [src]="logo.src" [alt]="logo.alt" />
+                </div>
+                <div *ngIf="appName && !hasSidenav" class="flex-shrink-0 mr-4">
+                  <span class="h-8 w-8 text-xl text">{{ appName }}</span>
+                </div>
+                <div>
+                  <div class="mr-4 flex items-baseline space-x-4">
+                    <button mat-button *ngFor="let route of topRoutes" [routerLink]="route.path">
+                      <mat-icon *ngIf="route.icon" class="mr-4">{{ route.icon }}</mat-icon>
+                      <span *ngIf="route.text">{{ route.text }}</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="block">
+                <div class="ml-4 flex items-center md:ml-6">
+                  <div class="ml-3 relative">
+                    <div>
+                      <ng-content select="rng-user-account-popup"></ng-content>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-toolbar>
+        <div class="relative w-full h-full overflow-scroll" style="background: whitesmoke">
+          <ng-content></ng-content>
+        </div>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
