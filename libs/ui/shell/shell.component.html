@@ -6,7 +6,7 @@
       [mode]="sidenavMode"
       [opened]="sidenavOpened"
       class="md:block"
-      color="primary"
+      [attr.color]="'primary'"
       [ngClass]="{
         'fixed-sidenav-minimized': !fixedSidenavOpened
       }"
@@ -15,7 +15,7 @@
         <mat-list>
           <mat-list-item>
             <img *ngIf="logo" class="h-8 w-8" matListIcon [src]="logo.src" [alt]="logo.alt" />
-            <p *ngIf="appName" matLine>{{ appName }}</p>
+            <p *ngIf="appName" class="text-xl" matLine>{{ appName }}</p>
           </mat-list-item>
         </mat-list>
         <mat-action-list class="h-full w-full overflow-y-auto overflow-x-hidden">

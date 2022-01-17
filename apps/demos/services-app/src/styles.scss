@@ -1,6 +1,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '~@angular/material' as mat;
+@use 'sass:map';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -158,14 +159,45 @@ mat-chip.mat-chip {
 mat-chip.mat-chip.mat-chip-selected {
   cursor: pointer;
 }
+$color-config: mat.get-color-config($rng-default-theme);
 .bg-primary {
-  background-color: #375984;
+  background-color: mat.get-color-from-palette(map.get($color-config, 'primary'), 500);
   color: white;
 }
+
 .bg-accent {
-  background-color: #537aac;
+  background: mat.get-color-from-palette(map.get($color-config, 'accent'), 500);
   color: white;
 }
+
+@import '~@angular/material/theming';
+
+@mixin _palette-styles($palette) {
+  background: mat.get-color-from-palette($palette);
+  color: mat.get-color-from-palette($palette, default-contrast);
+}
+@mixin sidenav-component-theme($theme) {
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
+  $foreground: map.get($theme, foreground);
+  $background: map.get($theme, background);
+  .mat-sidenav {
+    background: mat.get-color-from-palette($background, app-bar);
+    color: mat.get-color-from-palette($foreground, text);
+    &[color='primary'] {
+      @include _palette-styles($primary);
+    }
+    &[color='accent'] {
+      @include _palette-styles($accent);
+    }
+    &[color='warn'] {
+      @include _palette-styles($warn);
+    }
+  }
+}
+
+@include sidenav-component-theme($rng-default-theme);
 
 ::ng-deep {
   @media screen and (max-width: 500px) {
