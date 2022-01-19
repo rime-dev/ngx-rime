@@ -61,7 +61,12 @@
     </mat-sidenav>
     <mat-sidenav-content>
       <div class="flex flex-col h-full">
-        <mat-toolbar class="w-full z-50" [color]="!hasSidenav ? 'primary' : ''">
+        <mat-toolbar
+          #rngToolbar
+          class="w-full z-50"
+          [color]="!hasSidenav ? 'primary' : ''"
+          [class.mat-elevation-z2]="scrolled?.isScrolled"
+        >
           <div class="mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div class="flex items-center justify-between h-16">
               <div class="flex items-center">
@@ -76,6 +81,7 @@
                 <div *ngIf="appName && !hasSidenav" class="flex-shrink-0 mr-4">
                   <span class="h-8 w-8 text-xl text">{{ appName }}</span>
                 </div>
+                <ng-content *ngIf="hasSidenav" select="[topBarItem]"></ng-content>
                 <div>
                   <div class="mr-4 flex items-baseline space-x-4">
                     <button mat-button *ngFor="let route of topRoutes" [routerLink]="route.path">
@@ -97,7 +103,11 @@
             </div>
           </div>
         </mat-toolbar>
-        <div class="relative w-full h-full overflow-scroll" style="background: whitesmoke">
+        <div
+          class="relative w-full h-full overflow-auto"
+          style="background: whitesmoke"
+          (scroll)="onScroll($event)"
+        >
           <ng-content></ng-content>
         </div>
       </div>

@@ -18,4 +18,9 @@
   .mat-list-base .mat-list-item {
     color: inherit;
   }
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
 }

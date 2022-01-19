@@ -4,8 +4,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
+  EventEmitter,
   HostListener,
   Input,
+  OnInit,
+  Output,
   ViewChild,
 } from '@angular/core';
 import {MatDrawerMode, MatSidenav} from '@angular/material/sidenav';
@@ -28,7 +32,7 @@ export interface Routes {
   styleUrls: ['./shell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShellComponent implements AfterContentInit {
+export class ShellComponent implements OnInit, AfterContentInit {
   static ngAcceptInputType_elevation: BooleanInput;
 
   public sidenavOpened = false;
@@ -49,6 +53,19 @@ export class ShellComponent implements AfterContentInit {
     return this._elevation;
   }
   private _elevation = true;
+
+  /**
+   * Sets a sticky header
+   */
+  @Input()
+  set sticky(value: boolean) {
+    this._sticky = value;
+    this._changeDetectorRef.detectChanges();
+  }
+  get sticky(): boolean {
+    return this._sticky;
+  }
+  private _sticky = true;
 
   /**
    * Defines the URL to render the main image
@@ -113,7 +130,12 @@ export class ShellComponent implements AfterContentInit {
   }
   private _hasSidenav = false;
 
+  @Input() scrolled: Record<string, any> = {};
+  @Output() scrolledChange: EventEmitter<Record<string, any>> = new EventEmitter<
+    Record<string, any>
+  >();
   @ViewChild('sidenav') sidenav!: MatSidenav;
+  @ViewChild('rngToolbar') rngToolbar!: ElementRef;
 
   @HostListener('window:resize')
   onResize() {
@@ -138,9 +160,21 @@ export class ShellComponent implements AfterContentInit {
     }
     this.updateSidenav();
   }
-  constructor(private _changeDetectorRef: ChangeDetectorRef) {
-    this.onResize();
+
+  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+
+  onScroll(event: Event): void {
+    const onScrollEvent = {
+      target: event.target,
+      isScrolled: false
+    };
+    if ((event.target as any)?.scrollTop > (this.rngToolbar as any)._elementRef.nativeElement.offsetHeight) {
+      onScrollEvent.isScrolled = true;
+    }
+    this.scrolled = onScrollEvent;
+    this.scrolledChange.emit(onScrollEvent);
   }
+
   updateSidenav(): void {
     setTimeout(() => {
       if (this.sidenav && this.sidenav._container) {
@@ -152,6 +186,9 @@ export class ShellComponent implements AfterContentInit {
   toggleFixedSidenav() {
     this.fixedSidenavOpened = !this.fixedSidenavOpened;
     this.updateSidenav();
+  }
+  ngOnInit(): void {
+    this.onResize();
   }
   ngAfterContentInit(): void {
     this.updateSidenav();

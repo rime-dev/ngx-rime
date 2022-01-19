@@ -1,13 +1,15 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
 import {AuthService, User} from '@rng/data-access/auth';
 import {Subject, Observable} from 'rxjs';
+import {filter, takeUntil, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'rng-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
   appName = 'E-Servicios';
   logo = {
     src: 'assets/rng-logo.png',
@@ -50,14 +52,44 @@ export class DashboardComponent implements OnDestroy {
       icon: 'logout',
     },
   ];
+
   public hasSidenav = true;
   private destroy$: Subject<void> = new Subject();
   public user$: Observable<User | null>;
   showLoginButton = false;
   showLogoutButton = false;
-
-  constructor(private authService: AuthService) {
+  showTitlePage = false;
+  scrolled!: Record<string, any>;
+  titlePage = '';
+  constructor(private authService: AuthService, private router: Router) {
     this.user$ = this.authService.user$;
+  }
+  onScroll(event: any) {
+    this.showTitlePage = event.isScrolled;
+  }
+  scrollToTop() {
+    this.scrolled.target.scrollTop = 0;
+  }
+
+  private getTitlePage(event: any) {
+    const pathMatch = this.sideRoutes.map((route: any) => event?.url.includes(route.path))[0];
+    if (pathMatch) {
+      this.titlePage = pathMatch.text;
+    }
+  }
+  ngOnInit(): void {
+    this.getTitlePage(this.router.getCurrentNavigation());
+    this.router.events
+      .pipe(
+        filter((event: any) => event instanceof NavigationEnd),
+        tap({
+          next: (event: any) => {
+            this.getTitlePage(event);
+          },
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {

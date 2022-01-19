@@ -4,7 +4,12 @@
   [logo]="logo"
   [appName]="appName"
   [hasSidenav]="hasSidenav"
+  [(scrolled)]="scrolled"
+  (scrolledChange)="onScroll($event)"
 >
+  <button mat-button topBarItem (click)="scrollToTop()" *ngIf="showTitlePage">
+    {{ titlePage }}
+  </button>
   <rng-user-account-popup [userInfo]="user$ | async" [routes]="userRoutes"></rng-user-account-popup>
 
   <router-outlet> </router-outlet>
