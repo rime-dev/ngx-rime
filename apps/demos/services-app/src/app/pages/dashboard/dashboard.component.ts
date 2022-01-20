@@ -23,6 +23,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       icon: 'home',
     },
     {
+      path: '/dashboard/profile',
+      text: 'Perfil',
+      icon: 'person',
+    },
+    {
       path: '/dashboard/projects',
       text: 'Proyectos',
       icon: 'work',
@@ -36,11 +41,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       path: '/dashboard/reports',
       text: 'Informes',
       icon: 'analytics',
-    },
-    {
-      path: '/dashboard/team',
-      text: 'Equipo',
-      icon: 'group',
     },
   ];
   userRoutes = [

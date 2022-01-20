@@ -1,1 +1,53 @@
-<div class="lg:container mx-auto p-4 flex flex-col w-full">ssss</div>
+<div class="lg:container mx-auto p-8 flex flex-col w-full">
+  <div class="flex flex-row w-full h-auto">
+    <img
+      class="rounded-full h-14 w-14 mx-2 mat-elevation-z2"
+      src="https://i.picsum.photos/id/1031/200/200.jpg?hmac=E9kagTB6aHlVO8qmJYAQYYGJP3IvPT_v0N3ju0Rc4Gw"
+    />
+    <img
+      class="rounded-full h-14 w-14 mx-2 mat-elevation-z2"
+      src="https://i.picsum.photos/id/1031/200/200.jpg?hmac=E9kagTB6aHlVO8qmJYAQYYGJP3IvPT_v0N3ju0Rc4Gw"
+    />
+    <button mat-icon-button class="rounded-full h-14 w-14 mx-2">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <span class="text-xl font-semibold mt-6 mb-2">Detalles</span>
+  <div class="flex flex-col p-4">
+    <mat-action-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon>event</mat-icon>
+        <div mat-line class="text-gray-500">Fecha de inicio</div>
+        <div mat-line class="whitespace-normal">Miércoles 2 de Febrero, 2023</div>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>event</mat-icon>
+        <div mat-line class="text-gray-500">Fecha de fin estimada</div>
+        <div mat-line class="whitespace-normal">Lunes 7 de Febrero, 2023</div>
+      </mat-list-item>
+    </mat-action-list>
+  </div>
+  <span class="text-xl font-semibold mt-6 mb-2">Descripción</span>
+  <div class="flex flex-col w-full p-4">
+    <mat-action-list>
+      <mat-list-item class="h-auto">
+        <mat-icon mat-list-icon>description</mat-icon>
+        <div mat-line class="whitespace-normal">
+          La propiedad tiene 4 habitaciones, dos con 20m^2 y otras dos de 35m^2. Las primeras se
+          solitita que se pinten de color beige, y las otras dos blancas.
+        </div>
+      </mat-list-item>
+    </mat-action-list>
+  </div>
+  <span class="text-xl font-semibold mt-6 mb-2">Ubicación</span>
+  <div class="flex flex-col p-4">
+    <mat-action-list>
+      <mat-list-item class="h-auto">
+        <mat-icon mat-list-icon>place</mat-icon>
+        <div mat-line class="whitespace-normal">
+          Av. Malvarrosa, patio 5, puerta 10, Valencia, 46011
+        </div>
+      </mat-list-item>
+    </mat-action-list>
+  </div>
+</div>

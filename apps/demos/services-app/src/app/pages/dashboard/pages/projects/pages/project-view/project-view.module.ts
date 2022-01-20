@@ -8,11 +8,17 @@ import {ProjectViewRoutingModule} from './project-view-routing.module';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTabsModule} from '@angular/material/tabs';
 import {ProjectInfoComponent} from './components/project-info/project-info.component';
-import { ProjectActivityComponent } from './components/project-activity/project-activity.component';
-import { ProjectDocumentsComponent } from './components/project-documents/project-documents.component';
+import {ProjectActivityComponent} from './components/project-activity/project-activity.component';
+import {ProjectDocumentsComponent} from './components/project-documents/project-documents.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
-  declarations: [ProjectViewComponent, ProjectInfoComponent, ProjectActivityComponent, ProjectDocumentsComponent],
+  declarations: [
+    ProjectViewComponent,
+    ProjectInfoComponent,
+    ProjectActivityComponent,
+    ProjectDocumentsComponent,
+  ],
   imports: [
     CommonModule,
     ProjectViewRoutingModule,
@@ -21,6 +27,7 @@ import { ProjectDocumentsComponent } from './components/project-documents/projec
     MatChipsModule,
     MatIconModule,
     MatTabsModule,
+    MatListModule,
   ],
 })
 export class ProjectViewModule {}
