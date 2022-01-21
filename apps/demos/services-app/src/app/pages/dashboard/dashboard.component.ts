@@ -71,20 +71,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.scrolled.target.scrollTop = 0;
   }
 
-  private getTitlePage(event: any) {
-    const pathMatch = this.sideRoutes.map((route: any) => event?.url.includes(route.path))[0];
+  private getTitlePage(url: string) {
+    const pathMatch = this.sideRoutes.filter((route: any) => url.includes(route.path))[0];
     if (pathMatch) {
       this.titlePage = pathMatch.text;
     }
   }
   ngOnInit(): void {
-    this.getTitlePage(this.router.getCurrentNavigation());
+    this.getTitlePage(this.router.url);
     this.router.events
       .pipe(
         filter((event: any) => event instanceof NavigationEnd),
         tap({
           next: (event: any) => {
-            this.getTitlePage(event);
+            this.getTitlePage(event.url);
           },
         }),
         takeUntil(this.destroy$)

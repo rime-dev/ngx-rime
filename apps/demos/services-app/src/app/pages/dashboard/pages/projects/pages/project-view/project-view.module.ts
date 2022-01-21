@@ -11,6 +11,9 @@ import {ProjectInfoComponent} from './components/project-info/project-info.compo
 import {ProjectActivityComponent} from './components/project-activity/project-activity.component';
 import {ProjectDocumentsComponent} from './components/project-documents/project-documents.component';
 import {MatListModule} from '@angular/material/list';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,10 @@ import {MatListModule} from '@angular/material/list';
     MatIconModule,
     MatTabsModule,
     MatListModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatInputModule,
   ],
 })
 export class ProjectViewModule {}
