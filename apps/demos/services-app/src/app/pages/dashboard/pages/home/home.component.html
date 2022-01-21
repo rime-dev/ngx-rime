@@ -45,19 +45,21 @@
       <div class="flex flex-col w-full xl:w-2/5 lg:h-64 p-2 px-4">
         <div class="flex flex-row mb-2">
           <button mat-button class="w-full card-title" color="primary">Proyectos en curso</button>
-          <button mat-icon-button color="primary"><mat-icon>read_more</mat-icon></button>
+          <button
+            mat-icon-button
+            color="primary"
+            [routerLink]="['../projects/project-list']"
+            [state]="['state', 'active']"
+          >
+            <mat-icon>read_more</mat-icon>
+          </button>
         </div>
         <mat-card class="w-full h-full mat-elevation-z3 overflow-auto">
           <mat-action-list style="padding: 0">
-            <mat-list-item>
-              <mat-icon mat-list-icon>format_paint</mat-icon>
-              <div mat-line>Pintura de 4 habitaciones</div>
-              <div mat-line class="mat-card-subtitle">Av. Malvarrosa, Valencia</div>
-            </mat-list-item>
-            <mat-list-item>
-              <mat-icon mat-list-icon>format_paint</mat-icon>
-              <div mat-line>Barnizado de porche de madera</div>
-              <div mat-line class="mat-card-subtitle">C. Coronel Pérez, Torrent</div>
+            <mat-list-item *ngFor="let project of activeProjects">
+              <mat-icon mat-list-icon>{{ project.type | projectTypePipe }}</mat-icon>
+              <div mat-line>{{ project.title }}</div>
+              <div mat-line class="mat-card-subtitle">{{ project.location }}</div>
             </mat-list-item>
           </mat-action-list>
         </mat-card>
@@ -67,47 +69,35 @@
       <div class="flex flex-col w-full lg:w-1/2 p-2 px-4">
         <div class="flex flex-row mb-2">
           <button mat-button class="w-full card-title" color="primary">Proyectos ofertados</button>
-          <button mat-icon-button color="primary"><mat-icon>read_more</mat-icon></button>
+          <button
+            mat-icon-button
+            color="primary"
+            [routerLink]="['../projects/project-list']"
+            [state]="['group', undefined]"
+          >
+            <mat-icon>read_more</mat-icon>
+          </button>
         </div>
         <mat-card class="w-full h-auto mat-elevation-z3">
           <mat-action-list class="p-0">
-            <mat-list-item class="my-2 p-2 h-auto">
+            <mat-list-item class="my-2 p-2 h-auto" *ngFor="let project of otherProjects">
               <div mat-line class="flex flex-row">
                 <div class="flex items-center p-2">
-                  <mat-icon mat-list-icon matTooltip="Rehabilitación">construction</mat-icon>
+                  <mat-icon mat-list-icon [matTooltip]="project.type">{{
+                    project.type | projectTypePipe
+                  }}</mat-icon>
                 </div>
                 <div class="flex flex-col w-full">
-                  <div class="mb-1">Rehabilitación de muebles de exterior</div>
-                  <div class="mat-card-subtitle mb-2">C. Coronel Pérez, Torrent</div>
+                  <div class="mb-1">{{ project.title }}</div>
+                  <div class="mat-card-subtitle mb-2">{{ project.location }}</div>
                 </div>
               </div>
-              <p mat-line class="mb-2">
-                La parcela de la casa tiene 7 muebles que necesitan ser rehabilitados.
-              </p>
+              <p mat-line class="mb-2">{{ project.description }}}</p>
               <div mat-line class="flex flex-row">
                 <div
                   class="text-lg my-2 p-1 text-center bg-gray-100 rounded-full w-full select-none"
                 >
-                  2000€
-                </div>
-              </div>
-            </mat-list-item>
-            <mat-list-item class="my-2 p-2 h-auto">
-              <div mat-line class="flex flex-row">
-                <div class="flex items-center p-2">
-                  <mat-icon mat-list-icon matTooltip="Pintura">format_paint</mat-icon>
-                </div>
-                <div class="flex flex-col w-full">
-                  <div class="mb-1">Pintura de piscina</div>
-                  <div class="mat-card-subtitle mb-2">C. Coronel Pérez, Torrent</div>
-                </div>
-              </div>
-              <p mat-line class="mb-2">La piscina necesita una capa de pintura</p>
-              <div mat-line class="flex flex-row">
-                <div
-                  class="text-lg my-2 p-1 text-center bg-gray-100 rounded-full w-full select-none"
-                >
-                  300€
+                  {{ project.cost }}
                 </div>
               </div>
             </mat-list-item>

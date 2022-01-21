@@ -8,6 +8,8 @@ import {ProjectListRoutingModule} from './project-list-routing.module';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTabsModule} from '@angular/material/tabs';
 import {ProjectCardComponent} from './components/project-card/project-card.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {ProjectTypeModule} from 'apps/demos/services-app/src/app/pipes/project-type/project-type.module';
 
 @NgModule({
   declarations: [ProjectListComponent, ProjectCardComponent],
@@ -19,6 +21,8 @@ import {ProjectCardComponent} from './components/project-card/project-card.compo
     MatChipsModule,
     MatIconModule,
     MatTabsModule,
+    MatTooltipModule,
+    ProjectTypeModule,
   ],
 })
 export class ProjectListModule {}

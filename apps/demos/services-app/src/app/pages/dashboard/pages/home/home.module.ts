@@ -8,6 +8,7 @@ import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent} from './home.component';
 import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {ProjectTypeModule} from '../../../../pipes/project-type/project-type.module';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -20,6 +21,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatChipsModule,
     MatListModule,
     MatTooltipModule,
+    ProjectTypeModule,
   ],
 })
 export class HomeModule {}

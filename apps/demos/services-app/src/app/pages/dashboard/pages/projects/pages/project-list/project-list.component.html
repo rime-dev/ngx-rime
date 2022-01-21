@@ -2,48 +2,58 @@
   <header class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
     <h1 class="text-3xl font-semibold text-gray-700">Proyectos</h1>
   </header>
-  <mat-tab-group animationDuration="0ms">
+  <mat-tab-group
+    animationDuration="0ms"
+    [selectedIndex]="tabSelected"
+    (selectedIndexChange)="changeTab($event)"
+  >
     <mat-tab label="Activos (1)">
       <ng-template matTabContent>
-        <ng-container *ngTemplateOutlet="projectsListTemplate"></ng-container>
+        <ng-container
+          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: activeProjects | async}"
+        ></ng-container>
       </ng-template>
     </mat-tab>
-    <mat-tab label="Pendientes"> </mat-tab>
-    <mat-tab label="Terminados"> </mat-tab>
+    <mat-tab label="Ofertados">
+      <ng-template matTabContent>
+        <ng-container
+          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: otherProjects | async}"
+        ></ng-container>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Terminados">
+      <ng-template matTabContent>
+        <ng-container
+          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: finishedProjects | async}"
+        ></ng-container>
+      </ng-template>
+    </mat-tab>
   </mat-tab-group>
 </div>
-<ng-template #projectsListTemplate>
+<ng-template #projectsListTemplate let-projects>
   <div class="lg:container mx-auto p-4">
     <div class="flex flex-row w-full mb-4">
-      <button mat-button class="mx-2">
+      <button mat-button class="mx-2" (click)="filterByType()">
         <div class="flex flex-col items-center pt-2 font-thin">
           <mat-icon>grid_view</mat-icon>
           <span>Todos</span>
         </div>
       </button>
-      <button mat-button class="mx-2">
+      <button mat-button class="mx-2" (click)="filterByType('paint')">
         <div class="flex flex-col items-center pt-2 font-thin">
           <mat-icon>format_paint</mat-icon>
           <span>Pintura</span>
         </div>
       </button>
-      <button mat-button class="mx-2">
+      <button mat-button class="mx-2" (click)="filterByType('construction')">
         <div class="flex flex-col items-center pt-2 font-thin">
           <mat-icon>construction</mat-icon>
           <span>Rehabilitación</span>
         </div>
       </button>
     </div>
-    <div class="flex flex-col w-full">
-      <rng-project-card></rng-project-card>
-      <rng-project-card></rng-project-card>
-      <rng-project-card></rng-project-card>
-      <rng-project-card></rng-project-card>
-      <rng-project-card></rng-project-card>
-      <rng-project-card></rng-project-card>
-      <rng-project-card></rng-project-card>
-      <rng-project-card></rng-project-card>
-      <rng-project-card></rng-project-card>
+    <div class="flex flex-col w-full" *ngFor="let project of projects">
+      <rng-project-card [project]="project"></rng-project-card>
     </div>
   </div>
 </ng-template>
