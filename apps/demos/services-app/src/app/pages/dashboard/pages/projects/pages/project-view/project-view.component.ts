@@ -18,6 +18,7 @@ export class ProjectViewComponent implements OnDestroy {
     const allProjects = [...projects, ...otherProjects];
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       this.project = allProjects.filter((project: any) => project.uid === params.id)[0];
+      console.log(this.project);
     });
   }
   getCollaborators(collaboratorsBase: any[]) {

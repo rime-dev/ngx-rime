@@ -14,6 +14,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,9 @@ import {MatInputModule} from '@angular/material/input';
     ReactiveFormsModule,
     FormsModule,
     MatInputModule,
+    MatAutocompleteModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class ProjectViewModule {}
