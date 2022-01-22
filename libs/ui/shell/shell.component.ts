@@ -8,6 +8,7 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  NgZone,
   OnInit,
   Output,
   ViewChild,
@@ -139,36 +140,41 @@ export class ShellComponent implements OnInit, AfterContentInit {
 
   @HostListener('window:resize')
   onResize() {
-    if (window.innerWidth >= 1024) {
-      this.sidenavMode = 'side';
-      this.sidenavOpened = true;
-      this.hasBackdrop = false;
-      this.fixedSidenavOpened = true;
-      this.isMobile = false;
-    } else if (window.innerWidth >= 768) {
-      this.sidenavMode = 'side';
-      this.sidenavOpened = true;
-      this.hasBackdrop = false;
-      this.fixedSidenavOpened = false;
-      this.isMobile = false;
-    } else {
-      this.sidenavMode = 'over';
-      this.sidenavOpened = false;
-      this.hasBackdrop = true;
-      this.fixedSidenavOpened = true;
-      this.isMobile = true;
-    }
-    this.updateSidenav();
+    this.ngZone.runOutsideAngular(() => {
+      if (window.innerWidth >= 1024) {
+        this.sidenavMode = 'side';
+        this.sidenavOpened = true;
+        this.hasBackdrop = false;
+        this.fixedSidenavOpened = true;
+        this.isMobile = false;
+      } else if (window.innerWidth >= 768) {
+        this.sidenavMode = 'side';
+        this.sidenavOpened = true;
+        this.hasBackdrop = false;
+        this.fixedSidenavOpened = false;
+        this.isMobile = false;
+      } else {
+        this.sidenavMode = 'over';
+        this.sidenavOpened = false;
+        this.hasBackdrop = true;
+        this.fixedSidenavOpened = true;
+        this.isMobile = true;
+      }
+      this.updateSidenav();
+    });
   }
 
-  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private _changeDetectorRef: ChangeDetectorRef, private ngZone: NgZone) {}
 
   onScroll(event: Event): void {
     const onScrollEvent = {
       target: event.target,
-      isScrolled: false
+      isScrolled: false,
     };
-    if ((event.target as any)?.scrollTop > (this.rngToolbar as any)._elementRef.nativeElement.offsetHeight) {
+    if (
+      (event.target as any)?.scrollTop >
+      (this.rngToolbar as any)._elementRef.nativeElement.offsetHeight
+    ) {
       onScrollEvent.isScrolled = true;
     }
     this.scrolled = onScrollEvent;
@@ -184,8 +190,10 @@ export class ShellComponent implements OnInit, AfterContentInit {
     }, 0);
   }
   toggleFixedSidenav() {
-    this.fixedSidenavOpened = !this.fixedSidenavOpened;
-    this.updateSidenav();
+    this.ngZone.runOutsideAngular(() => {
+      this.fixedSidenavOpened = !this.fixedSidenavOpened;
+      this.updateSidenav();
+    });
   }
   ngOnInit(): void {
     this.onResize();

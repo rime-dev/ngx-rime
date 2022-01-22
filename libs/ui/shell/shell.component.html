@@ -1,10 +1,11 @@
 <div class="min-h-full relative flex flex-col" style="height: 100vh">
-  <mat-sidenav-container [hasBackdrop]="hasBackdrop">
+  <mat-sidenav-container [hasBackdrop]="hasBackdrop" (backdropClick)="sidenavOpened = false">
     <mat-sidenav
       *ngIf="hasSidenav"
       #sidenav
       [mode]="sidenavMode"
       [opened]="sidenavOpened"
+      (keydown.escape)="sidenavOpened = false"
       class="md:block"
       [attr.color]="'primary'"
       [ngClass]="{
