@@ -1,12 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
-import {
-  EntityCollectionDataService,
-  EntityCollectionServiceBase,
-  EntityCollectionServiceElementsFactory,
-} from '@ngrx/data';
+import {EntityCollectionServiceBase, EntityCollectionServiceElementsFactory} from '@ngrx/data';
 import {ENTITY_CONFIG} from '../constants/base.constant';
 import {FireEntityCollectionDataService, StateEntityConfig} from '../models/base.model';
-import {FireDataService} from './fire-data.service';
 
 /**
  * A data service to use as global data management service.

@@ -1,6 +1,6 @@
 import {FirebaseOptions} from '@angular/fire/app';
 import {FieldPath} from '@angular/fire/compat/firestore';
-import {EntityMetadataMap} from '@ngrx/data';
+import {EntityCollectionServiceBase, EntityMetadataMap} from '@ngrx/data';
 import {Update} from '@ngrx/entity';
 import {Observable} from 'rxjs';
 
@@ -12,6 +12,7 @@ export interface StateEntityConfig {
   enablePersistence?: boolean;
   entityMetadata: EntityMetadataMap;
   pluralNames: any;
+  mockData?: Record<string, any>;
 }
 export interface FirebaseConfig {
   options: FirebaseOptions;
@@ -24,6 +25,15 @@ export class FireDataObject {
   constructor(data: Record<string, any>) {
     this.id = data.payload.doc.id;
     this.data = data.payload.doc.data();
+  }
+}
+
+export class FireDataMockObject {
+  public id: string;
+  public data: Record<string, any>;
+  constructor(data: Record<string, any>) {
+    this.id = data.id;
+    this.data = data.data;
   }
 }
 
@@ -85,6 +95,6 @@ export interface FireEntityCollectionDataService<T> {
   getAll(): Observable<T[]>;
   getById(id: any): Observable<T>;
   getWithLimit(limit: number): Observable<T[]>;
-  getWithQuery(params: ConditionalQueryFirestore[]): Observable<T[]>;
   update(update: Update<T>): Observable<T>;
+  getWithQuery(params: ConditionalQueryFirestore[]): Observable<T[]>;
 }
