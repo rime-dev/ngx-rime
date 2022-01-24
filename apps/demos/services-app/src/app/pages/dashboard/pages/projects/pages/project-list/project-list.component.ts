@@ -16,7 +16,7 @@ export class ProjectListComponent {
   public collaborators: any[];
   constructor(private router: Router) {
     this.collaborators = collaborators;
-    this.activeProjects = of(projects.filter((project: any) => project.state === 'active'));
+    this.activeProjects = of(projects.filter((project: any) => project.data.state === 'active'));
     this.otherProjects = of(otherProjects);
     this.finishedProjects = of(projects.filter((project: any) => project.state === 'finished'));
     const currentNavigation = this.router.getCurrentNavigation();

@@ -9,9 +9,11 @@ import {HomeComponent} from './home.component';
 import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ProjectTypeModule} from '../../../../pipes/project-type/project-type.module';
+import {ActiveProjectsComponent} from './components/active-projects/active-projects.component';
+import { OtherProjectsComponent } from './components/other-projects/other-projects.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, ActiveProjectsComponent, OtherProjectsComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

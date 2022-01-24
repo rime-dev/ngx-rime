@@ -15,7 +15,7 @@ export class ProjectCardComponent {
   }
   set project(value: any) {
     this.internalProject = value;
-    this.getCollaborators(value.collaborators);
+    this.getCollaborators(value.data.collaborators);
   }
   private internalProject: any = {};
 

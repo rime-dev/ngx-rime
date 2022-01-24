@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthModule} from '@rng/data-access/auth';
-import {BaseModule} from '@rng/data-access/base';
+import {BaseMockModule} from '@rng/data-access/base';
 import {environment} from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -20,7 +20,8 @@ const firebaseConfig = {
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    BaseModule.firebase(firebaseConfig),
+    // BaseModule.firebase(firebaseConfig),
+    BaseMockModule.firebase(firebaseConfig),
     AuthModule,
   ],
   providers: [],

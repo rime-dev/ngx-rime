@@ -1,0 +1,20 @@
+<div class="flex flex-row mb-2">
+  <button mat-button class="w-full card-title text-left" color="primary">Proyectos en curso</button>
+  <button
+    mat-icon-button
+    color="primary"
+    [routerLink]="['../projects/project-list']"
+    [state]="['state', 'active']"
+  >
+    <mat-icon>read_more</mat-icon>
+  </button>
+</div>
+<mat-card class="w-full h-full mat-elevation-z3 overflow-auto">
+  <mat-action-list style="padding: 0">
+    <mat-list-item *ngFor="let project of projects$ | async">
+      <mat-icon mat-list-icon>{{ project.data.type | projectTypePipe }}</mat-icon>
+      <div mat-line>{{ project.data.title }}</div>
+      <div mat-line class="mat-card-subtitle">{{ project.data.location }}</div>
+    </mat-list-item>
+  </mat-action-list>
+</mat-card>

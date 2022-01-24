@@ -1,16 +1,16 @@
 <mat-card
   *ngIf="project"
   class="grid w-full mb-2 mat-elevation-z1 cursor-pointer"
-  [routerLink]="['../project-view', project.uid]"
+  [routerLink]="['../project-view', project.id]"
 >
   <div class="flex flex-row">
     <div class="w-full flex flex-col md:flex-row">
       <mat-card-header class="w-full md:w-4/5">
         <div mat-card-avatar class="text-center items-center self-center">
-          <mat-icon>{{ project.type | projectTypePipe }}</mat-icon>
+          <mat-icon>{{ project.data.type | projectTypePipe }}</mat-icon>
         </div>
-        <mat-card-title>{{ project.title }}</mat-card-title>
-        <mat-card-subtitle>{{ project.location }}</mat-card-subtitle>
+        <mat-card-title>{{ project.data.title }}</mat-card-title>
+        <mat-card-subtitle>{{ project.data.location }}</mat-card-subtitle>
       </mat-card-header>
       <div class="flex flex-row w-full md:w-1/5 justify-center pr-2">
         <div class="flex flex-col self-center">
@@ -29,7 +29,7 @@
               [src]="$any(collaboratorsArray[0]).avatar"
             />
           </div>
-          <span class="text-sm font-thin"> {{ project.collaborators.length }} Personas</span>
+          <span class="text-sm font-thin"> {{ project.data.collaborators.length }} Personas</span>
         </div>
       </div>
     </div>

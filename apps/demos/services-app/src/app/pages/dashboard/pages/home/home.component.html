@@ -42,67 +42,15 @@
           </mat-card>
         </div>
       </div>
-      <div class="flex flex-col w-full xl:w-2/5 lg:h-64 p-2 px-4">
-        <div class="flex flex-row mb-2">
-          <button mat-button class="w-full card-title" color="primary">Proyectos en curso</button>
-          <button
-            mat-icon-button
-            color="primary"
-            [routerLink]="['../projects/project-list']"
-            [state]="['state', 'active']"
-          >
-            <mat-icon>read_more</mat-icon>
-          </button>
-        </div>
-        <mat-card class="w-full h-full mat-elevation-z3 overflow-auto">
-          <mat-action-list style="padding: 0">
-            <mat-list-item *ngFor="let project of activeProjects">
-              <mat-icon mat-list-icon>{{ project.type | projectTypePipe }}</mat-icon>
-              <div mat-line>{{ project.title }}</div>
-              <div mat-line class="mat-card-subtitle">{{ project.location }}</div>
-            </mat-list-item>
-          </mat-action-list>
-        </mat-card>
+      <div>
+        <rng-active-projects
+          class="flex flex-col w-full xl:w-2/5 lg:h-64 p-2 px-4"
+        ></rng-active-projects>
       </div>
     </div>
     <div class="flex flex-col lg:flex-row w-full mt-4">
-      <div class="flex flex-col w-full lg:w-1/2 p-2 px-4">
-        <div class="flex flex-row mb-2">
-          <button mat-button class="w-full card-title" color="primary">Proyectos ofertados</button>
-          <button
-            mat-icon-button
-            color="primary"
-            [routerLink]="['../projects/project-list']"
-            [state]="['group', undefined]"
-          >
-            <mat-icon>read_more</mat-icon>
-          </button>
-        </div>
-        <mat-card class="w-full h-auto mat-elevation-z3">
-          <mat-action-list class="p-0">
-            <mat-list-item class="my-2 p-2 h-auto" *ngFor="let project of otherProjects">
-              <div mat-line class="flex flex-row">
-                <div class="flex items-center p-2">
-                  <mat-icon mat-list-icon [matTooltip]="project.type">{{
-                    project.type | projectTypePipe
-                  }}</mat-icon>
-                </div>
-                <div class="flex flex-col w-full">
-                  <div class="mb-1">{{ project.title }}</div>
-                  <div class="mat-card-subtitle mb-2">{{ project.location }}</div>
-                </div>
-              </div>
-              <p mat-line class="mb-2">{{ project.description }}}</p>
-              <div mat-line class="flex flex-row">
-                <div
-                  class="text-lg my-2 p-1 text-center bg-gray-100 rounded-full w-full select-none"
-                >
-                  {{ project.cost }}
-                </div>
-              </div>
-            </mat-list-item>
-          </mat-action-list>
-        </mat-card>
+      <div>
+        <rng-other-projects class="flex flex-col w-full lg:w-1/2 p-2 px-4"></rng-other-projects>
       </div>
       <div class="flex flex-col w-full lg:w-1/2 p-2 px-4">
         <div class="flex flex-row mb-2">

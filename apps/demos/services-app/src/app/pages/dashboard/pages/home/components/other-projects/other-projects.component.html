@@ -1,0 +1,36 @@
+<div class="flex flex-row mb-2">
+  <button mat-button class="w-full card-title text-left" color="primary">
+    Proyectos ofertados
+  </button>
+  <button
+    mat-icon-button
+    color="primary"
+    [routerLink]="['../projects/project-list']"
+    [state]="['group', undefined]"
+  >
+    <mat-icon>read_more</mat-icon>
+  </button>
+</div>
+<mat-card class="w-full h-auto mat-elevation-z3">
+  <mat-action-list class="p-0">
+    <mat-list-item class="my-2 p-2 h-auto" *ngFor="let project of projects$ | async">
+      <div mat-line class="flex flex-row">
+        <div class="flex items-center p-2">
+          <mat-icon mat-list-icon [matTooltip]="project.type">{{
+            project.data.type | projectTypePipe
+          }}</mat-icon>
+        </div>
+        <div class="flex flex-col w-full">
+          <div class="mb-1">{{ project.data.title }}</div>
+          <div class="mat-card-subtitle mb-2">{{ project.data.location }}</div>
+        </div>
+      </div>
+      <p mat-line class="mb-2">{{ project.description }}</p>
+      <div mat-line class="flex flex-row">
+        <div class="text-lg my-2 p-1 text-center bg-gray-100 rounded-full w-full select-none">
+          {{ project.data.cost }}
+        </div>
+      </div>
+    </mat-list-item>
+  </mat-action-list>
+</mat-card>
