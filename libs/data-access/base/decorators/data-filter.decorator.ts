@@ -1,4 +1,3 @@
-/* eslint-disable quote-props */
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {ConditionalQueryFirestore} from '../models/base.model';
@@ -11,7 +10,7 @@ const filterOperator = {
   '>=': (data: any, value: any) => data >= value,
   '>': (data: any, value: any) => data > value,
   'array-contains': (data: any[], value: any) => data.includes(value),
-  'in': () => (data: any, value: any) => data.some(value),
+  in: () => (data: any, value: any) => data.some(value),
   'array-contains-any': () => null,
   'not-in': (data: any, value: any) => !data.some(value),
 };

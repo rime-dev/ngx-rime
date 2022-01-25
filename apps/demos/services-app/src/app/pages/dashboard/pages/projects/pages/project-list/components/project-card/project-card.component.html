@@ -12,7 +12,7 @@
         <mat-card-title>{{ project.data.title }}</mat-card-title>
         <mat-card-subtitle>{{ project.data.location }}</mat-card-subtitle>
       </mat-card-header>
-      <div class="flex flex-row w-full md:w-1/5 justify-center pr-2">
+      <div class="flex flex-row w-full md:w-1/5 justify-center pr-2" *ngIf="project.data.group">
         <div class="flex flex-col self-center">
           <div class="flex flex-row mb-2">
             <img

@@ -16,7 +16,7 @@
     <mat-list-item class="my-2 p-2 h-auto" *ngFor="let project of projects$ | async">
       <div mat-line class="flex flex-row">
         <div class="flex items-center p-2">
-          <mat-icon mat-list-icon [matTooltip]="project.type">{{
+          <mat-icon mat-list-icon [matTooltip]="project.data.type">{{
             project.data.type | projectTypePipe
           }}</mat-icon>
         </div>
@@ -25,7 +25,7 @@
           <div class="mat-card-subtitle mb-2">{{ project.data.location }}</div>
         </div>
       </div>
-      <p mat-line class="mb-2">{{ project.description }}</p>
+      <p mat-line class="mb-2">{{ project.data.description }}</p>
       <div mat-line class="flex flex-row">
         <div class="text-lg my-2 p-1 text-center bg-gray-100 rounded-full w-full select-none">
           {{ project.data.cost }}

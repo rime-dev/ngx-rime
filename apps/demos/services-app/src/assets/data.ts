@@ -1,4 +1,8 @@
-export const projects = [
+import {EntityState} from '@rng/data-access/base/models/base.model';
+import {Collaborator} from '../app/models/collaborator.model';
+import {Project} from '../app/models/project.model';
+
+export const projects: EntityState<Project>[] = [
   {
     id: 'GFT3',
     data: {
@@ -18,18 +22,21 @@ export const projects = [
       cost: 2000,
       documents: [
         {
+          id: 'FTG1',
           title: 'Tienda',
           url: `https://images.unsplash.com/photo-1523275335684-37898b6baf30?
           ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=989&q=80`,
           format: 'image',
         },
         {
+          id: 'FTG2',
           title: 'Reloj',
           url: `https://images.unsplash.com/photo-1523275335684-37898b6baf30?
           ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=989&q=80`,
           format: 'image',
         },
         {
+          id: 'FTG3',
           title: 'Armario',
           url: `https://images.unsplash.com/photo-1523275335684-37898b6baf30?
           ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=989&q=80`,
@@ -65,7 +72,7 @@ export const projects = [
   },
 ];
 
-export const otherProjects = [
+export const otherProjects: EntityState<Project>[] = [
   {
     id: 'GFT4',
     data: {
@@ -87,20 +94,80 @@ export const otherProjects = [
       labels: ['deferrable'],
     },
   },
-];
-
-export const collaborators = [
   {
-    uid: '1',
-    name: 'Juan',
-    avatar:
-      'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+    id: 'GFT5',
+    data: {
+      uid: 'GFT5',
+      title: 'Cambio de bañera',
+      location: 'C. Coronel Pérez, Torrent',
+      type: 'construction',
+      state: 'inactive',
+      accepted: false,
+      group: undefined,
+      client: 'C2',
+      description: `Hay que cambiar la bañera por una ducha`,
+      startDate: '2022-02-21T15:22:05.643Z',
+      estimatedEndDate: '2022-03-21T15:22:05.643Z',
+      collaborators: [],
+      cost: 500,
+      documents: [],
+      activity: [],
+      labels: ['deferrable'],
+    },
   },
   {
-    uid: '2',
-    name: 'Sergio',
-    avatar:
-      'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+    id: 'GFT6',
+    data: {
+      uid: 'GFT6',
+      title: 'Pintura de piscina',
+      location: 'C. Coronel Pérez, Torrent',
+      type: 'paint',
+      state: 'inactive',
+      accepted: false,
+      group: undefined,
+      client: 'C2',
+      description: `La piscina necesita unas capas de pintura`,
+      startDate: '2022-02-21T15:22:05.643Z',
+      estimatedEndDate: '2022-03-21T15:22:05.643Z',
+      collaborators: [],
+      cost: 300,
+      documents: [],
+      activity: [],
+      labels: ['deferrable'],
+    },
+  },
+];
+
+export const collaborators: EntityState<Collaborator>[] = [
+  {
+    id: 'GFT6',
+    data: {
+      uid: '1',
+      name: 'Juan',
+      group: 'GS1',
+      avatar:
+        'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+    },
+  },
+  {
+    id: 'GFT7',
+    data: {
+      uid: '2',
+      name: 'Sergio',
+      group: 'GS1',
+      avatar:
+        'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+    },
+  },
+  {
+    id: 'GFT8',
+    data: {
+      uid: '2',
+      name: 'Sergio',
+      group: 'GS2',
+      avatar:
+        'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+    },
   },
 ];
 

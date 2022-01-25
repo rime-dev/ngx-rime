@@ -1,10 +1,10 @@
 import {FirebaseOptions} from '@angular/fire/app';
 import {FieldPath} from '@angular/fire/compat/firestore';
-import {EntityCollectionServiceBase, EntityMetadataMap} from '@ngrx/data';
+import {EntityMetadataMap} from '@ngrx/data';
 import {Update} from '@ngrx/entity';
 import {Observable} from 'rxjs';
 
-export interface EntityState {
+export interface EntityState<T> {
   id: string;
   data: any;
 }

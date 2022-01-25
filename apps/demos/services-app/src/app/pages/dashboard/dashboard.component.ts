@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {AuthService, User} from '@rng/data-access/auth';
+import {DataService} from '@rng/data-access/base';
 import {Subject, Observable} from 'rxjs';
 import {filter, takeUntil, tap} from 'rxjs/operators';
 
@@ -61,7 +62,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   showTitlePage = false;
   scrolled!: Record<string, any>;
   titlePage = '';
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private dataService: DataService
+  ) {
     this.user$ = this.authService.user$;
   }
   onScroll(event: any) {
@@ -79,6 +84,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.getTitlePage(this.router.url);
+    this.loadProjects();
+    this.loadCollaborators();
     this.router.events
       .pipe(
         filter((event: any) => event instanceof NavigationEnd),
@@ -92,6 +99,34 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  private loadProjects(): void {
+    const query = [
+      {
+        fieldPath: 'state',
+        opStr: '==',
+        value: 'active',
+      },
+    ];
+    this.dataService.select('Project').getWithQuery(query as any);
+    const query0 = [
+      {
+        fieldPath: 'group',
+        opStr: '==',
+        value: undefined,
+      },
+    ];
+    this.dataService.select('Project').getWithQuery(query0 as any);
+  }
+  private loadCollaborators(): void {
+    const query1 = [
+      {
+        fieldPath: 'group',
+        opStr: '==',
+        value: 'GS1',
+      },
+    ];
+    this.dataService.select('Collaborator').getWithQuery(query1 as any);
+  }
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

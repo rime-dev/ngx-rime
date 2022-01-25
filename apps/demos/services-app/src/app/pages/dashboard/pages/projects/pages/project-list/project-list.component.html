@@ -10,21 +10,21 @@
     <mat-tab label="Activos (1)">
       <ng-template matTabContent>
         <ng-container
-          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: activeProjects | async}"
+          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: activeProjects$ | async}"
         ></ng-container>
       </ng-template>
     </mat-tab>
     <mat-tab label="Ofertados">
       <ng-template matTabContent>
         <ng-container
-          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: otherProjects | async}"
+          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: otherProjects$ | async}"
         ></ng-container>
       </ng-template>
     </mat-tab>
     <mat-tab label="Terminados">
       <ng-template matTabContent>
         <ng-container
-          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: finishedProjects | async}"
+          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: finishedProjects$ | async}"
         ></ng-container>
       </ng-template>
     </mat-tab>
