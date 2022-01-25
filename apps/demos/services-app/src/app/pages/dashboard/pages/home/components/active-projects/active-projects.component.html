@@ -9,9 +9,9 @@
     <mat-icon>read_more</mat-icon>
   </button>
 </div>
-<mat-card class="w-full h-full mat-elevation-z3 overflow-auto">
+<mat-card class="w-full h-auto mat-elevation-z3 overflow-auto">
   <mat-action-list style="padding: 0">
-    <mat-list-item *ngFor="let project of projects$ | async">
+    <mat-list-item *ngFor="let project of projects$ | async | slice: 0:5">
       <mat-icon mat-list-icon>{{ project.data.type | projectTypePipe }}</mat-icon>
       <div mat-line>{{ project.data.title }}</div>
       <div mat-line class="mat-card-subtitle">{{ project.data.location }}</div>

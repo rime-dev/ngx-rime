@@ -10,7 +10,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ProjectTypeModule} from '../../../../pipes/project-type/project-type.module';
 import {ActiveProjectsComponent} from './components/active-projects/active-projects.component';
-import { OtherProjectsComponent } from './components/other-projects/other-projects.component';
+import {OtherProjectsComponent} from './components/other-projects/other-projects.component';
+import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
 
 @NgModule({
   declarations: [HomeComponent, ActiveProjectsComponent, OtherProjectsComponent],
@@ -24,6 +25,7 @@ import { OtherProjectsComponent } from './components/other-projects/other-projec
     MatListModule,
     MatTooltipModule,
     ProjectTypeModule,
+    TranslocoLocaleModule,
   ],
 })
 export class HomeModule {}

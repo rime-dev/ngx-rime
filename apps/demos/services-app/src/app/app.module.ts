@@ -7,6 +7,7 @@ import {BaseMockModule} from '@rng/data-access/base';
 import {environment} from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {TranslocoRootModule} from './transloco-root.module';
 
 const firebaseConfig = {
   options: environment.firebaseOptions,
@@ -23,6 +24,7 @@ const firebaseConfig = {
     // BaseModule.firebase(firebaseConfig),
     BaseMockModule.firebase(firebaseConfig),
     AuthModule,
+    TranslocoRootModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

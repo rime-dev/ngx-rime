@@ -1,5 +1,7 @@
+import {getLocaleId, NgLocaleLocalization} from '@angular/common';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import {TranslocoService} from '@ngneat/transloco';
 import {AuthService, User} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {Subject, Observable} from 'rxjs';
@@ -65,8 +67,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private translocoService: TranslocoService
   ) {
+    console.log(translocoService.getDefaultLang());
+
     this.user$ = this.authService.user$;
   }
   onScroll(event: any) {
@@ -82,6 +87,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.titlePage = pathMatch.text;
     }
   }
+
   ngOnInit(): void {
     this.getTitlePage(this.router.url);
     this.loadProjects();
