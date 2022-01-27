@@ -1,4 +1,5 @@
 {
-  "hello": "transloco es",
+  "projects.offered": "Proyectos ofertados",
+  "search": "Buscar",
   "dynamic": "transloco {{value}}"
 }

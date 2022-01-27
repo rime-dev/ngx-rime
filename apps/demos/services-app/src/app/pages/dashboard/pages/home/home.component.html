@@ -45,7 +45,9 @@
       <div class="flex flex-col w-full lg:w-1/2 p-2 px-4">
         <div class="flex flex-row mb-2">
           <button mat-button class="w-full card-title" color="primary">Facturas recientes</button>
-          <button mat-icon-button color="primary"><mat-icon>read_more</mat-icon></button>
+          <button mat-icon-button color="primary" [routerLink]="['../invoices']">
+            <mat-icon>read_more</mat-icon>
+          </button>
         </div>
         <mat-card class="w-full h-auto mat-elevation-z3">
           <div class="flex flex-col h-48 text-center items-center">

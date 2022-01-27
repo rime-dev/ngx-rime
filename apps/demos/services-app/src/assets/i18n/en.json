@@ -1,4 +1,5 @@
 {
-  "hello": "transloco es",
+  "projects.offerered": "Projects offered",
+  "search": "Search",
   "dynamic": "transloco {{value}}"
 }

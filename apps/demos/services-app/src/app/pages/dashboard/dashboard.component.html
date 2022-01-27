@@ -10,6 +10,8 @@
   <button mat-button topBarItem (click)="scrollToTop()" *ngIf="showTitlePage">
     {{ titlePage }}
   </button>
+  <rng-search-input class="ml-auto w-full" topBarItem></rng-search-input>
+
   <rng-user-account-popup [userInfo]="user$ | async" [routes]="userRoutes"></rng-user-account-popup>
 
   <router-outlet> </router-outlet>

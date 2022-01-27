@@ -10,6 +10,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {ShellModule} from '@rng/ui/shell';
 import {UserAccountPopupModule} from '@rng/ui/user-account-popup';
+import {SearchInputModule} from '../../components/search-input/search-input.module';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {DashboardComponent} from './dashboard.component';
 
@@ -29,6 +30,7 @@ import {DashboardComponent} from './dashboard.component';
     FormsModule,
     ShellModule,
     UserAccountPopupModule,
+    SearchInputModule,
   ],
 })
 export class DashboardModule {}
