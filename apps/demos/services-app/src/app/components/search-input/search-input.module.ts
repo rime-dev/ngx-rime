@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
+import {RouterModule} from '@angular/router';
 import {TranslocoModule} from '@ngneat/transloco';
 import {SearchInputComponent} from './search-input.component';
 
@@ -24,6 +25,7 @@ import {SearchInputComponent} from './search-input.component';
     MatListModule,
     TranslocoModule,
     OverlayModule,
+    RouterModule,
   ],
 })
 export class SearchInputModule {}

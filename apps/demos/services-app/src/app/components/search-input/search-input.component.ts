@@ -1,10 +1,11 @@
 import {CdkConnectedOverlay} from '@angular/cdk/overlay';
 import {AfterViewInit, Component, NgZone, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
 import {combineLatest, Observable, of, Subject} from 'rxjs';
-import {debounceTime, delay, filter, first, map, takeUntil, tap} from 'rxjs/operators';
+import {debounceTime, delay, filter, first, map, startWith, takeUntil, tap} from 'rxjs/operators';
 import {Project} from '../../models/project.model';
 
 @Component({
@@ -23,7 +24,8 @@ export class SearchInputComponent implements AfterViewInit {
   constructor(
     private ngZone: NgZone,
     private formBuilder: FormBuilder,
-    private dataService: DataService
+    private dataService: DataService,
+    private router: Router
   ) {
     this.searchForm = this.formBuilder.group({
       searchInput: [''],
@@ -39,7 +41,7 @@ export class SearchInputComponent implements AfterViewInit {
             });
           },
         }),
-        delay(150),
+        delay(100),
         tap({
           next: () => {
             this.ngZone.runOutsideAngular(() => {
@@ -54,6 +56,7 @@ export class SearchInputComponent implements AfterViewInit {
   onBlur(event: Event): void {
     of(event)
       .pipe(
+        delay(50),
         tap({
           next: () => {
             this.ngZone.runOutsideAngular(() => {
@@ -73,15 +76,24 @@ export class SearchInputComponent implements AfterViewInit {
       )
       .subscribe();
   }
+  goToItem(id: string) {
+    this.clearSearch();
+    this.router.navigate(['../dashboard/projects/project-view', id]);
+  }
+  clearSearch() {
+    this.searchForm.controls.searchInput.setValue('');
+  }
   ngAfterViewInit() {
     this.projectsSearched$ = combineLatest([
-      this.searchForm.controls.searchInput.valueChanges,
+      this.searchForm.controls.searchInput.valueChanges.pipe(startWith('')),
       this.dataService.select('Project').entities$,
     ]).pipe(
       debounceTime(150),
       map((combine) =>
         combine[1].filter((project) =>
-          project.data.title.toLowerCase().includes(combine[0].toLowerCase())
+          combine[0].length > 0
+            ? project.data.title.toLowerCase().includes(combine[0].toLowerCase())
+            : true
         )
       ),
       takeUntil(this.destroy$)
