@@ -1,4 +1,4 @@
-<div class="lg:container p-8 flex flex-col mx-auto">
+<div *ngIf="project" class="lg:container p-8 flex flex-col mx-auto">
   <div class="flex flex-row w-full h-auto">
     <img
       class="rounded-full h-14 w-14 mx-2 mat-elevation-z2"
@@ -33,8 +33,7 @@
       <mat-list-item class="h-auto">
         <mat-icon mat-list-icon>description</mat-icon>
         <div mat-line class="whitespace-normal">
-          La propiedad tiene 4 habitaciones, dos con 20m^2 y otras dos de 35m^2. Las primeras se
-          solitita que se pinten de color beige, y las otras dos blancas.
+          {{ project.data.description }}
         </div>
       </mat-list-item>
     </mat-action-list>
@@ -45,7 +44,7 @@
       <mat-list-item class="h-auto">
         <mat-icon mat-list-icon>place</mat-icon>
         <div mat-line class="whitespace-normal">
-          Av. Malvarrosa, patio 5, puerta 10, Valencia, 46011
+          {{ project.data.location }}
         </div>
       </mat-list-item>
     </mat-action-list>

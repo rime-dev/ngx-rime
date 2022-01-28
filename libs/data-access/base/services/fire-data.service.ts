@@ -320,7 +320,7 @@ export class FireDataService<T> {
       delete: () => this.getObservableFromDelete(req.document, collection),
       set: () => this.getObservableFromSet(req.data, collection),
       update: () => this.getObservableFromUpdate(req.data, collection),
-      get: () => this.getObservableFromGet(req.data?.uid, req.data, collection),
+      get: () => this.getObservableFromGet(req.document, req.data, collection),
     };
     let result$: Observable<any>;
     result$ = observableFromMethod[`${method}`]();
@@ -606,8 +606,8 @@ export class FireDataMockService<T> {
         action = this.mockData[collection].map((object: any) => new FireDataMockObject(object));
       } else if (document && !data) {
         action = this.mockData[collection]
-          .filter((object: any) => object.uid === document)
-          .map((object: any) => new FireDataMockObject(object));
+          .filter((object: any) => object.id === document)
+          .map((object: any) => new FireDataMockObject(object))[0];
       } else if (!document && data) {
         const filterData = this.getCollectionReferenceByConditions(this.mockData[collection], data);
         action = filterData.map((object: any) => new FireDataMockObject(object));
@@ -633,7 +633,7 @@ export class FireDataMockService<T> {
       delete: () => this.getObservableFromDelete(req.document, collection),
       set: () => this.getObservableFromSet(req.data, collection),
       update: () => this.getObservableFromUpdate(req.data, collection),
-      get: () => this.getObservableFromGet(req.data?.uid, req.data, collection),
+      get: () => this.getObservableFromGet(req.document, req.data, collection),
     };
     let result$: Observable<any>;
     result$ = observableFromMethod[`${method}`]();

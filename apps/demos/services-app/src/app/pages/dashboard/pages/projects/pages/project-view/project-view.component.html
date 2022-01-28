@@ -7,21 +7,20 @@
       <h1 class="text-3xl font-semibold text-gray-700">Pintura de 4 habitaciones</h1>
     </header>
   </div>
-
   <mat-tab-group animationDuration="0ms">
     <mat-tab label="Info">
       <ng-template matTabContent>
-        <rng-project-info [project]="project"></rng-project-info>
+        <rng-project-info [project]="project$ | async"></rng-project-info>
       </ng-template>
     </mat-tab>
     <mat-tab label="Documentos">
       <ng-template matTabContent>
-        <rng-project-documents [project]="project"></rng-project-documents>
+        <rng-project-documents [project]="project$ | async"></rng-project-documents>
       </ng-template>
     </mat-tab>
     <mat-tab label="Actividad">
       <ng-template matTabContent>
-        <rng-project-activity [project]="project"></rng-project-activity>
+        <rng-project-activity [project]="project$ | async"></rng-project-activity>
       </ng-template>
     </mat-tab>
   </mat-tab-group>

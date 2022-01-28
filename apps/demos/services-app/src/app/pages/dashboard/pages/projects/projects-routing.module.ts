@@ -18,6 +18,11 @@ const routes: Routes = [
           import('./pages/project-list/project-list.module').then((m) => m.ProjectListModule),
       },
       {
+        path: 'project-view',
+        pathMatch: 'full',
+        redirectTo: 'project-list',
+      },
+      {
         path: 'project-view/:id',
         loadChildren: () =>
           import('./pages/project-view/project-view.module').then((m) => m.ProjectViewModule),

@@ -1,5 +1,6 @@
 {
   "projects.offerered": "Projects offered",
   "search": "Search",
+  "others": "Others",
   "dynamic": "transloco {{value}}"
 }

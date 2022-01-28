@@ -1,8 +1,11 @@
 import {Component, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {collaborators, otherProjects, projects} from 'apps/demos/services-app/src/assets/data';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {DataService} from '@rng/data-access/base';
+import {EntityState} from '@rng/data-access/base/models/base.model';
+import {Project} from 'apps/demos/services-app/src/app/models/project.model';
+import {collaborators} from 'apps/demos/services-app/src/assets/data';
+import {Observable, of, Subject} from 'rxjs';
+import {first, takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'rng-project-view',
@@ -11,14 +14,13 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class ProjectViewComponent implements OnDestroy {
   public collaboratorsArray: any[] = [];
-  public project: any;
+  public project$: Observable<EntityState<Project>> = of();
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private route: ActivatedRoute) {
-    const allProjects = [...projects, ...otherProjects];
+  constructor(private route: ActivatedRoute, private dataService: DataService) {
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
-      this.project = allProjects.filter((project: any) => project.uid === params.id)[0];
-      console.log(this.project);
+      this.project$ = this.dataService.select('Project').getByKey(params.id);
+      this.project$.pipe(first()).subscribe();
     });
   }
   getCollaborators(collaboratorsBase: any[]) {

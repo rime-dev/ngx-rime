@@ -59,8 +59,16 @@
             *ngFor="let project of projectsSearched$ | async | slice: 0:5"
             (click)="goToItem(project.id)"
           >
-            <mat-icon mat-list-icon>work</mat-icon>
+            <mat-icon mat-list-icon>{{ project.data.type | projectTypePipe }}</mat-icon>
             <p mat-line>{{ project.data.title }}</p>
+            <mat-chip-list>
+              <mat-chip class="cursor-pointer" *ngIf="project.data.group">{{
+                project.data.state
+              }}</mat-chip>
+              <mat-chip class="cursor-pointer" *ngIf="!project.data.group">{{
+                'others' | transloco
+              }}</mat-chip>
+            </mat-chip-list>
           </mat-list-item>
         </mat-action-list>
       </div>

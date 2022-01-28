@@ -1,5 +1,6 @@
 {
   "projects.offered": "Proyectos ofertados",
   "search": "Buscar",
+  "others": "Otros",
   "dynamic": "transloco {{value}}"
 }
