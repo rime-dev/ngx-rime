@@ -1,6 +1,13 @@
 {
   "projects.offered": "Proyectos ofertados",
+  "projects.finished": "Proyectos terminados",
   "search": "Buscar",
   "others": "Otros",
-  "dynamic": "transloco {{value}}"
+  "active": "Activo",
+  "offered": "Ofertado",
+  "finished": "Terminado",
+  "all": "Todo",
+  "paint": "Pintura",
+  "rehabilitation": "Rehabilitación",
+  "persons": "Personas"
 }

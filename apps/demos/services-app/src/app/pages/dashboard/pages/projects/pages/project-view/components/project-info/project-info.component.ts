@@ -14,7 +14,6 @@ export class ProjectInfoComponent {
   }
   set project(value: EntityState<Project> | null) {
     this.internalProject = value;
-    console.log(value);
   }
   private internalProject!: EntityState<Project> | null;
 

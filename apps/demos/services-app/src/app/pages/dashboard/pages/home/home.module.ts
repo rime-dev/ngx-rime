@@ -13,9 +13,10 @@ import {ActiveProjectsComponent} from './components/active-projects/active-proje
 import {OtherProjectsComponent} from './components/other-projects/other-projects.component';
 import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
 import {TranslocoModule} from '@ngneat/transloco';
+import { InfoProjectsComponent } from './components/info-projects/info-projects.component';
 
 @NgModule({
-  declarations: [HomeComponent, ActiveProjectsComponent, OtherProjectsComponent],
+  declarations: [HomeComponent, ActiveProjectsComponent, OtherProjectsComponent, InfoProjectsComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

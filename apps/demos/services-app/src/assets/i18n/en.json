@@ -2,5 +2,11 @@
   "projects.offerered": "Projects offered",
   "search": "Search",
   "others": "Others",
-  "dynamic": "transloco {{value}}"
+  "active": "Active",
+  "offered": "Offered",
+  "finished": "Finished",
+  "all": "All",
+  "paint": "Paint",
+  "rehabilitation": "Rehabilitation",
+  "persons": "Persons"
 }

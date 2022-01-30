@@ -1,0 +1,17 @@
+.card-number {
+  border-radius: 8px;
+  width: 4rem;
+  height: 4rem;
+  font-size: x-large;
+  font-weight: 100;
+}
+:host {
+  ::ng-deep {
+    div.mat-chip-list-wrapper {
+      overflow-y: hidden;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      display: inline-flex;
+    }
+  }
+}

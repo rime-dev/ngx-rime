@@ -14,22 +14,24 @@
       </mat-card-header>
       <div class="flex flex-row w-full md:w-1/5 justify-center pr-2" *ngIf="project.data.group">
         <div class="flex flex-col self-center">
-          <div class="flex flex-row mb-2">
+          <div class="flex flex-row mb-2" *ngIf="collaborators$ | async; let collaborators">
             <img
-              *ngIf="$any(collaboratorsArray[0])"
+              *ngIf="collaborators[0]"
               class="rounded-full h-10 w-10 border-solid border-2 border-white"
-              [matTooltip]="$any(collaboratorsArray[0]).name"
-              [src]="$any(collaboratorsArray[0]).avatar"
+              [matTooltip]="collaborators[0].data.name"
+              [src]="collaborators[0].data.avatar"
             />
             <img
-              *ngFor="let collaborator of collaboratorsArray | slice: 1"
-              [matTooltip]="$any(collaborator).name"
+              *ngFor="let collaborator of collaborators | slice: 1"
+              [matTooltip]="collaborator.data.name"
               class="rounded-full h-10 w-10 border-solid border-2 border-white"
               style="margin-left: -10px"
-              [src]="$any(collaboratorsArray[0]).avatar"
+              [src]="collaborators[0].data.avatar"
             />
           </div>
-          <span class="text-sm font-thin"> {{ project.data.collaborators.length }} Personas</span>
+          <span class="text-sm font-thin">
+            {{ project.data.collaborators.length }}  {{ 'persons' | transloco }}</span
+          >
         </div>
       </div>
     </div>

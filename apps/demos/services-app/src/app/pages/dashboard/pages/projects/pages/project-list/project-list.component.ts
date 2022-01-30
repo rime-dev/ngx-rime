@@ -3,7 +3,6 @@ import {Router} from '@angular/router';
 import {DataFilter, DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
 import {Project} from 'apps/demos/services-app/src/app/models/project.model';
-import {collaborators} from 'apps/demos/services-app/src/assets/data';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -14,7 +13,7 @@ import {map} from 'rxjs/operators';
 })
 export class ProjectListComponent {
   public tabSelected = 0;
-  public collaborators: any[];
+  public filterByTypeSelected = 'all';
 
   @DataFilter({fieldPath: 'state', opStr: '==', value: 'active'})
   public activeProjects$: Observable<EntityState<Project>[]>;
@@ -26,7 +25,6 @@ export class ProjectListComponent {
   public finishedProjects$: Observable<EntityState<Project>[]>;
 
   constructor(private router: Router, private dataService: DataService) {
-    this.collaborators = collaborators;
     this.activeProjects$ = this.dataService.select('Project').entities$;
     this.otherProjects$ = this.dataService.select('Project').entities$;
     this.finishedProjects$ = this.dataService.select('Project').entities$;
@@ -52,6 +50,7 @@ export class ProjectListComponent {
       this.activeProjects$ = this.dataService.select('Project').entities$;
       this.otherProjects$ = this.dataService.select('Project').entities$;
       this.finishedProjects$ = this.dataService.select('Project').entities$;
+      this.filterByTypeSelected = 'all';
     } else {
       this.activeProjects$ = this.dataService
         .select('Project')
@@ -74,6 +73,7 @@ export class ProjectListComponent {
             documents.filter((project: EntityState<Project>) => project.data.type === type)
           )
         );
+      this.filterByTypeSelected = type;
     }
   }
 }

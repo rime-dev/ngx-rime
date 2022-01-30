@@ -18,7 +18,7 @@ export const projects: EntityState<Project>[] = [
       Las primeras se solitita que se pinten de color beige, y las otras dos blancas.`,
       startDate: '2022-01-21T15:22:05.643Z',
       estimatedEndDate: '2022-01-27T15:22:05.643Z',
-      collaborators: ['1', '2'],
+      collaborators: ['GFT6', 'GFT7'],
       cost: 2000,
       documents: [
         {
@@ -142,7 +142,7 @@ export const collaborators: EntityState<Collaborator>[] = [
   {
     id: 'GFT6',
     data: {
-      uid: '1',
+      uid: 'GFT6',
       name: 'Juan',
       group: 'GS1',
       avatar:
@@ -152,17 +152,17 @@ export const collaborators: EntityState<Collaborator>[] = [
   {
     id: 'GFT7',
     data: {
-      uid: '2',
+      uid: 'GFT7',
       name: 'Sergio',
       group: 'GS1',
-      avatar:
-        'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      avatar: `https://www.istockphoto.com/es/foto/
+        un-hombre-de-negocios-indio-sonriente-trabajando-en-una-computadora-port%C3%A1til-en-la-gm1307615661-397821651`,
     },
   },
   {
     id: 'GFT8',
     data: {
-      uid: '2',
+      uid: 'GFT8',
       name: 'Sergio',
       group: 'GS2',
       avatar:

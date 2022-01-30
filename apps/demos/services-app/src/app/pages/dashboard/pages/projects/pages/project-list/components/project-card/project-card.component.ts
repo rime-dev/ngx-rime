@@ -1,5 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {collaborators} from 'apps/demos/services-app/src/assets/data';
+import {DataService} from '@rng/data-access/base';
+import {EntityState} from '@rng/data-access/base/models/base.model';
+import {Collaborator} from 'apps/demos/services-app/src/app/models/collaborator.model';
+import {Observable} from 'rxjs';
+import {filter, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'rng-project-card',
@@ -7,23 +11,25 @@ import {collaborators} from 'apps/demos/services-app/src/assets/data';
   styleUrls: ['./project-card.component.scss'],
 })
 export class ProjectCardComponent {
-  public collaboratorsArray: any[] = [];
+  public collaborators$: Observable<EntityState<Collaborator>[]>;
 
   @Input()
   get project() {
     return this.internalProject;
   }
-  set project(value: any) {
+  set project(value: EntityState<Collaborator>) {
     this.internalProject = value;
-    this.getCollaborators(value.data.collaborators);
   }
-  private internalProject: any = {};
+  private internalProject!: EntityState<Collaborator>;
 
-  constructor() {}
-
-  getCollaborators(collaboratorsBase: any[]) {
-    this.collaboratorsArray = collaborators.filter((collaborator: any) =>
-      collaboratorsBase.some((cb: any) => collaborator.uid === cb)
+  constructor(private dataService: DataService) {
+    this.collaborators$ = this.dataService.select('Collaborator').entities$.pipe(
+      filter((collaborators: EntityState<Collaborator>[]) =>
+        collaborators.every((collaborator: EntityState<Collaborator>) =>
+          this.project.data.collaborators.filter((element: string) => collaborator.id === element)
+        )
+      ),
+      tap((c) => console.log(c))
     );
   }
 }

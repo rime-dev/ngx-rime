@@ -63,7 +63,7 @@
             <p mat-line>{{ project.data.title }}</p>
             <mat-chip-list>
               <mat-chip class="cursor-pointer" *ngIf="project.data.group">{{
-                project.data.state
+                project.data.state | transloco
               }}</mat-chip>
               <mat-chip class="cursor-pointer" *ngIf="!project.data.group">{{
                 'others' | transloco

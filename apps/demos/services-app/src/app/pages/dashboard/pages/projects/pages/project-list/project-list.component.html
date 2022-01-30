@@ -7,21 +7,30 @@
     [selectedIndex]="tabSelected"
     (selectedIndexChange)="changeTab($event)"
   >
-    <mat-tab label="Activos (1)">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'active' | transloco }} ({{ (activeProjects$ | async)?.length }})
+      </ng-template>
       <ng-template matTabContent>
         <ng-container
           *ngTemplateOutlet="projectsListTemplate; context: {$implicit: activeProjects$ | async}"
         ></ng-container>
       </ng-template>
     </mat-tab>
-    <mat-tab label="Ofertados">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'offered' | transloco }} ({{ (otherProjects$ | async)?.length }})
+      </ng-template>
       <ng-template matTabContent>
         <ng-container
           *ngTemplateOutlet="projectsListTemplate; context: {$implicit: otherProjects$ | async}"
         ></ng-container>
       </ng-template>
     </mat-tab>
-    <mat-tab label="Terminados">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'finished' | transloco }} ({{ (finishedProjects$ | async)?.length }})
+      </ng-template>
       <ng-template matTabContent>
         <ng-container
           *ngTemplateOutlet="projectsListTemplate; context: {$implicit: finishedProjects$ | async}"
@@ -32,24 +41,38 @@
 </div>
 <ng-template #projectsListTemplate let-projects>
   <div class="lg:container mx-auto p-4">
-    <div class="flex flex-row w-full mb-4">
-      <button mat-button class="mx-2" (click)="filterByType()">
-        <div class="flex flex-col items-center pt-2 font-thin">
-          <mat-icon>grid_view</mat-icon>
-          <span>Todos</span>
-        </div>
+    <div class="flex flex-row w-full mb-4 overflow-y-auto">
+      <button
+        mat-button
+        [ngClass]="filterByTypeSelected === 'all' ? 'mat-raised-button' : 'mat-stroked-button'"
+        class="mx-2 font-thin min-w-min"
+        color="primary"
+        (click)="filterByType()"
+      >
+        <mat-icon class="text-lg">grid_view</mat-icon>
+        <span>{{ 'all' | transloco }}</span>
       </button>
-      <button mat-button class="mx-2" (click)="filterByType('paint')">
-        <div class="flex flex-col items-center pt-2 font-thin">
-          <mat-icon>format_paint</mat-icon>
-          <span>Pintura</span>
-        </div>
+      <button
+        mat-button
+        [ngClass]="filterByTypeSelected === 'paint' ? 'mat-raised-button' : 'mat-stroked-button'"
+        class="mx-2 font-thin min-w-min"
+        color="primary"
+        (click)="filterByType('paint')"
+      >
+        <mat-icon class="text-lg">format_paint</mat-icon>
+        <span>{{ 'paint' | transloco }}</span>
       </button>
-      <button mat-button class="mx-2" (click)="filterByType('construction')">
-        <div class="flex flex-col items-center pt-2 font-thin">
-          <mat-icon>construction</mat-icon>
-          <span>Rehabilitación</span>
-        </div>
+      <button
+        mat-button
+        [ngClass]="
+          filterByTypeSelected === 'construction' ? 'mat-raised-button' : 'mat-stroked-button'
+        "
+        class="mx-2 font-thin min-w-min"
+        color="primary"
+        (click)="filterByType('construction')"
+      >
+        <mat-icon class="text-lg">construction</mat-icon>
+        <span>{{ 'rehabilitation' | transloco }}</span>
       </button>
     </div>
     <div class="flex flex-col w-full" *ngFor="let project of projects">
