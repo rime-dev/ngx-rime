@@ -4,6 +4,82 @@ import {Project} from '../app/models/project.model';
 
 export const projects: EntityState<Project>[] = [
   {
+    id: 'GFT7',
+    data: {
+      uid: 'GFT7',
+      title: 'Cambio de azulejos',
+      location: 'Av. Malvarrosa, Valencia',
+      type: 'construction',
+      state: 'finished',
+      accepted: true,
+      group: 'GS1',
+      client: 'C1',
+      description: `Azulejos nuevos azules`,
+      startDate: '2022-01-21T15:22:05.643Z',
+      estimatedEndDate: '2022-01-27T15:22:05.643Z',
+      endingDate: '2022-01-27T15:22:05.643Z',
+      collaborators: ['GFT6'],
+      cost: 250,
+      documents: [
+        {
+          id: 'FTG1',
+          title: 'Tienda',
+          url: `https://images.unsplash.com/photo-1523275335684-37898b6baf30?
+          ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=989&q=80`,
+          format: 'image',
+        },
+      ],
+      activity: [
+        {
+          date: '2022-01-21T08:22:05.643Z',
+          user: '2',
+          action: 'change',
+          affected: 'state',
+          result: 'active',
+        },
+      ],
+      labels: ['urgent'],
+    },
+  },
+  {
+    id: 'GFT8',
+    data: {
+      uid: 'GFT8',
+      title: 'Cambio de lámparas',
+      location: 'Av. Malvarrosa, Valencia',
+      type: 'paint',
+      state: 'finished',
+      accepted: true,
+      group: 'GS1',
+      client: 'C1',
+      description: `Azulejos nuevos azules`,
+      startDate: '2021-11-21T15:22:05.643Z',
+      estimatedEndDate: '2021-12-27T15:22:05.643Z',
+      endingDate: '2021-12-27T15:22:05.643Z',
+      collaborators: ['GFT6'],
+      cost: 250,
+      documents: [
+        {
+          id: 'FTG1',
+          title: 'Tienda',
+          url: `https://images.unsplash.com/photo-1523275335684-37898b6baf30?
+          ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=989&q=80`,
+          format: 'image',
+        },
+      ],
+      activity: [
+        {
+          date: '2022-01-21T08:22:05.643Z',
+          user: '2',
+          action: 'change',
+          affected: 'state',
+          result: 'active',
+        },
+      ],
+      labels: ['urgent'],
+    },
+  },
+  {
     id: 'GFT3',
     data: {
       uid: 'GFT3',
@@ -12,7 +88,7 @@ export const projects: EntityState<Project>[] = [
       type: 'paint',
       state: 'active',
       accepted: true,
-      group: 'TZ',
+      group: 'GS1',
       client: 'C1',
       description: `La propiedad tiene 4 habitaciones, dos con 20m^2 y otras dos de 35m^2.
       Las primeras se solitita que se pinten de color beige, y las otras dos blancas.`,
@@ -155,8 +231,7 @@ export const collaborators: EntityState<Collaborator>[] = [
       uid: 'GFT7',
       name: 'Sergio',
       group: 'GS1',
-      avatar: `https://www.istockphoto.com/es/foto/
-        un-hombre-de-negocios-indio-sonriente-trabajando-en-una-computadora-port%C3%A1til-en-la-gm1307615661-397821651`,
+      avatar: `https://i.picsum.photos/id/1084/536/354.jpg?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60`,
     },
   },
   {

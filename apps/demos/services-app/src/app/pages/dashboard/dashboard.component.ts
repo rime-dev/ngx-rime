@@ -1,10 +1,8 @@
-import {getLocaleId, NgLocaleLocalization} from '@angular/common';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import {TranslocoService} from '@ngneat/transloco';
 import {AuthService, User} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
-import {Subject, Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {filter, takeUntil, tap} from 'rxjs/operators';
 
 @Component({
@@ -67,11 +65,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private dataService: DataService,
-    private translocoService: TranslocoService
+    private dataService: DataService
   ) {
-    console.log(translocoService.getDefaultLang());
-
     this.user$ = this.authService.user$;
   }
   onScroll(event: any) {
@@ -108,9 +103,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private loadProjects(): void {
     const query = [
       {
-        fieldPath: 'state',
+        fieldPath: 'group',
         opStr: '==',
-        value: 'active',
+        value: 'GS1',
       },
     ];
     this.dataService.select('Project').getWithQuery(query as any);

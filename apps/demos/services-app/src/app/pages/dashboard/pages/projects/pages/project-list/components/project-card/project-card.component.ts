@@ -23,13 +23,14 @@ export class ProjectCardComponent {
   private internalProject!: EntityState<Collaborator>;
 
   constructor(private dataService: DataService) {
-    this.collaborators$ = this.dataService.select('Collaborator').entities$.pipe(
-      filter((collaborators: EntityState<Collaborator>[]) =>
-        collaborators.every((collaborator: EntityState<Collaborator>) =>
-          this.project.data.collaborators.filter((element: string) => collaborator.id === element)
+    this.collaborators$ = this.dataService
+      .select('Collaborator')
+      .entities$.pipe(
+        filter((collaborators: EntityState<Collaborator>[]) =>
+          collaborators.every((collaborator: EntityState<Collaborator>) =>
+            this.project.data.collaborators.filter((element: string) => collaborator.id === element)
+          )
         )
-      ),
-      tap((c) => console.log(c))
-    );
+      );
   }
 }

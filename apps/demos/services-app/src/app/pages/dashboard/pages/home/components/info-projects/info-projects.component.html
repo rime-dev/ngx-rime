@@ -4,12 +4,16 @@
       {{ (finishedProjects$ | async)?.length }}
     </button>
     <mat-card-title>{{ 'projects.finished' | transloco }}</mat-card-title>
-    <mat-card-subtitle>8 este mes</mat-card-subtitle>
+    <mat-card-subtitle
+      >{{ (finishedProjectsInThisMonth$ | async)?.length }}
+      {{ 'thismonth' | transloco }}</mat-card-subtitle
+    >
   </mat-card-header>
   <mat-card-content class="h-12 w-full overflow-y-hidden overflow-x-auto">
     <mat-chip-list>
-      <mat-chip color="accent" selected>Rehabilitación</mat-chip>
-      <mat-chip color="accent" selected>Pintura</mat-chip>
+      <mat-chip color="accent" selected *ngFor="let type of typeOfFinishedProjects">{{
+        type | transloco
+      }}</mat-chip>
     </mat-chip-list>
   </mat-card-content>
 </mat-card>

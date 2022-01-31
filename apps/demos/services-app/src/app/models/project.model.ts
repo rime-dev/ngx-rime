@@ -10,6 +10,7 @@ export interface Project {
   description: string;
   startDate: string;
   estimatedEndDate: string;
+  endingDate: string;
   collaborators: string[];
   cost: number;
   documents: ProjectDocument[];
