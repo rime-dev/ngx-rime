@@ -1,12 +1,10 @@
 <div *ngIf="project" class="lg:container p-8 flex flex-col mx-auto">
   <div class="flex flex-row w-full h-auto">
     <img
-      class="rounded-full h-14 w-14 mx-2 mat-elevation-z2"
-      src="https://i.picsum.photos/id/1031/200/200.jpg?hmac=E9kagTB6aHlVO8qmJYAQYYGJP3IvPT_v0N3ju0Rc4Gw"
-    />
-    <img
-      class="rounded-full h-14 w-14 mx-2 mat-elevation-z2"
-      src="https://i.picsum.photos/id/1031/200/200.jpg?hmac=E9kagTB6aHlVO8qmJYAQYYGJP3IvPT_v0N3ju0Rc4Gw"
+      *ngFor="let collaborator of collaborators$ | async | slice: 1"
+      [matTooltip]="collaborator.data.name"
+      class="rounded-full h-14 w-14 mx-2 mat-elevation-z2 object-cover"
+      [src]="collaborator.data.avatar"
     />
     <button mat-icon-button class="rounded-full h-14 w-14 mx-2">
       <mat-icon>add</mat-icon>

@@ -2,8 +2,9 @@ import {Component, Input} from '@angular/core';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
 import {Collaborator} from 'apps/demos/services-app/src/app/models/collaborator.model';
+import {Project} from 'apps/demos/services-app/src/app/models/project.model';
 import {Observable} from 'rxjs';
-import {filter, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'rng-project-card',
@@ -17,18 +18,18 @@ export class ProjectCardComponent {
   get project() {
     return this.internalProject;
   }
-  set project(value: EntityState<Collaborator>) {
+  set project(value: EntityState<Project>) {
     this.internalProject = value;
   }
-  private internalProject!: EntityState<Collaborator>;
+  private internalProject!: EntityState<Project>;
 
   constructor(private dataService: DataService) {
     this.collaborators$ = this.dataService
       .select('Collaborator')
       .entities$.pipe(
-        filter((collaborators: EntityState<Collaborator>[]) =>
-          collaborators.every((collaborator: EntityState<Collaborator>) =>
-            this.project.data.collaborators.filter((element: string) => collaborator.id === element)
+        map((collaborators: EntityState<Collaborator>[]) =>
+          collaborators.filter((collaborator: EntityState<Collaborator>) =>
+            this.project.data.collaborators.includes(collaborator.id)
           )
         )
       );

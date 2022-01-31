@@ -23,6 +23,7 @@ export class ProjectViewComponent implements OnDestroy {
       this.project$.pipe(first()).subscribe();
     });
   }
+
   getCollaborators(collaboratorsBase: any[]) {
     this.collaboratorsArray = collaborators.filter((collaborator: any) =>
       collaboratorsBase.some((cb: any) => collaborator.uid === cb)
