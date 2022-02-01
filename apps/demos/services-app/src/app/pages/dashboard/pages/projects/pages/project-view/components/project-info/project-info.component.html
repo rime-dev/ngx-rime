@@ -1,5 +1,8 @@
 <div *ngIf="project" class="lg:container p-8 flex flex-col mx-auto">
-  <div class="flex flex-row w-full h-auto">
+  <div *ngIf="project.data.group" class="flex flex-row w-full h-auto">
+    <div *ngIf="(collaborators$ | async)?.length === 0" class="self-center">
+      <span>Añadir colaboradores</span>
+    </div>
     <img
       *ngFor="let collaborator of collaborators$ | async | slice: 1"
       [matTooltip]="collaborator.data.name"
@@ -14,14 +17,37 @@
   <div class="flex flex-col p-4">
     <mat-action-list>
       <mat-list-item>
+        <mat-icon mat-list-icon>money</mat-icon>
+        <div mat-line class="text-gray-500">Coste</div>
+        <div mat-line class="whitespace-normal">{{ project.data.cost | translocoCurrency }}</div>
+      </mat-list-item>
+      <mat-list-item>
         <mat-icon mat-list-icon>event</mat-icon>
         <div mat-line class="text-gray-500">Fecha de inicio</div>
-        <div mat-line class="whitespace-normal">Miércoles 2 de Febrero, 2023</div>
+        <div mat-line class="whitespace-normal">
+          {{
+            project.data.startDate
+              | translocoDate
+                : {
+                    dateStyle: 'long',
+                    timeStyle: 'short'
+                  }
+          }}
+        </div>
       </mat-list-item>
       <mat-list-item>
         <mat-icon mat-list-icon>event</mat-icon>
         <div mat-line class="text-gray-500">Fecha de fin estimada</div>
-        <div mat-line class="whitespace-normal">Lunes 7 de Febrero, 2023</div>
+        <div mat-line class="whitespace-normal">
+          {{
+            project.data.estimatedEndDate
+              | translocoDate
+                : {
+                    dateStyle: 'long',
+                    timeStyle: 'short'
+                  }
+          }}
+        </div>
       </mat-list-item>
     </mat-action-list>
   </div>
@@ -46,5 +72,12 @@
         </div>
       </mat-list-item>
     </mat-action-list>
+  </div>
+  <div
+    class="flex w-full mt-4"
+    *ngIf="!project.data.group && !project.data.accepted"
+    (click)="acceptProject()"
+  >
+    <button mat-raised-button color="warn" class="w-full">Aceptar</button>
   </div>
 </div>

@@ -1,19 +1,18 @@
-import {HttpClient} from '@angular/common/http';
-import {
-  TRANSLOCO_LOADER,
-  Translation,
-  TranslocoLoader,
-  TRANSLOCO_CONFIG,
-  translocoConfig,
-  TranslocoModule,
-} from '@ngneat/transloco';
-import {Injectable, NgModule} from '@angular/core';
-import {environment} from '../environments/environment';
-
 import {registerLocaleData} from '@angular/common';
-import {DateFormatStyles, TranslocoLocaleModule} from '@ngneat/transloco-locale';
-import localeEs from '@angular/common/locales/es';
+import {HttpClient} from '@angular/common/http';
 import localeEn from '@angular/common/locales/en';
+import localeEs from '@angular/common/locales/es';
+import {Injectable, NgModule} from '@angular/core';
+import {
+  Translation,
+  translocoConfig,
+  TranslocoLoader,
+  TranslocoModule,
+  TRANSLOCO_CONFIG,
+  TRANSLOCO_LOADER,
+} from '@ngneat/transloco';
+import {DateFormatStyles, TranslocoLocaleModule} from '@ngneat/transloco-locale';
+import {environment} from '../environments/environment';
 
 registerLocaleData(localeEs, 'es');
 registerLocaleData(localeEn, 'en');
@@ -30,30 +29,16 @@ export class TranslocoHttpLoader implements TranslocoLoader {
 const globalFormatConfig = {
   date: {
     dateStyle: 'long' as DateFormatStyles,
-    timeStyle: 'long' as DateFormatStyles,
   },
 };
 
 const esESFormatConfig = {
   date: {
-    timeStyle: 'medium' as DateFormatStyles,
+    dateStyle: 'medium' as DateFormatStyles,
   },
   currency: {
-    minimumFractionDigits: 0,
+    minimumFractionDigits: 0 as number,
   },
-};
-
-const localeConfig = {
-  global: globalFormatConfig,
-};
-
-const langToLocaleMapping = {
-  en: 'en-US',
-  es: 'es-ES',
-};
-
-const defaultLocale = {
-  es: 'es-ES',
 };
 
 const localeToCurrencyMapping = {
@@ -64,7 +49,7 @@ const localeToCurrencyMapping = {
 @NgModule({
   imports: [
     TranslocoLocaleModule.forRoot({
-      defaultLocale: 'es',
+      defaultLocale: 'es-ES',
       langToLocaleMapping: {
         en: 'en-US',
         es: 'es-ES',

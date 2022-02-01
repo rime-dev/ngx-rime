@@ -17,6 +17,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {TranslocoModule} from '@ngneat/transloco';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     ReactiveFormsModule,
     MatTooltipModule,
     TranslocoModule,
+    TranslocoLocaleModule,
+    MatSnackBarModule,
   ],
 })
 export class ProjectViewModule {}

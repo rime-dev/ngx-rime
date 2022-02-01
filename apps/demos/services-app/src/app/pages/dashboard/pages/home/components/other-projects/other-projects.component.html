@@ -13,7 +13,11 @@
 </div>
 <mat-card class="w-full h-auto mat-elevation-z3">
   <mat-action-list class="p-0">
-    <mat-list-item class="my-2 p-2 h-auto" *ngFor="let project of projects$ | async | slice: 0:5">
+    <mat-list-item
+      class="my-2 p-2 h-auto"
+      *ngFor="let project of projects$ | async | slice: 0:5"
+      [routerLink]="['../projects/project-view', project.id]"
+    >
       <div mat-line class="flex flex-row">
         <div class="flex items-center p-2">
           <mat-icon mat-list-icon [matTooltip]="project.data.type">{{
