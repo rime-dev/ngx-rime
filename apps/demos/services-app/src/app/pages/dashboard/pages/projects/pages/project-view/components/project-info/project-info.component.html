@@ -13,6 +13,17 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
+  <span class="text-xl font-semibold mt-6 mb-2">Descripción</span>
+  <div class="flex flex-col w-full p-4">
+    <mat-action-list>
+      <mat-list-item class="h-auto">
+        <mat-icon mat-list-icon>description</mat-icon>
+        <div mat-line class="whitespace-normal">
+          {{ project.data.description }}
+        </div>
+      </mat-list-item>
+    </mat-action-list>
+  </div>
   <span class="text-xl font-semibold mt-6 mb-2">Detalles</span>
   <div class="flex flex-col p-4">
     <mat-action-list>
@@ -23,7 +34,7 @@
       </mat-list-item>
       <mat-list-item>
         <mat-icon mat-list-icon>event</mat-icon>
-        <div mat-line class="text-gray-500">Fecha de inicio</div>
+        <div mat-line class="text-gray-500">{{ 'date.start' | transloco }}</div>
         <div mat-line class="whitespace-normal">
           {{
             project.data.startDate
@@ -37,7 +48,7 @@
       </mat-list-item>
       <mat-list-item>
         <mat-icon mat-list-icon>event</mat-icon>
-        <div mat-line class="text-gray-500">Fecha de fin estimada</div>
+        <div mat-line class="text-gray-500">{{ 'date.estimatedEnd' | transloco }}</div>
         <div mat-line class="whitespace-normal">
           {{
             project.data.estimatedEndDate
@@ -49,20 +60,56 @@
           }}
         </div>
       </mat-list-item>
-    </mat-action-list>
-  </div>
-  <span class="text-xl font-semibold mt-6 mb-2">Descripción</span>
-  <div class="flex flex-col w-full p-4">
-    <mat-action-list>
-      <mat-list-item class="h-auto">
-        <mat-icon mat-list-icon>description</mat-icon>
+      <mat-list-item *ngIf="project.data.endingDate">
+        <mat-icon mat-list-icon>event</mat-icon>
+        <div mat-line class="text-gray-500">{{ 'date.end' | transloco }}</div>
         <div mat-line class="whitespace-normal">
-          {{ project.data.description }}
+          {{
+            project.data.endingDate
+              | translocoDate
+                : {
+                    dateStyle: 'long',
+                    timeStyle: 'short'
+                  }
+          }}
         </div>
       </mat-list-item>
     </mat-action-list>
   </div>
-  <span class="text-xl font-semibold mt-6 mb-2">Ubicación</span>
+  <span class="text-xl font-semibold mt-6 mb-2">{{ 'labels' | transloco }}</span>
+  <div class="flex flex-col p-4">
+    <mat-form-field class="example-chip-list" appearance="outline">
+      <mat-chip-list #chipList aria-label="Labels selection">
+        <mat-chip
+          *ngFor="let label of project.data.labels"
+          (removed)="removeLabel(label)"
+          [style.backgroundColor]="labels.getColor(label)"
+          class="text-white"
+        >
+          {{ 'labels.' + label | transloco }}
+          <button matChipRemove class="text-white mb-1">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input
+          #labelsInput
+          [placeholder]="'labels.newLabel' | transloco"
+          [formControl]="labelsControl"
+          [matChipInputFor]="chipList"
+          [matAutocomplete]="auto"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="false"
+        />
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedLabel($event)">
+        <mat-option *ngFor="let label of filteredLabels | async" [value]="label">
+          <mat-icon [style.color]="labels.getColor(label)">circle</mat-icon>
+          {{ 'labels.' + label | transloco }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <span class="text-xl font-semibold mt-6 mb-2">{{ 'location' | transloco }}</span>
   <div class="flex flex-col p-4">
     <mat-action-list>
       <mat-list-item class="h-auto">
@@ -78,6 +125,8 @@
     *ngIf="!project.data.group && !project.data.accepted"
     (click)="acceptProject()"
   >
-    <button mat-raised-button color="warn" class="w-full">Aceptar</button>
+    <button mat-raised-button color="warn" class="w-full">
+      {{ 'actions.accept' | transloco }}
+    </button>
   </div>
 </div>

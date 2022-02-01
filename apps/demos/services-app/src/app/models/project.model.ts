@@ -28,7 +28,7 @@ export interface ProjectActivity {
 
 export interface ProjectDocument {
   id: string;
-  titloe: string;
+  title: string;
   url: string;
   format: string;
 }
@@ -36,3 +36,24 @@ export interface ProjectDocument {
 export type ProjectState = 'active' | 'inactive' | 'finished';
 
 export type ProjectType = 'paint' | 'construction';
+
+export type Label = 'paint' | 'construction';
+
+export interface ProjectLabel {
+  name: string;
+  color: string;
+}
+
+export abstract class Labels {
+  static labels = ['urgent', 'critical', 'documentation', 'support', 'deferrable'];
+  static getColor(label: string): string {
+    const labels: Record<string, string> = {
+      urgent: '#d9534f',
+      critical: '#d9534f',
+      documentation: '#f0ad4e',
+      support: '#e96fed',
+      deferrable: '#428bca',
+    };
+    return labels[label];
+  }
+}

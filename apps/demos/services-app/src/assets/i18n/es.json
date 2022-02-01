@@ -15,5 +15,17 @@
   "thismonth": "Este mes",
   "information": "Información",
   "activity": "Actividad",
-  "documents": "Documentos"
+  "documents": "Documentos",
+  "location": "Ubicación",
+  "labels": "Etiquetas",
+  "labels.newLabel": "Nueva etiqueta",
+  "labels.urgent": "Urgente",
+  "labels.critical": "Crítico",
+  "labels.documentation": "Documentación",
+  "labels.support": "Apoyo",
+  "labels.deferrable": "Aplazable",
+  "actions.accept": "Aceptar",
+  "date.start": "Fecha de inicio",
+  "date.estimatedEnd": "Fecha de fin estimada",
+  "date.end": "Fecha de fin"
 }
