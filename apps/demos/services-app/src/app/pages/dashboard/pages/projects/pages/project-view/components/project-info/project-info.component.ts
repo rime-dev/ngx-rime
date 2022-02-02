@@ -1,5 +1,7 @@
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Component, ElementRef, Input, ViewChild} from '@angular/core';
-import {MatChipInputEvent} from '@angular/material/chips';
+import {FormControl} from '@angular/forms';
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TranslocoService} from '@ngneat/transloco';
 import {DataService} from '@rng/data-access/base';
@@ -7,10 +9,7 @@ import {EntityState} from '@rng/data-access/base/models/base.model';
 import {Collaborator} from 'apps/demos/services-app/src/app/models/collaborator.model';
 import {Labels, Project} from 'apps/demos/services-app/src/app/models/project.model';
 import {Observable} from 'rxjs';
-import {map, startWith, tap} from 'rxjs/operators';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {FormControl} from '@angular/forms';
-import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'rng-project-info',
@@ -23,7 +22,7 @@ export class ProjectInfoComponent {
   public collaborators$: Observable<EntityState<Collaborator>[]>;
   public filteredLabels: Observable<string[]>;
   public labelsControl = new FormControl();
-
+  public editLabels = false;
   @Input()
   get project() {
     return this.internalProject;

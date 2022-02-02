@@ -64,7 +64,7 @@
       <div class="flex flex-col h-full">
         <mat-toolbar
           #rngToolbar
-          class="w-full z-50"
+          class="w-full z-50 duration-150"
           [color]="!hasSidenav ? 'primary' : ''"
           [class.mat-elevation-z2]="scrolled?.isScrolled"
         >
@@ -107,7 +107,7 @@
         <div
           class="relative w-full h-full overflow-auto"
           style="background: whitesmoke"
-          (scroll)="onScroll($event)"
+          (scroll)="onScroll$.next($event)"
         >
           <ng-content></ng-content>
         </div>

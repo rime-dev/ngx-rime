@@ -9,11 +9,14 @@ import {
   HostListener,
   Input,
   NgZone,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
 import {MatDrawerMode, MatSidenav} from '@angular/material/sidenav';
+import {Subject} from 'rxjs';
+import {debounceTime, takeUntil, tap} from 'rxjs/operators';
 
 export interface ShellLogo {
   src: string;
@@ -33,7 +36,7 @@ export interface Routes {
   styleUrls: ['./shell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShellComponent implements OnInit, AfterContentInit {
+export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
   static ngAcceptInputType_elevation: BooleanInput;
 
   public sidenavOpened = false;
@@ -41,6 +44,8 @@ export class ShellComponent implements OnInit, AfterContentInit {
   public sidenavMode: MatDrawerMode = 'side';
   public hasBackdrop = false;
   public isMobile = false;
+  public onScroll$: Subject<Event> = new Subject<Event>();
+  private destroy$: Subject<void> = new Subject<void>();
 
   /**
    * Sets an elevation
@@ -200,10 +205,21 @@ export class ShellComponent implements OnInit, AfterContentInit {
   }
   ngAfterContentInit(): void {
     this.updateSidenav();
+    this.onScroll$
+      .pipe(
+        debounceTime(250),
+        tap({next: (event: Event) => this.onScroll(event)}),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
     setTimeout(() => {
       if (this.sidenav && !this.sidenav._container?._contentMargins.left) {
         this.updateSidenav();
       }
     }, 500);
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

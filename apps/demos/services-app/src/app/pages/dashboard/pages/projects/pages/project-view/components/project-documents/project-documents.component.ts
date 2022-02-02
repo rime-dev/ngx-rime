@@ -32,7 +32,7 @@ export class ProjectDocumentsComponent implements OnInit {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.project.documents.filter((option: any) =>
+    return this.project.data.documents.filter((option: any) =>
       option.title.toLowerCase().includes(filterValue)
     );
   }

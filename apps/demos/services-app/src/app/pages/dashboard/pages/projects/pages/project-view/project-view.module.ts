@@ -19,6 +19,7 @@ import {TranslocoModule} from '@ngneat/transloco';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
+import {ProjectTypeModule} from 'apps/demos/services-app/src/app/pipes/project-type/project-type.module';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
     TranslocoModule,
     TranslocoLocaleModule,
     MatSnackBarModule,
+    ProjectTypeModule,
   ],
 })
 export class ProjectViewModule {}

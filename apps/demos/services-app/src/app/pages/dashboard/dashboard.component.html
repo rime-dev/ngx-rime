@@ -7,7 +7,7 @@
   [(scrolled)]="scrolled"
   (scrolledChange)="onScroll($event)"
 >
-  <button mat-button topBarItem (click)="scrollToTop()" *ngIf="showTitlePage">
+  <button mat-button topBarItem class="duration-150" (click)="scrollToTop()" *ngIf="showTitlePage">
     {{ titlePage }}
   </button>
   <rng-search-input class="ml-auto w-full" topBarItem></rng-search-input>

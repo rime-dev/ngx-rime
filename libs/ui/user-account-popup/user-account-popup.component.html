@@ -3,6 +3,7 @@
   mat-mini-fab
   *ngIf="userInfo && userInfo.photoUrl"
   class="bg-contain bg-center mat-elevation-z0"
+  color="primary"
   [matMenuTriggerFor]="userMenu"
   [ngStyle]="{'background-image': 'url(' + userInfo?.photoUrl + ')'}"
 >
@@ -13,6 +14,7 @@
   class="mat-elevation-z0 text-2xl"
   mat-mini-fab
   *ngIf="userInfo && !userInfo.photoUrl"
+  color="primary"
   [matMenuTriggerFor]="userMenu"
 >
   <span class="sr-only">Open user menu</span>
@@ -29,7 +31,13 @@
           [src]="userInfo?.photoUrl"
           [alt]="userInfo?.displayName"
         />
-        <button mat-fab type="button" *ngIf="!userInfo?.photoUrl" class="mat-elevation-z0 text-3xl">
+        <button
+          mat-fab
+          type="button"
+          *ngIf="!userInfo?.photoUrl"
+          color="primary"
+          class="mat-elevation-z0 text-3xl"
+        >
           <span *ngIf="userInfo?.displayName">{{
             userInfo?.displayName | slice: 0:1 | uppercase
           }}</span>
@@ -49,8 +57,13 @@
       </div>
     </div>
     <mat-divider></mat-divider>
-    <button mat-menu-item *ngFor="let route of routes" (click)="handleClickEvent(route.click)">
-      <mat-icon>{{ route.icon }}</mat-icon>
+    <button
+      mat-menu-item
+      color="primary"
+      *ngFor="let route of routes"
+      (click)="handleClickEvent(route.click)"
+    >
+      <mat-icon color="primary">{{ route.icon }}</mat-icon>
       {{ route.text }}
     </button>
   </div>

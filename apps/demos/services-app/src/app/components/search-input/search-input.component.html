@@ -25,7 +25,10 @@
       #trigger="cdkOverlayOrigin"
     />
     <button type="submit" class="absolute right-0 top-0 mt-2 mr-2">
-      <mat-icon *ngIf="!(this.searchForm.controls.searchInput.valueChanges | async)">
+      <mat-icon
+        color="primary"
+        *ngIf="!(this.searchForm.controls.searchInput.valueChanges | async)"
+      >
         search
       </mat-icon>
     </button>

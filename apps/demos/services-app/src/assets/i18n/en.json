@@ -25,6 +25,8 @@
   "labels.support": "Support",
   "labels.deferrable": "Deferrable",
   "actions.accept": "Accept",
+  "actions.edit": "Edit",
+  "actions.close": "Close",
   "date.start": "Starting date",
   "date.estimatedEnd": "Estimated ending date",
   "date.end": "Ending date"
