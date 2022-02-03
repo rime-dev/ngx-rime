@@ -18,8 +18,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {TranslocoModule} from '@ngneat/transloco';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
 import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
 import {ProjectTypeModule} from 'apps/demos/services-app/src/app/pipes/project-type/project-type.module';
+import {ProjectChangeStateDialogComponent} from './components/project-change-state-dialog/project-change-state-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import {ProjectTypeModule} from 'apps/demos/services-app/src/app/pipes/project-t
     ProjectInfoComponent,
     ProjectActivityComponent,
     ProjectDocumentsComponent,
+    ProjectChangeStateDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +52,7 @@ import {ProjectTypeModule} from 'apps/demos/services-app/src/app/pipes/project-t
     TranslocoLocaleModule,
     MatSnackBarModule,
     ProjectTypeModule,
+    MatDialogModule,
   ],
 })
 export class ProjectViewModule {}

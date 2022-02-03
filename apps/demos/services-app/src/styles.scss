@@ -84,8 +84,8 @@ $rng-default-primary: mat.define-palette($mat-rng, A700);
 $rng-default-accent: mat.define-palette($mat-rng, A400);
 $rng-default-warn: mat.define-palette($mat-rng, 900);
 
-$rng-dark-primary: mat.define-palette($mat-rng-dark, 500);
-$rng-dark-accent: mat.define-palette($mat-rng-dark, 100);
+$rng-dark-primary: mat.define-palette($mat-rng-dark, A700);
+$rng-dark-accent: mat.define-palette($mat-rng-dark, A400);
 $rng-dark-warn: mat.define-palette($mat-rng-dark, 900);
 
 $rng-default-theme: mat.define-light-theme(
@@ -161,13 +161,26 @@ mat-chip.mat-chip.mat-chip-selected {
 }
 $color-config: mat.get-color-config($rng-default-theme);
 .bg-primary {
-  background-color: mat.get-color-from-palette(map.get($color-config, 'primary'), 500);
+  background-color: mat.get-color-from-palette(map.get($color-config, 'primary'), A700);
   color: white;
 }
 
 .bg-accent {
-  background: mat.get-color-from-palette(map.get($color-config, 'accent'), 500);
+  background: mat.get-color-from-palette(map.get($color-config, 'accent'), A400);
   color: white;
+}
+
+.project-state-active {
+  color: #37843a !important;
+  border-color: #37843a !important;
+}
+.project-state-inactive {
+  color: #828282 !important;
+  border-color: #828282 !important;
+}
+.project-state-finished {
+  color: #375984 !important;
+  border-color: #375984 !important;
 }
 
 @import '~@angular/material/theming';

@@ -19,13 +19,14 @@
         mat-stroked-button
         class="w-full md:w-auto rounded-full"
         [color]="project.data.state === 'active' ? 'primary' : 'accent'"
-      >
-        {{ project.data.state | transloco }}
-        <!--   [ngClass]="{
+        [ngClass]="{
           'project-state-active': project.data.state === 'active',
           'project-state-inactive': project.data.state === 'inactive',
           'project-state-finished': project.data.state === 'finished'
-        }"-->
+        }"
+        (click)="openDialogToChangeState()"
+      >
+        {{ project.data.state | transloco }}
       </button>
     </div>
   </div>

@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Estado del proyecto</h1>
+<div mat-dialog-content>
+  <mat-selection-list #stateSelection [multiple]="false">
+    <mat-list-option value="active">
+      <mat-icon mat-list-icon class="project-state-active border-solid border border-gray-400"
+        >circle</mat-icon
+      >
+      {{ 'active' | transloco }}
+    </mat-list-option>
+    <mat-list-option value="inactive">
+      <mat-icon mat-list-icon class="project-state-inactive border-solid border border-gray-400"
+        >circle</mat-icon
+      >{{ 'inactive' | transloco }}
+    </mat-list-option>
+    <mat-list-option value="finished">
+      <mat-icon mat-list-icon class="project-state-finished border-solid border border-gray-400"
+        >circle</mat-icon
+      >{{ 'finished' | transloco }}
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-stroked-button
+    class="w-full"
+    [mat-dialog-close]="stateSelection.selectedOptions.selected[0]?.value"
+  >
+    Aceptar
+  </button>
+</div>

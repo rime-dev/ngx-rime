@@ -1,6 +1,6 @@
 <mat-card class="grid mat-elevation-z3">
   <mat-card-header>
-    <button mat-raised-button mat-card-avatar color="accent" class="card-number">
+    <button mat-raised-button mat-card-avatar color="primary" class="card-number">
       {{ (finishedProjects$ | async)?.length }}
     </button>
     <mat-card-title>{{ 'projects.finished' | transloco }}</mat-card-title>
@@ -11,7 +11,7 @@
   </mat-card-header>
   <mat-card-content class="h-12 w-full overflow-y-hidden overflow-x-auto">
     <mat-chip-list>
-      <mat-chip color="accent" selected *ngFor="let type of typeOfFinishedProjects">{{
+      <mat-chip color="primary" selected *ngFor="let type of typeOfFinishedProjects">{{
         type | transloco
       }}</mat-chip>
     </mat-chip-list>

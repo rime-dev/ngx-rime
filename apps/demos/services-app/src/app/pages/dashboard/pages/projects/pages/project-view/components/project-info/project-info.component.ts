@@ -2,6 +2,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TranslocoService} from '@ngneat/transloco';
 import {DataService} from '@rng/data-access/base';
@@ -10,6 +11,7 @@ import {Collaborator} from 'apps/demos/services-app/src/app/models/collaborator.
 import {Labels, Project} from 'apps/demos/services-app/src/app/models/project.model';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {ProjectChangeStateDialogComponent} from '../project-change-state-dialog/project-change-state-dialog.component';
 
 @Component({
   selector: 'rng-project-info',
@@ -37,7 +39,8 @@ export class ProjectInfoComponent {
   constructor(
     private dataService: DataService,
     private snackBar: MatSnackBar,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    public matDialog: MatDialog
   ) {
     this.filteredLabels = this.labelsControl.valueChanges.pipe(
       startWith(null),
@@ -94,5 +97,17 @@ export class ProjectInfoComponent {
         duration: 3000,
       });
     }
+  }
+  openDialogToChangeState() {
+    this.matDialog
+      .open(ProjectChangeStateDialogComponent, {minWidth: '250px'})
+      .afterClosed()
+      .subscribe((state: string) => {
+        if (state && state !== this.project?.data.state) {
+          const data = {...this.project?.data, state};
+          const project = {...this.project, data};
+          this.dataService.select('Project').update(project);
+        }
+      });
   }
 }

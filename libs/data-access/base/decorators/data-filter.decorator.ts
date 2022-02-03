@@ -21,15 +21,40 @@ const arrayFilter = (array: any[], query: ConditionalQueryFirestore) =>
   );
 
 export const DataFilter =
-  (query: ConditionalQueryFirestore): any =>
+  (query: ConditionalQueryFirestore | ConditionalQueryFirestore[]): any =>
   (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     let propertyValue: any;
     const getter = () => propertyValue;
     const setter = (value: any) => {
-      if (value instanceof Observable) {
-        propertyValue = value.pipe(map((documents: any) => arrayFilter(documents, query)));
+      if (
+        (query as ConditionalQueryFirestore[]).length &&
+        (query as ConditionalQueryFirestore[]).length > 0
+      ) {
+        if (value instanceof Observable) {
+          propertyValue = value;
+          (query as ConditionalQueryFirestore[]).map(
+            (eachQuery) =>
+              (propertyValue = propertyValue.pipe(
+                map((documents: any) =>
+                  arrayFilter(documents, eachQuery as ConditionalQueryFirestore)
+                )
+              ))
+          );
+        } else {
+          propertyValue = value;
+          (query as ConditionalQueryFirestore[]).map(
+            (eachQuery) =>
+              (propertyValue = arrayFilter(propertyValue, eachQuery as ConditionalQueryFirestore))
+          );
+        }
       } else {
-        propertyValue = arrayFilter(value, query);
+        if (value instanceof Observable) {
+          propertyValue = value.pipe(
+            map((documents: any) => arrayFilter(documents, query as ConditionalQueryFirestore))
+          );
+        } else {
+          propertyValue = arrayFilter(value, query as ConditionalQueryFirestore);
+        }
       }
     };
     Object.defineProperty(target, propertyKey, {

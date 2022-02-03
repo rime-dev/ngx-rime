@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {DataFilter, DataService} from '@rng/data-access/base';
+import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
 import {Project} from 'apps/demos/services-app/src/app/models/project.model';
 import {collaborators} from 'apps/demos/services-app/src/assets/data';
 import {Observable, of, Subject} from 'rxjs';
-import {first, map, takeUntil} from 'rxjs/operators';
+import {map, takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'rng-project-view',

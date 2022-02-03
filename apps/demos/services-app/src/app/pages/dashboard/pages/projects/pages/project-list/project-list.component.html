@@ -29,6 +29,16 @@
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
+        {{ 'inactive' | transloco }} ({{ (inactiveProjects$ | async)?.length }})
+      </ng-template>
+      <ng-template matTabContent>
+        <ng-container
+          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: inactiveProjects$ | async}"
+        ></ng-container>
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
         {{ 'finished' | transloco }} ({{ (finishedProjects$ | async)?.length }})
       </ng-template>
       <ng-template matTabContent>
