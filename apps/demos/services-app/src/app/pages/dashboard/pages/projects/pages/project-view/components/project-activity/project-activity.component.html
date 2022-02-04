@@ -1,6 +1,101 @@
 <div class="lg:container p-8 flex flex-col mx-auto">
   <ol class="relative border-l border-gray-200 dark:border-gray-700">
-    <li class="mb-10 ml-6">
+    <li class="mb-6 ml-6" *ngFor="let activity of project.data.activity">
+      <span
+        class="absolute flex items-center justify-center w-6 h-6 bg-blue-200 rounded-full -left-3"
+      >
+        <img
+          [matTooltip]="activity.user"
+          class="rounded-full shadow-lg cursor-pointer"
+          src="https://i.picsum.photos/id/1031/200/200.jpg?hmac=E9kagTB6aHlVO8qmJYAQYYGJP3IvPT_v0N3ju0Rc4Gw"
+          [alt]="activity.user"
+        />
+      </span>
+      <div
+        class="
+          items-center
+          justify-between
+          p-4
+          bg-white
+          border border-gray-200
+          rounded-lg
+          shadow-sm
+          sm:flex
+          dark:bg-gray-700 dark:border-gray-600
+        "
+      >
+        <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0 text-center">{{
+          activity.date | translocoDate
+        }}</time>
+        <div class="text-sm font-normal text-gray-500 dark:text-gray-300">
+          {{ activity.user }} {{ 'activity.' + activity.action | transloco }}
+          <span class="font-semibold text-blue-600 dark:text-blue-500">
+            <ng-container [ngSwitch]="activity.affected">
+              <ng-container *ngSwitchCase="'startDate'">{{
+                'date.start' | transloco
+              }}</ng-container>
+              <ng-container *ngSwitchCase="'estimatedEndDate'">{{
+                'date.estimatedEnd' | transloco
+              }}</ng-container>
+              <ng-container *ngSwitchDefault>{{ activity.affected | transloco }}</ng-container>
+            </ng-container>
+          </span>
+          <div
+            *ngIf="activity.affected === 'description'; else shortResults"
+            class="
+              p-3
+              text-xs
+              italic
+              font-normal
+              text-gray-500
+              border border-gray-200
+              rounded-lg
+              bg-gray-50
+              dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300
+            "
+          >
+            {{ activity.result }}
+          </div>
+          <ng-template #shortResults>
+            <span
+              class="
+                bg-gray-100
+                text-gray-800 text-xs
+                font-normal
+                mx-2
+                px-2.5
+                py-0.5
+                rounded
+                dark:bg-gray-600 dark:text-gray-300
+              "
+            >
+              <ng-container [ngSwitch]="activity.affected">
+                <ng-container *ngSwitchCase="'state'">{{
+                  activity.result | transloco
+                }}</ng-container>
+                <ng-container *ngSwitchCase="'collaborators'">{{ activity.result }}</ng-container>
+                <ng-container *ngSwitchCase="'documents'">{{ activity.result }}</ng-container>
+                <ng-container *ngSwitchCase="'labels'">{{
+                  'labels.' + activity.result | transloco
+                }}</ng-container>
+                <ng-container *ngSwitchCase="'startDate'">{{
+                  activity.result | translocoDate
+                }}</ng-container>
+                <ng-container *ngSwitchCase="'estimatedEndDate'">{{
+                  activity.result | translocoDate
+                }}</ng-container>
+                <ng-container *ngSwitchDefault>{{ activity.result }}</ng-container>
+              </ng-container>
+            </span>
+          </ng-template>
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+
+<!--
+      <li class="mb-10 ml-6">
       <span
         class="absolute flex items-center justify-center w-6 h-6 bg-blue-200 rounded-full -left-3"
       >
@@ -122,5 +217,4 @@
         </div>
       </div>
     </li>
-  </ol>
-</div>
+-->

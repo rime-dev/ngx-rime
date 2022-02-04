@@ -1,7 +1,8 @@
 {
   "projects.offerered": "Projects offered",
-  "projects.finished": "Proyects finished",
-  "project.accepted": "Proyect accepted",
+  "projects.finished": "Projects finished",
+  "project.accepted": "Projects accepted",
+  "project.state": "Project state",
   "search": "Search",
   "others": "Others",
   "active": "Active",
@@ -13,6 +14,11 @@
   "rehabilitation": "Rehabilitation",
   "construction": "Construction",
   "persons": "Persons",
+  "collaborators": "Colaboradores",
+  "state": "State",
+  "title": "Title",
+  "description": "Description",
+  "type": "Type",
   "thismonth": "This month",
   "information": "Information",
   "activity": "Activity",
@@ -28,7 +34,11 @@
   "actions.accept": "Accept",
   "actions.edit": "Edit",
   "actions.close": "Close",
+  "actions.remove": "Remove",
   "date.start": "Starting date",
   "date.estimatedEnd": "Estimated ending date",
-  "date.end": "Ending date"
+  "date.end": "Ending date",
+  "activity.add": "has added",
+  "activity.change": "has changed",
+  "activity.remove": "has removed"
 }

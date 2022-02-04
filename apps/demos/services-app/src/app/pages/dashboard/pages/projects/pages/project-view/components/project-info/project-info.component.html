@@ -4,13 +4,38 @@
       <div *ngIf="(collaborators$ | async)?.length === 0" class="self-center text-sm">
         <span>Añadir colaboradores</span>
       </div>
-      <img
-        *ngFor="let collaborator of collaborators$ | async | slice: 1"
-        [matTooltip]="collaborator.data.name"
-        class="rounded-full h-12 w-12 mx-2 mat-elevation-z2 object-cover"
-        [src]="collaborator.data.avatar"
-      />
-      <button mat-icon-button class="rounded-full h-12 w-12 mx-2">
+      <div class="group flex flex-row relative" *ngFor="let collaborator of collaborators$ | async">
+        <img
+          [matTooltip]="collaborator.data.name"
+          class="
+            group
+            rounded-full
+            h-12
+            w-12
+            mx-2
+            mat-elevation-z2
+            object-cover
+            cursor-pointer
+            relative
+            group-hover:opacity-50
+          "
+          [src]="collaborator.data.avatar"
+        />
+        <div class="invisible group-hover:visible absolute w-full h-full">
+          <button
+            mat-icon-button
+            class="w-full h-full"
+            (click)="openDialogRemoveCollaborator(collaborator)"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <button
+        mat-icon-button
+        class="rounded-full h-12 w-12 mx-2"
+        (click)="openDialogAddCollaborator()"
+      >
         <mat-icon>add</mat-icon>
       </button>
     </div>

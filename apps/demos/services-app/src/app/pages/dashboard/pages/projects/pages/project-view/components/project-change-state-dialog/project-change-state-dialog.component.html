@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Estado del proyecto</h1>
+<h1 mat-dialog-title>{{ 'project.state' | transloco }}</h1>
 <div mat-dialog-content>
   <mat-selection-list #stateSelection [multiple]="false">
     <mat-list-option value="active">
@@ -25,6 +25,6 @@
     class="w-full"
     [mat-dialog-close]="stateSelection.selectedOptions.selected[0]?.value"
   >
-    Aceptar
+    {{ 'actions.accept' | transloco }}
   </button>
 </div>

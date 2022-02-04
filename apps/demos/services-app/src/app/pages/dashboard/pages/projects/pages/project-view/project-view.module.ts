@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
@@ -22,6 +23,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
 import {ProjectTypeModule} from 'apps/demos/services-app/src/app/pipes/project-type/project-type.module';
 import {ProjectChangeStateDialogComponent} from './components/project-change-state-dialog/project-change-state-dialog.component';
+import {ProjectAddCollaboratorDialogComponent} from './components/project-add-collaborator-dialog/project-add-collaborator-dialog.component';
+import {ProjectRemoveCollaboratorDialogComponent} from './components/project-remove-collaborator-dialog/project-remove-collaborator-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,8 @@ import {ProjectChangeStateDialogComponent} from './components/project-change-sta
     ProjectActivityComponent,
     ProjectDocumentsComponent,
     ProjectChangeStateDialogComponent,
+    ProjectAddCollaboratorDialogComponent,
+    ProjectRemoveCollaboratorDialogComponent,
   ],
   imports: [
     CommonModule,
