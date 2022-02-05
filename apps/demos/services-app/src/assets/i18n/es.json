@@ -15,6 +15,7 @@
   "construction": "Construcción",
   "persons": "Personas",
   "collaborators": "Colaboradores",
+  "collaborator": "Colaborador",
   "state": "Estado",
   "title": "Título",
   "description": "Descripción",
@@ -40,5 +41,7 @@
   "date.end": "Fecha de fin",
   "activity.add": "ha añadido",
   "activity.change": "ha cambiado",
-  "activity.remove": "ha eliminado"
+  "activity.remove": "ha eliminado",
+  "noActivity": "No hay actividad",
+  "noDocuments": "No hay documentos"
 }

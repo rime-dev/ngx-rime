@@ -23,7 +23,9 @@ export class InfoProjectsComponent {
       tap({
         next: (projects) => this.loadTypesOfFinishedProjects(projects),
       }),
-      map((documents: EntityState<Project>[]) => this.filterFinishedProjectsInThisMonth(documents))
+      map((documents: EntityState<Project>[]) =>
+        documents ? this.filterFinishedProjectsInThisMonth(documents) : []
+      )
     );
   }
 

@@ -14,7 +14,8 @@
   "rehabilitation": "Rehabilitation",
   "construction": "Construction",
   "persons": "Persons",
-  "collaborators": "Colaboradores",
+  "collaborators": "Collaborators",
+  "collaborator": "Collaborator",
   "state": "State",
   "title": "Title",
   "description": "Description",
@@ -40,5 +41,7 @@
   "date.end": "Ending date",
   "activity.add": "has added",
   "activity.change": "has changed",
-  "activity.remove": "has removed"
+  "activity.remove": "has removed",
+  "noActivity": "No activity",
+  "noDocuments": "No documents"
 }

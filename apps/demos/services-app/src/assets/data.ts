@@ -32,7 +32,7 @@ export const projects: EntityState<Project>[] = [
       activity: [
         {
           date: '2022-01-21T08:22:05.643Z',
-          user: '2',
+          user: 'GFT7',
           action: 'change',
           affected: 'state',
           result: 'active',
@@ -70,7 +70,7 @@ export const projects: EntityState<Project>[] = [
       activity: [
         {
           date: '2022-01-21T08:22:05.643Z',
-          user: '2',
+          user: 'GFT7',
           action: 'change',
           affected: 'state',
           result: 'active',
@@ -122,7 +122,7 @@ export const projects: EntityState<Project>[] = [
       activity: [
         {
           date: '2022-01-21T05:22:05.643Z',
-          user: '1',
+          user: 'GFT6',
           action: 'change',
           affected: 'description',
           result: `La propiedad tiene 4 habitaciones, dos con 20m^2 y otras dos de 35m^2.
@@ -130,49 +130,49 @@ export const projects: EntityState<Project>[] = [
         },
         {
           date: '2022-01-21T06:22:05.643Z',
-          user: '1',
+          user: 'GFT6',
           action: 'add',
           affected: 'collaborators',
-          result: '2',
+          result: 'GFT7',
         },
         {
           date: '2022-01-21T08:22:05.643Z',
-          user: '2',
+          user: 'GFT7',
           action: 'change',
           affected: 'state',
           result: 'active',
         },
         {
           date: '2022-01-21T08:22:05.643Z',
-          user: '2',
+          user: 'GFT7',
           action: 'change',
           affected: 'title',
           result: 'Pintura',
         },
         {
           date: '2022-01-21T08:22:05.643Z',
-          user: '2',
+          user: 'GFT7',
           action: 'add',
           affected: 'documents',
-          result: 'd',
+          result: 'Tienda',
         },
         {
           date: '2022-01-21T08:22:05.643Z',
-          user: '2',
+          user: 'GFT7',
           action: 'add',
           affected: 'labels',
           result: 'urgent',
         },
         {
           date: '2022-01-21T08:22:05.643Z',
-          user: '2',
+          user: 'GFT7',
           action: 'change',
           affected: 'startDate',
           result: '2022-01-21T06:22:05.643Z',
         },
         {
           date: '2022-01-21T08:22:05.643Z',
-          user: '2',
+          user: 'GFT7',
           action: 'change',
           affected: 'estimatedEndDate',
           result: '2022-01-21T06:22:05.643Z',
@@ -273,8 +273,17 @@ export const collaborators: EntityState<Collaborator>[] = [
     id: 'GFT8',
     data: {
       uid: 'GFT8',
-      name: 'Sergio',
+      name: 'Alex',
       group: 'GS2',
+      avatar: `https://i.picsum.photos/id/1084/536/354.jpg?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60`,
+    },
+  },
+  {
+    id: 'HgdTVUOGmgZ7XdPQhKCUZIZx6fT2',
+    data: {
+      uid: 'HgdTVUOGmgZ7XdPQhKCUZIZx6fT2',
+      name: 'Carlos',
+      group: 'GS1',
       avatar:
         'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
     },

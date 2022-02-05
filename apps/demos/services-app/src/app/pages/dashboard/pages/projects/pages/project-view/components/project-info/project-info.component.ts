@@ -5,11 +5,16 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TranslocoService} from '@ngneat/transloco';
+import {AuthService} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
 import {log$} from 'apps/demos/services-app/src/app/decorators/log.decorator';
 import {Collaborator} from 'apps/demos/services-app/src/app/models/collaborator.model';
-import {Labels, Project} from 'apps/demos/services-app/src/app/models/project.model';
+import {
+  Labels,
+  Project,
+  ProjectActivity,
+} from 'apps/demos/services-app/src/app/models/project.model';
 import {Observable, Subject} from 'rxjs';
 import {map, startWith, takeUntil, tap} from 'rxjs/operators';
 import {ProjectAddCollaboratorDialogComponent} from '../project-add-collaborator-dialog/project-add-collaborator-dialog.component';
@@ -47,6 +52,7 @@ export class ProjectInfoComponent implements OnDestroy {
     private dataService: DataService,
     private snackBar: MatSnackBar,
     private translocoService: TranslocoService,
+    private authService: AuthService,
     public matDialog: MatDialog
   ) {
     this.filteredLabels = this.labelsControl.valueChanges.pipe(
@@ -68,25 +74,50 @@ export class ProjectInfoComponent implements OnDestroy {
       )
     );
   }
+  checkIfProjectIsFinished(): boolean {
+    return this.project?.data.state === 'finished' ? true : false;
+  }
+  changeLabelsVisibility(visibility: boolean): void {
+    if (this.checkIfProjectIsFinished()) {
+      return;
+    }
+    this.editLabels = visibility;
+  }
   removeLabel(label: string): void {
     const index = this.project?.data.labels.indexOf(label);
-    if (index >= 0) {
+    if (index >= 0 && this.project) {
       const labels = [...this.project?.data.labels];
       labels.splice(index, 1);
       const data = {...this.project?.data, labels};
-      const project = {...this.project, data};
+      let project = {...this.project, data};
+      const activity = {
+        action: 'remove',
+        affected: 'label',
+        result: label,
+      };
+      project = this.addActivity(activity, project);
       this.dataService.select('Project').update(project);
     }
   }
+
   selectedLabel(event: MatAutocompleteSelectedEvent): void {
-    const labels = [...this.project?.data.labels];
-    labels.push(event.option.value);
-    const data = {...this.project?.data, labels};
-    const project = {...this.project, data};
-    this.dataService.select('Project').update(project);
-    this.labelsInput.nativeElement.value = '';
-    this.labelsControl.setValue(null);
+    if (this.project) {
+      const labels = [...this.project?.data.labels];
+      labels.push(event.option.value);
+      const data = {...this.project?.data, labels};
+      let project = {...this.project, data};
+      const activity = {
+        action: 'add',
+        affected: 'label',
+        result: event.option.value,
+      };
+      project = this.addActivity(activity, project);
+      this.dataService.select('Project').update(project);
+      this.labelsInput.nativeElement.value = '';
+      this.labelsControl.setValue(null);
+    }
   }
+
   private filterLabels(value: string): string[] {
     const filterValue = value.toLowerCase();
     return Labels.labels.filter((label) => {
@@ -97,7 +128,26 @@ export class ProjectInfoComponent implements OnDestroy {
       return translatedLabel.includes(filterValue);
     });
   }
+
+  private addActivity(
+    newActivity: Partial<ProjectActivity>,
+    project: EntityState<Project>
+  ): EntityState<Project> {
+    newActivity = {
+      ...newActivity,
+      date: new Date().toISOString(),
+      user: this.authService.user$.value?.uid as string,
+    };
+    const activity = [...project.data.activity];
+    activity.push(newActivity);
+    const data = {...project?.data, activity};
+    return {...project, data};
+  }
+
   acceptProject() {
+    if (this.checkIfProjectIsFinished()) {
+      return;
+    }
     if (this.project) {
       const data = {...this.project.data, accepted: true, group: 'GS1'};
       const project = {...this.project, data};
@@ -110,41 +160,72 @@ export class ProjectInfoComponent implements OnDestroy {
     }
   }
   openDialogToChangeState() {
+    if (this.checkIfProjectIsFinished()) {
+      return;
+    }
     this.matDialog
       .open(ProjectChangeStateDialogComponent, {minWidth: '300px'})
       .afterClosed()
       .subscribe((state: string) => {
-        if (state && state !== this.project?.data.state) {
-          const data = {...this.project?.data, state};
-          const project = {...this.project, data};
+        if (state && state !== this.project?.data.state && this.project) {
+          const data = {...this.project.data, state};
+          let project: EntityState<Project> = {...this.project, data};
+          const activity = {
+            action: 'change',
+            affected: 'state',
+            result: state,
+          };
+          project = this.addActivity(activity, project);
           this.dataService.select('Project').update(project);
         }
       });
   }
   openDialogAddCollaborator() {
+    if (this.checkIfProjectIsFinished()) {
+      return;
+    }
     this.matDialog
       .open(ProjectAddCollaboratorDialogComponent, {minWidth: '300px'})
       .afterClosed()
       .subscribe((collaborator: string) => {
-        if (collaborator && !this.project?.data.collaborators.includes(collaborator)) {
+        if (
+          collaborator &&
+          !this.project?.data.collaborators.includes(collaborator) &&
+          this.project
+        ) {
           const collaborators = [...this.project?.data.collaborators, collaborator];
           const data = {...this.project?.data, collaborators};
-          const project = {...this.project, data};
+          let project: EntityState<Project> = {...this.project, data};
+          const activity = {
+            action: 'add',
+            affected: 'collaborator',
+            result: collaborator,
+          };
+          project = this.addActivity(activity, project);
           this.dataService.select('Project').update(project);
         }
       });
   }
   openDialogRemoveCollaborator(collaborator: EntityState<Collaborator>) {
+    if (this.checkIfProjectIsFinished()) {
+      return;
+    }
     this.matDialog
       .open(ProjectRemoveCollaboratorDialogComponent, {minWidth: '300px', data: {collaborator}})
       .afterClosed()
       .subscribe((shouldRemove: boolean) => {
-        if (shouldRemove) {
+        if (shouldRemove && this.project) {
           const collaborators = [...this.project?.data.collaborators].filter(
             (value: string) => value !== collaborator.id
           );
           const data = {...this.project?.data, collaborators};
-          const project = {...this.project, data};
+          let project = {...this.project, data};
+          const activity = {
+            action: 'remove',
+            affected: 'collaborator',
+            result: collaborator.id,
+          };
+          project = this.addActivity(activity, project);
           this.dataService.select('Project').update(project);
         }
       });

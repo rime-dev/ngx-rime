@@ -21,7 +21,10 @@
           "
           [src]="collaborator.data.avatar"
         />
-        <div class="invisible group-hover:visible absolute w-full h-full">
+        <div
+          class="invisible group-hover:visible absolute w-full h-full"
+          *ngIf="!checkIfProjectIsFinished()"
+        >
           <button
             mat-icon-button
             class="w-full h-full"
@@ -35,6 +38,7 @@
         mat-icon-button
         class="rounded-full h-12 w-12 mx-2"
         (click)="openDialogAddCollaborator()"
+        *ngIf="!checkIfProjectIsFinished()"
       >
         <mat-icon>add</mat-icon>
       </button>
@@ -131,8 +135,8 @@
       mat-icon-button
       class="ml-auto"
       [matTooltip]="'actions.edit' | transloco"
-      (click)="editLabels = true"
-      *ngIf="!editLabels"
+      (click)="changeLabelsVisibility(true)"
+      *ngIf="!editLabels && !checkIfProjectIsFinished() && project.data.group"
     >
       <mat-icon>edit</mat-icon>
     </button>
@@ -140,7 +144,7 @@
       mat-icon-button
       class="ml-auto"
       [matTooltip]="'actions.close' | transloco"
-      (click)="editLabels = false"
+      (click)="changeLabelsVisibility(false)"
       *ngIf="editLabels"
     >
       <mat-icon>close</mat-icon>

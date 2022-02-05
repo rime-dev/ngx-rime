@@ -1,6 +1,13 @@
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 
+/**
+ * Logs the observable value
+ *
+ * @param target Observable target
+ * @param propertyKey Observable key
+ * @example @log$ posts$ : Observable<Post[]>;
+ */
 export const log$ = (target: any, propertyKey: string) => {
   let propertyValue: any;
 

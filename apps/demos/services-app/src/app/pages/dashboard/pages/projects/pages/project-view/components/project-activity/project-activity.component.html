@@ -1,14 +1,17 @@
 <div class="lg:container p-8 flex flex-col mx-auto">
-  <ol class="relative border-l border-gray-200 dark:border-gray-700">
-    <li class="mb-6 ml-6" *ngFor="let activity of project.data.activity">
+  <ol
+    *ngIf="project.data.activity && project.data.activity.length > 0; else noActivityTemplate"
+    class="relative border-l border-gray-200 dark:border-gray-700"
+  >
+    <li class="mb-6 ml-6" *ngFor="let activity of project.data.activity.slice().reverse()">
       <span
         class="absolute flex items-center justify-center w-6 h-6 bg-blue-200 rounded-full -left-3"
       >
         <img
-          [matTooltip]="activity.user"
+          [matTooltip]="(activity.user | collaboratorPipe: (collaborators$ | async))?.data.name"
           class="rounded-full shadow-lg cursor-pointer"
           src="https://i.picsum.photos/id/1031/200/200.jpg?hmac=E9kagTB6aHlVO8qmJYAQYYGJP3IvPT_v0N3ju0Rc4Gw"
-          [alt]="activity.user"
+          [alt]="(activity.user | collaboratorPipe: (collaborators$ | async))?.data.name"
         />
       </span>
       <div
@@ -28,7 +31,8 @@
           activity.date | translocoDate
         }}</time>
         <div class="text-sm font-normal text-gray-500 dark:text-gray-300">
-          {{ activity.user }} {{ 'activity.' + activity.action | transloco }}
+          {{ (activity.user | collaboratorPipe: (collaborators$ | async))?.data.name }}
+          {{ 'activity.' + activity.action | transloco }}
           <span class="font-semibold text-blue-600 dark:text-blue-500">
             <ng-container [ngSwitch]="activity.affected">
               <ng-container *ngSwitchCase="'startDate'">{{
@@ -73,8 +77,9 @@
                 <ng-container *ngSwitchCase="'state'">{{
                   activity.result | transloco
                 }}</ng-container>
-                <ng-container *ngSwitchCase="'collaborators'">{{ activity.result }}</ng-container>
-                <ng-container *ngSwitchCase="'documents'">{{ activity.result }}</ng-container>
+                <ng-container *ngSwitchCase="'collaborator'">{{
+                  (activity.result | collaboratorPipe: (collaborators$ | async))?.data.name
+                }}</ng-container>
                 <ng-container *ngSwitchCase="'labels'">{{
                   'labels.' + activity.result | transloco
                 }}</ng-container>
@@ -92,6 +97,14 @@
       </div>
     </li>
   </ol>
+  <ng-template #noActivityTemplate>
+    <div class="flex flex-col h-48 text-center items-center">
+      <div class="m-auto h-36">
+        <p class="mb-4">{{ 'noActivity' | transloco }}</p>
+        <img class="h-32 w-full" src="assets/undraw_not_found_-60-pq.svg" />
+      </div>
+    </div>
+  </ng-template>
 </div>
 
 <!--

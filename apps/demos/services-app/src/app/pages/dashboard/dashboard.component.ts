@@ -4,6 +4,7 @@ import {AuthService, User} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {Observable, Subject} from 'rxjs';
 import {filter, takeUntil, tap} from 'rxjs/operators';
+import {log$} from 'apps/demos/services-app/src/app/decorators/log.decorator';
 
 @Component({
   selector: 'rng-dashboard',
@@ -22,11 +23,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       path: '/dashboard/home',
       text: 'Inicio',
       icon: 'home',
-    },
-    {
-      path: '/dashboard/profile',
-      text: 'Perfil',
-      icon: 'person',
     },
     {
       path: '/dashboard/projects',
@@ -56,7 +52,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public hasSidenav = true;
   private destroy$: Subject<void> = new Subject();
-  public user$: Observable<User | null>;
+  @log$ public user$: Observable<User | null>;
   showLoginButton = false;
   showLogoutButton = false;
   showTitlePage = false;

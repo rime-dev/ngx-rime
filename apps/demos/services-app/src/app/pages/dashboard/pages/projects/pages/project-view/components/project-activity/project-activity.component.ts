@@ -1,4 +1,8 @@
 import {Component, Input} from '@angular/core';
+import {DataService} from '@rng/data-access/base';
+import {EntityState} from '@rng/data-access/base/models/base.model';
+import {Collaborator} from 'apps/demos/services-app/src/app/models/collaborator.model';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'rng-project-activity',
@@ -6,6 +10,7 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./project-activity.component.scss'],
 })
 export class ProjectActivityComponent {
+  public collaborators$: Observable<EntityState<Collaborator>[]>;
   @Input()
   get project() {
     return this.internalProject;
@@ -15,5 +20,7 @@ export class ProjectActivityComponent {
   }
   private internalProject: any = {};
 
-  constructor() {}
+  constructor(dataService: DataService) {
+    this.collaborators$ = dataService.select('Collaborator').entities$;
+  }
 }

@@ -25,6 +25,7 @@ import {ProjectTypeModule} from 'apps/demos/services-app/src/app/pipes/project-t
 import {ProjectChangeStateDialogComponent} from './components/project-change-state-dialog/project-change-state-dialog.component';
 import {ProjectAddCollaboratorDialogComponent} from './components/project-add-collaborator-dialog/project-add-collaborator-dialog.component';
 import {ProjectRemoveCollaboratorDialogComponent} from './components/project-remove-collaborator-dialog/project-remove-collaborator-dialog.component';
+import {CollaboratorPipeModule} from 'apps/demos/services-app/src/app/pipes/collaborator/collaborator.module';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import {ProjectRemoveCollaboratorDialogComponent} from './components/project-rem
     MatSnackBarModule,
     ProjectTypeModule,
     MatDialogModule,
+    CollaboratorPipeModule,
   ],
 })
 export class ProjectViewModule {}
