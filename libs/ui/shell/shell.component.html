@@ -83,7 +83,7 @@
                   <span class="h-8 w-8 text-xl text">{{ appName }}</span>
                 </div>
                 <ng-content *ngIf="hasSidenav" select="[topBarItem]"></ng-content>
-                <div>
+                <div *ngIf="topRoutes && topRoutes.length > 0">
                   <div class="mr-4 flex items-baseline space-x-4">
                     <button mat-button *ngFor="let route of topRoutes" [routerLink]="route.path">
                       <mat-icon *ngIf="route.icon" class="mr-4">{{ route.icon }}</mat-icon>
@@ -93,7 +93,7 @@
                 </div>
               </div>
               <div class="block">
-                <div class="flex items-center md:ml-6">
+                <div class="flex items-center">
                   <div class="ml-3 relative">
                     <div>
                       <ng-content select="rng-user-account-popup"></ng-content>

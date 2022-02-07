@@ -10,8 +10,8 @@
   <button mat-button topBarItem class="duration-150" (click)="scrollToTop()" *ngIf="showTitlePage">
     {{ titlePage }}
   </button>
-  <rng-search-input class="ml-auto w-full" topBarItem></rng-search-input>
-
+  <rng-search-input class="ml-auto mr-2 w-full" topBarItem></rng-search-input>
+  <rng-theme-switcher class="ml-auto" topBarItem></rng-theme-switcher>
   <rng-user-account-popup [userInfo]="user$ | async" [routes]="userRoutes"></rng-user-account-popup>
 
   <router-outlet> </router-outlet>

@@ -12,26 +12,46 @@
   </button>
 </div>
 <mat-card class="w-full h-auto mat-elevation-z3">
-  <mat-action-list class="p-0">
-    <mat-list-item
-      class="my-2 p-2 h-auto"
-      *ngFor="let project of projects$ | async | slice: 0:5"
-      [routerLink]="['../projects/project-view', project.id]"
-    >
-      <div mat-line class="flex flex-row">
-        <div class="flex items-center p-2">
-          <mat-icon mat-list-icon [matTooltip]="project.data.type">{{
-            project.data.type | projectTypePipe
-          }}</mat-icon>
-        </div>
-        <div class="flex flex-col w-full">
-          <div class="mb-1">{{ project.data.title }}</div>
-          <div class="mat-card-subtitle mb-2">{{ project.data.location }}</div>
+  <ng-container *ngIf="projects$ | async; let projects">
+    <mat-action-list *ngIf="projects.length > 0; else noOfferedProjects" class="p-0">
+      <mat-list-item
+        class="my-2 p-2 h-auto"
+        *ngFor="let project of projects$ | async | slice: 0:5"
+        [routerLink]="['../projects/project-view', project.id]"
+      >
+        <div mat-line class="flex flex-row">
+          <div class="flex items-center p-2">
+            <mat-icon mat-list-icon [matTooltip]="project.data.type">{{
+              project.data.type | projectTypePipe
+            }}</mat-icon>
+          </div>
+          <div class="flex flex-col w-full">
+            <div class="mb-1">{{ project.data.title }}</div>
+            <div class="mat-card-subtitle mb-2">{{ project.data.location }}</div>
+          </div>
+          <div
+            class="
+              hidden
+              xl:block
+              text-lg
+              my-2
+              p-1
+              px-10
+              text-center
+              bg-gray-100
+              rounded-full
+              w-auto
+              select-none
+            "
+          >
+            {{ project.data.cost | translocoCurrency }}
+          </div>
         </div>
         <div
+          mat-line
           class="
-            hidden
-            xl:block
+            block
+            xl:hidden
             text-lg
             my-2
             p-1
@@ -45,25 +65,15 @@
         >
           {{ project.data.cost | translocoCurrency }}
         </div>
-      </div>
-      <div
-        mat-line
-        class="
-          block
-          xl:hidden
-          text-lg
-          my-2
-          p-1
-          px-10
-          text-center
-          bg-gray-100
-          rounded-full
-          w-auto
-          select-none
-        "
-      >
-        {{ project.data.cost | translocoCurrency }}
-      </div>
-    </mat-list-item>
-  </mat-action-list>
+      </mat-list-item>
+    </mat-action-list>
+  </ng-container>
 </mat-card>
+<ng-template #noOfferedProjects>
+  <div class="flex flex-col h-48 text-center items-center">
+    <div class="m-auto h-36">
+      <p class="mb-4">{{ 'noOfferedProjects' | transloco }}</p>
+      <img class="h-32 w-full" src="assets/undraw_not_found_-60-pq.svg" />
+    </div>
+  </div>
+</ng-template>

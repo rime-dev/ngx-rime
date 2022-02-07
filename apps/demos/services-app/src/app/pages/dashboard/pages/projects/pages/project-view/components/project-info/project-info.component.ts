@@ -168,7 +168,10 @@ export class ProjectInfoComponent implements OnDestroy {
       .afterClosed()
       .subscribe((state: string) => {
         if (state && state !== this.project?.data.state && this.project) {
-          const data = {...this.project.data, state};
+          let data = {...this.project.data, state};
+          if (state === 'finished') {
+            data = {...data, endingDate: new Date().toISOString()};
+          }
           let project: EntityState<Project> = {...this.project, data};
           const activity = {
             action: 'change',

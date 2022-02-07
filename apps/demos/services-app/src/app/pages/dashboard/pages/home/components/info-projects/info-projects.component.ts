@@ -35,9 +35,16 @@ export class InfoProjectsComponent {
   }
 
   private filterFinishedProjectsInThisMonth(documents: EntityState<Project>[]) {
-    const thisMonth = new Date().getFullYear() + '-' + new Date().getMonth() + 1;
-    return documents.filter(
+    const thisMonth = this.calculateThisMonth();
+    const filteredDocuments = documents.filter(
       (project: EntityState<Project>) => project.data.endingDate.slice(0, 7) === thisMonth
     );
+    return filteredDocuments;
+  }
+  private calculateThisMonth(): string {
+    const year = new Date().getFullYear();
+    const month0 = new Date().getMonth() + 1;
+    const month = month0 < 10 ? '0' + month0 : month0;
+    return `${year}-${month}`;
   }
 }

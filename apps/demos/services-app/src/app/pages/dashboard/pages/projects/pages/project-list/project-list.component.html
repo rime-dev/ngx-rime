@@ -85,8 +85,21 @@
         <span>{{ 'rehabilitation' | transloco }}</span>
       </button>
     </div>
-    <div class="flex flex-col w-full" *ngFor="let project of projects">
-      <rng-project-card [project]="project"></rng-project-card>
+    <div
+      *ngIf="projects.length > 0; else noProjects"
+      class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 w-full"
+    >
+      <div *ngFor="let project of projects">
+        <rng-project-card [project]="project"></rng-project-card>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #noProjects>
+  <div class="flex flex-col h-48 text-center items-center">
+    <div class="m-auto h-36">
+      <p class="mb-4">{{ 'noProjects' | transloco }}</p>
+      <img class="h-32 w-full" src="assets/undraw_not_found_-60-pq.svg" />
     </div>
   </div>
 </ng-template>

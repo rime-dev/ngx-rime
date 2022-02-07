@@ -1,4 +1,5 @@
 {
+  "projects": "Projects",
   "projects.offerered": "Projects offered",
   "projects.finished": "Projects finished",
   "project.accepted": "Projects accepted",
@@ -43,5 +44,9 @@
   "activity.change": "has changed",
   "activity.remove": "has removed",
   "noActivity": "No activity",
-  "noDocuments": "No documents"
+  "noDocuments": "No documents",
+  "noProjects": "No projects",
+  "noActiveProjects": "No active projects",
+  "noOfferedProjects": "No offered projects",
+  "recentSearches": "Recent searches"
 }

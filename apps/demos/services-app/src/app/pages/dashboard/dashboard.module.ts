@@ -11,6 +11,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {ShellModule} from '@rng/ui/shell';
 import {UserAccountPopupModule} from '@rng/ui/user-account-popup';
 import {SearchInputModule} from '../../components/search-input/search-input.module';
+import {ThemeSwitcherModule} from '../../components/theme-switcher/theme-switcher.module';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {DashboardComponent} from './dashboard.component';
 
@@ -31,6 +32,7 @@ import {DashboardComponent} from './dashboard.component';
     ShellModule,
     UserAccountPopupModule,
     SearchInputModule,
+    ThemeSwitcherModule,
   ],
 })
 export class DashboardModule {}

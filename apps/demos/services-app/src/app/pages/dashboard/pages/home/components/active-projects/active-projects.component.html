@@ -10,14 +10,24 @@
   </button>
 </div>
 <mat-card class="w-full h-auto mat-elevation-z3 overflow-auto">
-  <mat-action-list style="padding: 0">
-    <mat-list-item
-      *ngFor="let project of projects$ | async | slice: 0:5"
-      [routerLink]="['../projects/project-view', project.id]"
-    >
-      <mat-icon mat-list-icon>{{ project.data.type | projectTypePipe }}</mat-icon>
-      <div mat-line>{{ project.data.title }}</div>
-      <div mat-line class="mat-card-subtitle">{{ project.data.location }}</div>
-    </mat-list-item>
-  </mat-action-list>
+  <ng-container *ngIf="projects$ | async; let projects">
+    <mat-action-list *ngIf="projects.length > 0; else noActiveProjects" style="padding: 0">
+      <mat-list-item
+        *ngFor="let project of projects$ | async | slice: 0:5"
+        [routerLink]="['../projects/project-view', project.id]"
+      >
+        <mat-icon mat-list-icon>{{ project.data.type | projectTypePipe }}</mat-icon>
+        <div mat-line>{{ project.data.title }}</div>
+        <div mat-line class="mat-card-subtitle">{{ project.data.location }}</div>
+      </mat-list-item>
+    </mat-action-list>
+  </ng-container>
 </mat-card>
+<ng-template #noActiveProjects>
+  <div class="flex flex-col h-48 text-center items-center">
+    <div class="m-auto h-36">
+      <p class="mb-4">{{ 'noActiveProjects' | transloco }}</p>
+      <img class="h-32 w-full" src="assets/undraw_not_found_-60-pq.svg" />
+    </div>
+  </div>
+</ng-template>

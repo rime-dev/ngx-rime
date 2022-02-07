@@ -1,65 +1,72 @@
 <div *ngIf="project" class="lg:container p-8 flex flex-col mx-auto">
-  <div *ngIf="project.data.group" class="flex flex-col-reverse md:flex-row w-full h-auto">
-    <div class="flex flex-row w-full md:w-1/2">
-      <div *ngIf="(collaborators$ | async)?.length === 0" class="self-center text-sm">
-        <span>Añadir colaboradores</span>
-      </div>
-      <div class="group flex flex-row relative" *ngFor="let collaborator of collaborators$ | async">
-        <img
-          [matTooltip]="collaborator.data.name"
-          class="
-            group
-            rounded-full
-            h-12
-            w-12
-            mx-2
-            mat-elevation-z2
-            object-cover
-            cursor-pointer
-            relative
-            group-hover:opacity-50
-          "
-          [src]="collaborator.data.avatar"
-        />
+  <ng-container *ngIf="project.data.group">
+    <span class="text-lg font-medium mt-6 mb-2 text-gray-700">Colaboradores</span>
+    <div class="flex flex-col-reverse md:flex-row w-full h-auto">
+      <div class="flex flex-row w-full md:w-1/2">
+        <div *ngIf="(collaborators$ | async)?.length === 0" class="self-center text-sm">
+          <span>Añadir colaboradores</span>
+        </div>
         <div
-          class="invisible group-hover:visible absolute w-full h-full"
+          class="group flex flex-row relative"
+          *ngFor="let collaborator of collaborators$ | async"
+        >
+          <img
+            [matTooltip]="collaborator.data.name"
+            class="
+              group
+              rounded-full
+              h-12
+              w-12
+              mx-2
+              mat-elevation-z2
+              object-cover
+              cursor-pointer
+              relative
+              group-hover:opacity-50
+            "
+            [src]="collaborator.data.avatar"
+          />
+          <div
+            class="invisible group-hover:visible absolute w-full h-full"
+            *ngIf="!checkIfProjectIsFinished()"
+          >
+            <button
+              mat-icon-button
+              class="w-full h-full"
+              (click)="openDialogRemoveCollaborator(collaborator)"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </div>
+        <button
+          mat-icon-button
+          class="rounded-full h-12 w-12 mx-2"
+          (click)="openDialogAddCollaborator()"
           *ngIf="!checkIfProjectIsFinished()"
         >
-          <button
-            mat-icon-button
-            class="w-full h-full"
-            (click)="openDialogRemoveCollaborator(collaborator)"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
-        </div>
+          <mat-icon>add</mat-icon>
+        </button>
       </div>
-      <button
-        mat-icon-button
-        class="rounded-full h-12 w-12 mx-2"
-        (click)="openDialogAddCollaborator()"
-        *ngIf="!checkIfProjectIsFinished()"
-      >
-        <mat-icon>add</mat-icon>
-      </button>
+      <div class="flex flex-row w-full md:w-1/2 pb-4 md:pb-0 justify-end">
+        <button
+          mat-stroked-button
+          class="w-full md:w-auto rounded-full"
+          [color]="project.data.state === 'active' ? 'primary' : 'accent'"
+          [ngClass]="{
+            'project-state-active': project.data.state === 'active',
+            'project-state-inactive': project.data.state === 'inactive',
+            'project-state-finished': project.data.state === 'finished'
+          }"
+          (click)="openDialogToChangeState()"
+        >
+          {{ project.data.state | transloco }}
+        </button>
+      </div>
     </div>
-    <div class="flex flex-row w-full md:w-1/2 pb-4 md:pb-0 justify-end">
-      <button
-        mat-stroked-button
-        class="w-full md:w-auto rounded-full"
-        [color]="project.data.state === 'active' ? 'primary' : 'accent'"
-        [ngClass]="{
-          'project-state-active': project.data.state === 'active',
-          'project-state-inactive': project.data.state === 'inactive',
-          'project-state-finished': project.data.state === 'finished'
-        }"
-        (click)="openDialogToChangeState()"
-      >
-        {{ project.data.state | transloco }}
-      </button>
-    </div>
-  </div>
-  <span class="text-xl font-semibold mt-6 mb-2">Descripción</span>
+  </ng-container>
+
+  <span class="text-lg font-medium mt-6 mb-2 text-gray-700">Descripción</span>
   <div class="flex flex-col w-full p-4">
     <mat-action-list>
       <mat-list-item class="h-auto">
@@ -70,7 +77,7 @@
       </mat-list-item>
     </mat-action-list>
   </div>
-  <span class="text-xl font-semibold mt-6 mb-2">Detalles</span>
+  <span class="text-lg font-medium mt-6 mb-2 text-gray-700">Detalles</span>
   <div class="flex flex-col p-4">
     <mat-action-list>
       <mat-list-item>
@@ -191,7 +198,7 @@
       >
     </mat-chip-list>
   </div>
-  <span class="text-xl font-semibold mt-6 mb-2">{{ 'location' | transloco }}</span>
+  <span class="text-lg font-medium mt-6 mb-2 text-gray-700">{{ 'location' | transloco }}</span>
   <div class="flex flex-col p-4">
     <mat-action-list>
       <mat-list-item class="h-auto">
