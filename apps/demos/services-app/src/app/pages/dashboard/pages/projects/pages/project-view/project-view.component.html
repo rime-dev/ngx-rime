@@ -3,10 +3,12 @@
     <mat-icon>arrow_back</mat-icon>
   </button>
   <header class="max-w-7xl w-full py-6 px-4 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-semibold text-gray-700">{{ (project$ | async)?.data.title }}</h1>
+    <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-200">
+      {{ (project$ | async)?.data.title }}
+    </h1>
   </header>
 </div>
-<mat-tab-group animationDuration="0ms">
+<mat-tab-group animationDuration="0ms" color="primary">
   <mat-tab>
     <ng-template mat-tab-label>
       {{ 'information' | transloco }}

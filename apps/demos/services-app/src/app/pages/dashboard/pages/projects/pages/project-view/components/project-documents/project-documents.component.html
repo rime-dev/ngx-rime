@@ -54,6 +54,8 @@
           md:max-w-2xl
           cursor-pointer
           hover:opacity-70
+          border border-gray-200
+          dark:border-gray-500
         "
         *ngFor="let document of filteredDocuments | async"
       >
@@ -66,7 +68,7 @@
               [alt]="document.title"
             />
           </div>
-          <div class="p-4">
+          <div class="p-4 dark:bg-gray-800">
             <p class="mt-2 text-slate-500 text-center">{{ document.title }}</p>
           </div>
         </div>

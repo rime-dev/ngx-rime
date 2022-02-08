@@ -1,6 +1,8 @@
 <div *ngIf="project" class="lg:container p-8 flex flex-col mx-auto">
   <ng-container *ngIf="project.data.group">
-    <span class="text-lg font-medium mt-6 mb-2 text-gray-700">Colaboradores</span>
+    <span class="text-lg font-medium mt-6 mb-2 text-gray-700 dark:text-gray-200"
+      >Colaboradores</span
+    >
     <div class="flex flex-col-reverse md:flex-row w-full h-auto">
       <div class="flex flex-row w-full md:w-1/2">
         <div *ngIf="(collaborators$ | async)?.length === 0" class="self-center text-sm">
@@ -66,7 +68,7 @@
     </div>
   </ng-container>
 
-  <span class="text-lg font-medium mt-6 mb-2 text-gray-700">Descripción</span>
+  <span class="text-lg font-medium mt-6 mb-2 text-gray-700 dark:text-gray-200">Descripción</span>
   <div class="flex flex-col w-full p-4">
     <mat-action-list>
       <mat-list-item class="h-auto">
@@ -77,7 +79,7 @@
       </mat-list-item>
     </mat-action-list>
   </div>
-  <span class="text-lg font-medium mt-6 mb-2 text-gray-700">Detalles</span>
+  <span class="text-lg font-medium mt-6 mb-2 text-gray-700 dark:text-gray-200">Detalles</span>
   <div class="flex flex-col p-4">
     <mat-action-list>
       <mat-list-item>
@@ -198,7 +200,9 @@
       >
     </mat-chip-list>
   </div>
-  <span class="text-lg font-medium mt-6 mb-2 text-gray-700">{{ 'location' | transloco }}</span>
+  <span class="text-lg font-medium mt-6 mb-2 text-gray-700 dark:text-gray-200">{{
+    'location' | transloco
+  }}</span>
   <div class="flex flex-col p-4">
     <mat-action-list>
       <mat-list-item class="h-auto">

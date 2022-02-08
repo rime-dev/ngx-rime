@@ -65,7 +65,7 @@
         <mat-toolbar
           #rngToolbar
           class="w-full z-50 duration-150"
-          [color]="!hasSidenav ? 'primary' : ''"
+          [color]="!hasSidenav ? 'primary' : 'accent'"
           [class.mat-elevation-z2]="scrolled?.isScrolled"
         >
           <div class="mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -104,11 +104,7 @@
             </div>
           </div>
         </mat-toolbar>
-        <div
-          class="relative w-full h-full overflow-auto"
-          style="background: whitesmoke"
-          (scroll)="onScroll$.next($event)"
-        >
+        <div class="relative w-full h-full overflow-auto" (scroll)="onScroll$.next($event)">
           <ng-content></ng-content>
         </div>
       </div>

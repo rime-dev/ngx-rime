@@ -1,11 +1,6 @@
 <div class="flex flex-row mb-2">
-  <button mat-button class="w-full card-title text-left" color="primary">Proyectos en curso</button>
-  <button
-    mat-icon-button
-    color="primary"
-    [routerLink]="['../projects/project-list']"
-    [state]="['state', 'active']"
-  >
+  <button mat-button class="w-full card-title text-left">Proyectos en curso</button>
+  <button mat-icon-button [routerLink]="['../projects/project-list']" [state]="['state', 'active']">
     <mat-icon>read_more</mat-icon>
   </button>
 </div>

@@ -48,10 +48,7 @@
         <div *ngIf="userInfo?.displayName" class="text-lg font-medium leading-none mb-2">
           {{ userInfo?.displayName }}
         </div>
-        <div
-          *ngIf="userInfo?.email"
-          class="text-sm font-medium leading-none text-gray-700 mb-1 text-center"
-        >
+        <div *ngIf="userInfo?.email" class="text-sm font-medium leading-none mb-1 text-center">
           {{ userInfo?.email }}
         </div>
       </div>

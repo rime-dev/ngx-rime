@@ -10,7 +10,7 @@
                 <span class="text-4lg text-white block mt-4">3000€</span>
               </mat-card-subtitle>
               <mat-chip-list>
-                <mat-chip color="accent" selected>+10% respecto al mes anterior</mat-chip>
+                <mat-chip color="primary" selected>+10% respecto al mes anterior</mat-chip>
               </mat-chip-list>
             </mat-card-header>
           </mat-card>
@@ -30,8 +30,8 @@
       </div>
       <div class="flex flex-col w-full xl:w-1/2 p-2 px-4">
         <div class="flex flex-row mb-2">
-          <button mat-button class="w-full card-title" color="primary">Facturas recientes</button>
-          <button mat-icon-button color="primary" [routerLink]="['../invoices']">
+          <button mat-button class="w-full card-title">Facturas recientes</button>
+          <button mat-icon-button [routerLink]="['../invoices']">
             <mat-icon>read_more</mat-icon>
           </button>
         </div>

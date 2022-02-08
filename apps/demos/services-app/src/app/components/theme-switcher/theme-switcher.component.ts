@@ -1,3 +1,4 @@
+import {OverlayContainer} from '@angular/cdk/overlay';
 import {Component, OnInit} from '@angular/core';
 
 @Component({
@@ -6,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./theme-switcher.component.scss'],
 })
 export class ThemeSwitcherComponent implements OnInit {
-  constructor() {}
+  constructor(private overlay: OverlayContainer) {}
   ngOnInit(): void {
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
@@ -26,17 +27,23 @@ export class ThemeSwitcherComponent implements OnInit {
       if (localStorage.getItem('theme')) {
         if (localStorage.getItem('theme') === 'dark') {
           document.documentElement.classList.remove('dark');
+          this.overlay.getContainerElement().classList.remove('dark');
+
           localStorage.setItem('theme', 'light');
         } else {
           document.documentElement.classList.add('dark');
+          this.overlay.getContainerElement().classList.add('dark');
+
           localStorage.setItem('theme', 'dark');
         }
       } else {
         if (document.documentElement.classList.contains('dark')) {
           document.documentElement.classList.remove('dark');
+          this.overlay.getContainerElement().classList.remove('dark');
           localStorage.setItem('theme', 'light');
         } else {
           document.documentElement.classList.add('dark');
+          this.overlay.getContainerElement().classList.add('dark');
           localStorage.setItem('theme', 'dark');
         }
       }

@@ -13,6 +13,73 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import '~@angular/material/theming';
+
+@mixin _palette-styles($palette) {
+  background: mat.get-color-from-palette($palette);
+  color: mat.get-color-from-palette($palette, default-contrast);
+}
+@mixin sidenav-component-theme($theme) {
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
+  $foreground: map.get($theme, foreground);
+  $background: map.get($theme, background);
+  .mat-sidenav {
+    background: mat.get-color-from-palette($background, app-bar);
+    color: mat.get-color-from-palette($foreground, text);
+    &[color='primary'] {
+      @include _palette-styles($primary);
+    }
+    &[color='accent'] {
+      @include _palette-styles($accent);
+    }
+    &[color='warn'] {
+      @include _palette-styles($warn);
+    }
+  }
+}
+@mixin overlay-component-theme($theme) {
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
+  $foreground: map.get($theme, foreground);
+  $background: map.get($theme, background);
+  .cdk-overlay-pane {
+    background: mat.get-color-from-palette($background, app-bar);
+    color: mat.get-color-from-palette($foreground, text);
+    &[color='primary'] {
+      @include _palette-styles($primary);
+    }
+    &[color='accent'] {
+      @include _palette-styles($accent);
+    }
+    &[color='warn'] {
+      @include _palette-styles($warn);
+    }
+  }
+}
+@mixin rng-search-input-component-theme($theme) {
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
+  $foreground: map.get($theme, foreground);
+  $background: map.get($theme, background);
+  .rng-search-input {
+    background: mat.get-color-from-palette($background, app-bar);
+    color: mat.get-color-from-palette($foreground, text);
+    &[color='primary'] {
+      @include _palette-styles($primary);
+    }
+    &[color='accent'] {
+      @include _palette-styles($accent);
+    }
+    &[color='warn'] {
+      @include _palette-styles($warn);
+    }
+  }
+}
+
 $mat-rng: (
   50: #f0f0f0,
   100: #f0f0f0,
@@ -27,7 +94,7 @@ $mat-rng: (
   900: #843737,
   A100: #607d8b,
   A200: #607d8b,
-  A400: #607d8b,
+  A400: #fafafa,
   A700: #375984,
   contrast: (
     50: white,
@@ -60,7 +127,7 @@ $mat-rng-dark: (
   900: #ad4848,
   A100: #607d8b,
   A200: #607d8b,
-  A400: #607d8b,
+  A400: #303030,
   A700: #18273a,
   contrast: (
     50: white,
@@ -135,10 +202,16 @@ $rng-app-theme: mat.define-light-theme(
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($rng-default-theme);
+@include sidenav-component-theme($rng-default-theme);
+@include overlay-component-theme($rng-default-theme);
+@include rng-search-input-component-theme($rng-default-theme);
 
 .dark {
   @include mat.core-color($rng-dark-theme);
-  @include mat.button-color($rng-dark-theme);
+  @include mat.all-component-colors($rng-dark-theme);
+  @include sidenav-component-theme($rng-dark-theme);
+  @include overlay-component-theme($rng-dark-theme);
+  @include rng-search-input-component-theme($rng-dark-theme);
 }
 
 html,
@@ -183,35 +256,6 @@ $color-config: mat.get-color-config($rng-default-theme);
   color: #375984 !important;
   border-color: #375984 !important;
 }
-
-@import '~@angular/material/theming';
-
-@mixin _palette-styles($palette) {
-  background: mat.get-color-from-palette($palette);
-  color: mat.get-color-from-palette($palette, default-contrast);
-}
-@mixin sidenav-component-theme($theme) {
-  $primary: map.get($theme, primary);
-  $accent: map.get($theme, accent);
-  $warn: map.get($theme, warn);
-  $foreground: map.get($theme, foreground);
-  $background: map.get($theme, background);
-  .mat-sidenav {
-    background: mat.get-color-from-palette($background, app-bar);
-    color: mat.get-color-from-palette($foreground, text);
-    &[color='primary'] {
-      @include _palette-styles($primary);
-    }
-    &[color='accent'] {
-      @include _palette-styles($accent);
-    }
-    &[color='warn'] {
-      @include _palette-styles($warn);
-    }
-  }
-}
-
-@include sidenav-component-theme($rng-default-theme);
 
 ::ng-deep {
   @media screen and (max-width: 500px) {

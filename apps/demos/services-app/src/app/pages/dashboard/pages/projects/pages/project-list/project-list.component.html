@@ -1,6 +1,6 @@
 <div>
   <header class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-semibold text-gray-700">Proyectos</h1>
+    <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-200">Proyectos</h1>
   </header>
   <mat-tab-group
     animationDuration="0ms"
@@ -55,7 +55,7 @@
       <button
         mat-button
         [ngClass]="filterByTypeSelected === 'all' ? 'mat-raised-button' : 'mat-stroked-button'"
-        class="mx-2 font-thin min-w-min"
+        class="mx-2 font-thin min-w-min dark:text-white"
         color="primary"
         (click)="filterByType()"
       >
@@ -65,7 +65,7 @@
       <button
         mat-button
         [ngClass]="filterByTypeSelected === 'paint' ? 'mat-raised-button' : 'mat-stroked-button'"
-        class="mx-2 font-thin min-w-min"
+        class="mx-2 font-thin min-w-min dark:text-white"
         color="primary"
         (click)="filterByType('paint')"
       >
@@ -77,7 +77,7 @@
         [ngClass]="
           filterByTypeSelected === 'construction' ? 'mat-raised-button' : 'mat-stroked-button'
         "
-        class="mx-2 font-thin min-w-min"
+        class="mx-2 font-thin min-w-min dark:text-white"
         color="primary"
         (click)="filterByType('construction')"
       >

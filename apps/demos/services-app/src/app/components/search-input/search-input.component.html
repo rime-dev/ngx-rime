@@ -11,7 +11,7 @@
       (focus)="onFocus($event)"
       (blur)="onBlur($event)"
       [formControlName]="'searchInput'"
-      class="bg-white h-10 px-5 pr-10 text-sm focus:outline-none max-w-full ml-auto"
+      class="rng-search-input h-10 px-5 pr-10 text-sm focus:outline-none max-w-full ml-auto"
       style="
         width: 200px;
         transition-duration: 100ms;
@@ -25,11 +25,8 @@
       cdkOverlayOrigin
       #trigger="cdkOverlayOrigin"
     />
-    <button type="submit" class="absolute right-0 top-0 mt-2 mr-2">
-      <mat-icon
-        color="primary"
-        *ngIf="!(this.searchForm.controls.searchInput.valueChanges | async)"
-      >
+    <button type="submit" class="absolute right-0 top-0 mt-2 mr-2 dark:text-white" color="primary">
+      <mat-icon *ngIf="!(this.searchForm.controls.searchInput.valueChanges | async)">
         search
       </mat-icon>
     </button>
@@ -43,19 +40,7 @@
     [cdkConnectedOverlayOpen]="isOverlayOpened"
     [cdkConnectedOverlayWidth]="inputSearch.clientWidth"
   >
-    <div
-      class="
-        relative
-        w-full
-        h-full
-        md:h-2/5
-        bg-white
-        flex flex-col
-        p-4
-        rounded-b-2xl
-        mat-elevation-z2
-      "
-    >
+    <div class="relative w-full h-full md:h-2/5 flex flex-col p-4 rounded-b-2xl mat-elevation-z2">
       <div>
         {{ 'projects' | transloco }}
         <mat-action-list>
