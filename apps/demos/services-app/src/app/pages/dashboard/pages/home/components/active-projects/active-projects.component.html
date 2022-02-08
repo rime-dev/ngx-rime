@@ -13,7 +13,7 @@
       >
         <mat-icon mat-list-icon>{{ project.data.type | projectTypePipe }}</mat-icon>
         <div mat-line>{{ project.data.title }}</div>
-        <div mat-line class="mat-card-subtitle">{{ project.data.location }}</div>
+        <div mat-line class="mat-card-subtitle">{{ project.data.location.text }}</div>
       </mat-list-item>
     </mat-action-list>
   </ng-container>

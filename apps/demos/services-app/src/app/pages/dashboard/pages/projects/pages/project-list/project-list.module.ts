@@ -11,6 +11,7 @@ import {ProjectCardComponent} from './components/project-card/project-card.compo
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ProjectTypeModule} from 'apps/demos/services-app/src/app/pipes/project-type/project-type.module';
 import {TranslocoModule} from '@ngneat/transloco';
+import {MapModule} from 'apps/demos/services-app/src/app/components/map/map.module';
 
 @NgModule({
   declarations: [ProjectListComponent, ProjectCardComponent],
@@ -25,6 +26,7 @@ import {TranslocoModule} from '@ngneat/transloco';
     MatTooltipModule,
     ProjectTypeModule,
     TranslocoModule,
+    MapModule,
   ],
 })
 export class ProjectListModule {}

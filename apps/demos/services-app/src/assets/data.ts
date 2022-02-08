@@ -8,7 +8,10 @@ export const projects: EntityState<Project>[] = [
     data: {
       uid: 'GFT7',
       title: 'Cambio de azulejos',
-      location: 'Av. Malvarrosa, Valencia',
+      location: {
+        text: 'Av. Malvarrosa, Valencia',
+        coordinates: [-0.3280813599117059, 39.4794693227284],
+      },
       type: 'construction',
       state: 'finished',
       accepted: true,
@@ -46,7 +49,10 @@ export const projects: EntityState<Project>[] = [
     data: {
       uid: 'GFT8',
       title: 'Cambio de lámparas',
-      location: 'Av. Malvarrosa, Valencia',
+      location: {
+        text: 'Av. Malvarrosa, Valencia',
+        coordinates: [-0.3280813599117059, 39.4794693227284],
+      },
       type: 'paint',
       state: 'finished',
       accepted: true,
@@ -84,7 +90,10 @@ export const projects: EntityState<Project>[] = [
     data: {
       uid: 'GFT3',
       title: 'Pintura de 4 habitaciones',
-      location: 'Av. Malvarrosa, Valencia',
+      location: {
+        text: 'Av. Malvarrosa, Valencia',
+        coordinates: [-0.3280813599117059, 39.4794693227284],
+      },
       type: 'paint',
       state: 'active',
       accepted: true,
@@ -189,7 +198,10 @@ export const otherProjects: EntityState<Project>[] = [
     data: {
       uid: 'GFT4',
       title: 'Rehabilitación de muebles de exterior',
-      location: 'C. Coronel Pérez, Torrent',
+      location: {
+        text: 'C. Coronel Pérez, Torrent',
+        coordinates: [-0.4729078334928575, 39.431874010962424],
+      },
       type: 'construction',
       state: 'inactive',
       accepted: false,
@@ -210,7 +222,10 @@ export const otherProjects: EntityState<Project>[] = [
     data: {
       uid: 'GFT5',
       title: 'Cambio de bañera',
-      location: 'C. Coronel Pérez, Torrent',
+      location: {
+        text: 'C. Coronel Pérez, Torrent',
+        coordinates: [-0.4729078334928575, 39.431874010962424],
+      },
       type: 'construction',
       state: 'inactive',
       accepted: false,
@@ -231,7 +246,10 @@ export const otherProjects: EntityState<Project>[] = [
     data: {
       uid: 'GFT6',
       title: 'Pintura de piscina',
-      location: 'C. Coronel Pérez, Torrent',
+      location: {
+        text: 'C. Coronel Pérez, Torrent',
+        coordinates: [-0.4729078334928575, 39.431874010962424],
+      },
       type: 'paint',
       state: 'inactive',
       accepted: false,

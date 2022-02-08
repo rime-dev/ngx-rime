@@ -1,0 +1,98 @@
+import {coerceArray} from '@angular/cdk/coercion';
+import {AfterViewInit, Component, HostBinding, Input} from '@angular/core';
+import {Feature} from 'ol';
+import {Circle, Fill, Stroke, Style} from 'ol/style';
+import TileLayer from 'ol/layer/Tile';
+import VectorLayer from 'ol/layer/Vector';
+import Map from 'ol/Map';
+import * as proj from 'ol/proj';
+import Stamen from 'ol/source/Stamen';
+import VectorSource from 'ol/source/Vector';
+import View from 'ol/View';
+import Point from 'ol/geom/Point';
+
+@Component({
+  selector: 'rng-map',
+  templateUrl: './map.component.html',
+})
+export class MapComponent implements AfterViewInit {
+  private map!: Map;
+  private vectorLayer!: VectorLayer<any>;
+  @Input()
+  set data(value) {
+    this._data = value;
+    this.addPoints(value);
+  }
+  get data() {
+    return this._data;
+  }
+  private _data = {};
+
+  @Input()
+  set center(value) {
+    this._center = coerceArray(value);
+    this.changeCenter(value);
+  }
+  get center() {
+    return this._center;
+  }
+  private _center = [0, 0];
+
+  @HostBinding('attr.id') id = 'rng-map';
+
+  constructor() {}
+
+  public updateMap() {
+    if (this.map && this.map instanceof Map) {
+      this.map.updateSize();
+    }
+  }
+
+  private changeCenter(center: number[]) {
+    if (this.map && this.map instanceof Map) {
+      this.map.getView().setCenter(center);
+    }
+  }
+  private addPoints(points: any) {
+    if (this.vectorLayer) {
+      const features = points.map((point: number[]) => new Feature(new Point(point)));
+      this.vectorLayer.getSource().clear();
+      this.vectorLayer.getSource().addFeatures(features);
+      this.updateMap();
+    } else {
+      if (this.map) {
+        const features = points.map((point: number[]) => new Feature(point));
+        const vectorLayer = new VectorLayer({
+          source: new VectorSource(features),
+          style: new Style({
+            image: new Circle({
+              radius: 9,
+              fill: new Fill({color: 'blue'}),
+              stroke: new Stroke({color: 'blue'}),
+            }),
+          }),
+        });
+        this.map.addLayer(vectorLayer);
+        this.vectorLayer = vectorLayer;
+      }
+    }
+  }
+  ngAfterViewInit(): void {
+    const map = new Map({
+      target: this.id,
+      layers: [
+        new TileLayer({
+          source: new Stamen({
+            layer: 'toner-lite', //'terrain',
+          }),
+        }),
+      ],
+      view: new View({
+        projection: 'EPSG:4326',
+        center: proj.fromLonLat(this.center),
+        zoom: 4,
+      }),
+    });
+    this.map = map;
+  }
+}
