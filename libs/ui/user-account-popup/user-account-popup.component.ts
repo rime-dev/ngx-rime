@@ -10,7 +10,7 @@ export interface Routes {
 export interface UserInfo {
   displayName?: string;
   email?: string;
-  photoUrl?: string;
+  photoURL?: string;
   uid?: string;
 }
 

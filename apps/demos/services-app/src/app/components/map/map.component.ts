@@ -45,6 +45,7 @@ export class MapComponent implements AfterViewInit {
   public updateMap() {
     if (this.map && this.map instanceof Map) {
       this.map.updateSize();
+      this.map.render();
     }
   }
 
@@ -54,11 +55,16 @@ export class MapComponent implements AfterViewInit {
     }
   }
   private addPoints(points: any) {
+    console.log('addPoints');
+
     if (this.vectorLayer) {
       const features = points.map((point: number[]) => new Feature(new Point(point)));
+      console.log('FEAUTRES', features);
+
       this.vectorLayer.getSource().clear();
       this.vectorLayer.getSource().addFeatures(features);
       this.updateMap();
+      console.log('vectorLayer');
     } else {
       if (this.map) {
         const features = points.map((point: number[]) => new Feature(point));
@@ -72,8 +78,13 @@ export class MapComponent implements AfterViewInit {
             }),
           }),
         });
-        this.map.addLayer(vectorLayer);
         this.vectorLayer = vectorLayer;
+        this.vectorLayer.changed();
+        this.map.addLayer(this.vectorLayer);
+        this.updateMap();
+        console.log('NO vectorLayer WITH MAP');
+      } else {
+        console.log('NO map');
       }
     }
   }
@@ -89,10 +100,11 @@ export class MapComponent implements AfterViewInit {
       ],
       view: new View({
         projection: 'EPSG:4326',
-        center: proj.fromLonLat(this.center),
+        center: this.center,
         zoom: 4,
       }),
     });
     this.map = map;
+    this.addPoints(this._data);
   }
 }

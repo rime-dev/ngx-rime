@@ -44,6 +44,7 @@
       "
     >
       <div
+        matRipple
         class="
           w-full
           mx-auto
@@ -53,13 +54,45 @@
           overflow-hidden
           md:max-w-2xl
           cursor-pointer
-          hover:opacity-70
           border border-gray-200
           dark:border-gray-500
         "
         *ngFor="let document of filteredDocuments | async"
       >
-        <div class="flex flex-col">
+        <div class="max-w-4xl mx-auto grid grid-cols-1">
+          <div
+            class="
+              relative
+              p-3
+              col-start-1
+              row-start-1
+              flex flex-col-reverse
+              rounded-lg
+              bg-gradient-to-t
+              from-gray-500
+              via-transparent
+            "
+          >
+            <h1 class="mt-1 text-lg font-semibold text-white dark:sm:text-white">
+              {{ document.title }}
+            </h1>
+            <p
+              *ngIf="document.subtitle"
+              class="text-sm leading-4 font-medium text-white dark:sm:text-slate-400"
+            >
+              {{ document.subtitle }}
+            </p>
+          </div>
+          <div class="grid gap-4 col-start-1 col-end-3 row-start-1">
+            <img
+              [src]="document.url"
+              [alt]="document.title"
+              class="w-full h-60 object-cover rounded-lg"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <!-- <div class="flex flex-col">
           <div class="md:shrink-0">
             <img
               *ngIf="document.format === 'image'"
@@ -71,7 +104,7 @@
           <div class="p-4 dark:bg-gray-800">
             <p class="mt-2 text-slate-500 text-center">{{ document.title }}</p>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </ng-container>

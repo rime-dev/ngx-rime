@@ -3,8 +3,10 @@ import {NavigationEnd, Router} from '@angular/router';
 import {AuthService, User} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {Observable, Subject} from 'rxjs';
-import {filter, takeUntil, tap} from 'rxjs/operators';
+import {filter, map, takeUntil, tap} from 'rxjs/operators';
 import {log$} from 'apps/demos/services-app/src/app/decorators/log.decorator';
+import {EntityState} from '@rng/data-access/base/models/base.model';
+import {UserInfo} from '@rng/ui/user-account-popup';
 
 @Component({
   selector: 'rng-dashboard',
@@ -52,7 +54,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public hasSidenav = true;
   private destroy$: Subject<void> = new Subject();
-  @log$ public user$: Observable<User | null>;
+  @log$ public userAuth$: Observable<User | null>;
+  @log$ public user$: Observable<UserInfo>;
   showLoginButton = false;
   showLogoutButton = false;
   showTitlePage = false;
@@ -63,7 +66,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private router: Router,
     private dataService: DataService
   ) {
-    this.user$ = this.authService.user$;
+    this.userAuth$ = this.authService.user$;
+    this.userAuth$
+      .pipe(
+        tap({
+          next: (user: User | null) => {
+            this.loadUser(user?.uid);
+          },
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
+    this.user$ = this.dataService
+      .select('User')
+      .entities$.pipe(map((users: EntityState<User>[]) => users.map((user) => user.data)[0]));
   }
   onScroll(event: any) {
     this.showTitlePage = event.isScrolled;
@@ -82,6 +98,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getTitlePage(this.router.url);
     this.loadProjects();
+    this.loadUser();
     this.loadCollaborators();
     this.router.events
       .pipe(
@@ -95,7 +112,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       )
       .subscribe();
   }
-
+  private loadUser(id?: string): void {
+    if (id) {
+      this.dataService.select('User').getByKey(id);
+    }
+  }
   private loadProjects(): void {
     const query = [
       {

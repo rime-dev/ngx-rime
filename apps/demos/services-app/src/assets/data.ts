@@ -108,23 +108,24 @@ export const projects: EntityState<Project>[] = [
       documents: [
         {
           id: 'FTG1',
-          title: 'Tienda',
+          title: 'Documento 1',
+          subtitle: 'Documentos importantes',
           url: `https://images.unsplash.com/photo-1523275335684-37898b6baf30?
           ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=989&q=80`,
           format: 'image',
         },
         {
           id: 'FTG2',
-          title: 'Reloj',
-          url: `https://images.unsplash.com/photo-1523275335684-37898b6baf30?
-          ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=989&q=80`,
+          title: 'Documento 2',
+          url: `https://images.unsplash.com/photo-1640622657236-e83b28df8e01?
+          ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80`,
           format: 'image',
         },
         {
           id: 'FTG3',
-          title: 'Armario',
-          url: `https://images.unsplash.com/photo-1523275335684-37898b6baf30?
-          ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=989&q=80`,
+          title: 'Documento 3',
+          url: `https://images.unsplash.com/photo-1644333192098-75573dacbb0c?
+          ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80`,
           format: 'image',
         },
       ],
@@ -302,13 +303,23 @@ export const collaborators: EntityState<Collaborator>[] = [
       uid: 'HgdTVUOGmgZ7XdPQhKCUZIZx6fT2',
       name: 'Carlos',
       group: 'GS1',
-      avatar:
-        'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      avatar: 'https://avatars.githubusercontent.com/u/31616221?v=4',
     },
   },
 ];
 
+const user = {
+  id: 'HgdTVUOGmgZ7XdPQhKCUZIZx6fT2',
+  data: {
+    displayName: 'Carlos Bayarri',
+    email: 'carlobr7@gmail.com',
+    emailVerified: true,
+    photoURL: 'https://avatars.githubusercontent.com/u/31616221?v=4',
+    uid: 'HgdTVUOGmgZ7XdPQhKCUZIZx6fT2',
+  },
+};
 export const mockData = {
   projects: [...projects, ...otherProjects],
   collaborators,
+  users: [user],
 };

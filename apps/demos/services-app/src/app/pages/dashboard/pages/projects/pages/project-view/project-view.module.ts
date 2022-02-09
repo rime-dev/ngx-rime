@@ -26,6 +26,7 @@ import {ProjectChangeStateDialogComponent} from './components/project-change-sta
 import {ProjectAddCollaboratorDialogComponent} from './components/project-add-collaborator-dialog/project-add-collaborator-dialog.component';
 import {ProjectRemoveCollaboratorDialogComponent} from './components/project-remove-collaborator-dialog/project-remove-collaborator-dialog.component';
 import {CollaboratorPipeModule} from 'apps/demos/services-app/src/app/pipes/collaborator/collaborator.module';
+import {MatRippleModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {CollaboratorPipeModule} from 'apps/demos/services-app/src/app/pipes/coll
     ProjectTypeModule,
     MatDialogModule,
     CollaboratorPipeModule,
+    MatRippleModule,
   ],
 })
 export class ProjectViewModule {}

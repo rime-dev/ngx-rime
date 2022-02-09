@@ -89,12 +89,13 @@
       *ngIf="projects.length > 0; else noProjects"
       class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 w-full"
     >
+      {{ setProjectsFiltered(projects) }}
       <div *ngFor="let project of projects">
         <rng-project-card [project]="project"></rng-project-card>
       </div>
     </div>
     <div class="grid grid-cols-1 w-full h-96">
-      <rng-map class="w-full h-full" [data]="points"></rng-map>
+      <rng-map class="w-full h-full" [data]="points" [center]="center"></rng-map>
     </div>
   </div>
 </ng-template>
