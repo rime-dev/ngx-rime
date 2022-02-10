@@ -7,6 +7,7 @@ import {EntityState} from '@rng/data-access/base/models/base.model';
 import {Project} from 'apps/demos/services-app/src/app/models/project.model';
 import {Observable, of} from 'rxjs';
 import {MapComponent} from 'apps/demos/services-app/src/app/components/map/map.component';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'rng-project-list',
@@ -18,7 +19,6 @@ export class ProjectListComponent implements OnInit {
   public tabSelected = 0;
   public filterByTypeSelected = 'all';
   public points$: Observable<any[]> = of([]);
-  public projectsFiltered!: any;
   public center = [-0.4729078334928575, 39.431874010962424];
   public mapIsOpenOnMobile = false;
   // @DataFilter([
@@ -47,27 +47,31 @@ export class ProjectListComponent implements OnInit {
     private dataService: DataService,
     private changeDetectorRef: ChangeDetectorRef
   ) {
-    this.activeProjects$ = this.dataService.select('Project').entities$.pipe(
-      dataFilter([
-        {fieldPath: 'state', opStr: '==', value: 'active'},
-        {fieldPath: 'group', opStr: '==', value: 'GS1'},
-      ])
-    );
-    this.otherProjects$ = this.dataService
-      .select('Project')
-      .entities$.pipe(dataFilter({fieldPath: 'group', opStr: '==', value: undefined}));
-    this.inactiveProjects$ = this.dataService.select('Project').entities$.pipe(
-      dataFilter([
-        {fieldPath: 'state', opStr: '==', value: 'inactive'},
-        {fieldPath: 'group', opStr: '==', value: 'GS1'},
-      ])
-    );
-    this.finishedProjects$ = this.dataService.select('Project').entities$.pipe(
-      dataFilter([
-        {fieldPath: 'state', opStr: '==', value: 'finished'},
-        {fieldPath: 'group', opStr: '==', value: 'GS1'},
-      ])
-    );
+    // this.activeProjects$ = this.dataService.select('Project').entities$.pipe(
+    //   dataFilter([
+    //     {fieldPath: 'state', opStr: '==', value: 'active'},
+    //     {fieldPath: 'group', opStr: '==', value: 'GS1'},
+    //   ])
+    // );
+    // this.otherProjects$ = this.dataService
+    //   .select('Project')
+    //   .entities$.pipe(dataFilter({fieldPath: 'group', opStr: '==', value: undefined}));
+    // this.inactiveProjects$ = this.dataService.select('Project').entities$.pipe(
+    //   dataFilter([
+    //     {fieldPath: 'state', opStr: '==', value: 'inactive'},
+    //     {fieldPath: 'group', opStr: '==', value: 'GS1'},
+    //   ])
+    // );
+    // this.finishedProjects$ = this.dataService.select('Project').entities$.pipe(
+    //   dataFilter([
+    //     {fieldPath: 'state', opStr: '==', value: 'finished'},
+    //     {fieldPath: 'group', opStr: '==', value: 'GS1'},
+    //   ])
+    // );
+    this.activeProjects$ = of([]);
+    this.otherProjects$ = of([]);
+    this.inactiveProjects$ = of([]);
+    this.finishedProjects$ = of([]);
     const currentNavigation = this.router.getCurrentNavigation();
     const state = currentNavigation?.extras.state;
     if (state) {
@@ -85,6 +89,7 @@ export class ProjectListComponent implements OnInit {
       }
     }
   }
+
   toogleMapOnMobile() {
     this.mapIsOpenOnMobile = !this.mapIsOpenOnMobile;
   }
@@ -109,25 +114,31 @@ export class ProjectListComponent implements OnInit {
         dataFilter([
           {fieldPath: 'state', opStr: '==', value: 'active'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
-        ])
+        ]),
+        tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
       this.otherProjects$ = this.dataService
         .select('Project')
-        .entities$.pipe(dataFilter({fieldPath: 'group', opStr: '==', value: undefined}));
+        .entities$.pipe(
+          dataFilter({fieldPath: 'group', opStr: '==', value: undefined}),
+          tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
+        );
 
       this.inactiveProjects$ = this.dataService.select('Project').entities$.pipe(
         dataFilter([
           {fieldPath: 'state', opStr: '==', value: 'inactive'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
-        ])
+        ]),
+        tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
       this.finishedProjects$ = this.dataService.select('Project').entities$.pipe(
         dataFilter([
           {fieldPath: 'state', opStr: '==', value: 'finished'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
-        ])
+        ]),
+        tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
       this.filterByTypeSelected = 'all';
@@ -137,14 +148,16 @@ export class ProjectListComponent implements OnInit {
           {fieldPath: 'state', opStr: '==', value: 'active'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
           {fieldPath: 'type', opStr: '==', value: type},
-        ])
+        ]),
+        tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
       this.otherProjects$ = this.dataService.select('Project').entities$.pipe(
         dataFilter([
           {fieldPath: 'group', opStr: '==', value: undefined},
           {fieldPath: 'type', opStr: '==', value: type},
-        ])
+        ]),
+        tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
       this.inactiveProjects$ = this.dataService.select('Project').entities$.pipe(
@@ -152,7 +165,8 @@ export class ProjectListComponent implements OnInit {
           {fieldPath: 'state', opStr: '==', value: 'inactive'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
           {fieldPath: 'type', opStr: '==', value: type},
-        ])
+        ]),
+        tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
       this.finishedProjects$ = this.dataService.select('Project').entities$.pipe(
@@ -160,11 +174,11 @@ export class ProjectListComponent implements OnInit {
           {fieldPath: 'state', opStr: '==', value: 'finished'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
           {fieldPath: 'type', opStr: '==', value: type},
-        ])
+        ]),
+        tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
       this.filterByTypeSelected = type;
     }
-    this.loadDataPoints(this.projectsFiltered);
     this.changeDetectorRef.detectChanges();
   }
   ngOnInit(): void {

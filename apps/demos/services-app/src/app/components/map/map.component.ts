@@ -1,18 +1,40 @@
 import {coerceArray} from '@angular/cdk/coercion';
 import {AfterViewInit, Component, HostBinding, InjectionToken, Input} from '@angular/core';
 import {Feature} from 'ol';
-import {Circle, Fill, Stroke, Style} from 'ol/style';
+import Point from 'ol/geom/Point';
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import Map from 'ol/Map';
-import * as proj from 'ol/proj';
 import Stamen from 'ol/source/Stamen';
 import VectorSource from 'ol/source/Vector';
+import {Fill, Style} from 'ol/style';
+import CircleStyle from 'ol/style/Circle';
 import View from 'ol/View';
-import Point from 'ol/geom/Point';
 
 const MAP = new InjectionToken<MapComponent>('MapComponent');
+const outerCircleFill = new Fill({
+  color: 'rgba(55, 89, 132, 0.3)',
+});
+const innerCircleFill = new Fill({
+  color: 'rgba(55, 89, 132, 0.7)',
+});
 
+const innerCircle = new CircleStyle({
+  radius: 10,
+  fill: innerCircleFill,
+});
+const outerCircle = new CircleStyle({
+  radius: 15,
+  fill: outerCircleFill,
+});
+const pointStyle = [
+  new Style({
+    image: outerCircle,
+  }),
+  new Style({
+    image: innerCircle,
+  }),
+];
 @Component({
   selector: 'rng-map',
   templateUrl: './map.component.html',
@@ -74,13 +96,7 @@ export class MapComponent implements AfterViewInit {
         const features = points.map((point: number[]) => new Feature(point));
         const vectorLayer = new VectorLayer({
           source: new VectorSource(features),
-          style: new Style({
-            image: new Circle({
-              radius: 9,
-              fill: new Fill({color: 'blue'}),
-              stroke: new Stroke({color: 'blue'}),
-            }),
-          }),
+          style: pointStyle,
         });
         this.vectorLayer = vectorLayer;
         this.vectorLayer.changed();
