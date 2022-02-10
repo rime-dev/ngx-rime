@@ -1,5 +1,5 @@
 import {coerceArray} from '@angular/cdk/coercion';
-import {AfterViewInit, Component, HostBinding, Input} from '@angular/core';
+import {AfterViewInit, Component, HostBinding, InjectionToken, Input} from '@angular/core';
 import {Feature} from 'ol';
 import {Circle, Fill, Stroke, Style} from 'ol/style';
 import TileLayer from 'ol/layer/Tile';
@@ -11,9 +11,12 @@ import VectorSource from 'ol/source/Vector';
 import View from 'ol/View';
 import Point from 'ol/geom/Point';
 
+const MAP = new InjectionToken<MapComponent>('MapComponent');
+
 @Component({
   selector: 'rng-map',
   templateUrl: './map.component.html',
+  providers: [{provide: MAP, useExisting: MapComponent}],
 })
 export class MapComponent implements AfterViewInit {
   private map!: Map;

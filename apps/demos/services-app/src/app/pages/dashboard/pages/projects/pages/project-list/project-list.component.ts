@@ -4,10 +4,9 @@ import {DataService} from '@rng/data-access/base';
 // import {DataFilter} from '@rng/data-access/base/decorators';
 import {dataFilter} from '@rng/data-access/base/operators';
 import {EntityState} from '@rng/data-access/base/models/base.model';
-import {log$} from 'apps/demos/services-app/src/app/decorators/log.decorator';
 import {Project} from 'apps/demos/services-app/src/app/models/project.model';
 import {Observable, of} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {MapComponent} from 'apps/demos/services-app/src/app/components/map/map.component';
 
 @Component({
   selector: 'rng-project-list',
@@ -21,14 +20,12 @@ export class ProjectListComponent implements OnInit {
   public points$: Observable<any[]> = of([]);
   public projectsFiltered!: any;
   public center = [-0.4729078334928575, 39.431874010962424];
-  showUtility = false;
-  showMapUtil = false;
-
+  public mapIsOpenOnMobile = false;
   // @DataFilter([
   //   {fieldPath: 'state', opStr: '==', value: 'active'},
   //   {fieldPath: 'group', opStr: '==', value: 'GS1'},
   // ])
-  @log$ public activeProjects$: Observable<EntityState<Project>[]>;
+  public activeProjects$: Observable<EntityState<Project>[]>;
 
   // @DataFilter({fieldPath: 'group', opStr: '==', value: undefined})
   public otherProjects$: Observable<EntityState<Project>[]>;
@@ -88,9 +85,13 @@ export class ProjectListComponent implements OnInit {
       }
     }
   }
-  toggleMapUtil() {
-    this.showMapUtil = !this.showMapUtil;
-    this.showMapUtil ? (this.showUtility = true) : (this.showUtility = false);
+  toogleMapOnMobile() {
+    this.mapIsOpenOnMobile = !this.mapIsOpenOnMobile;
+  }
+  updateMap(map: MapComponent): void {
+    setTimeout(() => {
+      map.updateMap();
+    }, 0);
   }
   changeTab(event: number): void {
     this.tabSelected = event;
