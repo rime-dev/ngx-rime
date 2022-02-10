@@ -26,7 +26,7 @@ export class MapComponent implements AfterViewInit {
   get data() {
     return this._data;
   }
-  private _data = {};
+  private _data: any[] | null = [];
 
   @Input()
   set center(value) {
@@ -55,7 +55,7 @@ export class MapComponent implements AfterViewInit {
     }
   }
   private addPoints(points: any) {
-    console.log('addPoints');
+    console.log('addPoints', points);
 
     if (this.vectorLayer) {
       const features = points.map((point: number[]) => new Feature(new Point(point)));
@@ -63,6 +63,7 @@ export class MapComponent implements AfterViewInit {
 
       this.vectorLayer.getSource().clear();
       this.vectorLayer.getSource().addFeatures(features);
+      this.vectorLayer.changed();
       this.updateMap();
       console.log('vectorLayer');
     } else {
@@ -106,5 +107,8 @@ export class MapComponent implements AfterViewInit {
     });
     this.map = map;
     this.addPoints(this._data);
+    setTimeout(() => {
+      this.updateMap();
+    }, 250);
   }
 }

@@ -1,104 +1,130 @@
-<div>
-  <header class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-200">Proyectos</h1>
-  </header>
-  <mat-tab-group
-    animationDuration="0ms"
-    [selectedIndex]="tabSelected"
-    (selectedIndexChange)="changeTab($event)"
-  >
-    <mat-tab>
-      <ng-template mat-tab-label>
-        {{ 'active' | transloco }} ({{ (activeProjects$ | async)?.length }})
-      </ng-template>
-      <ng-template matTabContent>
-        <ng-container
-          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: activeProjects$ | async}"
-        ></ng-container>
-      </ng-template>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        {{ 'offered' | transloco }} ({{ (otherProjects$ | async)?.length }})
-      </ng-template>
-      <ng-template matTabContent>
-        <ng-container
-          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: otherProjects$ | async}"
-        ></ng-container>
-      </ng-template>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        {{ 'inactive' | transloco }} ({{ (inactiveProjects$ | async)?.length }})
-      </ng-template>
-      <ng-template matTabContent>
-        <ng-container
-          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: inactiveProjects$ | async}"
-        ></ng-container>
-      </ng-template>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        {{ 'finished' | transloco }} ({{ (finishedProjects$ | async)?.length }})
-      </ng-template>
-      <ng-template matTabContent>
-        <ng-container
-          *ngTemplateOutlet="projectsListTemplate; context: {$implicit: finishedProjects$ | async}"
-        ></ng-container>
-      </ng-template>
-    </mat-tab>
-  </mat-tab-group>
-</div>
-<ng-template #projectsListTemplate let-projects>
-  <div class="lg:container mx-auto p-4">
-    <div class="flex flex-row w-full mb-4 overflow-y-auto">
-      <button
-        mat-button
-        [ngClass]="filterByTypeSelected === 'all' ? 'mat-raised-button' : 'mat-stroked-button'"
-        class="mx-2 font-thin min-w-min dark:text-white"
-        color="primary"
-        (click)="filterByType()"
-      >
-        <mat-icon class="text-lg">grid_view</mat-icon>
-        <span>{{ 'all' | transloco }}</span>
-      </button>
-      <button
-        mat-button
-        [ngClass]="filterByTypeSelected === 'paint' ? 'mat-raised-button' : 'mat-stroked-button'"
-        class="mx-2 font-thin min-w-min dark:text-white"
-        color="primary"
-        (click)="filterByType('paint')"
-      >
-        <mat-icon class="text-lg">format_paint</mat-icon>
-        <span>{{ 'paint' | transloco }}</span>
-      </button>
-      <button
-        mat-button
-        [ngClass]="
-          filterByTypeSelected === 'construction' ? 'mat-raised-button' : 'mat-stroked-button'
-        "
-        class="mx-2 font-thin min-w-min dark:text-white"
-        color="primary"
-        (click)="filterByType('construction')"
-      >
-        <mat-icon class="text-lg">construction</mat-icon>
-        <span>{{ 'rehabilitation' | transloco }}</span>
-      </button>
-    </div>
-    <div
-      *ngIf="projects.length > 0; else noProjects"
-      class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 w-full"
+<div class="flex flex-row w-full h-full">
+  <div class="w-full h-full" [ngClass]="{'md:w-2/4 lg:w-3/5': showUtility}">
+    <header class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-200">Proyectos</h1>
+    </header>
+    <mat-tab-group
+      animationDuration="0ms"
+      [selectedIndex]="tabSelected"
+      (selectedIndexChange)="changeTab($event)"
     >
-      {{ setProjectsFiltered(projects) }}
-      <div *ngFor="let project of projects">
-        <rng-project-card [project]="project"></rng-project-card>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          {{ 'active' | transloco }} ({{ (activeProjects$ | async)?.length }})
+        </ng-template>
+        <ng-template matTabContent>
+          <ng-container
+            *ngTemplateOutlet="projectsListTemplate; context: {$implicit: activeProjects$ | async}"
+          ></ng-container>
+        </ng-template>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          {{ 'offered' | transloco }} ({{ (otherProjects$ | async)?.length }})
+        </ng-template>
+        <ng-template matTabContent>
+          <ng-container
+            *ngTemplateOutlet="projectsListTemplate; context: {$implicit: otherProjects$ | async}"
+          ></ng-container>
+        </ng-template>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          {{ 'inactive' | transloco }} ({{ (inactiveProjects$ | async)?.length }})
+        </ng-template>
+        <ng-template matTabContent>
+          <ng-container
+            *ngTemplateOutlet="
+              projectsListTemplate;
+              context: {$implicit: inactiveProjects$ | async}
+            "
+          ></ng-container>
+        </ng-template>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          {{ 'finished' | transloco }} ({{ (finishedProjects$ | async)?.length }})
+        </ng-template>
+        <ng-template matTabContent>
+          <ng-container
+            *ngTemplateOutlet="
+              projectsListTemplate;
+              context: {$implicit: finishedProjects$ | async}
+            "
+          ></ng-container>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+    <ng-template #projectsListTemplate let-projects>
+      <div class="lg:container mx-auto p-4">
+        <div class="flex flex-row w-full mb-4 overflow-y-auto">
+          <button
+            mat-button
+            [ngClass]="filterByTypeSelected === 'all' ? 'mat-raised-button' : 'mat-stroked-button'"
+            class="mx-2 font-thin min-w-min dark:text-white"
+            color="primary"
+            (click)="filterByType()"
+          >
+            <mat-icon class="text-lg">grid_view</mat-icon>
+            <span>{{ 'all' | transloco }}</span>
+          </button>
+          <button
+            mat-button
+            [ngClass]="
+              filterByTypeSelected === 'paint' ? 'mat-raised-button' : 'mat-stroked-button'
+            "
+            class="mx-2 font-thin min-w-min dark:text-white"
+            color="primary"
+            (click)="filterByType('paint')"
+          >
+            <mat-icon class="text-lg">format_paint</mat-icon>
+            <span>{{ 'paint' | transloco }}</span>
+          </button>
+          <button
+            mat-button
+            [ngClass]="
+              filterByTypeSelected === 'construction' ? 'mat-raised-button' : 'mat-stroked-button'
+            "
+            class="mx-2 font-thin min-w-min dark:text-white"
+            color="primary"
+            (click)="filterByType('construction')"
+          >
+            <mat-icon class="text-lg">construction</mat-icon>
+            <span>{{ 'rehabilitation' | transloco }}</span>
+          </button>
+        </div>
+        <div
+          *ngIf="projects && projects.length > 0; else noProjects"
+          class="grid gap-4 w-full"
+          [ngClass]="{
+            'grid-cols-1 md:grid-cols-2 xl:grid-cols-3': !showUtility,
+            'grid-cols-1 md:grid-cols-1 xl:grid-cols-2': showUtility
+          }"
+        >
+          <div *ngFor="let project of projects" class="w-full">
+            <rng-project-card [project]="project"></rng-project-card>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="grid grid-cols-1 w-full h-96">
-      <rng-map class="w-full h-full" [data]="points" [center]="center"></rng-map>
-    </div>
+    </ng-template>
   </div>
-</ng-template>
+
+  <div
+    *ngIf="showMapUtil"
+    class="grid w-full h-full p-6"
+    [ngClass]="{'w-full md:w-2/4 lg:w-2/5': showUtility}"
+  >
+    <rng-map class="grid w-full h-full rounded-2xl overflow-hidden" [center]="center"></rng-map>
+    <!--[data]="points$ | async" -->
+  </div>
+  <div class="absolute z-50 pt-6 top-1 right-6">
+    <button mat-icon-button (click)="toggleMapUtil()">
+      <mat-icon *ngIf="!showMapUtil">map</mat-icon>
+      <mat-icon *ngIf="showMapUtil">close</mat-icon>
+    </button>
+  </div>
+</div>
+
 <ng-template #noProjects>
   <div class="flex flex-col h-48 text-center items-center">
     <div class="m-auto h-36">
