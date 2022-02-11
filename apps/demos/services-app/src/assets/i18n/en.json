@@ -20,6 +20,7 @@
   "state": "State",
   "title": "Title",
   "description": "Description",
+  "details": "Details",
   "type": "Type",
   "thismonth": "This month",
   "information": "Information",

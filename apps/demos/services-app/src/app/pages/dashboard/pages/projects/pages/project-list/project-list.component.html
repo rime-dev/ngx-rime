@@ -85,6 +85,7 @@
       md:fixed
       right-0
       top-0
+      z-40
     "
     [class.hidden]="!mapIsOpenOnMobile"
     [class.grid]="mapIsOpenOnMobile"
@@ -95,9 +96,32 @@
       class="grid w-full h-full rounded-2xl overflow-hidden"
       [center]="center"
       [data]="points$ | async"
+      [overlayClickTemplate]="mapClickTemplate"
+      (featureSelected)="handleFeatureSelected($event)"
     ></rng-map>
   </div>
 </div>
+
+<ng-template #mapClickTemplate let-data="data">
+  <div *ngIf="data">
+    <mat-card
+      class="grid w-full mb-2 mat-elevation-z1 cursor-pointer"
+      [routerLink]="['../project-view', data.id || data.uid]"
+    >
+      <div class="flex flex-row">
+        <div class="w-full flex flex-col">
+          <mat-card-header class="w-full">
+            <div mat-card-avatar class="text-center items-center self-center">
+              <mat-icon>{{ data.type | projectTypePipe }}</mat-icon>
+            </div>
+            <mat-card-title>{{ data.title }}</mat-card-title>
+            <mat-card-subtitle>{{ data.location.text }}</mat-card-subtitle>
+          </mat-card-header>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</ng-template>
 
 <ng-template #noProjects>
   <div class="flex flex-col h-48 text-center items-center">

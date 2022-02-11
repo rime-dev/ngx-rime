@@ -51,7 +51,7 @@ export const projects: EntityState<Project>[] = [
       title: 'Cambio de lámparas',
       location: {
         text: 'Av. Malvarrosa, Valencia',
-        coordinates: [-0.3280813599117059, 39.4794693227284],
+        coordinates: [-0.3325047375527262, 39.47647376144332],
       },
       type: 'paint',
       state: 'finished',
@@ -92,7 +92,7 @@ export const projects: EntityState<Project>[] = [
       title: 'Pintura de 4 habitaciones',
       location: {
         text: 'Av. Malvarrosa, Valencia',
-        coordinates: [-0.3280813599117059, 39.4794693227284],
+        coordinates: [-0.327054489271977, 39.473459253806304],
       },
       type: 'paint',
       state: 'active',
@@ -225,7 +225,7 @@ export const otherProjects: EntityState<Project>[] = [
       title: 'Cambio de bañera',
       location: {
         text: 'C. Coronel Pérez, Torrent',
-        coordinates: [-0.4729078334928575, 39.431874010962424],
+        coordinates: [-0.47724872718252204, 39.42603442631385],
       },
       type: 'construction',
       state: 'inactive',
@@ -249,7 +249,7 @@ export const otherProjects: EntityState<Project>[] = [
       title: 'Pintura de piscina',
       location: {
         text: 'C. Coronel Pérez, Torrent',
-        coordinates: [-0.4729078334928575, 39.431874010962424],
+        coordinates: [-0.4840176639519735, 39.43004841812394],
       },
       type: 'paint',
       state: 'inactive',
@@ -273,7 +273,7 @@ export const otherProjects: EntityState<Project>[] = [
       title: 'Pintura de piscina',
       location: {
         text: 'C. Coronel Pérez, Torrent',
-        coordinates: [-0.4729078334928575, 39.431874010962424],
+        coordinates: [-0.4868158464747782, 39.42764005078414],
       },
       type: 'paint',
       state: 'inactive',
@@ -297,7 +297,7 @@ export const otherProjects: EntityState<Project>[] = [
       title: 'Pintura de piscina',
       location: {
         text: 'C. Coronel Pérez, Torrent',
-        coordinates: [-0.4729078334928575, 39.431874010962424],
+        coordinates: [-0.4775152206534386, 39.43470024249243],
       },
       type: 'paint',
       state: 'inactive',

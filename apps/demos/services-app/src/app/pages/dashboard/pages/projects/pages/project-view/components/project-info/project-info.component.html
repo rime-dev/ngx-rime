@@ -1,59 +1,63 @@
 <div *ngIf="project" class="lg:container p-8 flex flex-col mx-auto">
   <ng-container *ngIf="project.data.group">
-    <span class="text-lg font-medium mt-6 mb-2 text-gray-700 dark:text-gray-200"
-      >Colaboradores</span
-    >
     <div class="flex flex-col-reverse md:flex-row w-full h-auto">
-      <div class="flex flex-row w-full md:w-1/2">
-        <div *ngIf="(collaborators$ | async)?.length === 0" class="self-center text-sm">
-          <span>Añadir colaboradores</span>
-        </div>
-        <div
-          class="group flex flex-row relative"
-          *ngFor="let collaborator of collaborators$ | async"
-        >
-          <img
-            [matTooltip]="collaborator.data.name"
-            class="
-              group
-              rounded-full
-              h-12
-              w-12
-              mx-2
-              mat-elevation-z2
-              object-cover
-              cursor-pointer
-              relative
-              group-hover:opacity-50
-            "
-            [src]="collaborator.data.avatar"
-          />
+      <div class="flex flex-col w-full md:w-1/2">
+        <span class="text-lg font-medium mb-2 text-gray-700 dark:text-gray-200">{{
+          'collaborators' | transloco
+        }}</span>
+        <div class="flex flex-row">
+          <div *ngIf="(collaborators$ | async)?.length === 0" class="self-center text-sm">
+            <span>Añadir colaboradores</span>
+          </div>
           <div
-            class="invisible group-hover:visible absolute w-full h-full"
+            class="group flex flex-row relative"
+            *ngFor="let collaborator of collaborators$ | async"
+          >
+            <img
+              [matTooltip]="collaborator.data.name"
+              class="
+                group
+                rounded-full
+                h-12
+                w-12
+                mx-2
+                mat-elevation-z2
+                object-cover
+                cursor-pointer
+                relative
+                group-hover:opacity-50
+              "
+              [src]="collaborator.data.avatar"
+            />
+            <div
+              class="invisible group-hover:visible absolute w-full h-full"
+              *ngIf="!checkIfProjectIsFinished()"
+            >
+              <button
+                mat-icon-button
+                class="w-full h-full"
+                (click)="openDialogRemoveCollaborator(collaborator)"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </div>
+          <button
+            mat-icon-button
+            class="rounded-full h-12 w-12 mx-2"
+            (click)="openDialogAddCollaborator()"
             *ngIf="!checkIfProjectIsFinished()"
           >
-            <button
-              mat-icon-button
-              class="w-full h-full"
-              (click)="openDialogRemoveCollaborator(collaborator)"
-            >
-              <mat-icon>close</mat-icon>
-            </button>
-          </div>
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
-        <button
-          mat-icon-button
-          class="rounded-full h-12 w-12 mx-2"
-          (click)="openDialogAddCollaborator()"
-          *ngIf="!checkIfProjectIsFinished()"
-        >
-          <mat-icon>add</mat-icon>
-        </button>
       </div>
-      <div class="flex flex-row w-full md:w-1/2 pb-4 md:pb-0 justify-end">
+      <div
+        class="flex flex-row w-full md:w-1/2 pb-4 pt-0 md:pt-0 md:pb-0 justify-end h-auto md:h-12"
+      >
         <button
           mat-stroked-button
-          class="w-full md:w-auto rounded-full"
+          class="w-full h-fit md:w-auto rounded-full"
           [color]="project.data.state === 'active' ? 'primary' : 'accent'"
           [ngClass]="{
             'project-state-active': project.data.state === 'active',
@@ -68,7 +72,9 @@
     </div>
   </ng-container>
 
-  <span class="text-lg font-medium mt-6 mb-2 text-gray-700 dark:text-gray-200">Descripción</span>
+  <span class="text-lg font-medium mt-6 mb-2 text-gray-700 dark:text-gray-200">{{
+    'description' | transloco
+  }}</span>
   <div class="flex flex-col w-full p-4">
     <mat-action-list>
       <mat-list-item class="h-auto">
@@ -79,7 +85,9 @@
       </mat-list-item>
     </mat-action-list>
   </div>
-  <span class="text-lg font-medium mt-6 mb-2 text-gray-700 dark:text-gray-200">Detalles</span>
+  <span class="text-lg font-medium mt-6 mb-2 text-gray-700 dark:text-gray-200">{{
+    'details' | transloco
+  }}</span>
   <div class="flex flex-col p-4">
     <mat-action-list>
       <mat-list-item>

@@ -8,6 +8,9 @@ import {Project} from 'apps/demos/services-app/src/app/models/project.model';
 import {Observable, of} from 'rxjs';
 import {MapComponent} from 'apps/demos/services-app/src/app/components/map/map.component';
 import {tap} from 'rxjs/operators';
+import {Feature} from 'ol';
+import {fromLonLat} from 'ol/proj';
+import Point from 'ol/geom/Point';
 
 @Component({
   selector: 'rng-project-list',
@@ -104,7 +107,13 @@ export class ProjectListComponent implements OnInit {
   loadDataPoints(projects: EntityState<Project>[]) {
     if (projects) {
       this.points$ = of([
-        ...projects.map((project: EntityState<Project>) => project.data.location.coordinates),
+        ...projects.map(
+          (project: EntityState<Project>) =>
+            new Feature({
+              geometry: new Point(fromLonLat(project.data.location.coordinates)),
+              data: project.data,
+            })
+        ),
       ]);
     }
   }
@@ -180,6 +189,9 @@ export class ProjectListComponent implements OnInit {
       this.filterByTypeSelected = type;
     }
     this.changeDetectorRef.detectChanges();
+  }
+  handleFeatureSelected(feature: any) {
+    console.log(feature);
   }
   ngOnInit(): void {
     this.filterByType();
