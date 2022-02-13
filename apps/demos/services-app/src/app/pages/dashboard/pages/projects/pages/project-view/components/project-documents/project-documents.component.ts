@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {UploaderComponent} from '@rng/data-access/storage/components/uploader/uploader.component';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-
 @Component({
   selector: 'rng-project-documents',
   templateUrl: './project-documents.component.html',
@@ -21,13 +22,17 @@ export class ProjectDocumentsComponent implements OnInit {
   }
   private internalProject: any = {};
 
-  constructor() {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {
     this.filteredDocuments = this.documentsFormControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value))
     );
+  }
+
+  addDocument() {
+    this.matDialog.open(UploaderComponent, {data: {path: 'projects'}});
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();

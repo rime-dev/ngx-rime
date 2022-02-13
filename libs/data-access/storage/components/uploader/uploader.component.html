@@ -1,0 +1,18 @@
+<input type="file" #file class="hidden" (change)="onChange($event)" [multiple]="true" />
+<div
+  class="dropzone"
+  rng-dropzone
+  (hovered)="toggleHover($event)"
+  (dropped)="onDrop($event)"
+  (click)="onClick()"
+  [class.hovering]="isHovering"
+>
+  <h3>AngularFire Drop Zone</h3>
+  <p>Drag and Drop a File</p>
+</div>
+
+<h3>Uploads</h3>
+
+<div *ngFor="let file of files">
+  <rng-upload-task [file]="file" [path]="path"></rng-upload-task>
+</div>
