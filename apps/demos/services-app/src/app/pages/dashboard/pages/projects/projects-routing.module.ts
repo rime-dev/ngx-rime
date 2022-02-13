@@ -27,6 +27,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/project-view/project-view.module').then((m) => m.ProjectViewModule),
       },
+      {
+        path: 'not-found',
+        loadChildren: () =>
+          import('../../../../components/not-found/not-found.module').then((m) => m.NotFoundModule),
+      },
     ],
   },
 ];

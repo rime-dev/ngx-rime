@@ -26,17 +26,21 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/projects/projects.module').then((m) => m.ProjectsModule),
       },
-      {
-        path: 'invoices',
-        loadChildren: () =>
-          import('./pages/invoices/invoices.module').then((m) => m.InvoicesModule),
-      },
-      {
-        path: 'reports',
-        loadChildren: () => import('./pages/reports/reports.module').then((m) => m.ReportsModule),
-      },
+
+      // {
+      //   path: 'invoices',
+      //   loadChildren: () =>
+      //     import('./pages/invoices/invoices.module').then((m) => m.InvoicesModule),
+      // },
+      // {
+      //   path: 'reports',
+      //   loadChildren: () => import('./pages/reports/reports.module').then((m) => m.ReportsModule),
+      // },
+
+      {path: '**', redirectTo: 'home'},
     ],
   },
+  {path: '**', redirectTo: 'dashboard'},
 ];
 
 @NgModule({

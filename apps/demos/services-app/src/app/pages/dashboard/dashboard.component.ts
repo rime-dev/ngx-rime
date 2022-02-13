@@ -31,16 +31,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
       text: 'Proyectos',
       icon: 'work',
     },
-    {
-      path: '/dashboard/invoices',
-      text: 'Facturas',
-      icon: 'receipt_long',
-    },
-    {
-      path: '/dashboard/reports',
-      text: 'Informes',
-      icon: 'analytics',
-    },
+    // {
+    //   path: '/dashboard/invoices',
+    //   text: 'Facturas',
+    //   icon: 'receipt_long',
+    // },
+    // {
+    //   path: '/dashboard/reports',
+    //   text: 'Informes',
+    //   icon: 'analytics',
+    // },
   ];
   userRoutes = [
     {

@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
 import {Project} from 'apps/demos/services-app/src/app/models/project.model';
 import {collaborators} from 'apps/demos/services-app/src/assets/data';
 import {Observable, of, Subject} from 'rxjs';
-import {map, takeUntil} from 'rxjs/operators';
+import {map, takeUntil, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'rng-project-view',
@@ -17,7 +17,11 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
   public project$: Observable<EntityState<Project>> = of();
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private dataService: DataService
+  ) {}
 
   getCollaborators(collaboratorsBase: any[]) {
     this.collaboratorsArray = collaborators.filter((collaborator: any) =>
@@ -35,7 +39,18 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
           )
         );
       this.dataService.select('Project').getByKey(params.id);
-      this.project$.pipe(takeUntil(this.destroy$)).subscribe();
+      this.project$
+        .pipe(
+          tap({
+            next: (project: EntityState<Project>) => {
+              if (!project) {
+                this.router.navigate(['../../not-found'], {relativeTo: this.route});
+              }
+            },
+          }),
+          takeUntil(this.destroy$)
+        )
+        .subscribe();
     });
   }
   ngOnDestroy(): void {

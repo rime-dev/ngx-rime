@@ -49,5 +49,9 @@
   "noProjects": "No hay proyectos",
   "noActiveProjects": "No hay proyectos activos",
   "noOfferedProjects": "No hay proyectos ofertados",
-  "recentSearches": "Búsquedas recientes"
+  "recentSearches": "Búsquedas recientes",
+  "pages.pageNotFound": "Página no encontrada",
+  "pages.oops": "¡Vaya!",
+  "pages.pageDoNotExist": "La página que intentas buscar no existe",
+  "pages.goHome": "Ir a inicio"
 }
