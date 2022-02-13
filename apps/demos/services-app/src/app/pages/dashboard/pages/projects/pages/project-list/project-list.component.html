@@ -18,6 +18,7 @@
         (selectedIndexChange)="changeTab($event)"
         [class.hidden]="mapIsOpenOnMobile"
         [class.block]="!mapIsOpenOnMobile"
+        class="w-full h-full"
       >
         <mat-tab>
           <ng-template mat-tab-label>
@@ -80,7 +81,6 @@
       pb-6
       px-4
       md:pb-6 md:pt-20 md:px-6 md:w-96
-      lg:w-2/5
       relative
       md:fixed
       right-0
@@ -168,7 +168,7 @@
         <span>{{ 'rehabilitation' | transloco }}</span>
       </button>
     </div>
-    <div *ngIf="projects && projects.length > 0; else noProjects" class="grid gap-4 w-full">
+    <div *ngIf="projects && projects.length > 0; else noProjects" class="grid gap-2 w-full">
       <div *ngFor="let project of projects" class="w-full">
         <rng-project-card [project]="project"></rng-project-card>
       </div>

@@ -47,6 +47,11 @@
   $background: map.get($theme, background);
   .cdk-overlay-pane {
     background: mat.get-color-from-palette($background, app-bar);
+
+    &.mat-tooltip-panel {
+      background: transparent;
+    }
+
     color: mat.get-color-from-palette($foreground, text);
     &[color='primary'] {
       @include _palette-styles($primary);
@@ -233,6 +238,7 @@ mat-chip.mat-chip {
 mat-chip.mat-chip.mat-chip-selected {
   cursor: pointer;
 }
+
 $color-config: mat.get-color-config($rng-default-theme);
 .bg-primary {
   background-color: mat.get-color-from-palette(map.get($color-config, 'primary'), A700);
