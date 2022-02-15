@@ -27,7 +27,7 @@ import {ProjectAddCollaboratorDialogComponent} from './components/project-add-co
 import {ProjectRemoveCollaboratorDialogComponent} from './components/project-remove-collaborator-dialog/project-remove-collaborator-dialog.component';
 import {CollaboratorPipeModule} from 'apps/demos/services-app/src/app/pipes/collaborator/collaborator.module';
 import {MatRippleModule} from '@angular/material/core';
-import {StorageModule} from '@rng/data-access/storage';
+import {StorageMockModule, StorageModule, UploaderModule} from '@rng/data-access/storage';
 import {ProjectDocumentDialogComponent} from './components/project-document-dialog/project-document-dialog.component';
 @NgModule({
   declarations: [
@@ -64,7 +64,9 @@ import {ProjectDocumentDialogComponent} from './components/project-document-dial
     MatDialogModule,
     CollaboratorPipeModule,
     MatRippleModule,
-    StorageModule,
+    UploaderModule,
+    StorageMockModule,
+    //StorageModule,
     MatDialogModule,
   ],
 })

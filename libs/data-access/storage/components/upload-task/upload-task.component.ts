@@ -1,14 +1,12 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {Observable, Subject} from 'rxjs';
-import {finalize, takeLast, takeUntil} from 'rxjs/operators';
+import {finalize, takeUntil} from 'rxjs/operators';
 import {StorageService} from '../../services/storage.service';
 
 @Component({
   selector: 'rng-upload-task',
   templateUrl: './upload-task.component.html',
   styleUrls: ['./upload-task.component.scss'],
-  providers: [StorageService, AngularFirestore],
 })
 export class UploadTaskComponent implements OnInit, OnDestroy {
   public percentage$!: Observable<number | undefined>;
@@ -61,8 +59,8 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
   }
   startUpload() {
     if (this.file && this.path && this.document) {
-      const path = `${this.path}/${Date.now()}_${this.file.name}`;
-      this.snapshot$ = this.storageService.uploadDocument(this.document, path, this.file).pipe(
+      const path = `${this.path}/${this.document}/${Date.now()}_${this.file.name}`;
+      this.snapshot$ = this.storageService.uploadDocument(path, this.file).pipe(
         finalize(() => {
           this.storageService
             .getDownloadURLFromReference()

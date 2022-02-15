@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
-import {UploaderComponent} from '@rng/data-access/storage/components/uploader/uploader.component';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {ProjectDocumentDialogComponent} from '../project-document-dialog/project-document-dialog.component';

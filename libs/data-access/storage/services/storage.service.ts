@@ -27,9 +27,9 @@ export class StorageService {
       .getDownloadURL()
       .pipe(take(1), tap({next: (downloadURL: string) => this.downloadURL$.next(downloadURL)}));
   }
-  uploadDocument(document: string, path: string, file: File) {
-    this.reference = this.angularFireStorage.ref(path + '/' + document);
-    this.task = this.angularFireStorage.upload(path + '/' + document, file);
+  uploadDocument(path: string, file: File) {
+    this.reference = this.angularFireStorage.ref(path);
+    this.task = this.angularFireStorage.upload(path, file);
     this.task
       .percentageChanges()
       .pipe(takeUntil(this.downloadURL$.asObservable()))
