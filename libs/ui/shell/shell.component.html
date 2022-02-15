@@ -22,14 +22,22 @@
         <mat-action-list class="h-full w-full overflow-y-auto overflow-x-hidden">
           <ng-container *ngFor="let route of sideRoutes">
             <ng-container *ngIf="!route.children && route.path">
-              <mat-list-item [routerLink]="route.path">
+              <mat-list-item
+                [routerLink]="route.path"
+                [matTooltip]="!fixedSidenavOpened && route.text ? route.text : ''"
+                matTooltipPosition="right"
+              >
                 <mat-icon matListIcon>{{ route.icon }}</mat-icon>
                 <p matLine>{{ route.text }}</p>
               </mat-list-item>
             </ng-container>
 
             <ng-container *ngIf="route.children">
-              <mat-list-item (click)="route.opened = !route.opened">
+              <mat-list-item
+                (click)="route.opened = !route.opened"
+                [matTooltip]="!fixedSidenavOpened ? '' + route.text : ''"
+                matTooltipPosition="right"
+              >
                 <mat-icon matListIcon *ngIf="!fixedSidenavOpened"
                   ><span class="flex justify-center">·</span></mat-icon
                 >
@@ -37,7 +45,12 @@
                 <mat-icon>{{ route.opened ? 'expand_less' : 'expand_more' }}</mat-icon>
               </mat-list-item>
               <ng-container *ngFor="let childRoute of route.children">
-                <mat-list-item [routerLink]="childRoute.path" *ngIf="route.opened">
+                <mat-list-item
+                  [routerLink]="childRoute.path"
+                  *ngIf="route.opened"
+                  [matTooltip]="!fixedSidenavOpened ? '' + route.text : ''"
+                  matTooltipPosition="right"
+                >
                   <!--                   [ngStyle]="{'paddingLeft': fixedSidenavOpened ? '48px' : '0px'}"
  -->
                   <mat-icon matListIcon>{{ childRoute.icon }}</mat-icon>
@@ -72,7 +85,7 @@
             <div class="flex items-center justify-between h-16">
               <div class="flex items-center w-full">
                 <div class="flex-shrink-0 block md:hidden">
-                  <button mat-icon-button (click)="sidenavOpened = !sidenavOpened">
+                  <button mat-icon-button color="primary" (click)="sidenavOpened = !sidenavOpened">
                     <mat-icon>menu</mat-icon>
                   </button>
                 </div>

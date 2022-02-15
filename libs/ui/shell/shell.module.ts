@@ -8,6 +8,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {RouterModule} from '@angular/router';
 import {UserAccountPopupModule} from '@rng/ui/user-account-popup';
 import {ShellComponent} from './shell.component';
@@ -25,6 +26,7 @@ import {ShellComponent} from './shell.component';
     RouterModule,
     MatSidenavModule,
     MatListModule,
+    MatTooltipModule,
   ],
   exports: [ShellComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
