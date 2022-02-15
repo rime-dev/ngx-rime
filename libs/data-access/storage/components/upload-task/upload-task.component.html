@@ -4,15 +4,14 @@
 </div>
 
 <div *ngIf="snapshot$ | async as snap">
-  {{ snap.bytesTransferred }} of {{ snap.totalBytes }}
-
-  <div *ngIf="downloadURL$ as url">
+  <!-- {{ snap.bytesTransferred }} of {{ snap.totalBytes }} -->
+  <div *ngIf="downloadURL$ | async as url">
     <h3>Results!</h3>
-    <img [src]="url" /><br />
-    <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
+    {{ url }}
+    <img width="100" height="100" [src]="url" />
   </div>
 
-  <button (click)="pause()" [disabled]="!isActive(snap)">Pause</button>
-  <button (click)="cancel()" [disabled]="!isActive(snap)">Cancel</button>
-  <button (click)="resume()" [disabled]="!(snap?.state === 'paused')">Resume</button>
+  <button mat-button (click)="pause()" [disabled]="!isActive(snap)">Pause</button>
+  <button mat-button (click)="cancel()" [disabled]="!isActive(snap)">Cancel</button>
+  <button mat-button (click)="resume()" [disabled]="!(snap?.state === 'paused')">Resume</button>
 </div>

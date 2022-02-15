@@ -1,7 +1,7 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {finalize, takeLast, takeUntil} from 'rxjs/operators';
 import {StorageService} from '../../services/storage.service';
 
 @Component({
@@ -16,14 +16,34 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
   public snapshot$!: Observable<any>;
 
   private destroy$: Subject<void> = new Subject<void>();
+
   @Input() file: File | undefined;
-  @Input() path: string | undefined;
+
+  @Input()
+  get path(): string | undefined {
+    return this.internalPath;
+  }
+  set path(value: string | undefined) {
+    this.internalPath = value;
+  }
+  private internalPath: string | undefined;
+
+  @Input()
+  get document(): string | undefined {
+    return this.internalDocument;
+  }
+  set document(value: string | undefined) {
+    this.internalDocument = value;
+  }
+  private internalDocument: string | undefined;
+
+  @Output() finalize: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private storageService: StorageService) {
     // Progress monitoring
-    this.percentage$ = this.storageService.percentage$;
+    this.percentage$ = this.storageService.percentage$.asObservable();
     // Download URL
-    this.downloadURL$ = this.storageService.downloadURL$;
+    this.downloadURL$ = this.storageService.downloadURL$.asObservable();
   }
 
   ngOnInit() {
@@ -40,11 +60,19 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
     this.storageService.task.cancel();
   }
   startUpload() {
-    if (this.file && this.path) {
+    if (this.file && this.path && this.document) {
       const path = `${this.path}/${Date.now()}_${this.file.name}`;
-      this.snapshot$ = this.storageService
-        .uploadDocument(path, this.file)
-        .pipe(takeUntil(this.destroy$));
+      this.snapshot$ = this.storageService.uploadDocument(this.document, path, this.file).pipe(
+        finalize(() => {
+          this.storageService
+            .getDownloadURLFromReference()
+            .toPromise()
+            .then(() => {
+              this.finalize.emit(this.storageService.downloadURL$.getValue());
+            });
+        }),
+        takeUntil(this.destroy$)
+      );
       this.snapshot$.subscribe();
     }
   }

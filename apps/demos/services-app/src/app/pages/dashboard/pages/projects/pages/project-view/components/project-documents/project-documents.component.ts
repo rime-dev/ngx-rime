@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {UploaderComponent} from '@rng/data-access/storage/components/uploader/uploader.component';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {ProjectDocumentDialogComponent} from '../project-document-dialog/project-document-dialog.component';
 @Component({
   selector: 'rng-project-documents',
   templateUrl: './project-documents.component.html',
@@ -32,11 +33,13 @@ export class ProjectDocumentsComponent implements OnInit {
   }
 
   addDocument() {
-    this.matDialog.open(UploaderComponent, {data: {path: 'projects'}});
+    this.matDialog.open(ProjectDocumentDialogComponent, {
+      data: {path: 'projects', document: this.project.id},
+    });
   }
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.project.data.documents.filter((option: any) =>
       option.title.toLowerCase().includes(filterValue)
     );
