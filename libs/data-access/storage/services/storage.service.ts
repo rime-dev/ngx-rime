@@ -4,6 +4,7 @@ import {
   AngularFireStorageReference,
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {BehaviorSubject} from 'rxjs';
 import {take, takeUntil, tap} from 'rxjs/operators';
 @Injectable()
@@ -14,14 +15,21 @@ export class StorageService {
   public downloadURL$: BehaviorSubject<string | undefined> = new BehaviorSubject<
     string | undefined
   >(undefined);
+
   public task!: AngularFireUploadTask;
   public reference!: AngularFireStorageReference;
 
-  constructor(private angularFireStorage: AngularFireStorage) {
+  constructor(private angularFireStorage: AngularFireStorage, private domSanitizer: DomSanitizer) {
     this.percentage$ = new BehaviorSubject<number | undefined>(undefined);
     this.downloadURL$ = new BehaviorSubject<string | undefined>(undefined);
   }
 
+  private isFileImage(file: File) {
+    return file && file.type.split('/')[0] === 'image';
+  }
+  satinizeImage(file: File) {
+    return this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
+  }
   getDownloadURLFromReference() {
     return this.reference
       .getDownloadURL()

@@ -1,5 +1,7 @@
 import {Component, ElementRef, EventEmitter, Inject, Input, Output, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {from} from 'rxjs';
+import {finalize, take, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'rng-uploader',
@@ -63,12 +65,19 @@ export class UploaderComponent {
   }
   onChange($event: Event) {
     this.files = [];
+    const files: File[] = [];
     const target = $event.target as HTMLInputElement;
     const fileList = target.files;
     if (fileList) {
-      for (let i = 0; i < fileList.length; i++) {
-        this.files.push(fileList.item(i) as File);
-      }
+      from(fileList)
+        .pipe(
+          tap({next: (file: File) => files.push(file)}),
+          take(fileList.length),
+          finalize(() => {
+            this.files = [...files];
+          })
+        )
+        .subscribe();
     }
   }
   onFinalize(uploadedFile: string) {

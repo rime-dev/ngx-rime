@@ -1,16 +1,31 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  InjectionToken,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import {SafeUrl} from '@angular/platform-browser';
 import {Observable, Subject} from 'rxjs';
-import {finalize, takeUntil} from 'rxjs/operators';
+import {delay, finalize, takeUntil, tap} from 'rxjs/operators';
 import {StorageService} from '../../services/storage.service';
+
+const UPLOADER_TOKEN = new InjectionToken<UploadTaskComponent>('UploadTaskComponent');
 
 @Component({
   selector: 'rng-upload-task',
   templateUrl: './upload-task.component.html',
   styleUrls: ['./upload-task.component.scss'],
+  providers: [{provide: UPLOADER_TOKEN, useExisting: UploadTaskComponent}],
 })
 export class UploadTaskComponent implements OnInit, OnDestroy {
   public percentage$!: Observable<number | undefined>;
   public downloadURL$!: Observable<string | undefined>;
+  public satinizedFile$!: Observable<string | SafeUrl | undefined>;
+  public satinizedFileSubject: Subject<string | SafeUrl | undefined>;
+
   public snapshot$!: Observable<any>;
 
   private destroy$: Subject<void> = new Subject<void>();
@@ -42,6 +57,10 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
     this.percentage$ = this.storageService.percentage$.asObservable();
     // Download URL
     this.downloadURL$ = this.storageService.downloadURL$.asObservable();
+    // Satinized file
+    this.satinizedFileSubject = new Subject<string | SafeUrl | undefined>();
+
+    this.satinizedFile$ = this.satinizedFileSubject.asObservable();
   }
 
   ngOnInit() {
@@ -57,8 +76,15 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
   cancel() {
     this.storageService.task.cancel();
   }
+
   startUpload() {
     if (this.file && this.path && this.document) {
+      const satinizedResult = this.storageService.satinizeImage(this.file);
+      setTimeout(() => {
+        // Emits async
+        this.satinizedFileSubject.next(satinizedResult);
+      }, 0);
+
       const path = `${this.path}/${this.document}/${Date.now()}_${this.file.name}`;
       this.snapshot$ = this.storageService.uploadDocument(path, this.file).pipe(
         finalize(() => {
