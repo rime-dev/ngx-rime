@@ -8,11 +8,12 @@
   [class.hovering]="isHovering"
 >
   <span>{{ 'rngUploader.dragAndDropAFile' | transloco }}</span>
+  <button mat-button class="mt-4">{{ 'rngUploader.uploadAFile' | transloco }}</button>
 </div>
 
-<div *ngIf="files && files.length > 0">
+<!-- <div *ngIf="files && files.length > 0">
   <span>{{ 'rngUploader.uploads' | transloco }}</span>
-</div>
+</div> -->
 
 <div *ngFor="let file of files">
   <rng-upload-task

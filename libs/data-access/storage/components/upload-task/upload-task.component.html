@@ -1,17 +1,33 @@
-<div *ngIf="percentage$ | async as pct">
-  <progress [value]="pct" max="100"></progress>
-  {{ pct | number }}%
-</div>
-
 <div *ngIf="snapshot$ | async as snap">
-  <!-- {{ snap.bytesTransferred }} of {{ snap.totalBytes }} -->
   <div *ngIf="downloadURL$ | async as url">
-    <h3>Results!</h3>
-    {{ url }}
     <img width="100" height="100" [src]="url" />
   </div>
-
-  <button mat-button (click)="pause()" [disabled]="!isActive(snap)">Pause</button>
-  <button mat-button (click)="cancel()" [disabled]="!isActive(snap)">Cancel</button>
-  <button mat-button (click)="resume()" [disabled]="!(snap?.state === 'paused')">Resume</button>
+  <div *ngIf="percentage$ | async as percentage">
+    <div *ngIf="percentage !== 0 && percentage !== 100">
+      <div class="flex flex-col text-center">
+        {{ percentage | number }}%
+        <mat-progress-bar
+          mode="determinate"
+          color="primary"
+          [value]="percentage"
+        ></mat-progress-bar>
+      </div>
+      <div class="flex flex-row">
+        <button mat-icon-button class="mr-auto" (click)="pause()" [disabled]="!isActive(snap)">
+          <mat-icon>pause</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          class="mr-auto"
+          (click)="resume()"
+          [disabled]="!(snap?.state === 'paused')"
+        >
+          <mat-icon>resume</mat-icon>
+        </button>
+        <button mat-icon-button class="ml-auto" (click)="cancel()" [disabled]="!isActive(snap)">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

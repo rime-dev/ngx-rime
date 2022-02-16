@@ -52,6 +52,7 @@ export class UploaderComponent {
   }
 
   onDrop(files: FileList) {
+    this.files = [];
     for (let i = 0; i < files.length; i++) {
       this.files.push(files.item(i) as File);
     }
@@ -61,6 +62,7 @@ export class UploaderComponent {
     this.file.nativeElement.click();
   }
   onChange($event: Event) {
+    this.files = [];
     const target = $event.target as HTMLInputElement;
     const fileList = target.files;
     if (fileList) {
