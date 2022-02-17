@@ -9,30 +9,29 @@ import {BehaviorSubject} from 'rxjs';
 import {take, takeUntil, tap} from 'rxjs/operators';
 @Injectable()
 export class StorageService {
-  public percentage$: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(
-    undefined
-  );
-  public downloadURL$: BehaviorSubject<string | undefined> = new BehaviorSubject<
-    string | undefined
-  >(undefined);
+  public percentage$: BehaviorSubject<number | undefined>;
+  public downloadURL$: BehaviorSubject<string | undefined>;
 
-  public task!: AngularFireUploadTask;
-  public reference!: AngularFireStorageReference;
+  public task: AngularFireUploadTask | undefined;
+  public reference: AngularFireStorageReference | undefined;
 
-  constructor(private angularFireStorage: AngularFireStorage, private domSanitizer: DomSanitizer) {
+  constructor(private angularFireStorage: AngularFireStorage) {
     this.percentage$ = new BehaviorSubject<number | undefined>(undefined);
     this.downloadURL$ = new BehaviorSubject<string | undefined>(undefined);
   }
-
+  restartBehavior() {
+    this.percentage$.next(undefined);
+    this.downloadURL$.next(undefined);
+    this.task = undefined;
+    this.reference = undefined;
+  }
   private isFileImage(file: File) {
     return file && file.type.split('/')[0] === 'image';
   }
-  satinizeImage(file: File) {
-    return this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
-  }
+
   getDownloadURLFromReference() {
     return this.reference
-      .getDownloadURL()
+      ?.getDownloadURL()
       .pipe(take(1), tap({next: (downloadURL: string) => this.downloadURL$.next(downloadURL)}));
   }
   uploadDocument(path: string, file: File) {

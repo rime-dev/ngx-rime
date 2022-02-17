@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import {SafeUrl} from '@angular/platform-browser';
 import {Observable, Subject} from 'rxjs';
-import {delay, finalize, takeUntil, tap} from 'rxjs/operators';
+import {finalize, takeUntil} from 'rxjs/operators';
 import {StorageService} from '../../services/storage.service';
 
 const UPLOADER_TOKEN = new InjectionToken<UploadTaskComponent>('UploadTaskComponent');
@@ -27,7 +27,7 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
   public satinizedFileSubject: Subject<string | SafeUrl | undefined>;
 
   public snapshot$!: Observable<any>;
-
+  public isCompleted: boolean;
   private destroy$: Subject<void> = new Subject<void>();
 
   @Input() file: File | undefined;
@@ -61,6 +61,7 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
     this.satinizedFileSubject = new Subject<string | SafeUrl | undefined>();
 
     this.satinizedFile$ = this.satinizedFileSubject.asObservable();
+    this.isCompleted = false;
   }
 
   ngOnInit() {
@@ -68,30 +69,40 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
   }
 
   pause() {
+    if (!this.storageService.task) {
+      return;
+    }
     this.storageService.task.pause();
   }
   resume() {
+    if (!this.storageService.task) {
+      return;
+    }
     this.storageService.task.resume();
   }
   cancel() {
+    if (!this.storageService.task) {
+      return;
+    }
     this.storageService.task.cancel();
   }
 
   startUpload() {
     if (this.file && this.path && this.document) {
-      const satinizedResult = this.storageService.satinizeImage(this.file);
       setTimeout(() => {
         // Emits async
-        this.satinizedFileSubject.next(satinizedResult);
+        this.satinizedFileSubject.next(window.URL.createObjectURL(this.file as Blob));
       }, 0);
-
       const path = `${this.path}/${this.document}/${Date.now()}_${this.file.name}`;
       this.snapshot$ = this.storageService.uploadDocument(path, this.file).pipe(
         finalize(() => {
           this.storageService
             .getDownloadURLFromReference()
-            .toPromise()
+            ?.toPromise()
             .then(() => {
+              this.isCompleted = true;
+              console.log(this.storageService.downloadURL$.getValue());
+
               this.finalize.emit(this.storageService.downloadURL$.getValue());
             });
         }),

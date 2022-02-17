@@ -1,31 +1,33 @@
 import {Injectable} from '@angular/core';
 import {AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/compat/storage';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
-import {asyncScheduler, BehaviorSubject, interval, of, ReplaySubject, Subject} from 'rxjs';
+import {asyncScheduler, BehaviorSubject, interval, of, Subject} from 'rxjs';
 import {finalize, take, tap, throttleTime} from 'rxjs/operators';
 
 @Injectable()
 export class StorageMockService {
   public percentage$: BehaviorSubject<number | undefined>;
   public downloadURL$: BehaviorSubject<string | undefined>;
-  public task!: AngularFireUploadTask;
-  public reference!: AngularFireStorageReference;
-  constructor(private domSanitizer: DomSanitizer) {
+  public task: AngularFireUploadTask | undefined;
+  public reference: AngularFireStorageReference | undefined;
+  constructor() {
     this.percentage$ = new BehaviorSubject<number | undefined>(undefined);
     this.downloadURL$ = new BehaviorSubject<string | undefined>(undefined);
   }
 
+  restartBehavior() {
+    this.percentage$.next(undefined);
+    this.downloadURL$.next(undefined);
+    this.task = undefined;
+    this.reference = undefined;
+  }
   getDownloadURLFromReference() {
     return this.reference
-      .getDownloadURL()
+      ?.getDownloadURL()
       .pipe(take(1), tap({next: (downloadURL: string) => this.downloadURL$.next(downloadURL)}));
   }
 
   private isFileImage(file: File) {
     return file && file.type.split('/')[0] === 'image';
-  }
-  private satinizeImage(file: File) {
-    return this.domSanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(file));
   }
 
   uploadDocument(path: string, file: File) {
@@ -36,10 +38,8 @@ export class StorageMockService {
       throttleTime(10, asyncScheduler, {trailing: true})
     );
 
-    const satinizedResult = this.satinizeImage(file);
-
     this.reference = {
-      getDownloadURL: () => of(satinizedResult),
+      getDownloadURL: () => of(window.URL.createObjectURL(file)),
     } as AngularFireStorageReference;
 
     this.task = {
@@ -51,7 +51,7 @@ export class StorageMockService {
       .pipe(
         tap({next: (v) => this.percentage$.next(v)}),
         finalize(() => {
-          result$.next(satinizedResult);
+          result$.next(window.URL.createObjectURL(file));
           result$.complete();
         })
       )

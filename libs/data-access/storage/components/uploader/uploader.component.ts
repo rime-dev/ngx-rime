@@ -82,7 +82,9 @@ export class UploaderComponent {
   }
   onFinalize(uploadedFile: string) {
     if (!this.uploadedFiles.includes(uploadedFile)) {
-      this.uploadedFiles.push(uploadedFile);
+      if (this.uploadedFiles.length < this.files.length) {
+        this.uploadedFiles.push(uploadedFile);
+      }
       if (this.uploadedFiles.length === this.files.length) {
         this.finalize.emit(this.uploadedFiles);
       }
