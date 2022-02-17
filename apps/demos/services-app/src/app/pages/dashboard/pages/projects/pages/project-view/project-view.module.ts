@@ -29,6 +29,7 @@ import {CollaboratorPipeModule} from 'apps/demos/services-app/src/app/pipes/coll
 import {MatRippleModule} from '@angular/material/core';
 import {StorageMockModule, StorageModule, UploaderModule} from '@rng/data-access/storage';
 import {ProjectDocumentDialogComponent} from './components/project-document-dialog/project-document-dialog.component';
+import {SatinizeModule} from '@rng/util/satinize';
 @NgModule({
   declarations: [
     ProjectViewComponent,
@@ -68,6 +69,7 @@ import {ProjectDocumentDialogComponent} from './components/project-document-dial
     StorageMockModule,
     //StorageModule,
     MatDialogModule,
+    SatinizeModule,
   ],
 })
 export class ProjectViewModule {}

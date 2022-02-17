@@ -50,7 +50,7 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
   }
   private internalDocument: string | undefined;
 
-  @Output() finalize: EventEmitter<string> = new EventEmitter<string>();
+  @Output() finalize: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private storageService: StorageService) {
     // Progress monitoring
@@ -101,9 +101,12 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
             ?.toPromise()
             .then(() => {
               this.isCompleted = true;
-              console.log(this.storageService.downloadURL$.getValue());
-
-              this.finalize.emit(this.storageService.downloadURL$.getValue());
+              const document = {
+                title: this.file?.name,
+                url: this.storageService.downloadURL$.getValue(),
+                format: this.file?.type,
+              };
+              this.finalize.emit(document);
             });
         }),
         takeUntil(this.destroy$)

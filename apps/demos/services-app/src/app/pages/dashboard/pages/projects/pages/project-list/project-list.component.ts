@@ -190,9 +190,6 @@ export class ProjectListComponent implements OnInit {
     }
     this.changeDetectorRef.detectChanges();
   }
-  handleFeatureSelected(feature: any) {
-    console.log(feature);
-  }
   ngOnInit(): void {
     this.filterByType();
   }

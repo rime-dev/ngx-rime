@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {from, of} from 'rxjs';
-import {debounceTime, delay, first, take, tap} from 'rxjs/operators';
+import {of} from 'rxjs';
+import {debounceTime, delay, take, tap} from 'rxjs/operators';
 @Component({
   selector: 'rng-project-document-dialog',
   templateUrl: './project-document-dialog.component.html',
@@ -25,7 +25,12 @@ export class ProjectDocumentDialogComponent {
 
   onFinalize(event: Event) {
     of(event)
-      .pipe(debounceTime(250), take(1), delay(1000), tap({next: () => this.matDialogRef.close()}))
+      .pipe(
+        debounceTime(250),
+        take(1),
+        delay(1000),
+        tap({next: () => this.matDialogRef.close(event)})
+      )
       .subscribe();
   }
 }

@@ -19,7 +19,7 @@
         >close</mat-icon
       >
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredDocuments | async" [value]="option.title">
+        <mat-option *ngFor="let option of filteredDocuments$ | async" [value]="option.title">
           {{ option.title }}
         </mat-option>
       </mat-autocomplete>
@@ -29,7 +29,7 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <ng-container *ngIf="filteredDocuments | async; let documents">
+  <ng-container *ngIf="filteredDocuments$ | async; let documents">
     <div
       *ngIf="documents.length > 0; else noDocumentsTemplate"
       class="
@@ -57,7 +57,7 @@
           border border-gray-200
           dark:border-gray-500
         "
-        *ngFor="let document of filteredDocuments | async"
+        *ngFor="let document of filteredDocuments$ | async"
       >
         <div class="max-w-4xl mx-auto grid grid-cols-1">
           <div
@@ -85,7 +85,7 @@
           </div>
           <div class="grid gap-4 col-start-1 col-end-3 row-start-1">
             <img
-              [src]="document.url"
+              [src]="document.url | satinize: 'url'"
               [alt]="document.title"
               class="w-full h-60 object-cover rounded-lg"
               loading="lazy"

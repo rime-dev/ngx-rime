@@ -77,8 +77,6 @@ export class SearchInputComponent implements AfterViewInit {
       .subscribe();
   }
   goToItem(id: string) {
-    console.log(id);
-
     this.clearSearch();
     this.router.navigate(['../dashboard/projects/project-view', id]);
   }
