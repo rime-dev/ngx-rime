@@ -46,21 +46,21 @@
       {{ percentage | number }}%
       <mat-progress-bar mode="determinate" color="primary" [value]="percentage"></mat-progress-bar>
     </div>
-    <div *ngIf="snapshot$ | async as snap" class="flex flex-row">
-      <button mat-icon-button class="mr-auto" (click)="pause()" [disabled]="!isActive(snap)">
-        <mat-icon>pause</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        class="mr-auto"
-        (click)="resume()"
-        [disabled]="!(snap?.state === 'paused')"
-      >
-        <mat-icon>resume</mat-icon>
-      </button>
-      <button mat-icon-button class="ml-auto" (click)="cancel()" [disabled]="!isActive(snap)">
-        <mat-icon>cancel</mat-icon>
-      </button>
-    </div>
   </div>
+</div>
+<div *ngIf="snapshot$ | async as snap" class="flex flex-row">
+  <button mat-icon-button class="mr-auto" (click)="pause()" [disabled]="!isActive(snap)">
+    <mat-icon>pause</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="mr-auto"
+    (click)="resume()"
+    [disabled]="!(snap?.state === 'paused')"
+  >
+    <mat-icon>resume</mat-icon>
+  </button>
+  <button mat-icon-button class="ml-auto" (click)="cancel()" [disabled]="!isActive(snap)">
+    <mat-icon>cancel</mat-icon>
+  </button>
 </div>

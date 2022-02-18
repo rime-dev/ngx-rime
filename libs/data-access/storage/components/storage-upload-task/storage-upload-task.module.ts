@@ -4,8 +4,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {UploadTaskComponent} from '../upload-task/upload-task.component';
 import {SatinizeModule} from '@rng/util/satinize';
+import {StorageUploadTaskComponent} from './storage-upload-task.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +15,7 @@ import {SatinizeModule} from '@rng/util/satinize';
     MatListModule,
     SatinizeModule,
   ],
-  declarations: [UploadTaskComponent],
-  exports: [UploadTaskComponent],
+  declarations: [StorageUploadTaskComponent],
+  exports: [StorageUploadTaskComponent],
 })
-export class UploadTaskModule {}
+export class StorageUploadTaskModule {}

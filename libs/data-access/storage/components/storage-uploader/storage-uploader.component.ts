@@ -4,11 +4,11 @@ import {from} from 'rxjs';
 import {finalize, take, tap} from 'rxjs/operators';
 
 @Component({
-  selector: 'rng-uploader',
-  templateUrl: './uploader.component.html',
-  styleUrls: ['./uploader.component.scss'],
+  selector: 'rng-storage-uploader',
+  templateUrl: './storage-uploader.component.html',
+  styleUrls: ['./storage-uploader.component.scss'],
 })
-export class UploaderComponent {
+export class StorageUploaderComponent {
   public isHovering: boolean;
   public files: File[];
   public uploadedFiles: string[];
