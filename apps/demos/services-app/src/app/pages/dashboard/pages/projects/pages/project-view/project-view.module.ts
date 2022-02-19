@@ -17,7 +17,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {TranslocoModule} from '@ngneat/transloco';
 import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
-import {StorageMockModule, StorageModule, StorageUploaderModule} from '@rng/data-access/storage';
+import {StorageMockModule, StorageModule} from '@rng/data-access/storage';
 import {SatinizeModule} from '@rng/util/satinize';
 import {CollaboratorPipeModule} from 'apps/demos/services-app/src/app/pipes/collaborator/collaborator.module';
 import {ProjectTypeModule} from 'apps/demos/services-app/src/app/pipes/project-type/project-type.module';
@@ -65,7 +65,6 @@ import {ProjectViewComponent} from './project-view.component';
     MatDialogModule,
     CollaboratorPipeModule,
     MatRippleModule,
-    StorageUploaderModule,
     StorageMockModule,
     // StorageModule,
     MatDialogModule,

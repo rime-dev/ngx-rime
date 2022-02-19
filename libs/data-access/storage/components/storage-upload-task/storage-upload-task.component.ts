@@ -14,7 +14,8 @@ import {
 } from '@angular/fire/compat/storage';
 import {SafeUrl} from '@angular/platform-browser';
 import {Observable, of, Subject} from 'rxjs';
-import {StorageUploadTask} from './storage-upload-task';
+import {finalize} from 'rxjs/operators';
+import {StorageUploadTaskService} from './storage-upload-task.service';
 
 const STORAGE_UPLOADER_TOKEN = new InjectionToken<StorageUploadTaskComponent>(
   'StorageUploadTaskComponent'
@@ -26,7 +27,7 @@ const STORAGE_UPLOADER_TOKEN = new InjectionToken<StorageUploadTaskComponent>(
   styleUrls: ['./storage-upload-task.component.scss'],
   providers: [{provide: STORAGE_UPLOADER_TOKEN, useExisting: StorageUploadTaskComponent}],
 })
-export class StorageUploadTaskComponent extends StorageUploadTask implements OnInit, OnDestroy {
+export class StorageUploadTaskComponent implements OnInit, OnDestroy {
   public satinizedFile$!: Observable<string | SafeUrl | undefined>;
   public satinizedFileSubject: Subject<string | SafeUrl | undefined>;
 
@@ -34,6 +35,14 @@ export class StorageUploadTaskComponent extends StorageUploadTask implements OnI
   public documentUploaded$!: Observable<string | undefined>;
 
   private destroy$: Subject<void> = new Subject<void>();
+
+  public task: AngularFireUploadTask | undefined;
+  public reference: AngularFireStorageReference | undefined;
+  public snapshot$!: Observable<any>;
+  public percentage$!: Observable<number | undefined>;
+  public isCompleted: boolean;
+  @Input() file: File | undefined;
+  @Output() finalize: EventEmitter<any> = new EventEmitter<any>();
 
   @Input()
   get path(): string | undefined {
@@ -53,12 +62,11 @@ export class StorageUploadTaskComponent extends StorageUploadTask implements OnI
   }
   private internalDocument: string | undefined;
 
-  constructor(angularFireStorage: AngularFireStorage) {
-    super(angularFireStorage);
+  constructor(private storageUploadService: StorageUploadTaskService) {
     this.documentUploadedSubject = new Subject();
     this.documentUploaded$ = this.documentUploadedSubject.asObservable();
-
-    this.percentage$ = this.percentage$;
+    this.percentage$ = of(0);
+    this.isCompleted = false;
     this.satinizedFileSubject = new Subject<string | SafeUrl | undefined>();
     this.satinizedFile$ = this.satinizedFileSubject.asObservable();
   }
@@ -99,6 +107,32 @@ export class StorageUploadTaskComponent extends StorageUploadTask implements OnI
       const path = `${this.path}/${this.document}/${Date.now()}_${this.file.name}`;
       this.uploadDocument(path, this.file);
     }
+  }
+  uploadDocument(path: string, file: File): void {
+    this.reference = this.storageUploadService.ref(path); // Reference to storage bucket
+    console.log(this.reference);
+
+    this.task = this.storageUploadService.upload(path, file); // The main task
+    console.log(this.task);
+
+    this.percentage$ = this.task.percentageChanges(); // Progress monitoring
+    this.snapshot$ = this.task.snapshotChanges().pipe(
+      finalize(() => {
+        this.reference
+          ?.getDownloadURL()
+          .toPromise()
+          .then((downloadURL) => {
+            console.log(downloadURL);
+            this.isCompleted = true;
+            const document = {
+              title: file.name,
+              url: downloadURL,
+              format: file.type,
+            };
+            this.finalize.emit(document);
+          });
+      })
+    );
   }
 
   isActive(snapshot: any) {
