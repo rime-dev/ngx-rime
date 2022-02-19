@@ -63,11 +63,9 @@ export class MockStorageReference<AngularFireStorageReference> {
   }
 
   getDownloadURL() {
-    setTimeout(() => {
-      console.log('revoe');
-
-      window.URL.revokeObjectURL(this.storage.getURL());
-    }, 1500);
+    // setTimeout(() => {
+    //   window.URL.revokeObjectURL(this.storage.getURL());
+    // }, 1500);
     return of(this.storage.getURL());
     Promise.resolve(this.fullPath);
   }

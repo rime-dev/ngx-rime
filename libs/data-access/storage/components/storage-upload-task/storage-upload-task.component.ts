@@ -102,6 +102,12 @@ export class StorageUploadTaskComponent implements OnInit, OnDestroy {
     if (this.file && this.path && this.document) {
       setTimeout(() => {
         // Emits async
+        const reader = new FileReader(); // no arguments
+        reader.readAsDataURL(this.file as Blob);
+        reader.onload = () => {
+          const url = reader.result as string;
+          this.satinizedFileSubject.next(url);
+        };
         this.satinizedFileSubject.next(window.URL.createObjectURL(this.file as Blob));
       }, 0);
       const path = `${this.path}/${this.document}/${Date.now()}_${this.file.name}`;
@@ -110,11 +116,7 @@ export class StorageUploadTaskComponent implements OnInit, OnDestroy {
   }
   uploadDocument(path: string, file: File): void {
     this.reference = this.storageUploadService.ref(path); // Reference to storage bucket
-    console.log(this.reference);
-
     this.task = this.storageUploadService.upload(path, file); // The main task
-    console.log(this.task);
-
     this.percentage$ = this.task.percentageChanges(); // Progress monitoring
     this.snapshot$ = this.task.snapshotChanges().pipe(
       finalize(() => {
@@ -122,7 +124,6 @@ export class StorageUploadTaskComponent implements OnInit, OnDestroy {
           ?.getDownloadURL()
           .toPromise()
           .then((downloadURL) => {
-            console.log(downloadURL);
             this.isCompleted = true;
             const document = {
               title: file.name,

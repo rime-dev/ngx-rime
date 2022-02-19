@@ -54,9 +54,10 @@ export class StorageUploadTaskMockService implements AngularFireStorage {
     metadata?: firebase.storage.UploadMetadata
   ): AngularFireUploadTask {
     this.file = data;
-    const url = window.URL.createObjectURL(data as Blob);
-    this.storageBase.setURL(url);
-    return new AngularFireUploadTaskMock(path, url, this.storageBase);
+    // const url = window.URL.createObjectURL(data as Blob);
+
+    //     this.storageBase.setURL(url);
+    return new AngularFireUploadTaskMock(path, this.file, this.storageBase);
   }
 }
 
@@ -73,6 +74,16 @@ class AngularFireUploadTaskMock implements AngularFireUploadTask {
     this.path = path;
     this.data = data;
     this.metadata = metadata;
+    let url: string;
+    setTimeout(() => {
+      const reader = new FileReader();
+      reader.readAsDataURL(data);
+      reader.onload = () => {
+        console.log(reader.result);
+        url = reader.result as string;
+        this.metadata.setURL(url as string);
+      };
+    }, 0);
   }
 
   snapshotChanges(): Observable<firebase.storage.UploadTaskSnapshot | any | undefined> {
