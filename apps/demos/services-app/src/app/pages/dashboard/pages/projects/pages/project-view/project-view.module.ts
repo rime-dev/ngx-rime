@@ -26,6 +26,7 @@ import {ProjectAddCollaboratorDialogComponent} from './components/project-add-co
 import {ProjectChangeStateDialogComponent} from './components/project-change-state-dialog/project-change-state-dialog.component';
 import {ProjectDocumentDialogComponent} from './components/project-document-dialog/project-document-dialog.component';
 import {ProjectDocumentsComponent} from './components/project-documents/project-documents.component';
+import {ProjectExistingDocumentDialogComponent} from './components/project-existing-document-dialog/project-existing-document-dialog.component';
 import {ProjectInfoComponent} from './components/project-info/project-info.component';
 import {ProjectRemoveCollaboratorDialogComponent} from './components/project-remove-collaborator-dialog/project-remove-collaborator-dialog.component';
 import {ProjectViewRoutingModule} from './project-view-routing.module';
@@ -40,6 +41,7 @@ import {ProjectViewComponent} from './project-view.component';
     ProjectAddCollaboratorDialogComponent,
     ProjectRemoveCollaboratorDialogComponent,
     ProjectDocumentDialogComponent,
+    ProjectExistingDocumentDialogComponent,
   ],
   imports: [
     CommonModule,

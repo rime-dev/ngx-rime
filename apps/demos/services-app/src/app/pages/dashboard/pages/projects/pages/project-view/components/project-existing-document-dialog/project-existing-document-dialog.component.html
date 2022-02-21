@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>{{ document.title }}</h1>
+<h1 mat-dialog-subtitle>{{ document.subtitle }}</h1>
+<button mat-icon-button class="absolute top-0 right-0">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<div mat-dialog-content class="w-full h-full m-auto">
+  <iframe
+    *ngIf="document.icon !== 'image'"
+    class="w-full h-full"
+    [src]="document.url | satinize: 'resourceUrl'"
+    frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+  <img
+    *ngIf="document.icon === 'image'"
+    class="w-full h-full object-contain rounded-2xl"
+    [src]="document.url | satinize: 'url'"
+    [alt]="document.title"
+  />
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button class="w-full" [mat-dialog-close]="document" cdkFocusInitial>
+    {{ 'actions.close' | transloco }}
+  </button>
+</div>

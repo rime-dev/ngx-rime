@@ -133,6 +133,13 @@ export const projects: EntityState<Project>[] = [
           format: 'image',
           icon: 'image',
         },
+        {
+          id: 'FTG4',
+          title: 'Documento 4',
+          url: `assets/partha_thesis.pdf`,
+          format: 'pdf',
+          icon: 'picture_as_pdf',
+        },
       ],
       activity: [
         {
