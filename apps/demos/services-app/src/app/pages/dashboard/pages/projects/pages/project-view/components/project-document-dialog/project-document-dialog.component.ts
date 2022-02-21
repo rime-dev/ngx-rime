@@ -28,7 +28,7 @@ export class ProjectDocumentDialogComponent {
       .pipe(
         debounceTime(250),
         take(1),
-        delay(1000),
+        delay(2000),
         tap({next: () => this.matDialogRef.close(event)})
       )
       .subscribe();

@@ -1,44 +1,12 @@
 <div *ngIf="satinizedFile$ | async as satinizedFile">
-  <div *ngIf="isCompleted; else documentPreview">
-    <div class="w-full h-auto mx-auto grid grid-cols-1">
-      <mat-list>
-        <mat-list-item>
-          <mat-icon mat-list-icon class="animate-pulse">done</mat-icon>
-          <div mat-line>{{ file?.name }}</div>
-        </mat-list-item>
-      </mat-list>
-    </div>
+  <div class="w-full h-auto mx-auto grid grid-cols-1">
+    <mat-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon class="animate-pulse">{{ satinizedFile }}</mat-icon>
+        <div mat-line>{{ file?.name }}</div>
+      </mat-list-item>
+    </mat-list>
   </div>
-  <ng-template #documentPreview>
-    <div class="document-container">
-      <div class="w-full h-full mx-auto grid grid-cols-1">
-        <div
-          class="
-            relative
-            p-3
-            col-start-1
-            row-start-1
-            flex flex-col-reverse
-            rounded-lg
-            bg-gradient-to-t
-            from-gray-500
-            via-transparent
-          "
-        >
-          <h1 class="mt-1 text-lg font-semibold text-white dark:sm:text-white">
-            {{ file?.name }}
-          </h1>
-        </div>
-        <div class="grid gap-4 col-start-1 col-end-3 row-start-1">
-          <img
-            [src]="satinizedFile | satinize: 'url'"
-            class="w-full h-60 object-cover rounded-lg"
-            loading="lazy"
-          />
-        </div>
-      </div>
-    </div>
-  </ng-template>
 </div>
 <div class="w-full h-auto" *ngIf="percentage$ | async as percentage">
   <div *ngIf="percentage !== 0 && percentage !== 100">

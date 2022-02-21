@@ -30,7 +30,7 @@ const STORAGE_UPLOADER_TOKEN = new InjectionToken<StorageUploadTaskComponent>(
 export class StorageUploadTaskComponent implements OnInit, OnDestroy {
   public satinizedFile$!: Observable<string | SafeUrl | undefined>;
   public satinizedFileSubject: Subject<string | SafeUrl | undefined>;
-
+  public objectURL!: string;
   public documentUploadedSubject!: Subject<string | undefined>;
   public documentUploaded$!: Observable<string | undefined>;
 
@@ -102,13 +102,8 @@ export class StorageUploadTaskComponent implements OnInit, OnDestroy {
     if (this.file && this.path && this.document) {
       setTimeout(() => {
         // Emits async
-        const reader = new FileReader(); // no arguments
-        reader.readAsDataURL(this.file as Blob);
-        reader.onload = () => {
-          const url = reader.result as string;
-          this.satinizedFileSubject.next(url);
-        };
-        this.satinizedFileSubject.next(window.URL.createObjectURL(this.file as Blob));
+        const icon = this._checkIconFromComplexFileTypes(this.file as File);
+        this.satinizedFileSubject.next(icon);
       }, 0);
       const path = `${this.path}/${this.document}/${Date.now()}_${this.file.name}`;
       this.uploadDocument(path, this.file);
@@ -129,7 +124,9 @@ export class StorageUploadTaskComponent implements OnInit, OnDestroy {
               title: file.name,
               url: downloadURL,
               format: file.type,
+              icon: this._checkIconFromComplexFileTypes(file),
             };
+            this.satinizedFileSubject.complete();
             this.finalize.emit(document);
           });
       })
@@ -143,5 +140,23 @@ export class StorageUploadTaskComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  private _checkIconFromComplexFileTypes(file: File): string {
+    const pdfFormatDocument = /(pdf)$/gi;
+    const textFormatDocument =
+      /(txt|doc|docx|odt|rtf|tex|text|wpd|ppt|pptx|pps|odp|key|ods|xls|xlsm|xlsx)$/i;
+    const imageFormatDocument = /(jpe?g|png|gif|bmp)$/i;
+    const compressedFormatDocument = /(7z|arj|deb|pkg|rar|rpm|tar|z|zip|gif)$/gi;
+    if (imageFormatDocument.exec(file.name)) {
+      return 'image';
+    } else if (pdfFormatDocument.exec(file.name)) {
+      return 'picture_as_pdf';
+    } else if (textFormatDocument.exec(file.name)) {
+      return 'article';
+    } else if (compressedFormatDocument.exec(file.name)) {
+      return 'folder_zip';
+    }
+    return 'insert_drive_file';
   }
 }

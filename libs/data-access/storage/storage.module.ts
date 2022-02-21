@@ -1,7 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {InjectionToken, ModuleWithProviders, NgModule} from '@angular/core';
-import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {StorageModule as FireStorageModule} from '@angular/fire/storage';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -9,10 +8,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {LangDefinition, TranslocoModule, TranslocoService} from '@ngneat/transloco';
 import {SatinizeModule} from '@rng/util/satinize';
-import {angularFireStorage} from './components/storage-upload-task/storage-upload-task-mock';
 import {StorageUploadTaskComponent} from './components/storage-upload-task/storage-upload-task.component';
 import {
-  StorageMock,
   StorageUploadTaskMockService,
   StorageUploadTaskService,
 } from './components/storage-upload-task/storage-upload-task.service';
@@ -71,10 +68,7 @@ export class StorageModule {
 @NgModule({
   imports: [StorageModule],
   exports: [StorageModule],
-  providers: [
-    {provide: StorageUploadTaskService, useClass: StorageUploadTaskMockService},
-    StorageMock,
-  ],
+  providers: [{provide: StorageUploadTaskService, useClass: StorageUploadTaskMockService}],
 })
 export class StorageMockModule {
   constructor() {

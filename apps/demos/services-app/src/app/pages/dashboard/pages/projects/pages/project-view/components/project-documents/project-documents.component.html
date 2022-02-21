@@ -73,7 +73,17 @@
               via-transparent
             "
           >
-            <h1 class="mt-1 text-lg font-semibold text-white dark:sm:text-white">
+            <h1
+              class="
+                mt-1
+                text-lg
+                font-semibold
+                text-white
+                dark:sm:text-white
+                overflow-hidden
+                text-ellipsis
+              "
+            >
               {{ document.title }}
             </h1>
             <p
@@ -85,26 +95,17 @@
           </div>
           <div class="grid gap-4 col-start-1 col-end-3 row-start-1">
             <img
+              *ngIf="document.icon === 'image'"
               [src]="document.url | satinize: 'url'"
               [alt]="document.title"
               class="w-full h-60 object-cover rounded-lg"
               loading="lazy"
             />
+            <div *ngIf="document.icon !== 'image'" class="flex w-full h-60 object-cover rounded-lg">
+              <mat-icon class="m-auto text-3xl">{{ document.icon }}</mat-icon>
+            </div>
           </div>
         </div>
-        <!-- <div class="flex flex-col">
-          <div class="md:shrink-0">
-            <img
-              *ngIf="document.format === 'image'"
-              class="h-48 w-full object-cover"
-              [src]="document.url"
-              [alt]="document.title"
-            />
-          </div>
-          <div class="p-4 dark:bg-gray-800">
-            <p class="mt-2 text-slate-500 text-center">{{ document.title }}</p>
-          </div>
-        </div> -->
       </div>
     </div>
   </ng-container>

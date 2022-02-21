@@ -5,8 +5,7 @@ import {
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
 import firebase from 'firebase/compat';
-import {asyncScheduler, interval, Observable, of} from 'rxjs';
-import {take, throttleTime, windowCount} from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
 import {MockStorageReference} from './firebase-reference-mock';
 
 @Injectable()
@@ -20,28 +19,26 @@ export class StorageUploadTaskService {
   }
 }
 
-@Injectable()
-export class StorageMock {
-  dataURL!: string;
-  constructor() {}
-  setURL(value: string) {
+export abstract class StorageMock {
+  private static dataURL: string;
+
+  static setURL(value: string) {
     this.dataURL = value;
   }
-  getURL(): string {
+  static getURL(): string {
     return this.dataURL;
   }
 }
 
 @Injectable()
-export class StorageUploadTaskMockService implements AngularFireStorage {
+export class StorageUploadTaskMockService extends StorageMock implements AngularFireStorage {
   storage!: any;
   private path!: any;
   private file!: any;
-  constructor(private storageBase: StorageMock) {}
 
   ref(path: string): AngularFireStorageReference {
     this.path = path;
-    const reference = new MockStorageReference(this.storageBase, path, undefined);
+    const reference = new MockStorageReference(StorageUploadTaskMockService, path, undefined);
     return reference as unknown as AngularFireStorageReference;
   }
   refFromURL(path: string): AngularFireStorageReference {
@@ -54,10 +51,12 @@ export class StorageUploadTaskMockService implements AngularFireStorage {
     metadata?: firebase.storage.UploadMetadata
   ): AngularFireUploadTask {
     this.file = data;
-    // const url = window.URL.createObjectURL(data as Blob);
-
-    //     this.storageBase.setURL(url);
-    return new AngularFireUploadTaskMock(path, this.file, this.storageBase);
+    const angularFireUploadTaskMock = new AngularFireUploadTaskMock(
+      path,
+      this.file,
+      StorageUploadTaskMockService
+    );
+    return angularFireUploadTaskMock;
   }
 }
 
@@ -66,37 +65,42 @@ class AngularFireUploadTaskMock implements AngularFireUploadTask {
   path!: string;
   data: any;
   metadata: any;
-  public interval$ = interval(25).pipe(
-    take(101),
-    throttleTime(10, asyncScheduler, {trailing: true})
-  );
+  public reader!: FileReader;
+  public percentageSubject!: Subject<number>;
   constructor(path: string, data: any, metadata?: any) {
     this.path = path;
     this.data = data;
     this.metadata = metadata;
+    this.percentageSubject = new Subject();
     let url: string;
-    setTimeout(() => {
-      const reader = new FileReader();
-      reader.readAsDataURL(data);
-      reader.onload = () => {
-        console.log(reader.result);
-        url = reader.result as string;
-        this.metadata.setURL(url as string);
-      };
-    }, 0);
+    const reader = new FileReader();
+    reader.readAsDataURL(data);
+    this.reader = reader;
+    reader.onprogress = (event) => {
+      const loaded = event.loaded;
+      const total = event.total;
+      const percentage = Number(((loaded * 100) / total).toFixed());
+      this.percentageSubject.next(percentage);
+    };
+    reader.onload = () => {
+      url = String(reader.result);
+      this.metadata.setURL(url);
+      this.percentageSubject.complete();
+    };
   }
 
   snapshotChanges(): Observable<firebase.storage.UploadTaskSnapshot | any | undefined> {
-    return this.interval$;
+    return this.percentageSubject.asObservable();
   }
   percentageChanges(): Observable<number | undefined> {
-    return this.interval$;
+    return this.percentageSubject.asObservable();
   }
   pause(): boolean {
     return false;
   }
   cancel(): boolean {
-    return false;
+    this.reader.abort();
+    return true;
   }
   resume(): boolean {
     return false;
