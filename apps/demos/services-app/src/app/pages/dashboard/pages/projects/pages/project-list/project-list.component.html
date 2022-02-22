@@ -1,7 +1,9 @@
 <div class="relative flex flex-col md:flex-row w-full h-full">
   <div class="relative md:absolute w-full h-auto md:h-full adapt-list-project">
     <header class="relative flex flex-row mx-auto py-6 px-4 sm:px-6 lg:px-8 items-center">
-      <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-200">Proyectos</h1>
+      <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-200">
+        {{ 'projects' | transloco }}
+      </h1>
       <button
         mat-icon-button
         class="block md:hidden ml-auto"

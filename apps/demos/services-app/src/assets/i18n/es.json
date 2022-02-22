@@ -60,5 +60,8 @@
   "pages.pageNotFound": "Página no encontrada",
   "pages.oops": "¡Vaya!",
   "pages.pageDoNotExist": "La página que intentas buscar no existe",
-  "pages.goHome": "Ir a inicio"
+  "pages.goHome": "Ir a inicio",
+  "management": "Administración",
+  "office": "Oficina",
+  "users": "Usuarios"
 }

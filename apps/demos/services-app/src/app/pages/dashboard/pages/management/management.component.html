@@ -1,4 +1,41 @@
-<div class="flex flex-col items-center justify-center h-full w-full">
-  <span class="text-3xl">Próximamente</span>
-  <img class="h-32 w-full" src="assets/undraw_under_construction.svg" />
+<div class="relative flex flex-col md:flex-row w-full h-full">
+  <div class="relative md:absolute w-full h-auto md:h-full adapt-list-project">
+    <header class="relative flex flex-row mx-auto py-6 px-4 sm:px-6 lg:px-8 items-center">
+      <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-200">
+        {{ 'management' | transloco }}
+      </h1>
+    </header>
+    <div class="relative w-full h-full flex flex-row">
+      <mat-tab-group
+        animationDuration="0ms"
+        [selectedIndex]="tabSelected"
+        (selectedIndexChange)="changeTab($event)"
+        class="w-full h-full"
+      >
+        <mat-tab>
+          <ng-template mat-tab-label>
+            {{ 'office' | transloco }}
+          </ng-template>
+          <ng-template matTabContent>
+            <ng-container *ngTemplateOutlet="officeTemplate"></ng-container>
+          </ng-template>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            {{ 'users' | transloco }}
+          </ng-template>
+          <ng-template matTabContent>
+            <ng-container *ngTemplateOutlet="usersTemplate"></ng-container>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
 </div>
+
+<ng-template #officeTemplate>
+  <div class="lg:container mx-auto p-4">Office</div>
+</ng-template>
+<ng-template #usersTemplate>
+  <div class="lg:container mx-auto p-4">Users</div>
+</ng-template>

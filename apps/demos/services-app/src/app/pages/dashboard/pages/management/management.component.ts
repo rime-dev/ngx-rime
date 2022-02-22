@@ -5,4 +5,10 @@ import {Component} from '@angular/core';
   templateUrl: './management.component.html',
   styleUrls: ['./management.component.scss'],
 })
-export class ManagementComponent {}
+export class ManagementComponent {
+  public tabSelected = 0;
+
+  changeTab(event: number): void {
+    this.tabSelected = event;
+  }
+}
