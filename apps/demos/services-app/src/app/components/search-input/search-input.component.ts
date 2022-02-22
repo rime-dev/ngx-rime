@@ -20,6 +20,7 @@ export class SearchInputComponent implements AfterViewInit {
   public searchForm: FormGroup;
   public projectsSearched$: Observable<EntityState<Project>[]> = of([]);
   private destroy$: Subject<void> = new Subject<void>();
+  public windowScreenWidth = window.screen.width;
   @ViewChild(CdkConnectedOverlay) cdkConnectedOverlay!: CdkConnectedOverlay;
   constructor(
     private ngZone: NgZone,

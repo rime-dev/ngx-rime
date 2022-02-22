@@ -4,14 +4,25 @@
     <input
       #inputSearch
       type="text"
-      name="serch"
+      name="search"
       autocomplete="off"
       [placeholder]="'search' | transloco"
       matInput
       (focus)="onFocus($event)"
       (blur)="onBlur($event)"
       [formControlName]="'searchInput'"
-      class="rng-search-input h-10 px-5 pr-10 text-sm focus:outline-none max-w-full ml-auto"
+      class="
+        rng-search-input
+        h-10
+        px-5
+        pr-10
+        text-sm
+        focus:outline-none
+        max-w-full
+        ml-auto
+        invisible
+        md:visible
+      "
       style="
         width: 200px;
         transition-duration: 100ms;
@@ -25,7 +36,12 @@
       cdkOverlayOrigin
       #trigger="cdkOverlayOrigin"
     />
-    <button type="submit" class="absolute right-0 top-0 mt-2 mr-2 dark:text-white" color="primary">
+    <button
+      type="button"
+      class="absolute right-0 top-0 mt-2 mr-2 dark:text-white"
+      color="primary"
+      (click)="onFocus($event)"
+    >
       <mat-icon *ngIf="!(this.searchForm.controls.searchInput.valueChanges | async)">
         search
       </mat-icon>
@@ -38,9 +54,48 @@
     cdkConnectedOverlay
     [cdkConnectedOverlayOrigin]="trigger"
     [cdkConnectedOverlayOpen]="isOverlayOpened"
-    [cdkConnectedOverlayWidth]="inputSearch.clientWidth"
+    [cdkConnectedOverlayWidth]="
+      inputSearch.clientWidth > 300 ? inputSearch.clientWidth : windowScreenWidth
+    "
+    cdkConnectedOverlayPush
   >
     <div class="relative w-full h-full md:h-2/5 flex flex-col p-4 rounded-b-2xl mat-elevation-z2">
+      <div *ngIf="inputSearch.clientWidth <= 300">
+        <form
+          class="relative text-gray-600 dark:text-gray-300 w-full flex"
+          [formGroup]="searchForm"
+        >
+          <button type="button" (click)="onBlur($event)">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <input
+            #inputSearch
+            type="text"
+            name="search"
+            autocomplete="off"
+            [placeholder]="'search' | transloco"
+            matInput
+            [formControlName]="'searchInput'"
+            class="
+              rng-search-input
+              h-10
+              px-5
+              pr-10
+              text-sm
+              focus:outline-none
+              max-w-full
+              ml-auto
+              w-full
+              rounded-t-2xl
+            "
+          />
+          <button type="button" class="absolute right-0 top-0 mt-2 mr-2" (click)="clearSearch()">
+            <mat-icon *ngIf="this.searchForm.controls.searchInput.valueChanges | async"
+              >close</mat-icon
+            >
+          </button>
+        </form>
+      </div>
       <div>
         {{ 'projects' | transloco }}
         <mat-action-list>
