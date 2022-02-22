@@ -12,6 +12,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
+import {MatMenuModule} from '@angular/material/menu';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -24,6 +25,7 @@ import {ProjectTypeModule} from 'apps/demos/services-app/src/app/pipes/project-t
 import {ProjectActivityComponent} from './components/project-activity/project-activity.component';
 import {ProjectAddCollaboratorDialogComponent} from './components/project-add-collaborator-dialog/project-add-collaborator-dialog.component';
 import {ProjectChangeStateDialogComponent} from './components/project-change-state-dialog/project-change-state-dialog.component';
+import {ProjectDocumentChangeTitleDialogComponent} from './components/project-document-change-title-dialog/project-document-change-title-dialog.component';
 import {ProjectDocumentDialogComponent} from './components/project-document-dialog/project-document-dialog.component';
 import {ProjectDocumentsComponent} from './components/project-documents/project-documents.component';
 import {ProjectExistingDocumentDialogComponent} from './components/project-existing-document-dialog/project-existing-document-dialog.component';
@@ -42,6 +44,7 @@ import {ProjectViewComponent} from './project-view.component';
     ProjectRemoveCollaboratorDialogComponent,
     ProjectDocumentDialogComponent,
     ProjectExistingDocumentDialogComponent,
+    ProjectDocumentChangeTitleDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -71,6 +74,7 @@ import {ProjectViewComponent} from './project-view.component';
     // StorageModule,
     MatDialogModule,
     SatinizeModule,
+    MatMenuModule,
   ],
 })
 export class ProjectViewModule {}

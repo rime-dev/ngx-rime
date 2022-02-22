@@ -1,0 +1,17 @@
+<h1 mat-dialog-title *ngIf="property === 'title'">{{ 'document.changeTitle' | transloco }}</h1>
+<h1 mat-dialog-title *ngIf="property === 'subtitle'">
+  {{ 'document.changeSubtitle' | transloco }}
+</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline" class="w-full">
+    <input matInput [formControl]="nameControl" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="flex flex-col md:flex-row">
+  <button mat-stroked-button class="w-full md:w-2/5" [mat-dialog-close]="nameControl.value">
+    {{ 'actions.accept' | transloco }}
+  </button>
+  <button mat-stroked-button class="w-full md:w-2/5 md:ml-auto" [mat-dialog-close]="false">
+    {{ 'actions.close' | transloco }}
+  </button>
+</div>

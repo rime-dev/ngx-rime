@@ -17,7 +17,7 @@ import {ProjectExistingDocumentDialogComponent} from '../project-existing-docume
 export class ProjectDocumentsComponent implements OnInit, OnDestroy {
   public filteredDocuments$: Observable<any[]> = of([]);
   public filteredDocuments: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
-  public documentsFormControl = new FormControl([]);
+  public documentsFormControl = new FormControl('');
 
   @Input()
   get project() {
@@ -71,16 +71,20 @@ export class ProjectDocumentsComponent implements OnInit, OnDestroy {
   viewDocument(document: any) {
     this.matDialog
       .open(ProjectExistingDocumentDialogComponent, {
-        data: {document},
-        width: '90vw',
-        height: '90vh',
+        data: {document, project: this.project},
+        width: '100vw',
+        height: '100vh',
       })
       .afterClosed()
-      .subscribe((document) => {
-        console.log(document);
-
-        // this.addDocuments(documentsURL);
+      .subscribe(() => {
+        this.updateFormControl();
       });
+  }
+  private updateFormControl() {
+    setTimeout(() => {
+      const value = this.documentsFormControl.value || '';
+      this.documentsFormControl.patchValue(value);
+    }, 0);
   }
   private addActivity(
     newActivity: Partial<ProjectActivity>,
@@ -110,47 +114,7 @@ export class ProjectDocumentsComponent implements OnInit, OnDestroy {
       project = this.addActivity(activity, project);
       this.dataService.select('Project').update(project);
       this.filteredDocuments.next(this.project.data.documents);
-      setTimeout(() => {
-        this.documentsFormControl.patchValue('');
-      }, 0);
-    }
-  }
-
-  private modifyDocuments(documents: any[]) {
-    if (documents && documents.length > 0 && this.project) {
-      const newDocuments = [...this.project.data.documents, ...documents];
-      const data = {...this.project.data, documents: newDocuments};
-      let project: EntityState<Project> = {...this.project, data};
-      const activity = {
-        action: 'add',
-        affected: 'documents',
-        result: documents.map((document) => document.title).join('. '),
-      };
-      project = this.addActivity(activity, project);
-      this.dataService.select('Project').update(project);
-      this.filteredDocuments.next(this.project.data.documents);
-      setTimeout(() => {
-        this.documentsFormControl.patchValue('');
-      }, 0);
-    }
-  }
-
-  private removeDocuments(documents: any[]) {
-    if (documents && documents.length > 0 && this.project) {
-      const newDocuments = [...this.project.data.documents, ...documents];
-      const data = {...this.project.data, documents: newDocuments};
-      let project: EntityState<Project> = {...this.project, data};
-      const activity = {
-        action: 'add',
-        affected: 'documents',
-        result: documents.map((document) => document.title).join('. '),
-      };
-      project = this.addActivity(activity, project);
-      this.dataService.select('Project').update(project);
-      this.filteredDocuments.next(this.project.data.documents);
-      setTimeout(() => {
-        this.documentsFormControl.patchValue('');
-      }, 0);
+      this.updateFormControl();
     }
   }
 
