@@ -29,6 +29,7 @@
   "document.changeTitle": "Change document name",
   "document.changeSubtitle": "Change document description",
   "location": "Location",
+  "label": "Label",
   "labels": "Labels",
   "labels.newLabel": "New label",
   "labels.urgent": "Urgent",
