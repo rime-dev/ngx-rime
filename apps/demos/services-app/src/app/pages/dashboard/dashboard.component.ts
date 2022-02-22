@@ -120,6 +120,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private loadUser(id?: string): void {
     if (id) {
       this.dataService.select('User').getByKey(id);
+      this.dataService.select('Group').getByKey('GS1');
     }
   }
   private loadProjects(): void {
