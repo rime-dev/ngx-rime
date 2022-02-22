@@ -1,6 +1,16 @@
 <button
   type="button"
   mat-mini-fab
+  *ngIf="!userInfo"
+  class="bg-contain bg-center mat-elevation-z0"
+  color="primary"
+>
+  <span class="sr-only">Open user menu</span>
+  <mat-icon>person</mat-icon>
+</button>
+<button
+  type="button"
+  mat-mini-fab
   *ngIf="userInfo && userInfo.photoURL"
   class="bg-contain bg-center mat-elevation-z0"
   color="primary"
