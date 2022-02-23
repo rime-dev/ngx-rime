@@ -34,58 +34,6 @@
 
 <ng-template #officeTemplate>
   <div class="mb-6" *ngIf="group$ | async; let group">
-    <h1 class="text-xl font-medium my-6">Tarjeta virtual</h1>
-    <mat-card class="mat-elevation-z3 rounded-lg p-0">
-      <div
-        [style]="'background-image: url(' + group.data.background + ')'"
-        class="h-64 bg-gray-200 bg-cover bg-center rounded-t-lg flex items-center justify-center"
-      >
-        <p class="font-bold text-4xl"></p>
-      </div>
-      <div class="rounded-b-lg px-8">
-        <div class="relative">
-          <img
-            class="
-              right-0
-              w-20
-              h-20
-              rounded-full
-              mr-4
-              shadow-lg
-              absolute
-              -mt-10
-              bg-gray-100
-              object-cover
-            "
-            [src]="group.data.logo"
-            alt="Logo"
-          />
-        </div>
-        <div class="pt-8 pb-8">
-          <h1 class="text-2xl font-bold mb-2">{{ group.data.name }}</h1>
-          <mat-chip-list aria-label="Activities">
-            <mat-chip color="primary" selected *ngFor="let activity of group.data.activities">{{
-              activity | transloco
-            }}</mat-chip>
-          </mat-chip-list>
-          <p class="mt-6" *ngFor="let info of group.data.additionalInfo">
-            {{ info }}
-          </p>
-
-          <div class="flex justify-around mt-8">
-            <button mat-icon-button color="primary">
-              <mat-icon>email</mat-icon>
-            </button>
-            <button mat-icon-button color="primary">
-              <mat-icon>phone</mat-icon>
-            </button>
-            <button mat-icon-button color="primary">
-              <mat-icon>place</mat-icon>
-            </button>
-          </div>
-        </div>
-      </div>
-    </mat-card>
     <h1 class="text-xl font-medium my-6">Información principal</h1>
     <mat-card class="mat-elevation-z3 rounded-lg">
       <mat-card-content class="flex flex-col">
@@ -139,10 +87,87 @@
         </div>
       </mat-card-content>
     </mat-card>
-    <h1 class="text-xl font-medium my-6">Información adicional</h1>
-    <mat-card class="mat-elevation-z3 rounded-lg"> </mat-card>
+    <div class="flex flex-row items-center w-full">
+      <h1 class="text-xl font-medium my-6">Información adicional</h1>
+      <button mat-icon-button class="ml-auto" [matMenuTriggerFor]="menuAdditionalInformation">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menuAdditionalInformation="matMenu">
+        <button mat-menu-item (click)="addAdditionalInfo(group)">
+          <mat-icon>add</mat-icon>Añadir
+        </button>
+      </mat-menu>
+    </div>
+    <mat-card class="mat-elevation-z3 rounded-lg">
+      <mat-action-list class="w-full" *ngFor="let info of group.data.additionalInfo; let i = index">
+        <h3 matSubheader>Texto {{ i + 1 }}</h3>
+        <mat-list-item class="h-auto min-h-10 mb-2">
+          {{ info }}
+        </mat-list-item>
+      </mat-action-list>
+    </mat-card>
     <h1 class="text-xl font-medium my-6">Ubicación</h1>
-    <mat-card class="mat-elevation-z3 rounded-lg"> </mat-card>
+    <mat-card class="mat-elevation-z3 rounded-lg">
+      <p class="mb-4">{{ group.data.location.text }}</p>
+      <rng-map
+        #map
+        class="grid w-full h-96 rounded-2xl overflow-hidden"
+        [center]="center"
+        [data]="point$ | async"
+      ></rng-map>
+    </mat-card>
+    <h1 class="text-xl font-medium my-6">Tarjeta virtual</h1>
+    <mat-card class="mat-elevation-z3 rounded-lg p-0">
+      <div
+        [style]="'background-image: url(' + group.data.background + ')'"
+        class="h-64 bg-gray-200 bg-cover bg-center rounded-t-lg flex items-center justify-center"
+      >
+        <p class="font-bold text-4xl"></p>
+      </div>
+      <div class="rounded-b-lg px-8">
+        <div class="relative">
+          <img
+            class="
+              right-0
+              w-20
+              h-20
+              rounded-full
+              mr-4
+              shadow-lg
+              absolute
+              -mt-10
+              bg-gray-100
+              object-cover
+            "
+            [src]="group.data.logo"
+            alt="Logo"
+          />
+        </div>
+        <div class="pt-8 pb-8">
+          <h1 class="text-2xl font-bold mb-2">{{ group.data.name }}</h1>
+          <mat-chip-list aria-label="Activities">
+            <mat-chip color="primary" selected *ngFor="let activity of group.data.activities">{{
+              activity | transloco
+            }}</mat-chip>
+          </mat-chip-list>
+          <p class="mt-6" *ngFor="let info of group.data.additionalInfo">
+            {{ info }}
+          </p>
+
+          <div class="flex justify-around mt-8">
+            <button mat-icon-button color="primary">
+              <mat-icon>email</mat-icon>
+            </button>
+            <button mat-icon-button color="primary">
+              <mat-icon>phone</mat-icon>
+            </button>
+            <button mat-icon-button color="primary">
+              <mat-icon>place</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
   </div>
 </ng-template>
 <ng-template #usersTemplate>

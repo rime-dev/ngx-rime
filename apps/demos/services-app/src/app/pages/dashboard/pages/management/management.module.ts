@@ -5,9 +5,11 @@ import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
+import {MatMenuModule} from '@angular/material/menu';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {TranslocoModule} from '@ngneat/transloco';
+import {MapModule} from '../../../../components/map/map.module';
 import {ManagementRoutingModule} from './management-routing.module';
 import {ManagementComponent} from './management.component';
 
@@ -24,6 +26,8 @@ import {ManagementComponent} from './management.component';
     TranslocoModule,
     MatChipsModule,
     MatListModule,
+    MatMenuModule,
+    MapModule,
   ],
 })
 export class ManagementModule {}
