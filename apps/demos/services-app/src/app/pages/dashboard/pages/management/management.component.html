@@ -1,16 +1,15 @@
-<div class="relative flex flex-col md:flex-row w-full h-full">
-  <div class="relative md:absolute w-full h-auto md:h-full adapt-list-project">
+<div class="relative flex flex-col md:flex-row w-full h-full lg:container mx-auto p-4">
+  <div class="relative w-full h-full">
     <header class="relative flex flex-row mx-auto py-6 px-4 sm:px-6 lg:px-8 items-center">
       <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-200">
         {{ 'management' | transloco }}
       </h1>
     </header>
-    <div class="relative w-full h-full flex flex-row">
+    <div class="relative w-full h-full">
       <mat-tab-group
         animationDuration="0ms"
         [selectedIndex]="tabSelected"
         (selectedIndexChange)="changeTab($event)"
-        class="w-full h-full"
       >
         <mat-tab>
           <ng-template mat-tab-label>
@@ -34,7 +33,117 @@
 </div>
 
 <ng-template #officeTemplate>
-  <div class="lg:container mx-auto p-4">Office</div>
+  <div class="mb-6" *ngIf="group$ | async; let group">
+    <h1 class="text-xl font-medium my-6">Tarjeta virtual</h1>
+    <mat-card class="mat-elevation-z3 rounded-lg p-0">
+      <div
+        [style]="'background-image: url(' + group.data.background + ')'"
+        class="h-64 bg-gray-200 bg-cover bg-center rounded-t-lg flex items-center justify-center"
+      >
+        <p class="font-bold text-4xl"></p>
+      </div>
+      <div class="rounded-b-lg px-8">
+        <div class="relative">
+          <img
+            class="
+              right-0
+              w-20
+              h-20
+              rounded-full
+              mr-4
+              shadow-lg
+              absolute
+              -mt-10
+              bg-gray-100
+              object-cover
+            "
+            [src]="group.data.logo"
+            alt="Logo"
+          />
+        </div>
+        <div class="pt-8 pb-8">
+          <h1 class="text-2xl font-bold mb-2">{{ group.data.name }}</h1>
+          <mat-chip-list aria-label="Activities">
+            <mat-chip color="primary" selected *ngFor="let activity of group.data.activities">{{
+              activity | transloco
+            }}</mat-chip>
+          </mat-chip-list>
+          <p class="mt-6" *ngFor="let info of group.data.additionalInfo">
+            {{ info }}
+          </p>
+
+          <div class="flex justify-around mt-8">
+            <button mat-icon-button color="primary">
+              <mat-icon>email</mat-icon>
+            </button>
+            <button mat-icon-button color="primary">
+              <mat-icon>phone</mat-icon>
+            </button>
+            <button mat-icon-button color="primary">
+              <mat-icon>place</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <h1 class="text-xl font-medium my-6">Información principal</h1>
+    <mat-card class="mat-elevation-z3 rounded-lg">
+      <mat-card-content class="flex flex-col">
+        <div class="flex flex-col md:flex-row w-full">
+          <div class="w-full md:w-1/2">
+            <mat-action-list>
+              <h3 matSubheader>Nombre</h3>
+              <button mat-list-item>{{ group.data.name }}</button>
+              <h3 matSubheader>Email</h3>
+              <button mat-list-item>{{ group.data.email }}</button>
+              <h3 matSubheader>Teléfono</h3>
+              <button mat-list-item>{{ group.data.phone }}</button>
+              <h3 matSubheader>Web</h3>
+              <button mat-list-item>{{ group.data.web }}</button>
+            </mat-action-list>
+            <mat-list>
+              <h3 matSubheader>Actividades</h3>
+              <mat-list-item class="h-auto">
+                <mat-chip-list aria-label="Activities">
+                  <mat-chip
+                    color="primary"
+                    selected
+                    *ngFor="let activity of group.data.activities"
+                    >{{ activity | transloco }}</mat-chip
+                  >
+                </mat-chip-list>
+              </mat-list-item>
+            </mat-list>
+          </div>
+
+          <mat-list class="w-full md:w-1/2">
+            <h3 matSubheader>Logo</h3>
+
+            <mat-list-item class="h-auto mb-2">
+              <img
+                mat-line
+                class="w-32 h-32 rounded-full m-auto object-cover"
+                [src]="group.data.logo"
+              />
+            </mat-list-item>
+            <h3 matSubheader>Fondo</h3>
+
+            <mat-list-item class="h-auto mb-2">
+              <img
+                mat-line
+                class="w-56 h-32 rounded-xl m-auto object-cover"
+                [src]="group.data.background"
+              />
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <h1 class="text-xl font-medium my-6">Información adicional</h1>
+    <mat-card class="mat-elevation-z3 rounded-lg"> </mat-card>
+    <h1 class="text-xl font-medium my-6">Ubicación</h1>
+    <mat-card class="mat-elevation-z3 rounded-lg"> </mat-card>
+  </div>
 </ng-template>
 <ng-template #usersTemplate>
   <div class="lg:container mx-auto p-4">Users</div>

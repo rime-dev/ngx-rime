@@ -1,7 +1,9 @@
+import {Location} from './location.model';
+
 export interface Project {
   uid: string;
   title: string;
-  location: ProjectLocation;
+  location: Location;
   type: ProjectType;
   state: ProjectState;
   accepted: boolean;
@@ -17,10 +19,7 @@ export interface Project {
   activity: ProjectActivity[];
   labels: string[];
 }
-export interface ProjectLocation {
-  text: string;
-  coordinates: number[];
-}
+
 export interface ProjectActivity {
   date: string;
   user: string;

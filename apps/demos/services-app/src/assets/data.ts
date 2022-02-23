@@ -389,16 +389,19 @@ const groups = [
       phone: '963344556',
       web: 'pinturaspaco.com',
       type: 'provider',
+      activities: ['paint'],
       dateStart: '2022-02-22T16:25:13.036Z',
       location: {
         text: 'C. Coronel Pérez, Torrent',
         coordinates: [-0.4775152206534386, 39.43470024249243],
       },
-      // eslint-disable-next-line max-len
-      logo: 'https://firebasestorage.googleapis.com/v0/b/e-lares.appspot.com/o/offices%2F7YquKjMbqu8kvJSTizTZ%2Fmandala.jpg?alt=media&token=31056a72-3ba5-4cc8-96dd-2e5cc5436ad3',
+      logo: 'https://i.picsum.photos/id/1084/536/354.jpg?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60',
       background:
-        // eslint-disable-next-line max-len
-        'https://firebasestorage.googleapis.com/v0/b/e-lares.appspot.com/o/offices%2F7YquKjMbqu8kvJSTizTZ%2Fcb95aef0431f3210fcb3713ddf47262c.jpg?alt=media&token=82ced96d-53e2-4852-8436-064c61b67d2d',
+        'https://i.picsum.photos/id/1084/536/354.jpg?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60',
+      additionalInfo: [
+        'Empresa desde el 1964 con una gran variedad de tipos de pintura y una alta gama de colores.',
+      ],
+      users: ['HgdTVUOGmgZ7XdPQhKCUZIZx6fT2', 'GFT6', 'GFT7'],
     },
   },
   {
