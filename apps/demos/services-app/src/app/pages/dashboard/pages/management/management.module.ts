@@ -12,11 +12,17 @@ import {TranslocoModule} from '@ngneat/transloco';
 import {MapModule} from '../../../../components/map/map.module';
 import {ManagementRoutingModule} from './management-routing.module';
 import {ManagementComponent} from './management.component';
-import { TeamComponent } from './components/team/team.component';
-import { CardComponent } from './components/card/card.component';
+import {TeamComponent} from './components/team/team.component';
+import {CardComponent} from './components/card/card.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {AddUserDialogComponent} from './components/add-user-dialog/add-user-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [ManagementComponent, TeamComponent, CardComponent],
+  declarations: [ManagementComponent, TeamComponent, CardComponent, AddUserDialogComponent],
   imports: [
     CommonModule,
     ManagementRoutingModule,
@@ -30,6 +36,12 @@ import { CardComponent } from './components/card/card.component';
     MatListModule,
     MatMenuModule,
     MapModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    FormsModule,
+    MatDialogModule,
   ],
 })
 export class ManagementModule {}

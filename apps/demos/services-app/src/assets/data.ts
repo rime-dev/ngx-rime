@@ -362,6 +362,7 @@ export const collaborators: EntityState<Collaborator>[] = [
       group: 'GS2',
       avatar: `https://i.picsum.photos/id/1084/536/354.jpg?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60`,
       headline: 'Operario',
+      email: 'sergio@pinturas.com',
     },
   },
   {
@@ -372,6 +373,7 @@ export const collaborators: EntityState<Collaborator>[] = [
       group: 'GS1',
       avatar: 'https://avatars.githubusercontent.com/u/31616221?v=4',
       headline: 'Operario',
+      email: 'carlobr7@gmail.com',
     },
   },
 ];

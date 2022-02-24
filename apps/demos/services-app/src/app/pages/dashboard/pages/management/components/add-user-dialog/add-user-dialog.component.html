@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Buscar</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Introduce el email</mat-label>
+    <input matInput #searchUserInput [formControl]="userFormControl" />
+    <mat-icon matSuffix class="cursor-pointer" *ngIf="!searchUserInput.value">search</mat-icon>
+    <mat-icon
+      matSuffix
+      class="cursor-pointer"
+      *ngIf="searchUserInput.value"
+      (click)="userFormControl.setValue('')"
+      >close</mat-icon
+    >
+  </mat-form-field>
+  <button color="primary" (click)="searchUser(searchUserInput.value)">Buscar</button>
+  <div *ngIf="userFound$ | async; let userFound">
+    <div *ngIf="userFound && userFound.length === 0">
+      No se ha encontrado ningún usuario con ese email
+    </div>
+    <div *ngIf="userFound && userFound.length > 0">
+      {{ userFound | json }}
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions class="flex flex-col md:flex-row">
+  <button mat-stroked-button class="w-full md:w-2/5" [mat-dialog-close]="true">
+    {{ 'actions.accept' | transloco }}
+  </button>
+  <button mat-stroked-button class="w-full md:w-2/5 md:ml-auto" [mat-dialog-close]="false">
+    {{ 'actions.close' | transloco }}
+  </button>
+</div>
