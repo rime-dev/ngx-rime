@@ -337,6 +337,9 @@ export const collaborators: EntityState<Collaborator>[] = [
       group: 'GS1',
       avatar:
         'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      headline: 'Director',
+      phone: '963326968',
+      email: 'juan@pinturas.com',
     },
   },
   {
@@ -346,6 +349,9 @@ export const collaborators: EntityState<Collaborator>[] = [
       name: 'Sergio',
       group: 'GS1',
       avatar: `https://i.picsum.photos/id/1084/536/354.jpg?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60`,
+      headline: 'Socio',
+      phone: '963326968',
+      email: 'sergio@pinturas.com',
     },
   },
   {
@@ -355,6 +361,7 @@ export const collaborators: EntityState<Collaborator>[] = [
       name: 'Alex',
       group: 'GS2',
       avatar: `https://i.picsum.photos/id/1084/536/354.jpg?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60`,
+      headline: 'Operario',
     },
   },
   {
@@ -364,6 +371,7 @@ export const collaborators: EntityState<Collaborator>[] = [
       name: 'Carlos',
       group: 'GS1',
       avatar: 'https://avatars.githubusercontent.com/u/31616221?v=4',
+      headline: 'Operario',
     },
   },
 ];

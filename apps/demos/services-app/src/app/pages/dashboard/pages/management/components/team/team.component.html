@@ -1,0 +1,50 @@
+<div class="mb-6">
+  <div class="container mx-auto">
+    <h1 class="text-xl font-medium my-6"></h1>
+
+    <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-4">
+      <mat-card *ngFor="let user of users">
+        <mat-card-content
+          class="flex flex-col items-center p-8 transform cursor-pointer rounded-xl"
+        >
+          <img
+            class="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300"
+            [src]="user.data.avatar"
+            [alt]="user.data.name"
+          />
+
+          <h1 class="mt-4 text-2xl font-semibold text-gray-700 capitalize dark:text-white">
+            {{ user.data.name }}
+          </h1>
+
+          <p class="mt-2 text-gray-500 capitalize dark:text-gray-300">
+            {{ user.data.headline }}
+          </p>
+
+          <div class="flex mt-3 -mx-2">
+            <button
+              *ngIf="user.data.email"
+              mat-icon-button
+              color="primary"
+              class="text-gray-600 dark:text-gray-300"
+              (click)="openTabForEmail(user.data.email)"
+              [matTooltip]="user.data.email"
+            >
+              <mat-icon>email</mat-icon>
+            </button>
+            <button
+              *ngIf="user.data.phone"
+              mat-icon-button
+              color="primary"
+              class="text-gray-600 dark:text-gray-300"
+              (click)="openTabForPhone(user.data.phone)"
+              [matTooltip]="user.data.phone"
+            >
+              <mat-icon>phone</mat-icon>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

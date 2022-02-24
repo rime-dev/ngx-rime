@@ -63,5 +63,7 @@
   "pages.goHome": "Go home",
   "management": "Management",
   "office": "Office",
-  "users": "Users"
+  "users": "Users",
+  "publicCard": "Public card",
+  "headline": "Headline"
 }

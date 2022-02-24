@@ -27,6 +27,7 @@ import {Fill, Stroke, Style} from 'ol/style';
 import CircleStyle from 'ol/style/Circle';
 import Text from 'ol/style/Text';
 import View from 'ol/View';
+import {defaults as defaultInteraction} from 'ol/interaction';
 
 const MAP = new InjectionToken<MapComponent>('MapComponent');
 const circleDistanceMultiplier = 1;
@@ -156,6 +157,16 @@ export class MapComponent implements AfterViewInit {
   }
   private _overlayClickTemplate!: TemplateRef<any>;
 
+  @Input()
+  set interactions(value) {
+    this._interactions = value;
+    this.updateMap();
+  }
+  get interactions() {
+    return this._interactions;
+  }
+  private _interactions: any = {};
+
   @Output() featureSelected: EventEmitter<any> = new EventEmitter<any>();
 
   @HostBinding('attr.id') id = 'rng-map';
@@ -245,6 +256,7 @@ export class MapComponent implements AfterViewInit {
         center: fromLonLat(this.center),
         zoom: 4,
       }),
+      interactions: defaultInteraction(this.interactions),
     });
     this.map = map;
     this.addPoints(this._data);

@@ -12,9 +12,11 @@ import {TranslocoModule} from '@ngneat/transloco';
 import {MapModule} from '../../../../components/map/map.module';
 import {ManagementRoutingModule} from './management-routing.module';
 import {ManagementComponent} from './management.component';
+import { TeamComponent } from './components/team/team.component';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
-  declarations: [ManagementComponent],
+  declarations: [ManagementComponent, TeamComponent, CardComponent],
   imports: [
     CommonModule,
     ManagementRoutingModule,

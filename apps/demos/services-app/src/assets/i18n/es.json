@@ -63,5 +63,7 @@
   "pages.goHome": "Ir a inicio",
   "management": "Administración",
   "office": "Oficina",
-  "users": "Usuarios"
+  "users": "Usuarios",
+  "publicCard": "Tarjeta pública",
+  "headline": "Titular"
 }
