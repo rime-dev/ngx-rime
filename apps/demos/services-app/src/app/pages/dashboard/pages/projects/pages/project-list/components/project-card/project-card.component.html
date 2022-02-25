@@ -15,19 +15,19 @@
       <mat-card-content class="m-0">
         <div class="flex flex-row w-full justify-end pr-2" *ngIf="project.data.group">
           <div class="flex flex-col items-center self-center">
-            <div class="flex flex-row mb-2" *ngIf="collaborators$ | async; let collaborators">
+            <div class="flex flex-row mb-2" *ngIf="users$ | async; let collaborators">
               <img
                 *ngIf="collaborators[0]"
                 class="rounded-full h-10 w-10 border-solid border-2 border-white"
                 [matTooltip]="collaborators[0].data.name"
-                [src]="collaborators[0].data.avatar"
+                [src]="collaborators[0].data.photoURL"
               />
               <img
-                *ngFor="let collaborator of collaborators$ | async | slice: 1"
+                *ngFor="let collaborator of users$ | async | slice: 1"
                 [matTooltip]="collaborator.data.name"
                 class="rounded-full h-10 w-10 border-solid border-2 border-white"
                 style="margin-left: -10px"
-                [src]="collaborator.data.avatar"
+                [src]="collaborator.data.photoURL"
               />
             </div>
           </div>

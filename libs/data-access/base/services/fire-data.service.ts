@@ -7,6 +7,7 @@ import {from, isObservable, observable, Observable, of, throwError} from 'rxjs';
 import {catchError, delay, map, take, tap, timeout} from 'rxjs/operators';
 import {ENTITY_CONFIG, ENTITY_NAME} from '../constants/base.constant';
 import {
+  arrayFilter,
   ConditionalQueryFirestore,
   EntityState,
   FirebaseData,
@@ -559,16 +560,12 @@ export class FireDataMockService<T> {
   }
 
   private getCollectionReferenceByConditions(ref: any[], data: any) {
-    const where = (array: any[], fieldPath: any, opStr: string, value: string) => {
-      array = array.filter((eachRef: any) => eachRef.data[fieldPath as string] === value);
-      return array;
-    };
     const conditions: any = {
       limit: (limit: number) => ref.slice(0, limit),
       limitToLast: (limit: number) => ref.slice(limit),
       where: (queries: ConditionalQueryFirestore[]) => {
         queries.forEach((query: ConditionalQueryFirestore) => {
-          ref = where(ref, query.fieldPath, query.opStr, query.value);
+          ref = arrayFilter(ref, query);
         });
         return ref;
       },

@@ -1,5 +1,8 @@
 <h1 mat-dialog-title>Buscar</h1>
-<div mat-dialog-content>
+<button mat-icon-button class="absolute top-0 right-0" [mat-dialog-close]="false">
+  <mat-icon>close</mat-icon>
+</button>
+<div mat-dialog-content class="max-w-sm">
   <mat-form-field appearance="outline" class="w-full">
     <mat-label>Introduce el email</mat-label>
     <input matInput #searchUserInput [formControl]="userFormControl" />
@@ -12,22 +15,36 @@
       >close</mat-icon
     >
   </mat-form-field>
-  <button color="primary" (click)="searchUser(searchUserInput.value)">Buscar</button>
-  <div *ngIf="userFound$ | async; let userFound">
+
+  <button
+    color="primary"
+    class="w-full my-2"
+    mat-raised-button
+    (click)="searchUser(searchUserInput.value)"
+  >
+    Buscar
+  </button>
+
+  <div class="w-full my-2" *ngIf="userFound$ | async; let userFound">
     <div *ngIf="userFound && userFound.length === 0">
       No se ha encontrado ningún usuario con ese email
     </div>
-    <div *ngIf="userFound && userFound.length > 0">
-      {{ userFound | json }}
+    <div class="flex flex-col" *ngIf="userFound && userFound.length > 0">
+      <mat-card class="max-w-xs mx-auto overflow-hidden mat-elevation-z1 p-0">
+        <img class="object-cover w-full h-56" [src]="userFound[0].data.photoURL" alt="avatar" />
+        <div class="py-5 text-center">
+          <span class="block text-2xl font-bold">{{ userFound[0].data.name }}</span>
+          <span class="text-sm">{{ userFound[0].data.headline }}</span>
+        </div>
+      </mat-card>
+
+      <button
+        mat-stroked-button
+        class="w-full md:w-2/5 mx-auto my-4"
+        [mat-dialog-close]="userFound[0].id"
+      >
+        Enviar invitación
+      </button>
     </div>
   </div>
-</div>
-
-<div mat-dialog-actions class="flex flex-col md:flex-row">
-  <button mat-stroked-button class="w-full md:w-2/5" [mat-dialog-close]="true">
-    {{ 'actions.accept' | transloco }}
-  </button>
-  <button mat-stroked-button class="w-full md:w-2/5 md:ml-auto" [mat-dialog-close]="false">
-    {{ 'actions.close' | transloco }}
-  </button>
 </div>

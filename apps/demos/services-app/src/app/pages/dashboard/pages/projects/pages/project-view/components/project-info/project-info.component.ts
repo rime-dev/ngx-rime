@@ -1,5 +1,6 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
+import {User} from '@angular/fire/auth/firebase';
 import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatDialog} from '@angular/material/dialog';
@@ -8,8 +9,6 @@ import {TranslocoService} from '@ngneat/transloco';
 import {AuthService} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
-import {log$} from 'apps/demos/services-app/src/app/decorators/log.decorator';
-import {Collaborator} from 'apps/demos/services-app/src/app/models/collaborator.model';
 import {
   Labels,
   Project,
@@ -29,7 +28,7 @@ import {ProjectRemoveCollaboratorDialogComponent} from '../project-remove-collab
 export class ProjectInfoComponent implements OnDestroy {
   public labels = Labels;
   public separatorKeysCodes: number[] = [ENTER, COMMA];
-  public collaborators$: Observable<EntityState<Collaborator>[]>;
+  public users$: Observable<EntityState<User>[]>;
   public filteredLabels: Observable<string[]>;
   public labelsControl = new FormControl();
   public editLabels = false;
@@ -59,16 +58,16 @@ export class ProjectInfoComponent implements OnDestroy {
       startWith(null),
       map((fruit: string | null) => (fruit ? this.filterLabels(fruit) : Labels.labels.slice()))
     );
-    this.collaborators$ = this.dataService.select('Collaborator').entities$;
+    this.users$ = this.dataService.select('User').entities$;
     this.loadCollaborators();
     this.stateChange$
       .pipe(tap({next: () => this.loadCollaborators()}), takeUntil(this.destroy$))
       .subscribe();
   }
   private loadCollaborators() {
-    this.collaborators$ = this.collaborators$.pipe(
-      map((collaborators: EntityState<Collaborator>[]) =>
-        collaborators.filter((collaborator: EntityState<Collaborator>) =>
+    this.users$ = this.users$.pipe(
+      map((collaborators: EntityState<User>[]) =>
+        collaborators.filter((collaborator: EntityState<User>) =>
           this.project?.data.collaborators.includes(collaborator.id)
         )
       )
@@ -209,7 +208,7 @@ export class ProjectInfoComponent implements OnDestroy {
         }
       });
   }
-  openDialogRemoveCollaborator(collaborator: EntityState<Collaborator>) {
+  openDialogRemoveCollaborator(collaborator: EntityState<User>) {
     if (this.checkIfProjectIsFinished()) {
       return;
     }

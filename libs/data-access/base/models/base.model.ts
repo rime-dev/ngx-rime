@@ -98,3 +98,21 @@ export interface FireEntityCollectionDataService<T> {
   update(update: Update<T>): Observable<T>;
   getWithQuery(params: ConditionalQueryFirestore[]): Observable<T[]>;
 }
+
+export const filterOperator = {
+  '<': (data: any, value: any) => data < value,
+  '<=': (data: any, value: any) => data <= value,
+  '==': (data: any, value: any) => data === value,
+  '!=': (data: any, value: any) => data !== value,
+  '>=': (data: any, value: any) => data >= value,
+  '>': (data: any, value: any) => data > value,
+  'array-contains': (data: any[], value: any) => data.includes(value),
+  in: () => (data: any, value: any) => data.some(value),
+  'array-contains-any': () => null,
+  'not-in': (data: any, value: any) => !data.some(value),
+};
+
+export const arrayFilter = (array: any[], query: ConditionalQueryFirestore) =>
+  array.filter((doc: any) =>
+    filterOperator[query.opStr](doc.data[query?.fieldPath as string], query?.value)
+  );

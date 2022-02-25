@@ -6,15 +6,12 @@
           'collaborators' | transloco
         }}</span>
         <div class="flex flex-row">
-          <div *ngIf="(collaborators$ | async)?.length === 0" class="self-center text-sm">
+          <div *ngIf="(users$ | async)?.length === 0" class="self-center text-sm">
             <span>Añadir colaboradores</span>
           </div>
-          <div
-            class="group flex flex-row relative"
-            *ngFor="let collaborator of collaborators$ | async"
-          >
+          <div class="group flex flex-row relative" *ngFor="let user of users$ | async">
             <img
-              [matTooltip]="collaborator.data.name"
+              [matTooltip]="user.data.name"
               class="
                 group
                 rounded-full
@@ -27,7 +24,7 @@
                 relative
                 group-hover:opacity-50
               "
-              [src]="collaborator.data.avatar"
+              [src]="user.data.photoURL"
             />
             <div
               class="invisible group-hover:visible absolute w-full h-full"
@@ -36,7 +33,7 @@
               <button
                 mat-icon-button
                 class="w-full h-full"
-                (click)="openDialogRemoveCollaborator(collaborator)"
+                (click)="openDialogRemoveCollaborator(user)"
               >
                 <mat-icon>close</mat-icon>
               </button>

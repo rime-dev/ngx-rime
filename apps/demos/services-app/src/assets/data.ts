@@ -1,5 +1,4 @@
 import {EntityState} from '@rng/data-access/base/models/base.model';
-import {Collaborator} from '../app/models/collaborator.model';
 import {Project} from '../app/models/project.model';
 
 export const projects: EntityState<Project>[] = [
@@ -328,66 +327,81 @@ export const otherProjects: EntityState<Project>[] = [
   },
 ];
 
-export const collaborators: EntityState<Collaborator>[] = [
+const users = [
+  {
+    id: 'HgdTVUOGmgZ7XdPQhKCUZIZx6fT2',
+    data: {
+      uid: 'HgdTVUOGmgZ7XdPQhKCUZIZx6fT2',
+      displayName: 'Carlos Bayarri',
+      email: 'carlobr7@gmail.com',
+      emailVerified: true,
+      phone: '963326968',
+      photoURL: 'https://avatars.githubusercontent.com/u/31616221?v=4',
+      name: 'Carlos',
+      lastName: 'Bayarri',
+      headline: 'Programador',
+      groups: ['GS1'],
+      invitations: [
+        {
+          group: 'GS2',
+          state: 'pending',
+        },
+      ],
+    },
+  },
   {
     id: 'GFT6',
     data: {
       uid: 'GFT6',
-      name: 'Juan',
-      group: 'GS1',
-      avatar:
-        'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      headline: 'Director',
-      phone: '963326968',
+      displayName: 'Juan Martínez',
       email: 'juan@pinturas.com',
+      emailVerified: true,
+      phone: '963326968',
+      photoURL:
+        'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      name: 'Juan',
+      lastName: 'Martínez',
+      headline: 'Director',
+      groups: ['GS1'],
+      invitations: [],
     },
   },
   {
     id: 'GFT7',
     data: {
       uid: 'GFT7',
-      name: 'Sergio',
-      group: 'GS1',
-      avatar: `https://i.picsum.photos/id/1084/536/354.jpg?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60`,
-      headline: 'Socio',
-      phone: '963326968',
+      displayName: 'Sergio Martínez',
       email: 'sergio@pinturas.com',
+      emailVerified: true,
+      phone: '963326968',
+      photoURL:
+        'https://i.picsum.photos/id/1084/536/354.jpg?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60',
+      name: 'Sergio',
+      lastName: 'Martínez',
+      headline: 'Socio',
+      groups: ['GS1'],
+      invitations: [],
     },
   },
   {
     id: 'GFT8',
     data: {
       uid: 'GFT8',
+      displayName: 'Alex Martínez',
+      email: 'alex@pinturas.com',
+      emailVerified: true,
+      phone: '963326968',
+      photoURL:
+        // eslint-disable-next-line max-len
+        'https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
       name: 'Alex',
-      group: 'GS2',
-      avatar: `https://i.picsum.photos/id/1084/536/354.jpg?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60`,
-      headline: 'Operario',
-      email: 'sergio@pinturas.com',
-    },
-  },
-  {
-    id: 'HgdTVUOGmgZ7XdPQhKCUZIZx6fT2',
-    data: {
-      uid: 'HgdTVUOGmgZ7XdPQhKCUZIZx6fT2',
-      name: 'Carlos',
-      group: 'GS1',
-      avatar: 'https://avatars.githubusercontent.com/u/31616221?v=4',
-      headline: 'Operario',
-      email: 'carlobr7@gmail.com',
+      lastName: 'Martínez',
+      headline: 'Socio',
+      groups: ['GS2'],
+      invitations: [],
     },
   },
 ];
-
-const user = {
-  id: 'HgdTVUOGmgZ7XdPQhKCUZIZx6fT2',
-  data: {
-    displayName: 'Carlos Bayarri',
-    email: 'carlobr7@gmail.com',
-    emailVerified: true,
-    photoURL: 'https://avatars.githubusercontent.com/u/31616221?v=4',
-    uid: 'HgdTVUOGmgZ7XdPQhKCUZIZx6fT2',
-  },
-};
 
 const groups = [
   {
@@ -436,7 +450,6 @@ const groups = [
 
 export const mockData = {
   projects: [...projects, ...otherProjects],
-  collaborators,
-  users: [user],
+  users,
   groups,
 };

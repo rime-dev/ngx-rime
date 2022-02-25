@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
 import {Project} from 'apps/demos/services-app/src/app/models/project.model';
-import {collaborators} from 'apps/demos/services-app/src/assets/data';
 import {Observable, of, Subject} from 'rxjs';
 import {map, takeUntil, tap} from 'rxjs/operators';
 
@@ -24,9 +23,9 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
   ) {}
 
   getCollaborators(collaboratorsBase: any[]) {
-    this.collaboratorsArray = collaborators.filter((collaborator: any) =>
-      collaboratorsBase.some((cb: any) => collaborator.uid === cb)
-    );
+    // this.collaboratorsArray = collaborators.filter((collaborator: any) =>
+    //   collaboratorsBase.some((cb: any) => collaborator.uid === cb)
+    // );
   }
   ngOnInit(): void {
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {

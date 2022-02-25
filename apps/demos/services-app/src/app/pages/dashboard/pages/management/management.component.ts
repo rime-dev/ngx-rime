@@ -7,7 +7,6 @@ import Point from 'ol/geom/Point';
 import {fromLonLat} from 'ol/proj';
 import {Observable, of} from 'rxjs';
 import {delay, map, tap} from 'rxjs/operators';
-import {Collaborator} from '../../../../models/collaborator.model';
 import {Group} from '../../../../models/group.model';
 
 @Component({
@@ -20,7 +19,7 @@ export class ManagementComponent {
   public center: number[] = [];
   public point$: Observable<any[]> = of([]);
   public group$: Observable<EntityState<Group>>;
-  public users$: Observable<EntityState<Collaborator>[]>;
+  public users$: Observable<EntityState<User>[]>;
   public interactions = {
     dragPan: false,
     mouseWheelZoom: false,
@@ -28,7 +27,7 @@ export class ManagementComponent {
   };
   constructor(private dataService: DataService) {
     this.group$ = this.dataService.select('Group').entities$.pipe(map((groups) => groups[0]));
-    this.users$ = this.dataService.select('Collaborator').entities$;
+    this.users$ = this.dataService.select('User').entities$;
     this.point$ = this.group$.pipe(
       map((group: EntityState<Group>) => [
         new Feature({

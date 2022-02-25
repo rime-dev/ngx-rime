@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
+import {User} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
-import {Collaborator} from 'apps/demos/services-app/src/app/models/collaborator.model';
 import {Project} from 'apps/demos/services-app/src/app/models/project.model';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -12,7 +12,7 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./project-card.component.scss'],
 })
 export class ProjectCardComponent {
-  public collaborators$: Observable<EntityState<Collaborator>[]>;
+  public users$: Observable<EntityState<User>[]>;
 
   @Input()
   get project() {
@@ -24,12 +24,12 @@ export class ProjectCardComponent {
   private internalProject!: EntityState<Project>;
 
   constructor(private dataService: DataService) {
-    this.collaborators$ = this.dataService
-      .select('Collaborator')
+    this.users$ = this.dataService
+      .select('User')
       .entities$.pipe(
-        map((collaborators: EntityState<Collaborator>[]) =>
-          collaborators.filter((collaborator: EntityState<Collaborator>) =>
-            this.project.data.collaborators.includes(collaborator.id)
+        map((users: EntityState<User>[]) =>
+          users.filter((user: EntityState<User>) =>
+            this.project.data.collaborators.includes(user.id)
           )
         )
       );

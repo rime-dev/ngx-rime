@@ -14,7 +14,7 @@ export class AddUserDialogComponent {
 
   searchUser(email: string) {
     if (email) {
-      this.userFound$ = this.dataService.select('Collaborator').getWithQuery([
+      this.userFound$ = this.dataService.select('User').getWithQuery([
         {
           fieldPath: 'email',
           opStr: '==',

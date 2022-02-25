@@ -3,7 +3,7 @@
     <h1 class="text-xl font-medium my-6"></h1>
     <div class="flex flex-row w-full">
       <mat-form-field class="w-full max-w-md" appearance="outline">
-        <mat-label>Buscar documentos</mat-label>
+        <mat-label>Buscar</mat-label>
         <input
           #usersInput
           type="searc"
@@ -39,7 +39,7 @@
           >
             <img
               class="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300"
-              [src]="user.data.avatar"
+              [src]="user.data.photoURL"
               [alt]="user.data.name"
             />
 

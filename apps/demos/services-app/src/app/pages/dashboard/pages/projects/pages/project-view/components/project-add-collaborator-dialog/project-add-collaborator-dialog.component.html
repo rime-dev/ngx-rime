@@ -1,13 +1,13 @@
 <h1 mat-dialog-title>{{ 'collaborators' | transloco }}</h1>
 <div mat-dialog-content>
   <mat-selection-list #collaboratorSelection [multiple]="false">
-    <mat-list-option *ngFor="let collaborator of collaborators$ | async" [value]="collaborator.id">
+    <mat-list-option *ngFor="let user of users$ | async" [value]="user.id">
       <img
         mat-list-icon
         class="rounded-full h-10 w-10 border-solid border-2 border-white"
-        [src]="collaborator.data.avatar"
+        [src]="user.data.photoURL"
       />
-      {{ collaborator.data.name }}
+      {{ user.data.name }}
     </mat-list-option>
   </mat-selection-list>
 </div>
