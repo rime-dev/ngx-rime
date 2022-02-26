@@ -33,15 +33,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
       icon: 'work',
     },
     {
+      path: '/dashboard/invoices',
+      text: 'Facturas',
+      icon: 'receipt_long',
+    },
+    {
       path: '/dashboard/management',
       text: 'Administración',
       icon: 'admin_panel_settings',
     },
-    // {
-    //   path: '/dashboard/invoices',
-    //   text: 'Facturas',
-    //   icon: 'receipt_long',
-    // },
     // {
     //   path: '/dashboard/reports',
     //   text: 'Informes',

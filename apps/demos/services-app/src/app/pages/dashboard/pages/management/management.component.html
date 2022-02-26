@@ -21,14 +21,6 @@
         </mat-tab>
         <mat-tab>
           <ng-template mat-tab-label>
-            {{ 'publicCard' | transloco }}
-          </ng-template>
-          <ng-template matTabContent>
-            <rng-card *ngIf="group$ | async; let group" [group]="group"></rng-card>
-          </ng-template>
-        </mat-tab>
-        <mat-tab>
-          <ng-template mat-tab-label>
             {{ 'users' | transloco }}
           </ng-template>
           <ng-template matTabContent>
@@ -56,6 +48,8 @@
               <button mat-list-item>{{ group.data.phone }}</button>
               <h3 matSubheader>Web</h3>
               <button mat-list-item>{{ group.data.web }}</button>
+              <h3 matSubheader>NIF</h3>
+              <button mat-list-item>{{ group.data.nif }}</button>
             </mat-action-list>
             <mat-list>
               <h3 matSubheader>Actividades</h3>
@@ -74,7 +68,6 @@
 
           <mat-list class="w-full md:w-1/2">
             <h3 matSubheader>Logo</h3>
-
             <mat-list-item class="h-auto mb-2">
               <img
                 mat-line

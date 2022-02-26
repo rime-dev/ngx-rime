@@ -343,6 +343,7 @@ const users = [
       group: 'GS1',
       role: 'user',
       type: 'provider',
+      nif: '23456789D',
     },
   },
   {
@@ -361,6 +362,7 @@ const users = [
       group: 'GS1',
       role: 'user',
       type: 'provider',
+      nif: '23456789D',
     },
   },
   {
@@ -379,6 +381,7 @@ const users = [
       group: 'GS1',
       role: 'user',
       type: 'provider',
+      nif: '23456789D',
     },
   },
   {
@@ -398,6 +401,7 @@ const users = [
       group: 'GS2',
       role: 'user',
       type: 'provider',
+      nif: '23456789D',
     },
   },
 ];
@@ -425,6 +429,7 @@ const groups = [
         'Empresa desde el 1964 con una gran variedad de tipos de pintura y una alta gama de colores.',
       ],
       users: ['HgdTVUOGmgZ7XdPQhKCUZIZx6fT2', 'GFT6', 'GFT7'],
+      nif: '23456789D',
     },
   },
   {

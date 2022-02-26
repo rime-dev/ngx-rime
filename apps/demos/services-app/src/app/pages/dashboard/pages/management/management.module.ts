@@ -18,11 +18,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {AddUserDialogComponent} from './components/add-user-dialog/add-user-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [ManagementComponent, TeamComponent, CardComponent, AddUserDialogComponent],
+  declarations: [ManagementComponent, TeamComponent, CardComponent],
   imports: [
     CommonModule,
     ManagementRoutingModule,

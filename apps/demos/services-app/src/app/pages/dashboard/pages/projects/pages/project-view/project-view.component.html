@@ -26,6 +26,12 @@
     </ng-template>
   </mat-tab>
   <mat-tab>
+    <ng-template mat-tab-label> Comentarios </ng-template>
+    <ng-template matTabContent>
+      <rng-project-comments [project]="project$ | async"></rng-project-comments>
+    </ng-template>
+  </mat-tab>
+  <mat-tab>
     <ng-template mat-tab-label>
       {{ 'activity' | transloco }}
     </ng-template>

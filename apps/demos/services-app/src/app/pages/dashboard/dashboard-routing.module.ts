@@ -26,17 +26,17 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/projects/projects.module').then((m) => m.ProjectsModule),
       },
+
+      {
+        path: 'invoices',
+        loadChildren: () =>
+          import('./pages/invoices/invoices.module').then((m) => m.InvoicesModule),
+      },
       {
         path: 'management',
         loadChildren: () =>
           import('./pages/management/management.module').then((m) => m.ManagementModule),
       },
-
-      // {
-      //   path: 'invoices',
-      //   loadChildren: () =>
-      //     import('./pages/invoices/invoices.module').then((m) => m.InvoicesModule),
-      // },
       // {
       //   path: 'reports',
       //   loadChildren: () => import('./pages/reports/reports.module').then((m) => m.ReportsModule),

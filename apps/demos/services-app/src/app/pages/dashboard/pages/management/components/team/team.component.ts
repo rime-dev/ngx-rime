@@ -4,7 +4,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {DataService} from '@rng/data-access/base';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {map, startWith, takeUntil, tap} from 'rxjs/operators';
-import {AddUserDialogComponent} from '../add-user-dialog/add-user-dialog.component';
 
 @Component({
   selector: 'rng-team',
@@ -38,14 +37,7 @@ export class TeamComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-  addUser() {
-    this.matDialog
-      .open(AddUserDialogComponent)
-      .afterClosed()
-      .subscribe((user) => {
-        this.addUserDocument(user);
-      });
-  }
+
   openTabForEmail(email: string): void {
     if (email) {
       window.open('mailto:' + email, '_blank');

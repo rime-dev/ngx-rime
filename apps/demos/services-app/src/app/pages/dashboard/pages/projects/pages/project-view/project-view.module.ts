@@ -25,6 +25,7 @@ import {ProjectTypeModule} from 'apps/demos/services-app/src/app/pipes/project-t
 import {ProjectActivityComponent} from './components/project-activity/project-activity.component';
 import {ProjectAddCollaboratorDialogComponent} from './components/project-add-collaborator-dialog/project-add-collaborator-dialog.component';
 import {ProjectChangeStateDialogComponent} from './components/project-change-state-dialog/project-change-state-dialog.component';
+import {ProjectCommentsComponent} from './components/project-comments/project-comments.component';
 import {ProjectDocumentChangeTitleDialogComponent} from './components/project-document-change-title-dialog/project-document-change-title-dialog.component';
 import {ProjectDocumentDialogComponent} from './components/project-document-dialog/project-document-dialog.component';
 import {ProjectDocumentsComponent} from './components/project-documents/project-documents.component';
@@ -45,6 +46,7 @@ import {ProjectViewComponent} from './project-view.component';
     ProjectDocumentDialogComponent,
     ProjectExistingDocumentDialogComponent,
     ProjectDocumentChangeTitleDialogComponent,
+    ProjectCommentsComponent,
   ],
   imports: [
     CommonModule,

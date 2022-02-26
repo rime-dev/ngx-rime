@@ -26,10 +26,6 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-
-      <button mat-icon-button class="ml-auto mt-2" (click)="addUser()">
-        <mat-icon>add</mat-icon>
-      </button>
     </div>
     <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-4">
       <ng-container *ngIf="filteredUsers$ | async; let filteredUsers">
