@@ -340,13 +340,9 @@ const users = [
       name: 'Carlos',
       lastName: 'Bayarri',
       headline: 'Programador',
-      groups: ['GS1'],
-      invitations: [
-        {
-          group: 'GS2',
-          state: 'pending',
-        },
-      ],
+      group: 'GS1',
+      role: 'user',
+      type: 'provider',
     },
   },
   {
@@ -362,8 +358,9 @@ const users = [
       name: 'Juan',
       lastName: 'Martínez',
       headline: 'Director',
-      groups: ['GS1'],
-      invitations: [],
+      group: 'GS1',
+      role: 'user',
+      type: 'provider',
     },
   },
   {
@@ -379,8 +376,9 @@ const users = [
       name: 'Sergio',
       lastName: 'Martínez',
       headline: 'Socio',
-      groups: ['GS1'],
-      invitations: [],
+      group: 'GS1',
+      role: 'user',
+      type: 'provider',
     },
   },
   {
@@ -397,8 +395,9 @@ const users = [
       name: 'Alex',
       lastName: 'Martínez',
       headline: 'Socio',
-      groups: ['GS2'],
-      invitations: [],
+      group: 'GS2',
+      role: 'user',
+      type: 'provider',
     },
   },
 ];

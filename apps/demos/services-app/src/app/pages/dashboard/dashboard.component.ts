@@ -134,7 +134,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (!userResult) {
       return;
     }
-    this.dataService.select('Group').getByKey(userResult.groups[0]);
+    this.dataService.select('Group').getByKey(userResult.group);
   }
 
   private loadProjects(userResult: any): void {
@@ -145,7 +145,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       {
         fieldPath: 'group',
         opStr: '==',
-        value: userResult.groups[0],
+        value: userResult.group,
       },
     ];
     this.dataService.select('Project').getWithQuery(query as any);
@@ -165,9 +165,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
     const query1 = [
       {
-        fieldPath: 'groups',
-        opStr: 'array-contains',
-        value: userResult.groups[0],
+        fieldPath: 'group',
+        opStr: '==',
+        value: userResult.group,
       },
     ];
     this.dataService.select('User').getWithQuery(query1 as any);
