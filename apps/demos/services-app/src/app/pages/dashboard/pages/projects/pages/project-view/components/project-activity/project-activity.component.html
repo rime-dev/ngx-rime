@@ -1,4 +1,20 @@
 <div class="lg:container p-8 flex flex-col mx-auto">
+  <div class="flex flex-row items-center pb-8">
+    <span
+      class="
+        text-lg
+        font-medium
+        text-gray-700
+        dark:text-gray-200
+        overflow-hidden overflow-ellipsis
+        whitespace-nowrap
+      "
+      >Acciones realizadas</span
+    >
+    <button mat-icon-button class="ml-auto">
+      <mat-icon>info</mat-icon>
+    </button>
+  </div>
   <ol
     *ngIf="project.data.activity && project.data.activity.length > 0; else noActivityTemplate"
     class="relative border-l border-gray-200 dark:border-gray-700"

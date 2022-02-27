@@ -1,1 +1,32 @@
-<div class="lg:container p-8 flex flex-col mx-auto"></div>
+<div class="lg:container p-8 flex flex-col mx-auto">
+  <div class="flex flex-row items-center">
+    <span
+      class="
+        text-lg
+        font-medium
+        text-gray-700
+        dark:text-gray-200
+        overflow-hidden overflow-ellipsis
+        whitespace-nowrap
+      "
+      >Notas sobre el proyecto</span
+    >
+    <button mat-icon-button class="ml-auto" (click)="openDialogToAddComment()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <mat-list>
+    <ng-container *ngFor="let comment of project.data.comments.slice().reverse()">
+      <mat-list-item class="py-8 h-auto">
+        <mat-icon mat-list-icon color="primary">description</mat-icon>
+        <div mat-line *ngIf="comment.title" class="text-lg pb-2 whitespace-normal">
+          {{ comment.title }}
+        </div>
+        <div mat-line *ngIf="comment.description" class="whitespace-normal">
+          {{ comment.description }}
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </mat-list>
+</div>

@@ -200,6 +200,26 @@ export const projects: EntityState<Project>[] = [
         },
       ],
       labels: ['urgent'],
+      comments: [
+        {
+          user: 'HHH',
+          title: 'Shooting Stars 1',
+          description:
+            'Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.',
+        },
+        {
+          user: 'HHH',
+          title: 'Shooting Stars 2',
+          description:
+            'Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.',
+        },
+        {
+          user: 'HHH',
+          title: 'Shooting Stars 3',
+          description:
+            'Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.',
+        },
+      ],
     },
   },
 ];
