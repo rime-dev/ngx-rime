@@ -7,10 +7,21 @@
             <mat-card-header class="flex flex-col mt-auto mb-auto">
               <mat-card-title>Ganancias</mat-card-title>
               <mat-card-subtitle>
-                <span class="text-4lg text-white block mt-4">3000€</span>
+                <span
+                  class="text-4lg text-white block mt-4"
+                  *ngIf="earnings$ | async; let earningValue; else: noEarningsTemplate"
+                  >{{ earningValue | translocoCurrency }}</span
+                >
+                <ng-template #noEarningsTemplate>No hay ganancias</ng-template>
               </mat-card-subtitle>
               <mat-chip-list>
-                <mat-chip color="primary" selected>+10% respecto al mes anterior</mat-chip>
+                <mat-chip
+                  color="primary"
+                  selected
+                  *ngIf="percentageFromPreviousMonth$ | async; let percentageFromPreviousMonth"
+                  >{{ percentageFromPreviousMonth | translocoPercent }} respecto al mes
+                  anterior</mat-chip
+                >
               </mat-chip-list>
             </mat-card-header>
           </mat-card>
@@ -19,10 +30,10 @@
           <mat-card class="grid w-full h-2/5 mb-2 mat-elevation-z3">
             <mat-card-header>
               <button mat-raised-button mat-card-avatar color="primary" class="card-number">
-                21
+                <mat-icon>support_agent</mat-icon>
               </button>
-              <mat-card-title>Nivel</mat-card-title>
-              <mat-card-subtitle>En el top 30%</mat-card-subtitle>
+              <mat-card-title>Soporte</mat-card-title>
+              <mat-card-subtitle>Si necesitas ayuda, contacta con nosotros</mat-card-subtitle>
             </mat-card-header>
           </mat-card>
           <rng-info-projects class="w-full h-3/5 mt-2"></rng-info-projects>

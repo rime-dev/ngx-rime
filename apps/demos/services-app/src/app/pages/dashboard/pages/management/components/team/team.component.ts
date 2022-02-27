@@ -50,7 +50,6 @@ export class TeamComponent implements OnInit, OnDestroy {
   }
   private addUserDocument(user: any) {
     if (user) {
-      console.log(user);
       this.updateFormControl();
     }
   }

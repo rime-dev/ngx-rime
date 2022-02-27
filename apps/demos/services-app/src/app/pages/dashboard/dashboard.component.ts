@@ -128,6 +128,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.loadGroups(userResult);
     this.loadProjects(userResult);
     this.loadCollaborators(userResult);
+    this.loadInvoices(userResult);
   }
 
   private loadGroups(userResult: any) {
@@ -172,7 +173,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
     ];
     this.dataService.select('User').getWithQuery(query1 as any);
   }
-
+  private loadInvoices(userResult: any): void {
+    if (!userResult) {
+      return;
+    }
+    const query = [
+      {
+        fieldPath: 'group',
+        opStr: '==',
+        value: userResult.group,
+      },
+    ];
+    this.dataService.select('Invoice').getWithQuery(query as any);
+  }
   private getTitlePage(url: string) {
     const pathMatch = this.sideRoutes.filter((route: any) => url.includes(route.path))[0];
     if (pathMatch) {

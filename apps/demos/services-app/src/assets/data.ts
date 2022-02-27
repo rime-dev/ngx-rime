@@ -364,6 +364,11 @@ const users = [
       role: 'user',
       type: 'provider',
       nif: '23456789D',
+      stats: {
+        projects: {
+          closed: 20,
+        },
+      },
     },
   },
   {
@@ -471,9 +476,40 @@ const groups = [
     },
   },
 ];
+const invoices = [
+  {
+    id: 'IS1',
+    data: {
+      uid: 'IS1',
+      title: 'Pintura de 4 habitaciones',
+      description: 'Pintura Pintura Pintura Pintura',
+      cost: '3000',
+      taxes: '0.21',
+      url: 'assets/partha_thesis.pdf',
+      project: 'GFT7',
+      group: 'GS1',
+      date: '2022-02-27T16:19:27.527Z',
+    },
+  },
+  {
+    id: 'IS2',
+    data: {
+      uid: 'IS2',
+      title: 'Pintura de 4 habitaciones',
+      description: 'Pintura Pintura Pintura Pintura',
+      cost: '6000',
+      taxes: '0.21',
+      url: 'assets/partha_thesis.pdf',
+      project: 'GFT7',
+      group: 'GS1',
+      date: '2022-01-27T16:19:27.527Z',
+    },
+  },
+];
 
 export const mockData = {
   projects: [...projects, ...otherProjects],
   users,
   groups,
+  invoices,
 };

@@ -12,9 +12,7 @@ import {finalize, map} from 'rxjs/operators';
 
 export class angularFireStorage implements AngularFireStorage {
   storage!: firebase.storage.Storage;
-  constructor() {
-    console.log('angular firestore mock');
-  }
+  constructor() {}
   ref(path: string): AngularFireStorageReference {
     return {
       getDownloadURL: () => of(path),
@@ -28,8 +26,6 @@ export class angularFireStorage implements AngularFireStorage {
     data: any,
     metadata?: firebase.storage.UploadMetadata
   ): AngularFireUploadTask {
-    console.log('fffffffffff');
-
     const ref = createStorageRef(this.ref(path));
     return ref.put(data, metadata);
   }

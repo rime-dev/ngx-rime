@@ -71,9 +71,7 @@ export class StorageModule {
   providers: [{provide: StorageUploadTaskService, useClass: StorageUploadTaskMockService}],
 })
 export class StorageMockModule {
-  constructor() {
-    console.log('Mock module');
-  }
+  constructor() {}
   static firebase(): ModuleWithProviders<StorageMockModule> {
     return {
       ngModule: StorageMockModule,
