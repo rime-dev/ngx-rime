@@ -1,4 +1,5 @@
 {
+  "project": "Project",
   "projects": "Projects",
   "projects.offerered": "Projects offered",
   "projects.finished": "Projects finished",
@@ -25,6 +26,7 @@
   "thismonth": "This month",
   "information": "Information",
   "activity": "Activity",
+  "document": "Document",
   "documents": "Documents",
   "document.changeTitle": "Change document name",
   "document.changeSubtitle": "Change document description",
@@ -45,6 +47,7 @@
   "actions.openInNew": "Open in new",
   "actions.changeDescription": "Change description",
   "actions.changeName": "Change name",
+  "date": "Date",
   "date.start": "Starting date",
   "date.estimatedEnd": "Estimated ending date",
   "date.end": "Ending date",
@@ -54,6 +57,7 @@
   "noActivity": "No activity",
   "noDocuments": "No documents",
   "noProjects": "No projects",
+  "noInvoices": "No invoices",
   "noActiveProjects": "No active projects",
   "noOfferedProjects": "No offered projects",
   "recentSearches": "Recent searches",
@@ -65,5 +69,6 @@
   "office": "Office",
   "users": "Users",
   "publicCard": "Public card",
-  "headline": "Headline"
+  "headline": "Headline",
+  "invoices": "Invoices"
 }

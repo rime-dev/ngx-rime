@@ -1,7 +1,9 @@
 import {Component, OnDestroy} from '@angular/core';
 import {DataService} from '@rng/data-access/base';
+import {EntityState} from '@rng/data-access/base/models/base.model';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {map, takeUntil, tap} from 'rxjs/operators';
+import {Invoice} from '../../../../models/invoice.model';
 
 @Component({
   selector: 'rng-home',
@@ -11,8 +13,9 @@ import {map, takeUntil, tap} from 'rxjs/operators';
 export class HomeComponent implements OnDestroy {
   public earnings$: BehaviorSubject<number> = new BehaviorSubject(0);
   public percentageFromPreviousMonth$: BehaviorSubject<number> = new BehaviorSubject(0);
+  public invoices$: Observable<EntityState<Invoice>[]>;
+
   private user$: Observable<any>;
-  private invoices$: Observable<any>;
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private dataService: DataService) {

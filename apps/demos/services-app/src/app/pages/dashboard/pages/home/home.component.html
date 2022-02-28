@@ -41,17 +41,36 @@
       </div>
       <div class="flex flex-col w-full xl:w-1/2 p-2 px-4">
         <div class="flex flex-row mb-2">
-          <button mat-button class="w-full card-title">Facturas recientes</button>
-          <button mat-icon-button [routerLink]="['../invoices']">
+          <button mat-button class="w-full card-title" [routerLink]="['../invoices/invoice-list']">
+            Facturas recientes
+          </button>
+          <button mat-icon-button [routerLink]="['../invoices/invoice-list']">
             <mat-icon>read_more</mat-icon>
           </button>
         </div>
-        <mat-card class="w-full h-auto mat-elevation-z3">
-          <div class="flex flex-col h-48 text-center items-center">
+        <mat-card class="w-full h-auto mat-elevation-z3" *ngIf="invoices$ | async; let invoices">
+          <div
+            class="flex flex-col h-auto xl:h-48 text-center items-center"
+            *ngIf="invoices.length === 0"
+          >
             <div class="m-auto h-36">
               <p class="mb-4">No hay facturas</p>
               <img class="h-32 w-full" src="assets/undraw_not_found_-60-pq.svg" />
             </div>
+          </div>
+          <div class="flex flex-col h-auto xl:h-48" *ngIf="invoices.length > 0">
+            <mat-action-list style="padding: 0">
+              <mat-list-item
+                *ngFor="let invoice of invoices | slice: 0:3"
+                [routerLink]="['../invoices/invoice-view', invoice.id]"
+              >
+                <mat-icon mat-list-icon>receipt_long</mat-icon>
+                <div mat-line>{{ invoice.data.title }}</div>
+                <div mat-line class="mat-card-subtitle">
+                  {{ invoice.data.cost | translocoCurrency }}
+                </div>
+              </mat-list-item>
+            </mat-action-list>
           </div>
         </mat-card>
       </div>

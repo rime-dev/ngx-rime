@@ -495,7 +495,7 @@ const invoices = [
     id: 'IS2',
     data: {
       uid: 'IS2',
-      title: 'Pintura de 4 habitaciones',
+      title: 'Pintura de 8 habitaciones',
       description: 'Pintura Pintura Pintura Pintura',
       cost: '6000',
       taxes: '0.21',

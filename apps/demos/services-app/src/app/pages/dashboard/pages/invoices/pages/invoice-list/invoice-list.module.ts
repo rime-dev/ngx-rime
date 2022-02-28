@@ -7,26 +7,24 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {TranslocoModule} from '@ngneat/transloco';
-import {MapModule} from 'apps/demos/services-app/src/app/components/map/map.module';
-import {ProjectTypeModule} from 'apps/demos/services-app/src/app/pipes/project-type/project-type.module';
-import {ProjectCardComponent} from './components/project-card/project-card.component';
-import {ProjectListRoutingModule} from './project-list-routing.module';
-import {ProjectListComponent} from './project-list.component';
+import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
+import {InvoiceCardComponent} from './components/invoice-card/invoice-card.component';
+import {InvoiceListRoutingModule} from './invoice-list-routing.module';
+import {InvoiceListComponent} from './invoice-list.component';
 
 @NgModule({
-  declarations: [ProjectListComponent, ProjectCardComponent],
+  declarations: [InvoiceListComponent, InvoiceCardComponent],
   imports: [
     CommonModule,
-    ProjectListRoutingModule,
+    InvoiceListRoutingModule,
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
     MatIconModule,
+    MatTabsModule,
     MatTooltipModule,
     TranslocoModule,
-    MatTabsModule,
-    MapModule,
-    ProjectTypeModule,
+    TranslocoLocaleModule,
   ],
 })
 export class InvoiceListModule {}

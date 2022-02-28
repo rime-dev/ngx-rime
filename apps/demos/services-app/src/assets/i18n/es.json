@@ -1,4 +1,5 @@
 {
+  "project": "Proyectos",
   "projects": "Proyectos",
   "projects.offered": "Proyectos ofertados",
   "projects.finished": "Proyectos terminados",
@@ -25,6 +26,7 @@
   "thismonth": "Este mes",
   "information": "Información",
   "activity": "Actividad",
+  "document": "Documento",
   "documents": "Documentos",
   "document.changeTitle": "Cambiar nombre del documento",
   "document.changeSubtitle": "Cambiar descripción del documento",
@@ -45,6 +47,7 @@
   "actions.openInNew": " Abrir en una ventana nueva",
   "actions.changeDescription": "Cambiar descripción",
   "actions.changeName": "Cambiar nombre",
+  "date": "Fecha",
   "date.start": "Fecha de inicio",
   "date.estimatedEnd": "Fecha de fin estimada",
   "date.end": "Fecha de fin",
@@ -54,6 +57,7 @@
   "noActivity": "No hay actividad",
   "noDocuments": "No hay documentos",
   "noProjects": "No hay proyectos",
+  "noInvoices": "No hay facturas",
   "noActiveProjects": "No hay proyectos activos",
   "noOfferedProjects": "No hay proyectos ofertados",
   "recentSearches": "Búsquedas recientes",
@@ -65,5 +69,6 @@
   "office": "Oficina",
   "users": "Usuarios",
   "publicCard": "Tarjeta pública",
-  "headline": "Titular"
+  "headline": "Titular",
+  "invoices": "Facturas"
 }

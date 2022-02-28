@@ -1,0 +1,17 @@
+<mat-card
+  *ngIf="invoice"
+  class="grid w-full mb-2 mat-elevation-z1 cursor-pointer"
+  [routerLink]="['../invoice-view', invoice.id]"
+>
+  <div class="flex flex-row">
+    <div class="w-full flex flex-col">
+      <mat-card-header class="w-full">
+        <div mat-card-avatar class="text-center items-center self-center">
+          <mat-icon>receipt_long</mat-icon>
+        </div>
+        <mat-card-title>{{ invoice.data.title }}</mat-card-title>
+        <mat-card-subtitle>{{ invoice.data.cost | translocoCurrency }}</mat-card-subtitle>
+      </mat-card-header>
+    </div>
+  </div>
+</mat-card>

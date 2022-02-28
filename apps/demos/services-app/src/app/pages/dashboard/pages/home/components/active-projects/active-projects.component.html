@@ -1,5 +1,12 @@
 <div class="flex flex-row mb-2">
-  <button mat-button class="w-full card-title text-left">Proyectos en curso</button>
+  <button
+    mat-button
+    class="w-full card-title text-left"
+    [routerLink]="['../projects/project-list']"
+    [state]="['state', 'active']"
+  >
+    Proyectos en curso
+  </button>
   <button mat-icon-button [routerLink]="['../projects/project-list']" [state]="['state', 'active']">
     <mat-icon>read_more</mat-icon>
   </button>
@@ -8,7 +15,7 @@
   <ng-container *ngIf="projects$ | async; let projects">
     <mat-action-list *ngIf="projects.length > 0; else noActiveProjects" style="padding: 0">
       <mat-list-item
-        *ngFor="let project of projects$ | async | slice: 0:5"
+        *ngFor="let project of projects$ | async | slice: 0:3"
         [routerLink]="['../projects/project-view', project.id]"
       >
         <mat-icon mat-list-icon>{{ project.data.type | projectTypePipe }}</mat-icon>

@@ -15,7 +15,7 @@ const routes: Routes = [
       {
         path: 'project-list',
         loadChildren: () =>
-          import('./pages/project-list/project-list.module').then((m) => m.ProjectListModule),
+          import('./pages/project-list/project-list.module').then((m) => m.InvoiceListModule),
       },
       {
         path: 'project-view',

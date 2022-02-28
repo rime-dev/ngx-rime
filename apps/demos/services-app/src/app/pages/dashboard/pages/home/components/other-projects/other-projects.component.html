@@ -1,5 +1,10 @@
 <div class="flex flex-row mb-2">
-  <button mat-button class="w-full card-title text-left">
+  <button
+    mat-button
+    class="w-full card-title text-left"
+    [routerLink]="['../projects/project-list']"
+    [state]="['group', undefined]"
+  >
     {{ 'projects.offered' | transloco }}
   </button>
   <button
@@ -15,7 +20,7 @@
     <mat-action-list *ngIf="projects.length > 0; else noOfferedProjects" class="p-0">
       <mat-list-item
         class="my-2 p-2 h-auto"
-        *ngFor="let project of projects$ | async | slice: 0:5"
+        *ngFor="let project of projects$ | async | slice: 0:3"
         [routerLink]="['../projects/project-view', project.id]"
       >
         <div mat-line class="flex flex-row">
@@ -38,6 +43,7 @@
               px-10
               text-center
               bg-gray-100
+              dark:bg-gray-900
               rounded-full
               w-auto
               select-none
