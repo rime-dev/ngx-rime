@@ -11,6 +11,7 @@ import {Invoice} from '../../../../models/invoice.model';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnDestroy {
+  public invoicesData$ = new BehaviorSubject([]);
   public earnings$: BehaviorSubject<number> = new BehaviorSubject(0);
   public percentageFromPreviousMonth$: BehaviorSubject<number> = new BehaviorSubject(0);
   public invoices$: Observable<EntityState<Invoice>[]>;
@@ -38,7 +39,16 @@ export class HomeComponent implements OnDestroy {
     this.destroy$.complete();
   }
   private getEarningsFromInvoices(invoices: any[]) {
+    const invoiceData: any = invoices.map((invoice: any) => ({
+      value: invoice.data.cost,
+      date: invoice.data.date,
+    }));
+    console.log(invoiceData);
+
+    this.invoicesData$.next(invoiceData);
     const invoicesThisMonth = this.filterInvoicesInThisMonth(invoices);
+    console.log(invoicesThisMonth);
+
     const invoicesPreviousMonth = this.filterInvoicesInPreviousMonth(invoices);
     const costThisMonth = invoicesThisMonth.map((invoice: any) => Number(invoice.data.cost));
     const costPreviousMonth = invoicesPreviousMonth.map((invoice: any) =>

@@ -3,9 +3,9 @@
     <div class="flex flex-col xl:flex-row mt-4">
       <div class="flex flex-col md:flex-row w-full xl:w-3/5 lg:h-64">
         <div class="w-full h-full p-2 px-4">
-          <mat-card class="w-full h-full mat-elevation-z3 bg-primary flex">
+          <mat-card class="w-full h-full mat-elevation-z3 bg-primary flex flex-col">
             <mat-card-header class="flex flex-col mt-auto mb-auto">
-              <mat-card-title>Ganancias</mat-card-title>
+              <mat-card-title>Facturado</mat-card-title>
               <mat-card-subtitle>
                 <span
                   class="text-4lg text-white block mt-4"
@@ -23,6 +23,10 @@
                   anterior</mat-chip
                 >
               </mat-chip-list>
+              <rng-earnings-chart
+                class="block h-20"
+                [data]="invoicesData$ | async"
+              ></rng-earnings-chart>
             </mat-card-header>
           </mat-card>
         </div>
