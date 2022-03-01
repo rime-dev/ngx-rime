@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Factura</h1>
+<button mat-icon-button class="absolute top-0 right-0" [mat-dialog-close]="false">
+  <mat-icon>close</mat-icon>
+</button>
+<div mat-dialog-content class="max-w-md flex flex-col">
+  <div class="flex flex-col md:flex-row">
+    <rng-storage-uploader
+      [path]="path"
+      [document]="document"
+      (finalize)="onFinalize($event)"
+    ></rng-storage-uploader>
+    <div class="flex flex-col m-2">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Añade un título</mat-label>
+        <input matInput #titleInput [formControl]="titleFormControl" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Añade una descripción opcional</mat-label>
+        <input matInput #titleInput [formControl]="titleFormControl" />
+      </mat-form-field>
+    </div>
+  </div>
+</div>

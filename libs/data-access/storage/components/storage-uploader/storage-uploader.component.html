@@ -1,6 +1,6 @@
 <input type="file" #file class="hidden" (change)="onChange($event)" [multiple]="true" />
 <div
-  class="dropzone"
+  class="dropzone min-w-min min-h-min w-full h-full items-center text-center p-4"
   rng-dropzone
   (hovered)="toggleHover($event)"
   (dropped)="onDrop($event)"
