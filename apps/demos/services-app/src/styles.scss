@@ -256,6 +256,12 @@ $color-config: mat.get-color-config($rng-default-theme);
 .color-accent {
   color: mat.get-color-from-palette(map.get($color-config, 'accent'), A400);
 }
+.stroke-primary {
+  stroke: mat.get-color-from-palette(map.get($color-config, 'primary'), A700);
+}
+.stroke-accent {
+  stroke: mat.get-color-from-palette(map.get($color-config, 'accent'), A400);
+}
 
 .project-state-active {
   color: #37843a !important;

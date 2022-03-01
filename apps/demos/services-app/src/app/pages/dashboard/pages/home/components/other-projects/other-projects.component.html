@@ -19,38 +19,32 @@
   <ng-container *ngIf="projects$ | async; let projects">
     <mat-action-list *ngIf="projects.length > 0; else noOfferedProjects" class="p-0">
       <mat-list-item
-        class="my-2 p-2 h-auto"
+        class="my-2 py-2 h-auto relative"
         *ngFor="let project of projects$ | async | slice: 0:3"
         [routerLink]="['../projects/project-view', project.id]"
       >
-        <div mat-line class="flex flex-row">
-          <div class="flex items-center p-2">
-            <mat-icon mat-list-icon [matTooltip]="project.data.type">{{
-              project.data.type | projectTypePipe
-            }}</mat-icon>
-          </div>
-          <div class="flex flex-col w-full">
-            <div class="mb-1">{{ project.data.title }}</div>
-            <div class="mat-card-subtitle mb-2">{{ project.data.location.text }}</div>
-          </div>
-          <div
-            class="
-              hidden
-              xl:block
-              text-lg
-              my-2
-              p-1
-              px-10
-              text-center
-              bg-gray-100
-              dark:bg-gray-900
-              rounded-full
-              w-auto
-              select-none
-            "
-          >
-            {{ project.data.cost | translocoCurrency }}
-          </div>
+        <mat-icon mat-list-icon [matTooltip]="project.data.type">{{
+          project.data.type | projectTypePipe
+        }}</mat-icon>
+        <div mat-line class="mb-1">{{ project.data.title }}</div>
+        <div mat-line class="mat-card-subtitle mb-2">{{ project.data.location.text }}</div>
+        <div
+          class="
+            hidden
+            xl:block
+            text-lg
+            my-2
+            p-1
+            px-10
+            text-center
+            bg-gray-100
+            dark:bg-gray-900
+            rounded-full
+            w-auto
+            select-none
+          "
+        >
+          {{ project.data.cost | translocoCurrency }}
         </div>
         <div
           mat-line

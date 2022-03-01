@@ -39,16 +39,13 @@ export class HomeComponent implements OnDestroy {
     this.destroy$.complete();
   }
   private getEarningsFromInvoices(invoices: any[]) {
+    invoices = invoices.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
     const invoiceData: any = invoices.map((invoice: any) => ({
       value: invoice.data.cost,
       date: invoice.data.date,
     }));
-    console.log(invoiceData);
-
     this.invoicesData$.next(invoiceData);
     const invoicesThisMonth = this.filterInvoicesInThisMonth(invoices);
-    console.log(invoicesThisMonth);
-
     const invoicesPreviousMonth = this.filterInvoicesInPreviousMonth(invoices);
     const costThisMonth = invoicesThisMonth.map((invoice: any) => Number(invoice.data.cost));
     const costPreviousMonth = invoicesPreviousMonth.map((invoice: any) =>

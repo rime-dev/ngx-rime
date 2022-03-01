@@ -8,9 +8,11 @@ import {curveMonotoneX, extent, line, max, min, scaleLinear, scaleTime, select} 
 export class EarningsChartComponent implements AfterViewInit, OnChanges {
   @Input() public data: any = [];
 
-  private margin = 10;
+  private margin = 15;
   private height = 0;
   private width = 0;
+  private widthProcessed = 0;
+  private heightProcessed = 0;
   public svg: any;
   public svgInner: any;
   public yScale: any;
@@ -26,44 +28,42 @@ export class EarningsChartComponent implements AfterViewInit, OnChanges {
     }
   }
   ngAfterViewInit(): void {
-    this.width = this.chartElem.nativeElement.getBoundingClientRect().width;
-    this.height = this.chartElem.nativeElement.getBoundingClientRect().height;
     this.initializeChart();
     this.drawChart();
   }
+  private calculateSize() {
+    this.width = this.chartElem.nativeElement.getBoundingClientRect().width;
+    this.height = this.chartElem.nativeElement.getBoundingClientRect().height;
+    this.widthProcessed = this.width - 2 * this.margin;
+    this.heightProcessed = this.height - 2 * this.margin;
+  }
   private initializeChart(): void {
+    this.calculateSize();
     select(this.chartElem.nativeElement).select('.linechart').select('svg').remove();
     this.svg = select(this.chartElem.nativeElement)
       .select('.linechart')
       .append('svg')
       .attr('height', this.height);
-    this.svgInner = this.svg
-      .append('g')
-      .style('transform', 'translate(' + this.margin + 'px, ' + this.margin + 'px)');
+    this.svgInner = this.svg.append('g').style('transform', 'translate(' + 0 + 'px, ' + 5 + 'px)');
     const maxValue = Number(max(this.data, (d: any) => d.value));
     const minValue = Number(min(this.data, (d: any) => d.value));
     const domainArray = [maxValue + 1, minValue - 1];
-    this.yScale = scaleLinear()
-      .domain(domainArray)
-      .range([0, this.height - 2 * this.margin]);
-
+    this.yScale = scaleLinear().domain(domainArray).range([0, this.heightProcessed]);
     this.xScale = scaleTime().domain(extent(this.data, (d: any) => new Date(d.date)) as any);
     this.lineGroup = this.svgInner
       .append('g')
       .append('path')
       .attr('id', 'line')
       .style('fill', 'none')
-      .style('stroke', '#39d353')
+      // .style('stroke', '#39d353')
+      .attr('class', 'stroke-accent')
       .style('stroke-width', '2px');
   }
 
   private drawChart(): void {
-    this.width = this.chartElem.nativeElement.getBoundingClientRect().width;
-    this.height = this.chartElem.nativeElement.getBoundingClientRect().height;
-    this.svg.attr('width', this.width);
-    this.svg.attr('height', this.height);
-
-    this.xScale.range([this.margin, this.width - 2 * this.margin]);
+    this.svg.attr('width', this.widthProcessed);
+    this.svg.attr('height', this.heightProcessed);
+    this.xScale.range([this.margin, this.widthProcessed]);
     const lineBase = line()
       .x((d) => d[0])
       .y((d) => d[1])

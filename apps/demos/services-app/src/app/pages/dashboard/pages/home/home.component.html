@@ -1,18 +1,22 @@
 <div class="lg:container mx-auto px-4 h-full">
   <div class="flex flex-col h-full w-full">
     <div class="flex flex-col xl:flex-row mt-4">
-      <div class="flex flex-col md:flex-row w-full xl:w-3/5 lg:h-64">
-        <div class="w-full h-full p-2 px-4">
+      <div class="flex flex-col md:flex-row w-full xl:w-3/5 lg:h-68">
+        <div class="w-full h-full p-2">
           <mat-card class="w-full h-full mat-elevation-z3 bg-primary flex flex-col">
             <mat-card-header class="flex flex-col mt-auto mb-auto">
-              <mat-card-title>Facturado</mat-card-title>
+              <mat-card-title
+                >Facturado <span class="text-sm font-thin">(este mes)</span></mat-card-title
+              >
               <mat-card-subtitle>
                 <span
                   class="text-4lg text-white block mt-4"
                   *ngIf="earnings$ | async; let earningValue; else: noEarningsTemplate"
                   >{{ earningValue | translocoCurrency }}</span
                 >
-                <ng-template #noEarningsTemplate>No hay ganancias</ng-template>
+                <ng-template #noEarningsTemplate>
+                  <span class="text-2lg text-white block mt-2">No hay ganancias</span>
+                </ng-template>
               </mat-card-subtitle>
               <mat-chip-list>
                 <mat-chip
@@ -23,14 +27,11 @@
                   anterior</mat-chip
                 >
               </mat-chip-list>
-              <rng-earnings-chart
-                class="block h-20"
-                [data]="invoicesData$ | async"
-              ></rng-earnings-chart>
+              <rng-earnings-chart class="h-20" [data]="invoicesData$ | async"></rng-earnings-chart>
             </mat-card-header>
           </mat-card>
         </div>
-        <div class="w-full h-full px-4 pt-2 pb-4">
+        <div class="w-full h-full p-2">
           <mat-card class="grid w-full h-2/5 mb-2 mat-elevation-z3">
             <mat-card-header>
               <button mat-raised-button mat-card-avatar color="primary" class="card-number">
@@ -43,7 +44,7 @@
           <rng-info-projects class="w-full h-3/5 mt-2"></rng-info-projects>
         </div>
       </div>
-      <div class="flex flex-col w-full xl:w-1/2 p-2 px-4">
+      <div class="flex flex-col w-full xl:w-2/5 p-2 lg:h-68">
         <div class="flex flex-row mb-2">
           <button mat-button class="w-full card-title" [routerLink]="['../invoices/invoice-list']">
             Facturas recientes
@@ -52,7 +53,10 @@
             <mat-icon>read_more</mat-icon>
           </button>
         </div>
-        <mat-card class="w-full h-auto mat-elevation-z3" *ngIf="invoices$ | async; let invoices">
+        <mat-card
+          class="w-full h-auto lg:h-full mat-elevation-z3"
+          *ngIf="invoices$ | async; let invoices"
+        >
           <div
             class="flex flex-col h-auto xl:h-48 text-center items-center"
             *ngIf="invoices.length === 0"
@@ -81,9 +85,9 @@
     </div>
     <div class="flex flex-col lg:flex-row w-full mt-4">
       <rng-active-projects
-        class="flex flex-col w-full xl:w-1/2 lg:h-64 p-2 px-4"
+        class="flex flex-col w-full lg:w-1/2 lg:h-auto p-2"
       ></rng-active-projects>
-      <rng-other-projects class="flex flex-col w-full lg:w-1/2 p-2 px-4"></rng-other-projects>
+      <rng-other-projects class="flex flex-col w-full lg:w-1/2 lg:h-auto p-2"></rng-other-projects>
     </div>
   </div>
 </div>
