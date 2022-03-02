@@ -19,6 +19,8 @@ import {InvoiceCardComponent} from './components/invoice-card/invoice-card.compo
 import {InvoiceCreateDialogComponent} from './components/invoice-create-dialog/invoice-create-dialog.component';
 import {InvoiceListRoutingModule} from './invoice-list-routing.module';
 import {InvoiceListComponent} from './invoice-list.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [InvoiceListComponent, InvoiceCardComponent, InvoiceCreateDialogComponent],
@@ -42,6 +44,8 @@ import {InvoiceListComponent} from './invoice-list.component';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
+    MatSnackBarModule,
   ],
 })
 export class InvoiceListModule {}

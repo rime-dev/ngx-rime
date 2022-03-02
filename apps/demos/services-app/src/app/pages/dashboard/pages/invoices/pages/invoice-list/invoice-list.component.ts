@@ -1,11 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {AuthService, User} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
-import {EntityState} from '@rng/data-access/base/models/base.model';
-import {Group} from 'apps/demos/services-app/src/app/models/group.model';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {take, takeUntil, tap} from 'rxjs/operators';
+import {Invoice} from 'apps/demos/services-app/src/app/models/invoice.model';
+import {Observable, Subject} from 'rxjs';
 import {InvoiceCreateDialogComponent} from './components/invoice-create-dialog/invoice-create-dialog.component';
 
 @Component({
@@ -31,26 +28,19 @@ export class InvoiceListComponent implements OnDestroy {
     this.matDialog
       .open(InvoiceCreateDialogComponent, {
         data: {path: 'invoices', document: group},
-        minWidth: 300,
+        width: '100vw',
       })
       .afterClosed()
-      .subscribe((documentsURL) => {
-        this.addDocuments(group, documentsURL);
+      .subscribe((invoice) => {
+        console.log(group, invoice);
+
+        this.addDocuments(group, invoice);
       });
   }
 
-  private addDocuments(group: string, documents: any[]) {
-    if (documents && documents.length > 0) {
-      const invoice = {
-        title: documents[0].title,
-        description: documents[0].description,
-        cost: documents[0].cost,
-        taxes: documents[0].taxes,
-        url: documents[0].url,
-        project: documents[0].project,
-        group,
-        date: new Date().toISOString(),
-      };
+  private addDocuments(group: string, invoice: Partial<Invoice>) {
+    if (invoice) {
+      invoice = {...invoice, group, date: new Date().toISOString()};
       this.dataService.select('Invoice').add(invoice);
     }
   }

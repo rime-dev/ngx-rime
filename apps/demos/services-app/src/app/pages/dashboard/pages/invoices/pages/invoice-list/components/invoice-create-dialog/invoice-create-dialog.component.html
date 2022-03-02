@@ -1,23 +1,65 @@
-<h1 mat-dialog-title>Factura</h1>
-<button mat-icon-button class="absolute top-0 right-0" [mat-dialog-close]="false">
-  <mat-icon>close</mat-icon>
-</button>
-<div mat-dialog-content class="max-w-md flex flex-col">
-  <div class="flex flex-col md:flex-row">
-    <rng-storage-uploader
-      [path]="path"
-      [document]="document"
-      (finalize)="onFinalize($event)"
-    ></rng-storage-uploader>
-    <div class="flex flex-col m-2">
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Añade un título</mat-label>
-        <input matInput #titleInput [formControl]="titleFormControl" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Añade una descripción opcional</mat-label>
-        <input matInput #titleInput [formControl]="titleFormControl" />
-      </mat-form-field>
+<form [formGroup]="form">
+  <h1 mat-dialog-title>Factura</h1>
+  <button mat-icon-button class="absolute top-0 right-0" [mat-dialog-close]="false" cdkFocusInitial>
+    <mat-icon>close</mat-icon>
+  </button>
+  <div mat-dialog-content class="flex flex-col">
+    <div class="grid gap-2 grid-cols-1 md:grid-cols-2">
+      <rng-storage-uploader
+        [path]="path"
+        [document]="document"
+        (finalize)="onFinalize($event)"
+      ></rng-storage-uploader>
+      <div class="flex flex-col pt-2">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Añade un título</mat-label>
+          <input matInput #titleInput formControlName="title" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Añade una descripción opcional</mat-label>
+          <textarea
+            matInput
+            #descriptionInput
+            formControlName="description"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="3"
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <div class="grid gap-2 grid-cols-1 md:grid-cols-2">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Coste</mat-label>
+          <input matInput #costInput type="number" formControlName="cost" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Impuestos</mat-label>
+          <input
+            matInput
+            #taxesInput
+            type="number"
+            min="0"
+            max="1"
+            formControlName="taxes"
+            placeholder="0.21"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="flex flex-col">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Proyecto</mat-label>
+          <mat-select formControlName="project" required>
+            <mat-option *ngFor="let project of projects$ | async" [value]="project.id">{{
+              project.data.title
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
   </div>
-</div>
+  <mat-dialog-actions align="end">
+    <button mat-button type="submit" (click)="submitInvoice()">Aceptar</button>
+  </mat-dialog-actions>
+</form>

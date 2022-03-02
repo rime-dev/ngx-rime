@@ -30,7 +30,7 @@
       <mat-list-item class="h-auto">
         <mat-icon mat-list-icon>description</mat-icon>
         <div mat-line class="whitespace-normal">
-          {{ invoice.data.description }}
+          {{ invoice.data.description || 'Sin información' }}
         </div>
       </mat-list-item>
     </mat-action-list>
