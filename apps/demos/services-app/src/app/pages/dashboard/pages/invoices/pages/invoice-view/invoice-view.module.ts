@@ -20,10 +20,12 @@ import {TranslocoModule} from '@ngneat/transloco';
 import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
 import {StorageMockModule} from '@rng/data-access/storage';
 import {SatinizeModule} from '@rng/util/satinize';
+import {RequestIfTrueModule} from 'apps/demos/services-app/src/app/components/request-if-true-dialog/request-if-true.module';
+import {IvoiceExistingDocumentDialogComponent} from './components/invoice-existing-document-dialog/invoice-existing-document-dialog.component';
 import {InvoiceViewRoutingModule} from './invoice-view-routing.module';
 import {InvoiceViewComponent} from './invoice-view.component';
 @NgModule({
-  declarations: [InvoiceViewComponent],
+  declarations: [InvoiceViewComponent, IvoiceExistingDocumentDialogComponent],
   imports: [
     CommonModule,
     InvoiceViewRoutingModule,
@@ -51,6 +53,7 @@ import {InvoiceViewComponent} from './invoice-view.component';
     MatDialogModule,
     SatinizeModule,
     MatMenuModule,
+    RequestIfTrueModule,
   ],
 })
 export class InvoiceViewModule {}

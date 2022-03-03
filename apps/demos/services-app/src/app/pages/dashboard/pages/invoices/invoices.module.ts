@@ -5,9 +5,17 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {InvoicesRoutingModule} from './invoices-routing.module';
 import {InvoicesComponent} from './invoices.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [InvoicesComponent],
-  imports: [CommonModule, InvoicesRoutingModule, MatButtonModule, MatCardModule, MatIconModule],
+  imports: [
+    CommonModule,
+    InvoicesRoutingModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatMenuModule,
+  ],
 })
 export class InvoicesModule {}

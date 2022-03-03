@@ -32,8 +32,6 @@ export class InvoiceListComponent implements OnDestroy {
       })
       .afterClosed()
       .subscribe((invoice) => {
-        console.log(group, invoice);
-
         this.addDocuments(group, invoice);
       });
   }

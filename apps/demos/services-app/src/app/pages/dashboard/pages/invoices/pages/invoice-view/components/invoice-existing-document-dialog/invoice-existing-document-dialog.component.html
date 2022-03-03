@@ -1,0 +1,37 @@
+<ng-container *ngIf="invoice">
+  <div class="flex flex-col">
+    <div class="flex flex-row items-center mb-1">
+      <button mat-icon-button mat-dialog-close>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1 mat-dialog-title class="m-0 ml-2 flex flex-row items-center cursor-pointer">
+        <mat-icon class="mr-2">receipt_long</mat-icon>
+        {{ invoice.data.title }}
+      </h1>
+    </div>
+  </div>
+
+  <button mat-icon-button class="absolute top-0 right-0" [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="openNewTab()">
+      <mat-icon>open_in_new</mat-icon>
+      {{ 'actions.openInNew' | transloco }}
+    </button>
+    <button mat-menu-item (click)="download()">
+      <mat-icon>file_download</mat-icon>
+      {{ 'actions.download' | transloco }}
+    </button>
+  </mat-menu>
+
+  <div mat-dialog-content class="w-full h-full m-auto max-h-screen">
+    <iframe
+      class="w-full h-full"
+      [src]="invoice.data.url | satinize: 'resourceUrl'"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+</ng-container>
