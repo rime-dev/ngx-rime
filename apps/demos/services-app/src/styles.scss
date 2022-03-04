@@ -46,7 +46,9 @@
   $foreground: map.get($theme, foreground);
   $background: map.get($theme, background);
   .cdk-overlay-pane {
-    //background: mat.get-color-from-palette($background, app-bar);
+    .overlay-background {
+      background: mat.get-color-from-palette($background, app-bar);
+    }
     border-radius: 14px;
     &.mat-tooltip-panel {
       background: transparent;

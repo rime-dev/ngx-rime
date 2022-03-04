@@ -59,7 +59,19 @@
     "
     cdkConnectedOverlayPush
   >
-    <div class="relative w-full h-full md:h-2/5 flex flex-col p-4 rounded-b-2xl mat-elevation-z2">
+    <div
+      class="
+        relative
+        w-full
+        h-full
+        md:h-2/5
+        flex flex-col
+        p-4
+        rounded-b-2xl
+        mat-elevation-z2
+        overlay-background
+      "
+    >
       <div *ngIf="inputSearch.clientWidth <= 300">
         <form
           class="relative text-gray-600 dark:text-gray-300 w-full flex"

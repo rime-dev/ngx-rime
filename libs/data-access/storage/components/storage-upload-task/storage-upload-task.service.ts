@@ -5,19 +5,8 @@ import {
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
 import firebase from 'firebase/compat';
-import {Observable, Subject} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 import {MockStorageReference} from './firebase-reference-mock';
-
-@Injectable()
-export class StorageUploadTaskService {
-  constructor(private angularFireStorage: AngularFireStorage) {}
-  ref(path: string) {
-    return this.angularFireStorage.ref(path);
-  }
-  upload(path: string, file: File) {
-    return this.angularFireStorage.upload(path, file);
-  }
-}
 
 export abstract class StorageMock {
   private static dataURL: string;
@@ -27,6 +16,19 @@ export abstract class StorageMock {
   }
   static getURL(): string {
     return this.dataURL;
+  }
+}
+@Injectable()
+export class StorageUploadTaskService {
+  constructor(private angularFireStorage: AngularFireStorage) {}
+  ref(path: string) {
+    return this.angularFireStorage.ref(path);
+  }
+  upload(path: string, file: File) {
+    return this.angularFireStorage.upload(path, file);
+  }
+  delete(path: string) {
+    return this.angularFireStorage.refFromURL(path).delete();
   }
 }
 
@@ -44,7 +46,6 @@ export class StorageUploadTaskMockService extends StorageMock implements Angular
   refFromURL(path: string): AngularFireStorageReference {
     throw new Error('Method not implemented.');
   }
-
   upload(
     path: string,
     data: any,
@@ -57,6 +58,9 @@ export class StorageUploadTaskMockService extends StorageMock implements Angular
       StorageUploadTaskMockService
     );
     return angularFireUploadTaskMock;
+  }
+  delete(path: string) {
+    return of(path);
   }
 }
 

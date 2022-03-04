@@ -21,11 +21,22 @@ import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
 import {StorageMockModule} from '@rng/data-access/storage';
 import {SatinizeModule} from '@rng/util/satinize';
 import {RequestIfTrueModule} from 'apps/demos/services-app/src/app/components/request-if-true-dialog/request-if-true.module';
+import {InvoiceAddCostDialogComponent} from './components/invoice-add-cost-dialog/invoice-add-cost-dialog.component';
+import {InvoiceAddDescriptionDialogComponent} from './components/invoice-add-description-dialog/invoice-add-description-dialog.component';
+import {InvoiceAddTaxesDialogComponent} from './components/invoice-add-taxes-dialog/invoice-add-taxes-dialog.component';
+import {InvoiceAddTitleDialogComponent} from './components/invoice-add-title-dialog/invoice-add-title-dialog.component';
 import {IvoiceExistingDocumentDialogComponent} from './components/invoice-existing-document-dialog/invoice-existing-document-dialog.component';
 import {InvoiceViewRoutingModule} from './invoice-view-routing.module';
 import {InvoiceViewComponent} from './invoice-view.component';
 @NgModule({
-  declarations: [InvoiceViewComponent, IvoiceExistingDocumentDialogComponent],
+  declarations: [
+    InvoiceViewComponent,
+    IvoiceExistingDocumentDialogComponent,
+    InvoiceAddTitleDialogComponent,
+    InvoiceAddDescriptionDialogComponent,
+    InvoiceAddCostDialogComponent,
+    InvoiceAddTaxesDialogComponent,
+  ],
   imports: [
     CommonModule,
     InvoiceViewRoutingModule,

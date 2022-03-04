@@ -57,8 +57,13 @@ export class ProjectDocumentsComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
+  checkIfProjectIsFinished(): boolean {
+    return this.project?.data.state === 'finished' ? true : false;
+  }
   addDocument() {
+    if (this.checkIfProjectIsFinished()) {
+      return;
+    }
     this.matDialog
       .open(ProjectDocumentDialogComponent, {
         data: {path: 'projects', document: this.project.id},

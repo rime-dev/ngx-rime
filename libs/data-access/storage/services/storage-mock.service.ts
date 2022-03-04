@@ -59,4 +59,8 @@ export class StorageMockService {
 
     return result$.asObservable();
   }
+  deleteDocument(path: string) {
+    const result$ = new Subject();
+    return result$.asObservable();
+  }
 }

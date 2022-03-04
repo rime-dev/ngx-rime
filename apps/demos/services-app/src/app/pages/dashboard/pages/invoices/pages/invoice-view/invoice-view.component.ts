@@ -8,6 +8,11 @@ import {RequestIfTrueDialogComponent} from 'apps/demos/services-app/src/app/comp
 import {Invoice} from 'apps/demos/services-app/src/app/models/invoice.model';
 import {Observable, of, Subject} from 'rxjs';
 import {map, takeUntil, tap} from 'rxjs/operators';
+import {InvoiceAddCostDialogComponent} from './components/invoice-add-cost-dialog/invoice-add-cost-dialog.component';
+import {InvoiceAddDescriptionDialogComponent} from './components/invoice-add-description-dialog/invoice-add-description-dialog.component';
+import {InvoiceAddTaxesDialogComponent} from './components/invoice-add-taxes-dialog/invoice-add-taxes-dialog.component';
+import {InvoiceAddTitleDialogComponent} from './components/invoice-add-title-dialog/invoice-add-title-dialog.component';
+// eslint-disable-next-line max-len
 import {IvoiceExistingDocumentDialogComponent} from './components/invoice-existing-document-dialog/invoice-existing-document-dialog.component';
 
 @Component({
@@ -70,10 +75,82 @@ export class InvoiceViewComponent implements OnInit, OnDestroy {
   viewDocument(invoice: any) {
     if (invoice) {
       this.matDialog.open(IvoiceExistingDocumentDialogComponent, {
-        data: invoice,
+        data: {path: 'invoices', document: invoice.id, invoice},
         width: '100vw',
         height: '100vh',
       });
+    }
+  }
+  changeTitle(invoice: any) {
+    if (invoice) {
+      this.matDialog
+        .open(InvoiceAddTitleDialogComponent, {
+          data: {invoice},
+          minWidth: '33vw',
+          minHeight: '33vh',
+        })
+        .afterClosed()
+        .subscribe((data: any) => {
+          if (data && data.title) {
+            const data2 = {...invoice.data, title: data.title};
+            const invoice2 = {...invoice, data: data2};
+            this.dataService.select('Invoice').update(invoice2);
+          }
+        });
+    }
+  }
+  changeDescription(invoice: any) {
+    if (invoice) {
+      this.matDialog
+        .open(InvoiceAddDescriptionDialogComponent, {
+          data: {invoice},
+          minWidth: '33vw',
+          minHeight: '33vh',
+        })
+        .afterClosed()
+        .subscribe((data: any) => {
+          if (data) {
+            const data2 = {...invoice.data, description: data.description || ''};
+            const invoice2 = {...invoice, data: data2};
+            this.dataService.select('Invoice').update(invoice2);
+          }
+        });
+    }
+  }
+  changeCost(invoice: any) {
+    if (invoice) {
+      this.matDialog
+        .open(InvoiceAddCostDialogComponent, {
+          data: {invoice},
+          minWidth: '33vw',
+          minHeight: '33vh',
+        })
+        .afterClosed()
+        .subscribe((data: any) => {
+          if (data) {
+            const data2 = {...invoice.data, cost: data.cost};
+            const invoice2 = {...invoice, data: data2};
+            this.dataService.select('Invoice').update(invoice2);
+          }
+        });
+    }
+  }
+  changeTaxes(invoice: any) {
+    if (invoice) {
+      this.matDialog
+        .open(InvoiceAddTaxesDialogComponent, {
+          data: {invoice},
+          minWidth: '33vw',
+          minHeight: '33vh',
+        })
+        .afterClosed()
+        .subscribe((data: any) => {
+          if (data) {
+            const data2 = {...invoice.data, taxes: data.taxes};
+            const invoice2 = {...invoice, data: data2};
+            this.dataService.select('Invoice').update(invoice2);
+          }
+        });
     }
   }
   removeInvoice(invoice: EntityState<Invoice>) {

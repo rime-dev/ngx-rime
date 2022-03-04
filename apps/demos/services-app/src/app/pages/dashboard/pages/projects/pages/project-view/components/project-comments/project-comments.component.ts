@@ -27,8 +27,14 @@ export class ProjectCommentsComponent {
     private authService: AuthService,
     private matDialog: MatDialog
   ) {}
+  checkIfProjectIsFinished(): boolean {
+    return this.project?.data.state === 'finished' ? true : false;
+  }
 
   openDialogToAddComment() {
+    if (this.checkIfProjectIsFinished()) {
+      return;
+    }
     this.matDialog
       .open(ProjectAddCommentDialogComponent, {minWidth: '300px'})
       .afterClosed()

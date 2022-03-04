@@ -29,8 +29,13 @@ export class ProjectExistingDocumentDialogComponent {
       this.project = this.data.project;
     }
   }
-
+  checkIfProjectIsFinished(): boolean {
+    return this.project?.data.state === 'finished' ? true : false;
+  }
   changeTitle() {
+    if (this.checkIfProjectIsFinished()) {
+      return;
+    }
     this.matDialog
       .open(ProjectDocumentChangeTitleDialogComponent, {
         data: {property: 'title', value: this.document.title},
@@ -44,6 +49,9 @@ export class ProjectExistingDocumentDialogComponent {
       });
   }
   changeSubtitle() {
+    if (this.checkIfProjectIsFinished()) {
+      return;
+    }
     this.matDialog
       .open(ProjectDocumentChangeTitleDialogComponent, {
         data: {property: 'subtitle', value: this.document.subtitle},
@@ -74,6 +82,9 @@ export class ProjectExistingDocumentDialogComponent {
     }
   }
   delete() {
+    if (this.checkIfProjectIsFinished()) {
+      return;
+    }
     this.deleteDocument(this.document);
   }
   private addActivity(
