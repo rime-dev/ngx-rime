@@ -60,8 +60,11 @@
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #logoMenu="matMenu">
+                  <button mat-menu-item (click)="addLogo(group)">
+                    <mat-icon>add_photo_alternate</mat-icon>Subir imagen
+                  </button>
                   <button mat-menu-item (click)="removeLogo(group)">
-                    <mat-icon>delete</mat-icon>Eliminar
+                    <mat-icon>delete</mat-icon>Eliminar imagen
                   </button>
                 </mat-menu>
               </h3>
@@ -73,7 +76,7 @@
                 <img
                   mat-line
                   *ngIf="group.data.logo"
-                  class="w-32 h-32 rounded-full m-auto object-cover ring"
+                  class="w-32 h-32 rounded-full m-auto object-cover"
                   [src]="group.data.logo"
                 />
                 <mat-icon
@@ -96,14 +99,19 @@
             </mat-action-list>
 
             <mat-list>
-              <h3 matSubheader>Actividades</h3>
+              <h3 matSubheader>
+                Actividades
+                <button mat-icon-button class="ml-auto" (click)="changeActivity(group)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </h3>
               <mat-list-item class="h-auto">
                 <mat-chip-list aria-label="Activities">
                   <mat-chip
                     color="primary"
                     selected
                     *ngFor="let activity of group.data.activities"
-                    >{{ activity | transloco }}</mat-chip
+                    >{{ 'activities.' + activity | transloco }}</mat-chip
                   >
                 </mat-chip-list>
               </mat-list-item>

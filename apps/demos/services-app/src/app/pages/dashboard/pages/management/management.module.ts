@@ -27,6 +27,7 @@ import {GroupAddNifDialogComponent} from './components/group-add-nif-dialog/grou
 import {MatRippleModule} from '@angular/material/core';
 import {GroupAddLogoDialogComponent} from './components/group-add-logo-dialog/group-add-logo-dialog.component';
 import {StorageMockModule} from '@rng/data-access/storage';
+import {GroupAddActivityDialogComponent} from './components/group-add-activity-dialog/group-add-activity-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {StorageMockModule} from '@rng/data-access/storage';
     GroupAddNifDialogComponent,
     GroupAddEmailDialogComponent,
     GroupAddLogoDialogComponent,
+    GroupAddActivityDialogComponent,
   ],
   imports: [
     CommonModule,

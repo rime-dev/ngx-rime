@@ -12,7 +12,7 @@
   "offered": "Offered",
   "finished": "Finished",
   "all": "All",
-  "paint": "Paint",
+  "painting": "Paint",
   "rehabilitation": "Rehabilitation",
   "construction": "Construction",
   "persons": "Persons",
@@ -70,5 +70,12 @@
   "users": "Users",
   "publicCard": "Public card",
   "headline": "Headline",
-  "invoices": "Invoices"
+  "invoices": "Invoices",
+  "activities.plumbing": "Plumbing",
+  "activities.carpentry": "Carpentry",
+  "activities.electrical_installations": "Electrical Installations",
+  "activities.painting": "Painting",
+  "activities.soil_treatment": "Soil treatment",
+  "activities.glazing": "Glazing",
+  "activities.cleaning": "Cleaning"
 }

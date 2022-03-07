@@ -12,7 +12,7 @@
   "offered": "Ofertado",
   "finished": "Terminado",
   "all": "Todo",
-  "paint": "Pintura",
+  "painting": "Pintura",
   "rehabilitation": "Rehabilitación",
   "construction": "Construcción",
   "persons": "Personas",
@@ -70,5 +70,12 @@
   "users": "Usuarios",
   "publicCard": "Tarjeta pública",
   "headline": "Titular",
-  "invoices": "Facturas"
+  "invoices": "Facturas",
+  "activities.plumbing": "Fontanería",
+  "activities.carpentry": "Carpintería",
+  "activities.electrical_installations": "Instalaciones eléctricas",
+  "activities.painting": "Pintura",
+  "activities.soil_treatment": "Tratamiento de suelo",
+  "activities.glazing": "Acristalamiento",
+  "activities.cleaning": "Limpieza"
 }

@@ -5,7 +5,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class ProjectTypePipe implements PipeTransform {
   transform(value: unknown, ...args: unknown[]): unknown {
-    if (value === 'paint') {
+    if (value === 'painting') {
       return 'format_paint';
     }
     return value;

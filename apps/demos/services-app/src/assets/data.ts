@@ -53,7 +53,7 @@ export const projects: EntityState<Project>[] = [
         text: 'Av. Malvarrosa, Valencia',
         coordinates: [-0.3325047375527262, 39.47647376144332],
       },
-      type: 'paint',
+      type: 'painting',
       state: 'finished',
       accepted: true,
       group: 'GS1',
@@ -95,7 +95,7 @@ export const projects: EntityState<Project>[] = [
         text: 'Av. Malvarrosa, Valencia',
         coordinates: [-0.327054489271977, 39.473459253806304],
       },
-      type: 'paint',
+      type: 'painting',
       state: 'active',
       accepted: true,
       group: 'GS1',
@@ -282,7 +282,7 @@ export const otherProjects: EntityState<Project>[] = [
         text: 'C. Coronel Pérez, Torrent',
         coordinates: [-0.4840176639519735, 39.43004841812394],
       },
-      type: 'paint',
+      type: 'painting',
       state: 'inactive',
       accepted: false,
       group: undefined,
@@ -306,7 +306,7 @@ export const otherProjects: EntityState<Project>[] = [
         text: 'C. Coronel Pérez, Torrent',
         coordinates: [-0.4868158464747782, 39.42764005078414],
       },
-      type: 'paint',
+      type: 'painting',
       state: 'inactive',
       accepted: false,
       group: undefined,
@@ -330,7 +330,7 @@ export const otherProjects: EntityState<Project>[] = [
         text: 'C. Coronel Pérez, Torrent',
         coordinates: [-0.4775152206534386, 39.43470024249243],
       },
-      type: 'paint',
+      type: 'painting',
       state: 'inactive',
       accepted: false,
       group: undefined,
@@ -441,7 +441,7 @@ const groups = [
       phone: '963344556',
       web: 'pinturaspaco.com',
       type: 'provider',
-      activities: ['paint'],
+      activities: ['painting'],
       dateStart: '2022-02-22T16:25:13.036Z',
       location: {
         text: 'C. Coronel Pérez, Torrent',
@@ -474,6 +474,7 @@ const groups = [
     },
   },
 ];
+
 const invoices = [
   {
     id: 'IS1',
@@ -519,9 +520,75 @@ const invoices = [
   },
 ];
 
+const activities = [
+  {
+    id: 'AS1',
+    data: {
+      uid: 'AS1',
+      code: 'plumbing',
+      icon: 'construction',
+      title: 'Fontanería',
+    },
+  },
+  {
+    id: 'AS2',
+    data: {
+      uid: 'AS2',
+      code: 'carpentry',
+      icon: 'construction',
+      title: 'Carpintería',
+    },
+  },
+  {
+    id: 'AS3',
+    data: {
+      uid: 'AS3',
+      code: 'electrical_installations',
+      icon: 'construction',
+      title: 'Instalaciones eléctricas',
+    },
+  },
+  {
+    id: 'AS4',
+    data: {
+      uid: 'AS4',
+      code: 'painting',
+      icon: 'format_paint',
+      title: 'Pintura',
+    },
+  },
+  {
+    id: 'AS5',
+    data: {
+      uid: 'AS5',
+      code: 'soil_treatment',
+      icon: 'construction',
+      title: 'Tratamiento de suelo',
+    },
+  },
+  {
+    id: 'AS6',
+    data: {
+      uid: 'AS6',
+      code: 'glazing',
+      icon: 'construction',
+      title: 'Acristalamiento',
+    },
+  },
+  {
+    id: 'AS7',
+    data: {
+      uid: 'AS7',
+      code: 'cleaning',
+      icon: 'construction',
+      title: 'Limpieza',
+    },
+  },
+];
 export const mockData = {
   projects: [...projects, ...otherProjects],
   users,
   groups,
   invoices,
+  activities,
 };

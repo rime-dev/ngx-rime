@@ -11,6 +11,7 @@ import {Observable, of} from 'rxjs';
 import {delay, map, tap} from 'rxjs/operators';
 import {RequestIfTrueDialogComponent} from '../../../../components/request-if-true-dialog/request-if-true-dialog.component';
 import {Group} from '../../../../models/group.model';
+import {GroupAddActivityDialogComponent} from './components/group-add-activity-dialog/group-add-activity-dialog.component';
 import {GroupAddEmailDialogComponent} from './components/group-add-email-dialog/group-add-email-dialog.component';
 import {GroupAddLogoDialogComponent} from './components/group-add-logo-dialog/group-add-logo-dialog.component';
 import {GroupAddNameDialogComponent} from './components/group-add-name-dialog/group-add-name-dialog.component';
@@ -153,6 +154,24 @@ export class ManagementComponent {
         .subscribe((data: any) => {
           if (data && data.nif) {
             const data2 = {...group.data, nif: data.nif};
+            const group2 = {...group, data: data2};
+            this.dataService.select('Group').update(group2);
+          }
+        });
+    }
+  }
+  changeActivity(group: any) {
+    if (group) {
+      this.matDialog
+        .open(GroupAddActivityDialogComponent, {
+          data: {group},
+          minWidth: '33vw',
+          minHeight: '33vh',
+        })
+        .afterClosed()
+        .subscribe((data: any) => {
+          if (data && data.activities) {
+            const data2 = {...group.data, activities: data.activities};
             const group2 = {...group, data: data2};
             this.dataService.select('Group').update(group2);
           }

@@ -37,9 +37,9 @@ export interface ProjectDocument {
 
 export type ProjectState = 'active' | 'inactive' | 'finished';
 
-export type ProjectType = 'paint' | 'construction';
+export type ProjectType = 'painting' | 'construction';
 
-export type Label = 'paint' | 'construction';
+export type Label = 'painting' | 'construction';
 
 export interface ProjectLabel {
   name: string;

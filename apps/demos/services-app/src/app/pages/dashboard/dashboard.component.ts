@@ -2,12 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {AuthService, User} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
-import {Observable, Subject} from 'rxjs';
-import {filter, map, take, takeUntil, tap} from 'rxjs/operators';
-import {log$} from 'apps/demos/services-app/src/app/decorators/log.decorator';
 import {EntityState} from '@rng/data-access/base/models/base.model';
 import {UserInfo} from '@rng/ui/user-account-popup';
-import {user} from 'rxfire/auth';
+import {log$} from 'apps/demos/services-app/src/app/decorators/log.decorator';
+import {Observable, Subject} from 'rxjs';
+import {filter, map, takeUntil, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'rng-dashboard',
@@ -125,12 +124,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private loadDataByUser(userResult: User) {
+    this.loadActivities(userResult);
     this.loadGroups(userResult);
     this.loadProjects(userResult);
     this.loadCollaborators(userResult);
     this.loadInvoices(userResult);
   }
-
+  private loadActivities(userResult: any) {
+    if (!userResult) {
+      return;
+    }
+    this.dataService.select('Activity').getAll();
+  }
   private loadGroups(userResult: any) {
     if (!userResult) {
       return;
