@@ -41,16 +41,60 @@
           <div class="w-full md:w-1/2">
             <mat-action-list>
               <h3 matSubheader>Nombre</h3>
-              <button mat-list-item>{{ group.data.name }}</button>
+              <button mat-list-item (click)="changeName(group)">{{ group.data.name }}</button>
               <h3 matSubheader>Email</h3>
-              <button mat-list-item>{{ group.data.email }}</button>
+              <button mat-list-item (click)="changeEmail(group)">{{ group.data.email }}</button>
               <h3 matSubheader>Teléfono</h3>
-              <button mat-list-item>{{ group.data.phone }}</button>
+              <button mat-list-item (click)="changePhone(group)">{{ group.data.phone }}</button>
               <h3 matSubheader>Web</h3>
-              <button mat-list-item>{{ group.data.web }}</button>
+              <button mat-list-item (click)="changeWeb(group)">{{ group.data.web }}</button>
               <h3 matSubheader>NIF</h3>
-              <button mat-list-item>{{ group.data.nif }}</button>
+              <button mat-list-item (click)="changeNif(group)">{{ group.data.nif }}</button>
             </mat-action-list>
+          </div>
+          <div class="w-full md:w-1/2">
+            <mat-action-list class="grid">
+              <h3 matSubheader>
+                Logo
+                <button mat-icon-button class="ml-auto" [matMenuTriggerFor]="logoMenu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #logoMenu="matMenu">
+                  <button mat-menu-item (click)="removeLogo(group)">
+                    <mat-icon>delete</mat-icon>Eliminar
+                  </button>
+                </mat-menu>
+              </h3>
+              <button
+                mat-button
+                class="h-auto mx-auto mb-2 p-0 rounded-full"
+                (click)="addLogo(group)"
+              >
+                <img
+                  mat-line
+                  *ngIf="group.data.logo"
+                  class="w-32 h-32 rounded-full m-auto object-cover ring"
+                  [src]="group.data.logo"
+                />
+                <mat-icon
+                  mat-line
+                  *ngIf="!group.data.logo"
+                  class="
+                    w-32
+                    h-32
+                    rounded-full
+                    m-auto
+                    object-cover
+                    ring
+                    flex
+                    justify-center
+                    items-center
+                  "
+                  >image</mat-icon
+                >
+              </button>
+            </mat-action-list>
+
             <mat-list>
               <h3 matSubheader>Actividades</h3>
               <mat-list-item class="h-auto">
@@ -65,26 +109,6 @@
               </mat-list-item>
             </mat-list>
           </div>
-
-          <mat-list class="w-full md:w-1/2">
-            <h3 matSubheader>Logo</h3>
-            <mat-list-item class="h-auto mb-2">
-              <img
-                mat-line
-                class="w-32 h-32 rounded-full m-auto object-cover"
-                [src]="group.data.logo"
-              />
-            </mat-list-item>
-            <h3 matSubheader>Fondo</h3>
-
-            <mat-list-item class="h-auto mb-2">
-              <img
-                mat-line
-                class="w-56 h-32 rounded-xl m-auto object-cover"
-                [src]="group.data.background"
-              />
-            </mat-list-item>
-          </mat-list>
         </div>
       </mat-card-content>
     </mat-card>

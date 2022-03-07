@@ -448,8 +448,6 @@ const groups = [
         coordinates: [-0.4775152206534386, 39.43470024249243],
       },
       logo: 'https://i.picsum.photos/id/1084/536/354.jpg?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60',
-      background:
-        'https://i.picsum.photos/id/1084/536/354.jpg?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60',
       additionalInfo: [
         'Empresa desde el 1964 con una gran variedad de tipos de pintura y una alta gama de colores.',
       ],

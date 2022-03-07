@@ -19,9 +19,27 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDialogModule} from '@angular/material/dialog';
+import {GroupAddNameDialogComponent} from './components/group-add-name-dialog/group-add-name-dialog.component';
+import {GroupAddEmailDialogComponent} from './components/group-add-email-dialog/group-add-email-dialog.component';
+import {GroupAddPhoneDialogComponent} from './components/group-add-phone-dialog/group-add-phone-dialog.component';
+import {GroupAddWebDialogComponent} from './components/group-add-web-dialog/group-add-web-dialog.component';
+import {GroupAddNifDialogComponent} from './components/group-add-nif-dialog/group-add-nif-dialog.component';
+import {MatRippleModule} from '@angular/material/core';
+import {GroupAddLogoDialogComponent} from './components/group-add-logo-dialog/group-add-logo-dialog.component';
+import {StorageMockModule} from '@rng/data-access/storage';
 
 @NgModule({
-  declarations: [ManagementComponent, TeamComponent, CardComponent],
+  declarations: [
+    ManagementComponent,
+    TeamComponent,
+    CardComponent,
+    GroupAddNameDialogComponent,
+    GroupAddWebDialogComponent,
+    GroupAddPhoneDialogComponent,
+    GroupAddNifDialogComponent,
+    GroupAddEmailDialogComponent,
+    GroupAddLogoDialogComponent,
+  ],
   imports: [
     CommonModule,
     ManagementRoutingModule,
@@ -41,6 +59,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatAutocompleteModule,
     FormsModule,
     MatDialogModule,
+    MatRippleModule,
+    StorageMockModule,
+    // StorageModule,
   ],
 })
 export class ManagementModule {}
