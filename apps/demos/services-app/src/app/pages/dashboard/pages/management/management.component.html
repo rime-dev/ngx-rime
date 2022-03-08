@@ -164,11 +164,21 @@
         </mat-list-item>
       </mat-action-list>
     </mat-card>
-    <h1 class="text-xl font-medium my-6">Ubicación</h1>
+    <div class="flex flex-row items-center w-full">
+      <h1 class="text-xl font-medium my-6">Ubicación</h1>
+      <button mat-icon-button class="ml-auto" [matMenuTriggerFor]="menuLocation">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menuLocation="matMenu">
+        <button mat-menu-item (click)="changeLocation(group)">
+          <mat-icon>edit</mat-icon>Editar
+        </button>
+      </mat-menu>
+    </div>
     <mat-card class="mat-elevation-z3 rounded-lg">
       <mat-action-list class="w-full">
         <h3 matSubheader>Dirección</h3>
-        <mat-list-item class="h-auto mb-2">
+        <mat-list-item class="h-auto mb-2" (click)="changeLocation(group)">
           <mat-icon mat-list-icon>place</mat-icon>
           <span class="py-4"> {{ group.data.location.text }}</span>
         </mat-list-item>
@@ -180,6 +190,7 @@
         #map
         class="grid w-full h-96 rounded-2xl overflow-hidden"
         [center]="center"
+        [zoom]="zoom"
         [data]="point$ | async"
         [interactions]="interactions"
       ></rng-map>

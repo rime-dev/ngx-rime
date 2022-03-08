@@ -1,4 +1,4 @@
-import {coerceArray} from '@angular/cdk/coercion';
+import {coerceArray, coerceNumberProperty} from '@angular/cdk/coercion';
 import {
   AfterViewInit,
   Component,
@@ -149,6 +149,16 @@ export class MapComponent implements AfterViewInit {
   private _center = [0, 0];
 
   @Input()
+  set zoom(value) {
+    this._zoom = coerceNumberProperty(value);
+    this.changeZoom(value);
+  }
+  get zoom() {
+    return this._zoom;
+  }
+  private _zoom = 0;
+
+  @Input()
   set overlayClickTemplate(value) {
     this._overlayClickTemplate = value;
   }
@@ -183,6 +193,11 @@ export class MapComponent implements AfterViewInit {
   private changeCenter(center: number[]) {
     if (this.map && this.map instanceof Map) {
       this.map.getView().setCenter(center);
+    }
+  }
+  private changeZoom(zoom: number) {
+    if (this.map && this.map instanceof Map) {
+      this.map.getView().setZoom(zoom);
     }
   }
 

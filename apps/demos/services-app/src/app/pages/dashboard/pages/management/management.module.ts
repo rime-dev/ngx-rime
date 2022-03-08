@@ -30,6 +30,7 @@ import {StorageMockModule} from '@rng/data-access/storage';
 import {GroupAddActivityDialogComponent} from './components/group-add-activity-dialog/group-add-activity-dialog.component';
 // eslint-disable-next-line max-len
 import {GroupAddAdditionalInfoDialogComponent} from './components/group-add-additional-info-dialog/group-add-additional-info-dialog.component';
+import {GroupAddLocationDialogComponent} from './components/group-add-location-dialog/group-add-location-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {GroupAddAdditionalInfoDialogComponent} from './components/group-add-addi
     GroupAddLogoDialogComponent,
     GroupAddActivityDialogComponent,
     GroupAddAdditionalInfoDialogComponent,
+    GroupAddLocationDialogComponent,
   ],
   imports: [
     CommonModule,

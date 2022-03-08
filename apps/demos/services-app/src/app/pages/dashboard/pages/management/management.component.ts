@@ -1,3 +1,4 @@
+import {coerceNumberProperty} from '@angular/cdk/coercion';
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {User} from '@rng/data-access/auth';
@@ -14,6 +15,7 @@ import {Group} from '../../../../models/group.model';
 import {GroupAddActivityDialogComponent} from './components/group-add-activity-dialog/group-add-activity-dialog.component';
 import {GroupAddAdditionalInfoDialogComponent} from './components/group-add-additional-info-dialog/group-add-additional-info-dialog.component';
 import {GroupAddEmailDialogComponent} from './components/group-add-email-dialog/group-add-email-dialog.component';
+import {GroupAddLocationDialogComponent} from './components/group-add-location-dialog/group-add-location-dialog.component';
 import {GroupAddLogoDialogComponent} from './components/group-add-logo-dialog/group-add-logo-dialog.component';
 import {GroupAddNameDialogComponent} from './components/group-add-name-dialog/group-add-name-dialog.component';
 import {GroupAddNifDialogComponent} from './components/group-add-nif-dialog/group-add-nif-dialog.component';
@@ -28,6 +30,7 @@ import {GroupAddWebDialogComponent} from './components/group-add-web-dialog/grou
 export class ManagementComponent {
   public tabSelected = 0;
   public center: number[] = [];
+  public zoom = 7;
   public point$: Observable<any[]> = of([]);
   public group$: Observable<EntityState<Group>>;
   public users$: Observable<EntityState<User>[]>;
@@ -44,25 +47,75 @@ export class ManagementComponent {
     this.group$ = this.dataService.select('Group').entities$.pipe(map((groups) => groups[0]));
     this.users$ = this.dataService.select('User').entities$;
     this.point$ = this.group$.pipe(
-      map((group: EntityState<Group>) => [
-        new Feature({
-          geometry: new Point(fromLonLat(group.data.location.coordinates)),
-        }),
-      ]),
+      map((group: EntityState<Group>) =>
+        this.transformCoordinatesToFeature(group.data.location.coordinates)
+      ),
       delay(0),
       tap({
         next: (features: Feature<Point>[]) => this.setCenterOfMap(features),
+      }),
+      tap({
+        next: (features: Feature<Point>[]) => this.setZoomOfMap(features),
       })
     );
   }
+  private transformCoordinatesToFeature(coordinates: number[]) {
+    if (coordinates[0] && coordinates[1]) {
+      return [
+        new Feature({
+          geometry: new Point(fromLonLat(coordinates)),
+        }),
+      ];
+    } else {
+      return [];
+    }
+  }
   setCenterOfMap(features: Feature<Point>[]) {
-    const geometry = features[0].getGeometry();
+    const geometry = features[0]?.getGeometry();
     if (geometry) {
       this.center = geometry.getCoordinates();
+    } else {
+      this.center = [0, 0];
+    }
+  }
+  setZoomOfMap(features: Feature<Point>[]) {
+    const geometry = features[0]?.getGeometry();
+    if (geometry) {
+      this.zoom = 15;
+    } else {
+      this.zoom = 1;
     }
   }
   changeTab(event: number): void {
     this.tabSelected = event;
+  }
+  changeLocation(group: EntityState<Group>) {
+    if (group) {
+      this.matDialog
+        .open(GroupAddLocationDialogComponent, {
+          data: {group},
+          minWidth: '33vw',
+          minHeight: '33vh',
+        })
+        .afterClosed()
+        .pipe(
+          tap({
+            next: (data: any) => {
+              if (data && data.location) {
+                const coordinates = [
+                  coerceNumberProperty(data.location.coordinates[0]),
+                  coerceNumberProperty(data.location.coordinates[1]),
+                ];
+                const location = {...data.location, coordinates};
+                const data2 = {...group.data, location};
+                const group2 = {...group, data: data2};
+                this.dataService.select('Group').update(group2);
+              }
+            },
+          })
+        )
+        .subscribe();
+    }
   }
   addAdditionalInfo(group: EntityState<Group>) {
     if (group) {
