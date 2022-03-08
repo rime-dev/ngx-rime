@@ -40,20 +40,44 @@
         <div class="flex flex-col md:flex-row w-full">
           <div class="w-full md:w-1/2">
             <mat-action-list>
-              <h3 matSubheader>Nombre</h3>
-              <button mat-list-item (click)="changeName(group)">{{ group.data.name }}</button>
-              <h3 matSubheader>Email</h3>
-              <button mat-list-item (click)="changeEmail(group)">{{ group.data.email }}</button>
-              <h3 matSubheader>Teléfono</h3>
-              <button mat-list-item (click)="changePhone(group)">{{ group.data.phone }}</button>
-              <h3 matSubheader>Web</h3>
-              <button mat-list-item (click)="changeWeb(group)">{{ group.data.web }}</button>
-              <h3 matSubheader>NIF</h3>
-              <button mat-list-item (click)="changeNif(group)">{{ group.data.nif }}</button>
+              <div>
+                <h3 matSubheader>Nombre</h3>
+                <button mat-list-item (click)="changeName(group)">
+                  {{ group.data.name }}
+                </button>
+              </div>
+
+              <div>
+                <h3 matSubheader>Email</h3>
+                <button mat-list-item (click)="changeEmail(group)">
+                  {{ group.data.email }}
+                </button>
+              </div>
+
+              <div>
+                <h3 matSubheader>Teléfono</h3>
+                <button mat-list-item (click)="changePhone(group)">
+                  {{ group.data.phone }}
+                </button>
+              </div>
+
+              <div>
+                <h3 matSubheader>Web</h3>
+                <button mat-list-item (click)="changeWeb(group)">
+                  {{ group.data.web }}
+                </button>
+              </div>
+
+              <div>
+                <h3 matSubheader>NIF</h3>
+                <button mat-list-item (click)="changeNif(group)">
+                  {{ group.data.nif }}
+                </button>
+              </div>
             </mat-action-list>
           </div>
           <div class="w-full md:w-1/2">
-            <mat-action-list class="grid">
+            <mat-action-list class="grid group">
               <h3 matSubheader>
                 Logo
                 <button mat-icon-button class="ml-auto" [matMenuTriggerFor]="logoMenu">
@@ -102,7 +126,7 @@
               <h3 matSubheader>
                 Actividades
                 <button mat-icon-button class="ml-auto" (click)="changeActivity(group)">
-                  <mat-icon>edit</mat-icon>
+                  <mat-icon color="primary">edit</mat-icon>
                 </button>
               </h3>
               <mat-list-item class="h-auto">
@@ -134,7 +158,7 @@
     <mat-card class="mat-elevation-z3 rounded-lg">
       <mat-action-list class="w-full" *ngFor="let info of group.data.additionalInfo; let i = index">
         <h3 matSubheader>Texto {{ i + 1 }}</h3>
-        <mat-list-item class="h-auto mb-2">
+        <mat-list-item class="h-auto mb-2" (click)="changeAdditionalInfo(group, info, i)">
           <mat-icon mat-list-icon>description</mat-icon>
           <span class="py-4"> {{ info }}</span>
         </mat-list-item>

@@ -12,6 +12,7 @@ import {delay, map, tap} from 'rxjs/operators';
 import {RequestIfTrueDialogComponent} from '../../../../components/request-if-true-dialog/request-if-true-dialog.component';
 import {Group} from '../../../../models/group.model';
 import {GroupAddActivityDialogComponent} from './components/group-add-activity-dialog/group-add-activity-dialog.component';
+import {GroupAddAdditionalInfoDialogComponent} from './components/group-add-additional-info-dialog/group-add-additional-info-dialog.component';
 import {GroupAddEmailDialogComponent} from './components/group-add-email-dialog/group-add-email-dialog.component';
 import {GroupAddLogoDialogComponent} from './components/group-add-logo-dialog/group-add-logo-dialog.component';
 import {GroupAddNameDialogComponent} from './components/group-add-name-dialog/group-add-name-dialog.component';
@@ -64,12 +65,32 @@ export class ManagementComponent {
     this.tabSelected = event;
   }
   addAdditionalInfo(group: EntityState<Group>) {
-    const additionalInfo = [...group.data.additionalInfo];
-    additionalInfo.push('');
-    const data = {...group.data, additionalInfo};
-    const groupClone = {...group, data};
-    this.dataService.select('Group').update(groupClone);
+    if (group) {
+      this.matDialog
+        .open(GroupAddAdditionalInfoDialogComponent, {
+          data: {group},
+          minWidth: '33vw',
+          minHeight: '33vh',
+        })
+        .afterClosed()
+        .pipe(tap({next: (data: any) => this.appendAdditionalInfo(group, data)}))
+        .subscribe();
+    }
   }
+  changeAdditionalInfo(group: EntityState<Group>, info: string, index: number) {
+    if (group) {
+      this.matDialog
+        .open(GroupAddAdditionalInfoDialogComponent, {
+          data: {group, info, index},
+          minWidth: '33vw',
+          minHeight: '33vh',
+        })
+        .afterClosed()
+        .pipe(tap({next: (data: any) => this.updateAdditionalInfo(group, index, data)}))
+        .subscribe();
+    }
+  }
+
   changeName(group: any) {
     if (group) {
       this.matDialog
@@ -209,6 +230,26 @@ export class ManagementComponent {
         this.storageUploadTaskService.delete(group.data.logo);
       }
       const data2 = {...group.data, logo: documents[0].url};
+      const group2 = {...group, data: data2};
+      this.dataService.select('Group').update(group2);
+    }
+  }
+  private appendAdditionalInfo(group: any, data: any) {
+    if (data && data.additionalInfo) {
+      const additionalInfo = [...group.data.additionalInfo];
+      additionalInfo.push(data.additionalInfo);
+      const data2 = {...group.data, additionalInfo};
+      const group2 = {...group, data: data2};
+      this.dataService.select('Group').update(group2);
+    }
+  }
+  private updateAdditionalInfo(group: any, index: number, data: any) {
+    if (data && data.additionalInfo) {
+      let additionalInfo = [...group.data.additionalInfo];
+      additionalInfo = additionalInfo.map((info1: string, i: number) =>
+        i === index ? data.additionalInfo : info1
+      );
+      const data2 = {...group.data, additionalInfo};
       const group2 = {...group, data: data2};
       this.dataService.select('Group').update(group2);
     }
