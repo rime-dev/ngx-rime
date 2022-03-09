@@ -6,7 +6,10 @@
           <mat-card class="w-full h-full mat-elevation-z3 bg-primary flex flex-col">
             <mat-card-header class="flex flex-col mt-auto mb-auto">
               <mat-card-title
-                >Facturado <span class="text-sm font-thin">(este mes)</span></mat-card-title
+                >{{ 'invoiced' | transloco }}
+                <span class="text-sm font-thin"
+                  >({{ 'thismonth' | transloco }})</span
+                ></mat-card-title
               >
               <mat-card-subtitle>
                 <span
@@ -15,7 +18,7 @@
                   >{{ earningValue | translocoCurrency }}</span
                 >
                 <ng-template #noEarningsTemplate>
-                  <span class="text-2lg text-white block mt-2">No hay ganancias</span>
+                  <span class="text-2lg text-white block mt-2">{{ 'noEarnings' | transloco }}</span>
                 </ng-template>
               </mat-card-subtitle>
               <mat-chip-list>
@@ -23,8 +26,8 @@
                   color="primary"
                   selected
                   *ngIf="percentageFromPreviousMonth$ | async; let percentageFromPreviousMonth"
-                  >{{ percentageFromPreviousMonth | translocoPercent }} respecto al mes
-                  anterior</mat-chip
+                  >{{ percentageFromPreviousMonth | translocoPercent }}
+                  {{ 'regardingTheMonthPrevious' | transloco }}</mat-chip
                 >
               </mat-chip-list>
               <rng-earnings-chart class="h-20" [data]="invoicesData$ | async"></rng-earnings-chart>
@@ -37,8 +40,8 @@
               <button mat-raised-button mat-card-avatar color="primary" class="card-number">
                 <mat-icon>support_agent</mat-icon>
               </button>
-              <mat-card-title>Soporte</mat-card-title>
-              <mat-card-subtitle>Si necesitas ayuda, contacta con nosotros</mat-card-subtitle>
+              <mat-card-title>{{ 'support' | transloco }}</mat-card-title>
+              <mat-card-subtitle>{{ 'support.helpContact' | transloco }}</mat-card-subtitle>
             </mat-card-header>
           </mat-card>
           <rng-info-projects class="w-full h-3/5 mt-2"></rng-info-projects>
@@ -47,7 +50,7 @@
       <div class="flex flex-col w-full xl:w-2/5 p-2 lg:h-68">
         <div class="flex flex-row mb-2">
           <button mat-button class="w-full card-title" [routerLink]="['../invoices/invoice-list']">
-            Facturas recientes
+            {{ 'invoices.recent' | transloco }}
           </button>
           <button mat-icon-button [routerLink]="['../invoices/invoice-list']">
             <mat-icon>read_more</mat-icon>
@@ -62,7 +65,7 @@
             *ngIf="invoices.length === 0"
           >
             <div class="m-auto h-36">
-              <p class="mb-4">No hay facturas</p>
+              <p class="mb-4">{{ 'noInvoices' | transloco }}</p>
               <img class="h-32 w-full" src="assets/undraw_not_found_-60-pq.svg" />
             </div>
           </div>

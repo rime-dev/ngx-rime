@@ -5,7 +5,7 @@
     [routerLink]="['../projects/project-list']"
     [state]="['state', 'active']"
   >
-    Proyectos en curso
+    {{ 'projects.ongoing' | transloco }}
   </button>
   <button mat-icon-button [routerLink]="['../projects/project-list']" [state]="['state', 'active']">
     <mat-icon>read_more</mat-icon>
