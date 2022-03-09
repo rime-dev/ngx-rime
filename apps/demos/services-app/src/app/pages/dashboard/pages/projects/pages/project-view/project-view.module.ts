@@ -20,6 +20,7 @@ import {TranslocoModule} from '@ngneat/transloco';
 import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
 import {StorageMockModule, StorageModule} from '@rng/data-access/storage';
 import {SatinizeModule} from '@rng/util/satinize';
+import {RequestIfTrueModule} from 'apps/demos/services-app/src/app/components/request-if-true-dialog/request-if-true.module';
 import {CollaboratorPipeModule} from 'apps/demos/services-app/src/app/pipes/collaborator/collaborator.module';
 import {ProjectTypeModule} from 'apps/demos/services-app/src/app/pipes/project-type/project-type.module';
 import {ProjectActivityComponent} from './components/project-activity/project-activity.component';
@@ -79,6 +80,7 @@ import {ProjectViewComponent} from './project-view.component';
     MatDialogModule,
     SatinizeModule,
     MatMenuModule,
+    RequestIfTrueModule,
   ],
 })
 export class ProjectViewModule {}

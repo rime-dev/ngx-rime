@@ -5,10 +5,12 @@ import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TranslocoService} from '@ngneat/transloco';
 import {AuthService} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
+import {RequestIfTrueDialogComponent} from 'apps/demos/services-app/src/app/components/request-if-true-dialog/request-if-true-dialog.component';
 import {
   Labels,
   Project,
@@ -52,7 +54,9 @@ export class ProjectInfoComponent implements OnDestroy {
     private snackBar: MatSnackBar,
     private translocoService: TranslocoService,
     private authService: AuthService,
-    public matDialog: MatDialog
+    public matDialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.filteredLabels = this.labelsControl.valueChanges.pipe(
       startWith(null),
@@ -143,6 +147,31 @@ export class ProjectInfoComponent implements OnDestroy {
     return {...project, data};
   }
 
+  declineProject() {
+    if (this.checkIfProjectIsFinished()) {
+      return;
+    }
+    this.matDialog
+      .open(RequestIfTrueDialogComponent, {
+        minWidth: '33vw',
+      })
+      .afterClosed()
+      .subscribe((request) => {
+        if (this.project) {
+          if (request) {
+            const data = {...this.project.data, accepted: false, group: null};
+            const project = {...this.project, data};
+            this.dataService.select('Project').update(project);
+            this.router.navigate(['../../project-list'], {relativeTo: this.route});
+            this.snackBar.open(this.translocoService.translate('project.declined'), '', {
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+              duration: 3000,
+            });
+          }
+        }
+      });
+  }
   acceptProject() {
     if (this.checkIfProjectIsFinished()) {
       return;

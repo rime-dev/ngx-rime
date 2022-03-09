@@ -23,12 +23,7 @@
         invisible
         md:visible
       "
-      style="
-        width: 200px;
-        transition-duration: 100ms;
-        transition-property: width;
-        transition-timing-function: ease-in-out;
-      "
+      style="width: 200px"
       [class.w-full]="isFocused"
       [class.rounded-t-2xl]="isFocused"
       [class.rounded-2xl]="!isFocused"
@@ -54,6 +49,11 @@
     cdkConnectedOverlay
     [cdkConnectedOverlayOrigin]="trigger"
     [cdkConnectedOverlayOpen]="isOverlayOpened"
+    [cdkConnectedOverlayPositions]="
+      inputSearch.clientWidth <= 300
+        ? [{originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom'}]
+        : [{originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top'}]
+    "
     [cdkConnectedOverlayWidth]="
       inputSearch.clientWidth > 300 ? inputSearch.clientWidth : windowScreenWidth
     "
@@ -77,8 +77,8 @@
           class="relative text-gray-600 dark:text-gray-300 w-full flex"
           [formGroup]="searchForm"
         >
-          <button type="button" (click)="onBlur($event)">
-            <mat-icon>arrow_back</mat-icon>
+          <button type="button">
+            <mat-icon>search</mat-icon>
           </button>
           <input
             #inputSearch
@@ -101,32 +101,43 @@
               rounded-t-2xl
             "
           />
-          <button type="button" class="absolute right-0 top-0 mt-2 mr-2" (click)="clearSearch()">
+          <button mat-icon-button (click)="clearSearch()">
             <mat-icon *ngIf="this.searchForm.controls.searchInput.valueChanges | async"
               >close</mat-icon
             >
           </button>
+          <button mat-button (click)="onBlur($event)">Cancelar</button>
         </form>
       </div>
       <div>
         {{ 'projects' | transloco }}
-        <mat-action-list>
-          <mat-list-item
-            *ngFor="let project of projectsSearched$ | async | slice: 0:5"
-            (click)="goToItem(project.id)"
-          >
-            <mat-icon mat-list-icon>{{ project.data.type | projectTypePipe }}</mat-icon>
-            <p mat-line>{{ project.data.title }}</p>
-            <mat-chip-list>
-              <mat-chip class="cursor-pointer" *ngIf="project.data.group">{{
-                project.data.state | transloco
-              }}</mat-chip>
-              <mat-chip class="cursor-pointer" *ngIf="!project.data.group">{{
-                'others' | transloco
-              }}</mat-chip>
-            </mat-chip-list>
-          </mat-list-item>
-        </mat-action-list>
+        <div *ngIf="projectsSearched$ | async; let projectsSearched">
+          <mat-action-list *ngIf="projectsSearched && projectsSearched.length > 0; else noProjects">
+            <mat-list-item
+              *ngFor="let project of projectsSearched$ | async | slice: 0:5"
+              (click)="goToItem(project.id)"
+            >
+              <mat-icon mat-list-icon>{{ project.data.type | projectTypePipe }}</mat-icon>
+              <p mat-line>{{ project.data.title }}</p>
+              <mat-chip-list>
+                <mat-chip class="cursor-pointer" *ngIf="project.data.group">{{
+                  project.data.state | transloco
+                }}</mat-chip>
+                <mat-chip class="cursor-pointer" *ngIf="!project.data.group">{{
+                  'others' | transloco
+                }}</mat-chip>
+              </mat-chip-list>
+            </mat-list-item>
+          </mat-action-list>
+          <ng-template #noProjects>
+            <div class="flex flex-col h-48 text-center items-center">
+              <div class="m-auto h-36">
+                <p class="mb-4">{{ 'noProjects' | transloco }}</p>
+                <img class="h-32 w-full" src="assets/undraw_not_found_-60-pq.svg" />
+              </div>
+            </div>
+          </ng-template>
+        </div>
       </div>
       <div *ngIf="recentSearches.length > 0">
         {{ 'recentSearches' | transloco }}

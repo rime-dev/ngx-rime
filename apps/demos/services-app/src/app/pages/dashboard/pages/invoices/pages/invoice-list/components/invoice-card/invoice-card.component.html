@@ -10,7 +10,9 @@
           <mat-icon>receipt_long</mat-icon>
         </div>
         <mat-card-title>{{ invoice.data.title }}</mat-card-title>
-        <mat-card-subtitle>{{ invoice.data.cost | translocoCurrency }}</mat-card-subtitle>
+        <mat-card-subtitle class="m-0">{{
+          invoice.data.cost | translocoCurrency
+        }}</mat-card-subtitle>
       </mat-card-header>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <div class="lg:container p-8 flex flex-col mx-auto">
-  <div class="flex flex-row items-center">
+  <div class="flex flex-row items-center h-10">
     <span
       class="
         text-lg
@@ -11,7 +11,12 @@
       "
       >Notas sobre el proyecto</span
     >
-    <button mat-icon-button class="ml-auto" (click)="openDialogToAddComment()">
+    <button
+      mat-icon-button
+      class="ml-auto"
+      *ngIf="project.data.group"
+      (click)="openDialogToAddComment()"
+    >
       <mat-icon>add</mat-icon>
     </button>
   </div>
@@ -29,7 +34,7 @@
       <mat-divider></mat-divider>
     </ng-container>
   </mat-list>
-  <div *ngIf="!project.data.comments" class="flex flex-col h-auto xl:h-48 text-center items-center">
+  <div *ngIf="!project.data.comments" class="flex flex-col h-48 text-center items-center">
     <div class="m-auto h-36">
       <p class="mb-4">No hay comentarios</p>
       <img class="h-32 w-full" src="assets/undraw_not_found_-60-pq.svg" />

@@ -1,4 +1,21 @@
 <div class="lg:container p-8 flex flex-col mx-auto">
+  <div class="flex flex-row items-center h-10">
+    <span
+      class="
+        text-lg
+        font-medium
+        text-gray-700
+        dark:text-gray-200
+        overflow-hidden overflow-ellipsis
+        whitespace-nowrap
+      "
+      >Documentos del proyecto</span
+    >
+
+    <button mat-icon-button *ngIf="project.data.group" class="ml-auto" (click)="addDocument()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
   <div class="flex flex-row w-full" *ngIf="project.data.group">
     <mat-form-field class="w-full max-w-md" appearance="fill">
       <mat-label>Buscar documentos</mat-label>
@@ -24,10 +41,6 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-
-    <button mat-icon-button class="ml-auto" (click)="addDocument()">
-      <mat-icon>add</mat-icon>
-    </button>
   </div>
   <ng-container *ngIf="filteredDocuments$ | async; let documents">
     <div

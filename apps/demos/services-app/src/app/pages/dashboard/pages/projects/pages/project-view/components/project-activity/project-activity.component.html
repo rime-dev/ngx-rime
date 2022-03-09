@@ -1,5 +1,5 @@
 <div class="lg:container p-8 flex flex-col mx-auto">
-  <div class="flex flex-row items-center pb-8">
+  <div class="flex flex-row items-center h-10">
     <span
       class="
         text-lg
@@ -17,7 +17,7 @@
   </div>
   <ol
     *ngIf="project.data.activity && project.data.activity.length > 0; else noActivityTemplate"
-    class="relative border-l border-gray-200 dark:border-gray-700"
+    class="relative mt-8 border-l border-gray-200 dark:border-gray-700"
   >
     <li class="mb-6 ml-6" *ngFor="let activity of project.data.activity.slice().reverse()">
       <span
