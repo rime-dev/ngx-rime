@@ -362,8 +362,9 @@ const users = [
       headline: 'Programador',
       group: 'GS1',
       role: 'user',
-      type: 'provider',
+      type: 'housers',
       nif: '23456789D',
+      apps: ['services'],
       stats: {
         projects: {
           closed: 20,

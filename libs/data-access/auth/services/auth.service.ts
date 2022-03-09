@@ -5,6 +5,7 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/f
 import {Router} from '@angular/router';
 import firebase from 'firebase/compat';
 import {BehaviorSubject, Subject} from 'rxjs';
+import {take, tap} from 'rxjs/operators';
 import {User} from '../models/auth.model';
 
 @Injectable({providedIn: 'root'})
@@ -88,6 +89,15 @@ export class AuthService implements OnDestroy {
       });
   }
 
+  // Returns user role
+  get userRole(): string | null {
+    return localStorage.getItem('role');
+  }
+  // Returns user type
+  get userType(): string | null {
+    return localStorage.getItem('type');
+  }
+
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(String(localStorage.getItem('user')));
@@ -137,7 +147,12 @@ export class AuthService implements OnDestroy {
       merge: true,
     });
   }
-
+  public getUserData(user: User) {
+    const userRef: AngularFirestoreDocument<any> = this.angularFirestore
+      .collection('users')
+      .doc(`${user.uid}`);
+    return userRef.get();
+  }
   // Sign out
   public signOut() {
     return this.angularFireAuth.signOut().then(() => {

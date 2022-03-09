@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {ShellModule} from '@rng/ui/shell';
 import {UserAccountPopupModule} from '@rng/ui/user-account-popup';
@@ -31,6 +32,7 @@ import {DashboardComponent} from './dashboard.component';
     FormsModule,
     ShellModule,
     UserAccountPopupModule,
+    MatSnackBarModule,
     SearchInputModule,
     ThemeSwitcherModule,
   ],

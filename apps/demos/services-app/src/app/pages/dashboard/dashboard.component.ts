@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {NavigationEnd, Router} from '@angular/router';
 import {AuthService, User} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
@@ -69,7 +70,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private snackBar: MatSnackBar
   ) {
     this.userAuth$ = this.authService.user$;
     this.userAuth$
@@ -82,6 +84,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe();
+  }
+
+  private checkPermissions(user: any) {
+    if (user.role && user.type && user.type !== 'provider' && user.role === 'user') {
+      this.router.navigate(['sign-in']);
+      this.snackBar.open('No tiene permisos para esta aplicación', '', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        duration: 3000,
+      });
+      return null;
+    }
+    return user;
   }
 
   onScroll(event: any) {
@@ -118,12 +133,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
         .getByKey(id)
         .pipe(
           map((userResult: EntityState<User>) => userResult.data),
+          map((userResult: User) => this.checkPermissions(userResult)),
           tap({next: (userResult: User) => this.loadDataByUser(userResult)})
         );
     }
   }
 
   private loadDataByUser(userResult: User) {
+    if (!userResult) {
+      return;
+    }
     this.loadActivities(userResult);
     this.loadGroups(userResult);
     this.loadProjects(userResult);
