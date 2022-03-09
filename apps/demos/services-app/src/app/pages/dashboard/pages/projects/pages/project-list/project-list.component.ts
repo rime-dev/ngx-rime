@@ -1,76 +1,36 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DataService} from '@rng/data-access/base';
-// import {DataFilter} from '@rng/data-access/base/decorators';
-import {dataFilter} from '@rng/data-access/base/operators';
 import {EntityState} from '@rng/data-access/base/models/base.model';
-import {Project} from 'apps/demos/services-app/src/app/models/project.model';
-import {Observable, of} from 'rxjs';
+import {dataFilter} from '@rng/data-access/base/operators';
 import {MapComponent} from 'apps/demos/services-app/src/app/components/map/map.component';
-import {tap} from 'rxjs/operators';
+import {Project} from 'apps/demos/services-app/src/app/models/project.model';
 import {Feature} from 'ol';
-import {fromLonLat} from 'ol/proj';
 import Point from 'ol/geom/Point';
+import {fromLonLat} from 'ol/proj';
+import {Observable, of} from 'rxjs';
+import {delay, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'rng-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectListComponent implements OnInit {
   public tabSelected = 0;
   public filterByTypeSelected = 'all';
   public points$: Observable<any[]> = of([]);
-  public center = [-0.4729078334928575, 39.431874010962424];
   public mapIsOpenOnMobile = false;
-  // @DataFilter([
-  //   {fieldPath: 'state', opStr: '==', value: 'active'},
-  //   {fieldPath: 'group', opStr: '==', value: 'GS1'},
-  // ])
+
   public activeProjects$: Observable<EntityState<Project>[]>;
 
-  // @DataFilter({fieldPath: 'group', opStr: '==', value: undefined})
   public otherProjects$: Observable<EntityState<Project>[]>;
 
-  // @DataFilter([
-  //   {fieldPath: 'state', opStr: '==', value: 'inactive'},
-  //   {fieldPath: 'group', opStr: '==', value: 'GS1'},
-  // ])
   public inactiveProjects$: Observable<EntityState<Project>[]>;
 
-  // @DataFilter([
-  //   {fieldPath: 'state', opStr: '==', value: 'finished'},
-  //   {fieldPath: 'group', opStr: '==', value: 'GS1'},
-  // ])
   public finishedProjects$: Observable<EntityState<Project>[]>;
 
-  constructor(
-    private router: Router,
-    private dataService: DataService,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {
-    // this.activeProjects$ = this.dataService.select('Project').entities$.pipe(
-    //   dataFilter([
-    //     {fieldPath: 'state', opStr: '==', value: 'active'},
-    //     {fieldPath: 'group', opStr: '==', value: 'GS1'},
-    //   ])
-    // );
-    // this.otherProjects$ = this.dataService
-    //   .select('Project')
-    //   .entities$.pipe(dataFilter({fieldPath: 'group', opStr: '==', value: undefined}));
-    // this.inactiveProjects$ = this.dataService.select('Project').entities$.pipe(
-    //   dataFilter([
-    //     {fieldPath: 'state', opStr: '==', value: 'inactive'},
-    //     {fieldPath: 'group', opStr: '==', value: 'GS1'},
-    //   ])
-    // );
-    // this.finishedProjects$ = this.dataService.select('Project').entities$.pipe(
-    //   dataFilter([
-    //     {fieldPath: 'state', opStr: '==', value: 'finished'},
-    //     {fieldPath: 'group', opStr: '==', value: 'GS1'},
-    //   ])
-    // );
+  constructor(private router: Router, private dataService: DataService) {
     this.activeProjects$ = of([]);
     this.otherProjects$ = of([]);
     this.inactiveProjects$ = of([]);
@@ -124,6 +84,7 @@ export class ProjectListComponent implements OnInit {
           {fieldPath: 'state', opStr: '==', value: 'active'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
         ]),
+        delay(0),
         tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
@@ -131,6 +92,7 @@ export class ProjectListComponent implements OnInit {
         .select('Project')
         .entities$.pipe(
           dataFilter({fieldPath: 'group', opStr: '==', value: undefined}),
+          delay(0),
           tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
         );
 
@@ -139,6 +101,7 @@ export class ProjectListComponent implements OnInit {
           {fieldPath: 'state', opStr: '==', value: 'inactive'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
         ]),
+        delay(0),
         tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
@@ -147,6 +110,7 @@ export class ProjectListComponent implements OnInit {
           {fieldPath: 'state', opStr: '==', value: 'finished'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
         ]),
+        delay(0),
         tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
@@ -158,6 +122,7 @@ export class ProjectListComponent implements OnInit {
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
           {fieldPath: 'type', opStr: '==', value: type},
         ]),
+        delay(0),
         tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
@@ -166,6 +131,7 @@ export class ProjectListComponent implements OnInit {
           {fieldPath: 'group', opStr: '==', value: undefined},
           {fieldPath: 'type', opStr: '==', value: type},
         ]),
+        delay(0),
         tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
@@ -175,6 +141,7 @@ export class ProjectListComponent implements OnInit {
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
           {fieldPath: 'type', opStr: '==', value: type},
         ]),
+        delay(0),
         tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
@@ -184,11 +151,11 @@ export class ProjectListComponent implements OnInit {
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
           {fieldPath: 'type', opStr: '==', value: type},
         ]),
+        delay(0),
         tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
       this.filterByTypeSelected = type;
     }
-    this.changeDetectorRef.detectChanges();
   }
   ngOnInit(): void {
     this.filterByType();

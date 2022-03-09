@@ -13,6 +13,7 @@ import {delay, map, tap} from 'rxjs/operators';
 import {RequestIfTrueDialogComponent} from '../../../../components/request-if-true-dialog/request-if-true-dialog.component';
 import {Group} from '../../../../models/group.model';
 import {GroupAddActivityDialogComponent} from './components/group-add-activity-dialog/group-add-activity-dialog.component';
+// eslint-disable-next-line max-len
 import {GroupAddAdditionalInfoDialogComponent} from './components/group-add-additional-info-dialog/group-add-additional-info-dialog.component';
 import {GroupAddEmailDialogComponent} from './components/group-add-email-dialog/group-add-email-dialog.component';
 import {GroupAddLocationDialogComponent} from './components/group-add-location-dialog/group-add-location-dialog.component';

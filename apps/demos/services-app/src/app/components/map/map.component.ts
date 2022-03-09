@@ -1,4 +1,4 @@
-import {coerceArray, coerceNumberProperty} from '@angular/cdk/coercion';
+import {coerceArray, coerceBooleanProperty, coerceNumberProperty} from '@angular/cdk/coercion';
 import {
   AfterViewInit,
   Component,
@@ -218,6 +218,7 @@ export class MapComponent implements AfterViewInit {
       this.clusterCircles.getSource().clear();
       this.clusterCircles.setSource(clusterSource);
       this.clusterCircles.changed();
+      this.fitToFeaturesExtent(features);
       this.updateMap();
     } else {
       if (this.map) {
@@ -242,11 +243,34 @@ export class MapComponent implements AfterViewInit {
         this.map.addLayer(this.clusterHulls);
         this.map.addLayer(this.clusters);
         this.map.addLayer(this.clusterCircles);
+        this.fitToFeaturesExtent(features);
         this.updateMap();
       }
     }
   }
-
+  private isValidExtent(extent: number[]): boolean {
+    return (
+      coerceBooleanProperty(coerceNumberProperty(extent[0])) &&
+      coerceBooleanProperty(coerceNumberProperty(extent[1])) &&
+      coerceBooleanProperty(coerceNumberProperty(extent[2])) &&
+      coerceBooleanProperty(coerceNumberProperty(extent[3]))
+    );
+  }
+  public fitToFeaturesExtent(features: any) {
+    // Calculate the extent of the cluster members.
+    const extent = createEmpty();
+    features.forEach((feature: Feature<any>) => extend(extent, feature.getGeometry().getExtent()));
+    const view = this.map.getView();
+    // Zoom to the extent of the cluster members.
+    if (features.length > 0 && this.isValidExtent(extent)) {
+      if (features.length > 1) {
+        view.fit(extent, {duration: 500, padding: [50, 50, 50, 50]});
+      } else {
+        view.fit(extent, {duration: 0, padding: [50, 50, 50, 50]});
+        view.setZoom(15);
+      }
+    }
+  }
   ngAfterViewInit(): void {
     this.overlay = new Overlay({
       element: document.getElementById('overlayClick') as HTMLElement,
@@ -296,19 +320,8 @@ export class MapComponent implements AfterViewInit {
               extend(extent, feature.getGeometry().getExtent())
             );
             const view = this.map.getView();
-            const resolution = this.map.getView().getResolution();
-            if (
-              view.getZoom() === view.getMaxZoom() ||
-              (resolution && getWidth(extent) < resolution && getWidth(extent) < resolution)
-            ) {
-              // Show an expanded view of the cluster members.
-              this.clickFeature = features[0];
-              this.clickResolution = resolution;
-              this.clusterCircles.setStyle(this.clusterCircleStyle as any);
-            } else {
-              // Zoom to the extent of the cluster members.
-              view.fit(extent, {duration: 500, padding: [50, 50, 50, 50]});
-            }
+            // Zoom to the extent of the cluster members.
+            view.fit(extent, {duration: 500, padding: [50, 50, 50, 50]});
           } else {
             this.tooltipContext = {...(clusterMembers[0] as Feature<any>).getProperties()};
             const coordinate = event.coordinate;

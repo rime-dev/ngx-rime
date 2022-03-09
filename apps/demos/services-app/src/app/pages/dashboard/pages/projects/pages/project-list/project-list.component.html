@@ -97,7 +97,6 @@
     <rng-map
       #map
       class="grid w-full h-full rounded-2xl overflow-hidden"
-      [center]="center"
       [data]="points$ | async"
       [overlayClickTemplate]="mapClickTemplate"
     ></rng-map>
@@ -149,13 +148,13 @@
       </button>
       <button
         mat-button
-        [ngClass]="filterByTypeSelected === 'paint' ? 'mat-raised-button' : 'mat-stroked-button'"
+        [ngClass]="filterByTypeSelected === 'painting' ? 'mat-raised-button' : 'mat-stroked-button'"
         class="mx-2 font-thin min-w-min dark:text-white"
         color="primary"
-        (click)="filterByType('paint')"
+        (click)="filterByType('painting')"
       >
         <mat-icon class="text-lg">format_paint</mat-icon>
-        <span>{{ 'paint' | transloco }}</span>
+        <span>{{ 'painting' | transloco }}</span>
       </button>
       <button
         mat-button
