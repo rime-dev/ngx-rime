@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <h1 mat-dialog-title>Factura</h1>
+  <h1 mat-dialog-title>{{ 'invoice' | transloco }}</h1>
   <button mat-icon-button class="absolute top-0 right-0" [mat-dialog-close]="false" cdkFocusInitial>
     <mat-icon>close</mat-icon>
   </button>
@@ -12,11 +12,11 @@
       ></rng-storage-uploader>
       <div class="flex flex-col pt-2">
         <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Añade un título</mat-label>
+          <mat-label>{{ 'form.addTitle' | transloco }}</mat-label>
           <input matInput #titleInput formControlName="title" required />
         </mat-form-field>
         <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Añade una descripción opcional</mat-label>
+          <mat-label>{{ 'form.addDescription' | transloco }}</mat-label>
           <textarea
             matInput
             #descriptionInput
@@ -30,11 +30,11 @@
     <div class="flex flex-col">
       <div class="grid gap-2 grid-cols-1 md:grid-cols-2">
         <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Coste</mat-label>
+          <mat-label>{{ 'cost' | transloco }}</mat-label>
           <input matInput #costInput type="number" formControlName="cost" required />
         </mat-form-field>
         <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Impuestos</mat-label>
+          <mat-label>{{ 'taxes' | transloco }}</mat-label>
           <input
             matInput
             #taxesInput
@@ -49,7 +49,7 @@
       </div>
       <div class="flex flex-col">
         <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Proyecto</mat-label>
+          <mat-label>{{ 'project' | transloco }}</mat-label>
           <mat-select formControlName="project" required>
             <mat-option *ngFor="let project of projects$ | async" [value]="project.id">{{
               project.data.title

@@ -9,7 +9,7 @@
         overflow-hidden overflow-ellipsis
         whitespace-nowrap
       "
-      >Notas sobre el proyecto</span
+      >{{ 'projectNotes' | transloco }}</span
     >
     <button
       mat-icon-button
@@ -36,7 +36,7 @@
   </mat-list>
   <div *ngIf="!project.data.comments" class="flex flex-col h-48 text-center items-center">
     <div class="m-auto h-36">
-      <p class="mb-4">No hay comentarios</p>
+      <p class="mb-4">{{ 'noComments' | transloco }}</p>
       <img class="h-32 w-full" src="assets/undraw_not_found_-60-pq.svg" />
     </div>
   </div>

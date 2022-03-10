@@ -4,21 +4,21 @@
   </button>
   <h1 mat-dialog-title class="m-0 ml-2 flex flex-row items-center cursor-pointer">
     <mat-icon class="mr-2">admin_panel_settings</mat-icon>
-    Ubicación
+    {{ 'location' | transloco }}
   </h1>
 </div>
 <div mat-dialog-content class="flex flex-col md:w-96">
   <mat-form-field appearance="outline">
-    <mat-label>Dirección</mat-label>
+    <mat-label>{{ 'address' | transloco }}</mat-label>
     <input #textInput matInput [value]="group.data.location.text" />
   </mat-form-field>
   <mat-form-field appearance="outline">
-    <mat-label>Longitud</mat-label>
+    <mat-label>{{ 'longitude' | transloco }}</mat-label>
 
     <input #longitudeInput matInput [value]="group.data.location.coordinates[0]" />
   </mat-form-field>
   <mat-form-field appearance="outline">
-    <mat-label>Latitud</mat-label>
+    <mat-label>{{ 'latitude' | transloco }}</mat-label>
 
     <input #latitudeInput matInput [value]="group.data.location.coordinates[1]" />
   </mat-form-field>

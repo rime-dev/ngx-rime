@@ -1,11 +1,11 @@
-<h1 mat-dialog-title>Añadir comentario</h1>
+<h1 mat-dialog-title>{{ 'addComment' | transloco }}</h1>
 <div mat-dialog-content class="flex flex-col md:w-96">
   <mat-form-field appearance="outline">
-    <mat-label>Título</mat-label>
+    <mat-label>{{ 'title' | transloco }}</mat-label>
     <input #titleInput matInput />
   </mat-form-field>
   <mat-form-field appearance="outline">
-    <mat-label>Descripción</mat-label>
+    <mat-label>{{ 'description' | transloco }}</mat-label>
     <textarea #descriptionInput matInput></textarea>
   </mat-form-field>
 </div>

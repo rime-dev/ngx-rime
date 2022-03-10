@@ -34,42 +34,42 @@
 
 <ng-template #officeTemplate>
   <div class="mb-6" *ngIf="group$ | async; let group">
-    <h1 class="text-xl font-medium my-6">Información principal</h1>
+    <h1 class="text-xl font-medium my-6">{{ 'mainInformation' | transloco }}</h1>
     <mat-card class="mat-elevation-z3 rounded-lg">
       <mat-card-content class="flex flex-col">
         <div class="flex flex-col md:flex-row w-full">
           <div class="w-full md:w-1/2">
             <mat-action-list>
               <div>
-                <h3 matSubheader>Nombre</h3>
+                <h3 matSubheader>{{ 'name' | transloco }}</h3>
                 <button mat-list-item (click)="changeName(group)">
                   {{ group.data.name }}
                 </button>
               </div>
 
               <div>
-                <h3 matSubheader>Email</h3>
+                <h3 matSubheader>{{ 'email' | transloco }}</h3>
                 <button mat-list-item (click)="changeEmail(group)">
                   {{ group.data.email }}
                 </button>
               </div>
 
               <div>
-                <h3 matSubheader>Teléfono</h3>
+                <h3 matSubheader>{{ 'phone' | transloco }}</h3>
                 <button mat-list-item (click)="changePhone(group)">
                   {{ group.data.phone }}
                 </button>
               </div>
 
               <div>
-                <h3 matSubheader>Web</h3>
+                <h3 matSubheader>{{ 'web' | transloco }}</h3>
                 <button mat-list-item (click)="changeWeb(group)">
                   {{ group.data.web }}
                 </button>
               </div>
 
               <div>
-                <h3 matSubheader>NIF</h3>
+                <h3 matSubheader>{{ 'idcard' | transloco }}</h3>
                 <button mat-list-item (click)="changeNif(group)">
                   {{ group.data.nif }}
                 </button>
@@ -79,16 +79,16 @@
           <div class="w-full md:w-1/2">
             <mat-action-list class="grid group">
               <h3 matSubheader>
-                Logo
+                {{ 'logo' | transloco }}
                 <button mat-icon-button class="ml-auto" [matMenuTriggerFor]="logoMenu">
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #logoMenu="matMenu">
                   <button mat-menu-item (click)="addLogo(group)">
-                    <mat-icon>add_photo_alternate</mat-icon>Subir imagen
+                    <mat-icon>add_photo_alternate</mat-icon>{{ 'image.upload' | transloco }}
                   </button>
                   <button mat-menu-item (click)="removeLogo(group)">
-                    <mat-icon>delete</mat-icon>Eliminar imagen
+                    <mat-icon>delete</mat-icon>{{ 'image.delete' | transloco }}
                   </button>
                 </mat-menu>
               </h3>
@@ -124,7 +124,7 @@
 
             <mat-list>
               <h3 matSubheader>
-                Actividades
+                {{ 'activities' | transloco }}
                 <button mat-icon-button class="ml-auto" (click)="changeActivity(group)">
                   <mat-icon color="primary">edit</mat-icon>
                 </button>
@@ -145,19 +145,19 @@
       </mat-card-content>
     </mat-card>
     <div class="flex flex-row items-center w-full">
-      <h1 class="text-xl font-medium my-6">Información adicional</h1>
+      <h1 class="text-xl font-medium my-6">{{ 'addtionalInformation' | transloco }}</h1>
       <button mat-icon-button class="ml-auto" [matMenuTriggerFor]="menuAdditionalInformation">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menuAdditionalInformation="matMenu">
         <button mat-menu-item (click)="addAdditionalInfo(group)">
-          <mat-icon>add</mat-icon>Añadir
+          <mat-icon>add</mat-icon>{{ 'actions.add' | transloco }}
         </button>
       </mat-menu>
     </div>
     <mat-card class="mat-elevation-z3 rounded-lg">
       <mat-action-list class="w-full" *ngFor="let info of group.data.additionalInfo; let i = index">
-        <h3 matSubheader>Texto {{ i + 1 }}</h3>
+        <h3 matSubheader>{{ 'text' | transloco }} {{ i + 1 }}</h3>
         <mat-list-item class="h-auto mb-2" (click)="changeAdditionalInfo(group, info, i)">
           <mat-icon mat-list-icon>description</mat-icon>
           <span class="py-4"> {{ info }}</span>
@@ -165,26 +165,26 @@
       </mat-action-list>
     </mat-card>
     <div class="flex flex-row items-center w-full">
-      <h1 class="text-xl font-medium my-6">Ubicación</h1>
+      <h1 class="text-xl font-medium my-6">{{ 'location' | transloco }}</h1>
       <button mat-icon-button class="ml-auto" [matMenuTriggerFor]="menuLocation">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menuLocation="matMenu">
         <button mat-menu-item (click)="changeLocation(group)">
-          <mat-icon>edit</mat-icon>Editar
+          <mat-icon>edit</mat-icon>{{ 'actions.edit' | transloco }}
         </button>
       </mat-menu>
     </div>
     <mat-card class="mat-elevation-z3 rounded-lg">
       <mat-action-list class="w-full">
-        <h3 matSubheader>Dirección</h3>
+        <h3 matSubheader>{{ 'address' | transloco }}</h3>
         <mat-list-item class="h-auto mb-2" (click)="changeLocation(group)">
           <mat-icon mat-list-icon>place</mat-icon>
           <span class="py-4"> {{ group.data.location.text }}</span>
         </mat-list-item>
       </mat-action-list>
       <mat-list class="w-full">
-        <h3 matSubheader>Mapa</h3>
+        <h3 matSubheader>{{ 'map' | transloco }}</h3>
       </mat-list>
       <rng-map
         #map

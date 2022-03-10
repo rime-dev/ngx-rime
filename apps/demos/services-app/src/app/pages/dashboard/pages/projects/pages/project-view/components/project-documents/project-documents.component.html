@@ -9,7 +9,7 @@
         overflow-hidden overflow-ellipsis
         whitespace-nowrap
       "
-      >Documentos del proyecto</span
+      >{{ 'projectDocuments' | transloco }}</span
     >
 
     <button mat-icon-button *ngIf="project.data.group" class="ml-auto" (click)="addDocument()">
@@ -18,7 +18,7 @@
   </div>
   <div class="flex flex-row w-full" *ngIf="project.data.group">
     <mat-form-field class="w-full max-w-md" appearance="fill">
-      <mat-label>Buscar documentos</mat-label>
+      <mat-label>{{ 'searchDocuments' | transloco }}</mat-label>
       <input
         #documentsInput
         type="searc"

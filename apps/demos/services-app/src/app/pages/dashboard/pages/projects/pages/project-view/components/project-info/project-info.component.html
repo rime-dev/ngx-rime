@@ -7,7 +7,7 @@
         }}</span>
         <div class="flex flex-row">
           <div *ngIf="(users$ | async)?.length === 0" class="self-center text-sm">
-            <span>Añadir colaboradores</span>
+            <span>{{ 'addCollaborators' | transloco }}</span>
           </div>
           <div class="group flex flex-row relative" *ngFor="let user of users$ | async">
             <img
