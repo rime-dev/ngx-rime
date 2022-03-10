@@ -5,7 +5,7 @@ import {TranslocoService} from '@ngneat/transloco';
 import {AuthService, User} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
-import {UserInfo} from '@rng/ui/user-account-popup';
+import {Routes, UserInfo} from '@rng/ui/user-account-popup';
 import {log$} from 'apps/demos/services-app/src/app/decorators/log.decorator';
 import {Observable, Subject} from 'rxjs';
 import {filter, map, takeUntil, tap} from 'rxjs/operators';
@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     alt: 'RNG APP',
   };
   topRoutes = [];
-  sideRoutes;
+  sideRoutes: Routes[];
   userRoutes = [
     {
       click: () => {
@@ -210,7 +210,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
   private getTitlePage(url: string) {
     const pathMatch = this.sideRoutes.filter((route: any) => url.includes(route.path))[0];
-    if (pathMatch) {
+    if (pathMatch && pathMatch.text) {
       this.titlePage = pathMatch.text;
     }
   }

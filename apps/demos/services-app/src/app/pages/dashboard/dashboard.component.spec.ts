@@ -3,6 +3,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {RouterTestingModule} from '@angular/router/testing';
+import {AuthModule} from '@rng/data-access/auth';
 import {DashboardComponent} from './dashboard.component';
 
 describe('DashboardComponent', () => {
@@ -12,7 +13,7 @@ describe('DashboardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DashboardComponent],
-      imports: [RouterTestingModule, MatButtonModule, MatToolbarModule, MatCardModule],
+      imports: [RouterTestingModule, AuthModule, MatButtonModule, MatToolbarModule, MatCardModule],
     }).compileComponents();
   });
 

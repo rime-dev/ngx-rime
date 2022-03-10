@@ -9,6 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {AuthModule} from '@rng/data-access/auth';
 import {ShellModule} from '@rng/ui/shell';
 import {UserAccountPopupModule} from '@rng/ui/user-account-popup';
 import {SearchInputModule} from '../../components/search-input/search-input.module';
@@ -33,6 +34,7 @@ import {DashboardComponent} from './dashboard.component';
     ShellModule,
     UserAccountPopupModule,
     MatSnackBarModule,
+    AuthModule,
     SearchInputModule,
     ThemeSwitcherModule,
   ],

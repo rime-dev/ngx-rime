@@ -11,7 +11,6 @@ import {MatListModule} from '@angular/material/list';
 import {RouterModule} from '@angular/router';
 import {TranslocoModule} from '@ngneat/transloco';
 import {ProjectTypeModule} from '../../pipes/project-type/project-type.module';
-import {ProjectTypePipe} from '../../pipes/project-type/project-type.pipe';
 import {SearchInputComponent} from './search-input.component';
 
 @NgModule({

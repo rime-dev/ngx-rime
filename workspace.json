@@ -44,106 +44,8 @@
             ]
           }
         }
-      }
-    },
-    "services-app": {
-      "projectType": "application",
-      "root": "apps/demos/services-app",
-      "sourceRoot": "apps/demos/services-app/src",
-      "prefix": "rng",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
-          "options": {
-            "outputPath": "dist/apps/demos/services-app",
-            "index": "apps/demos/services-app/src/index.html",
-            "main": "apps/demos/services-app/src/main.ts",
-            "polyfills": "apps/demos/services-app/src/polyfills.ts",
-            "tsConfig": "apps/demos/services-app/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/demos/services-app/src/favicon.ico",
-              "apps/demos/services-app/src/assets"
-            ],
-            "styles": [
-              "apps/demos/services-app/src/styles.scss"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "apps/demos/services-app/src/environments/environment.ts",
-                  "with": "apps/demos/services-app/src/environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "services-app:build:production"
-            },
-            "development": {
-              "browserTarget": "services-app:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "services-app:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/demos/services-app/src/**/*.ts",
-              "apps/demos/services-app/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/demos/services-app"
-          ],
-          "options": {
-            "jestConfig": "apps/demos/services-app/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
+      },
+      "tags": []
     },
     "feature": {
       "projectType": "library",
@@ -188,7 +90,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": []
     },
     "quiz-app": {
       "projectType": "application",
@@ -287,7 +190,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "rng-app": {
       "projectType": "application",
@@ -386,7 +290,108 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
+    },
+    "services-app": {
+      "projectType": "application",
+      "root": "apps/demos/services-app",
+      "sourceRoot": "apps/demos/services-app/src",
+      "prefix": "rng",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/demos/services-app",
+            "index": "apps/demos/services-app/src/index.html",
+            "main": "apps/demos/services-app/src/main.ts",
+            "polyfills": "apps/demos/services-app/src/polyfills.ts",
+            "tsConfig": "apps/demos/services-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/demos/services-app/src/favicon.ico",
+              "apps/demos/services-app/src/assets"
+            ],
+            "styles": [
+              "apps/demos/services-app/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "5kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/demos/services-app/src/environments/environment.ts",
+                  "with": "apps/demos/services-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "services-app:build:production"
+            },
+            "development": {
+              "browserTarget": "services-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "services-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/demos/services-app/src/**/*.ts",
+              "apps/demos/services-app/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/demos/services-app"
+          ],
+          "options": {
+            "jestConfig": "apps/demos/services-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     },
     "task-app": {
       "projectType": "application",
@@ -485,7 +490,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "ui": {
       "projectType": "library",
@@ -537,7 +543,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/ui/.storybook"
-            }
+            },
+            "projectBuildConfig": "ui:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -555,7 +562,8 @@
             "outputPath": "dist/storybook/ui",
             "config": {
               "configFolder": "libs/ui/.storybook"
-            }
+            },
+            "projectBuildConfig": "ui:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -563,7 +571,8 @@
             }
           }
         }
-      }
+      },
+      "tags": []
     },
     "util": {
       "projectType": "library",
@@ -615,7 +624,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/util/.storybook"
-            }
+            },
+            "projectBuildConfig": "util:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -633,7 +643,8 @@
             "outputPath": "dist/storybook/util",
             "config": {
               "configFolder": "libs/util/.storybook"
-            }
+            },
+            "projectBuildConfig": "util:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -641,39 +652,8 @@
             }
           }
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular",
-    "packageManager": "npm"
-  },
-  "schematics": {
-    "@nrwl/angular": {
-      "application": {
-        "linter": "eslint"
       },
-      "library": {
-        "linter": "eslint"
-      },
-      "storybook-configuration": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/angular:application": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:component": {
-      "style": "scss"
+      "tags": []
     }
-  },
-  "defaultProject": "rng-app"
+  }
 }

@@ -9,7 +9,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {TranslocoRootModule} from './transloco-root.module';
 
-const firebaseConfig = {
+export const firebaseConfig = {
   options: environment.firebaseOptions,
   entityConfig: environment.firebaseEntityConfig,
 };

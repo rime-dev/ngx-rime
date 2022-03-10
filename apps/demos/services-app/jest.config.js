@@ -1,6 +1,7 @@
 module.exports = {
   displayName: 'services-app',
   preset: '../../../jest.preset.js',
+  extensionsToTreatAsEsm: ['.ts'],
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -10,11 +11,12 @@ module.exports = {
   },
   coverageDirectory: '../../../coverage/apps/demos/services-app',
   transform: {
-    '^.+\\.(ts|js|html)$': 'jest-preset-angular',
+    '^.+.(ts|js|mjs|html)$': 'jest-preset-angular'
   },
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',
     'jest-preset-angular/build/serializers/html-comment',
   ],
+  transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
 };

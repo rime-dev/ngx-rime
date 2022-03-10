@@ -3,19 +3,18 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import {AngularFireModule, FIREBASE_OPTIONS} from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFirestoreModule, ENABLE_PERSISTENCE} from '@angular/fire/compat/firestore';
-import {
-  DefaultDataServiceFactory,
-  EntityDataModule,
-  ENTITY_METADATA_TOKEN,
-  PLURAL_NAMES_TOKEN,
-} from '@ngrx/data';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {ENTITY_CONFIG} from './constants/base.constant';
 import {FirebaseConfig} from './models/base.model';
 import {FireDataMockServiceFactory, FireDataServiceFactory} from './services/fire-data.service';
-
+import {
+  DefaultDataServiceFactory,
+  EntityDataModule,
+  ENTITY_METADATA_TOKEN,
+  PLURAL_NAMES_TOKEN,
+} from '@ngrx/data';
 /**
  * entity-data main module includes Firebase data services
  * Configure with `firebase`.
@@ -36,6 +35,7 @@ import {FireDataMockServiceFactory, FireDataServiceFactory} from './services/fir
     AngularFirestoreModule,
   ],
   providers: [{provide: DefaultDataServiceFactory, useClass: FireDataServiceFactory}],
+  exports: [StoreModule],
 })
 export class BaseModule {
   static firebase(firebaseConfig: FirebaseConfig): ModuleWithProviders<BaseModule> {
@@ -88,6 +88,7 @@ export class BaseModule {
     AngularFirestoreModule,
   ],
   providers: [{provide: DefaultDataServiceFactory, useClass: FireDataMockServiceFactory}],
+  exports: [StoreModule],
 })
 export class BaseMockModule {
   static firebase(firebaseConfig: FirebaseConfig): ModuleWithProviders<BaseMockModule> {
