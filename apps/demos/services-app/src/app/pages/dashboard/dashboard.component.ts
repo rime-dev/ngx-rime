@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {NavigationEnd, Router} from '@angular/router';
+import {TranslocoService} from '@ngneat/transloco';
 import {AuthService, User} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
@@ -21,33 +22,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     alt: 'RNG APP',
   };
   topRoutes = [];
-  sideRoutes = [
-    {
-      path: '/dashboard/home',
-      text: 'Inicio',
-      icon: 'home',
-    },
-    {
-      path: '/dashboard/projects',
-      text: 'Proyectos',
-      icon: 'work',
-    },
-    {
-      path: '/dashboard/invoices',
-      text: 'Facturas',
-      icon: 'receipt_long',
-    },
-    {
-      path: '/dashboard/management',
-      text: 'Administración',
-      icon: 'admin_panel_settings',
-    },
-    // {
-    //   path: '/dashboard/reports',
-    //   text: 'Informes',
-    //   icon: 'analytics',
-    // },
-  ];
+  sideRoutes;
   userRoutes = [
     {
       click: () => {
@@ -71,8 +46,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private dataService: DataService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private translocoService: TranslocoService
   ) {
+    this.sideRoutes = [
+      {
+        path: '/dashboard/home',
+        text: this.translocoService.translate('home'),
+        icon: 'home',
+      },
+      {
+        path: '/dashboard/projects',
+        text: this.translocoService.translate('projects'),
+        icon: 'work',
+      },
+      {
+        path: '/dashboard/invoices',
+        text: this.translocoService.translate('invoices'),
+        icon: 'receipt_long',
+      },
+      {
+        path: '/dashboard/management',
+        text: this.translocoService.translate('management'),
+        icon: 'admin_panel_settings',
+      },
+    ];
     this.userAuth$ = this.authService.user$;
     this.userAuth$
       .pipe(
