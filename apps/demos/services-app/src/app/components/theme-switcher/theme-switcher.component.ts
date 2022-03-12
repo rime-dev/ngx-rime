@@ -13,7 +13,9 @@ export class ThemeSwitcherComponent implements OnInit {
     const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
     if (
       localStorage.getItem('theme') === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      (!('theme' in localStorage) &&
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
       themeToggleDarkIcon?.classList.remove('hidden');
     } else {

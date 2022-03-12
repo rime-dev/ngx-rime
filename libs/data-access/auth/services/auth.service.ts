@@ -5,7 +5,6 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/f
 import {Router} from '@angular/router';
 import firebase from 'firebase/compat';
 import {BehaviorSubject, Subject} from 'rxjs';
-import {take, tap} from 'rxjs/operators';
 import {User} from '../models/auth.model';
 
 @Injectable({providedIn: 'root'})

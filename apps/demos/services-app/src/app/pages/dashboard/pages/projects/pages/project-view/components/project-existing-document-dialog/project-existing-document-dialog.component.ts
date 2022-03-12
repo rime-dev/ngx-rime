@@ -77,7 +77,6 @@ export class ProjectExistingDocumentDialogComponent {
       element.click();
       document.body.removeChild(element);
     } catch (e) {
-      console.error(e);
       window.open(this.document.url);
     }
   }

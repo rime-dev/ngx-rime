@@ -35,8 +35,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public hasSidenav = true;
   private destroy$: Subject<void> = new Subject();
-  @log$ public userAuth$: Observable<User | null>;
-  @log$ public user$!: Observable<UserInfo>;
+  public userAuth$: Observable<User | null>;
+  public user$!: Observable<UserInfo>;
   showLoginButton = false;
   showLogoutButton = false;
   showTitlePage = false;

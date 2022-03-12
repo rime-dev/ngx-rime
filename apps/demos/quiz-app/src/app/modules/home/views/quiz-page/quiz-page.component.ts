@@ -24,9 +24,7 @@ export class QuizPageComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute
   ) {}
 
-  onFinalized(event: boolean): void {
-    console.log(event);
-  }
+  onFinalized(event: boolean): void {}
   onClosed(event: any) {
     this.router.navigate(['/']);
   }
@@ -66,7 +64,7 @@ export class QuizPageComponent implements OnInit, OnDestroy {
         tap({next: (value: any) => (this.questions = value)}),
         takeUntil(this.destroy$)
       )
-      .subscribe(console.log);
+      .subscribe();
   }
   ngOnDestroy(): void {
     this.destroy$.next();

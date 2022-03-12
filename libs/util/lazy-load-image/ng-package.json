@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/libs/util/lazy-load-image",
+  "lib": {
+    "entryFile": "./index.ts"
+  }
+}

@@ -10,9 +10,14 @@ import {
   TranslocoModule,
   TRANSLOCO_CONFIG,
   TRANSLOCO_LOADER,
+  TranslocoTestingModule,
+  TranslocoTestingOptions,
 } from '@ngneat/transloco';
+
 import {DateFormatStyles, TranslocoLocaleModule} from '@ngneat/transloco-locale';
 import {environment} from '../environments/environment';
+import en from '../assets/i18n/en.json';
+import es from '../assets/i18n/es.json';
 
 registerLocaleData(localeEs, 'es');
 registerLocaleData(localeEn, 'en');
@@ -46,6 +51,13 @@ const localeToCurrencyMapping = {
   'es-EN': 'USD',
 };
 
+const translocoConfiguration = {
+  availableLangs: ['es', 'en'],
+  defaultLang: 'es',
+  reRenderOnLangChange: true,
+  fallbackLang: 'es',
+  prodMode: environment.production,
+};
 @NgModule({
   imports: [
     TranslocoLocaleModule.forRoot({
@@ -68,14 +80,18 @@ const localeToCurrencyMapping = {
   providers: [
     {
       provide: TRANSLOCO_CONFIG,
-      useValue: translocoConfig({
-        availableLangs: ['es', 'en'],
-        defaultLang: 'es',
-        reRenderOnLangChange: true,
-        prodMode: environment.production,
-      }),
+      useValue: translocoConfig(translocoConfiguration),
     },
     {provide: TRANSLOCO_LOADER, useClass: TranslocoHttpLoader},
   ],
 })
 export class TranslocoRootModule {}
+
+export function getTranslocoModule(options: TranslocoTestingOptions = {}) {
+  return TranslocoTestingModule.forRoot({
+    langs: {en, es},
+    translocoConfig: translocoConfiguration,
+    preloadLangs: true,
+    ...options,
+  });
+}
