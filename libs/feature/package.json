@@ -1,0 +1,8 @@
+{
+  "name": "@rng/feature",
+  "version": "0.0.0",
+  "description": "Common utilities",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

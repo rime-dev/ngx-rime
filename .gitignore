@@ -50,3 +50,5 @@ package-lock.json
 
 **/environment.ts
 **/environment.prod.ts
+
+.angular

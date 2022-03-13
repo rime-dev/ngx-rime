@@ -26,31 +26,6 @@ export function initAuthRouter(router: Router) {
   router.config.unshift(...routes);
   return () => Promise.resolve();
 }
-@NgModule({
-  declarations: [SignInComponent, SignUpComponent, ForgotPasswordComponent, VerifyEmailComponent],
-  imports: [
-    CommonModule,
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatIconModule,
-  ],
-  providers: [
-    AuthService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initAuthRouter,
-      deps: [Router],
-      multi: true,
-    },
-  ],
-})
-export class AuthModule {}
 
 @NgModule({
   declarations: [SignInComponent, SignUpComponent, ForgotPasswordComponent, VerifyEmailComponent],
@@ -64,6 +39,26 @@ export class AuthModule {}
     MatDividerModule,
     MatIconModule,
   ],
+  exports: [SignInComponent, SignUpComponent, ForgotPasswordComponent, VerifyEmailComponent],
+})
+export class AuthComponentsModule {}
+
+@NgModule({
+  imports: [CommonModule, AuthComponentsModule, AngularFireAuthModule, AngularFirestoreModule],
+  providers: [
+    AuthService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initAuthRouter,
+      deps: [Router],
+      multi: true,
+    },
+  ],
+})
+export class AuthModule {}
+
+@NgModule({
+  imports: [CommonModule, AuthComponentsModule],
   providers: [
     {
       provide: AuthService,
