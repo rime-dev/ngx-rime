@@ -9,21 +9,26 @@ export class DropzoneDirective {
   @Output() hovered = new EventEmitter<boolean>();
 
   @HostListener('drop', ['$event'])
-  onDrop($event: any) {
-    $event.preventDefault();
-    this.dropped.emit($event.dataTransfer.files);
-    this.hovered.emit(false);
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (event.dataTransfer) {
+      this.dropped.emit(event.dataTransfer.files);
+      this.hovered.emit(false);
+    }
   }
 
   @HostListener('dragover', ['$event'])
-  onDragOver($event: any) {
-    $event.preventDefault();
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
     this.hovered.emit(true);
   }
 
   @HostListener('dragleave', ['$event'])
-  onDragLeave($event: any) {
-    $event.preventDefault();
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
     this.hovered.emit(false);
   }
 }

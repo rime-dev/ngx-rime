@@ -6,7 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {LangDefinition, TranslocoModule, TranslocoService} from '@ngneat/transloco';
+import {LangDefinition, Translation, TranslocoModule, TranslocoService} from '@ngneat/transloco';
 import {SatinizeModule} from '@rng/util/satinize';
 import {StorageUploadTaskComponent} from './components/storage-upload-task/storage-upload-task.component';
 import {
@@ -49,7 +49,7 @@ export class StorageModule {
   constructor(translocoService: TranslocoService) {
     translocoService.getAvailableLangs().forEach((lang) => {
       const language: string = (lang as LangDefinition).id || (lang as string);
-      const translation = (i18n as any)[language];
+      const translation = (i18n as Record<string, Translation>)[language];
       translocoService.setTranslation(translation, 'rngStorageUploader/' + language);
     });
   }
@@ -71,7 +71,6 @@ export class StorageModule {
   providers: [{provide: StorageUploadTaskService, useClass: StorageUploadTaskMockService}],
 })
 export class StorageMockModule {
-  constructor() {}
   static firebase(): ModuleWithProviders<StorageMockModule> {
     return {
       ngModule: StorageMockModule,
