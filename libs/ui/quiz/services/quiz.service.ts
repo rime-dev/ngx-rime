@@ -6,7 +6,6 @@ import {Question, QuizMode} from '../models/quiz.model';
 export class QuizService {
   private mode$: BehaviorSubject<QuizMode> = new BehaviorSubject<QuizMode>('exam');
   private questions$: BehaviorSubject<Question[]> = new BehaviorSubject<Question[]>([]);
-  constructor() {}
   getMode(): QuizMode {
     return this.mode$.value;
   }

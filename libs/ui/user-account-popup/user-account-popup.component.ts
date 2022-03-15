@@ -42,8 +42,7 @@ export class UserAccountPopupComponent {
     return this._userInfo;
   }
   private _userInfo!: UserInfo | null;
-  constructor() {}
-  handleClickEvent(event: any) {
+  handleClickEvent(event: () => void) {
     event();
   }
 }

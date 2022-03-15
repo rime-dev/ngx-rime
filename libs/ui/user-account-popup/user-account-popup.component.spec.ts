@@ -1,5 +1,4 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {UserAccountPopupComponent} from './user-account-popup.component';
 import {UserAccountPopupModule} from './user-account-popup.module';
 

@@ -136,9 +136,9 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
   }
   private _hasSidenav = false;
 
-  @Input() scrolled: Record<string, any> = {};
-  @Output() scrolledChange: EventEmitter<Record<string, any>> = new EventEmitter<
-    Record<string, any>
+  @Input() scrolled: Record<string, unknown> = {};
+  @Output() scrolledChange: EventEmitter<Record<string, unknown>> = new EventEmitter<
+    Record<string, unknown>
   >();
   @ViewChild('sidenav') sidenav!: MatSidenav;
   @ViewChild('rngToolbar') rngToolbar!: ElementRef;
@@ -177,8 +177,8 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
       isScrolled: false,
     };
     if (
-      (event.target as any)?.scrollTop >
-      (this.rngToolbar as any)._elementRef.nativeElement.offsetHeight
+      (event.target as HTMLElement)?.scrollTop >
+      (this.rngToolbar.nativeElement as HTMLElement).offsetHeight
     ) {
       onScrollEvent.isScrolled = true;
     }

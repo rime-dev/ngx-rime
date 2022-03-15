@@ -1,5 +1,5 @@
 import {FocusMonitor} from '@angular/cdk/a11y';
-import {coerceArray, coerceBooleanProperty, coerceNumberProperty} from '@angular/cdk/coercion';
+import {coerceArray, coerceBooleanProperty} from '@angular/cdk/coercion';
 import {
   AfterViewInit,
   Component,
@@ -128,7 +128,7 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private focusMonitor: FocusMonitor,
-    private elementRef: ElementRef,
+    private elementRef: ElementRef<HTMLElement>,
     private quizService: QuizService
   ) {}
 
@@ -200,6 +200,6 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   private checkIfCanBeFinlized(): boolean {
     return this.questions.every(
       (question: Question) => question.response || question.response === 0
-    ) as boolean;
+    );
   }
 }
