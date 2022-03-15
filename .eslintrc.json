@@ -29,16 +29,16 @@
         "@angular-eslint/directive-selector": [
           "error",
           {
-            "type": "attribute",
-            "prefix": "m",
+            "type": ["element", "attribute"],
+            "prefix": "rng",
             "style": "kebab-case"
           }
         ],
         "@angular-eslint/component-selector": [
           "error",
           {
-            "type": "element",
-            "prefix": "m",
+            "type": ["element", "attribute"],
+            "prefix": "rng",
             "style": "kebab-case"
           }
         ],
