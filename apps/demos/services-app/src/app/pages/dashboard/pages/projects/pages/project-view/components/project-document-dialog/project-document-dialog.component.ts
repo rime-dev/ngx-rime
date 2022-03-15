@@ -23,7 +23,7 @@ export class ProjectDocumentDialogComponent {
     }
   }
 
-  onFinalize(event: Event) {
+  onFinalize(event: string[]) {
     of(event)
       .pipe(
         debounceTime(250),

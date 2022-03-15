@@ -22,7 +22,7 @@ export class GroupAddLogoDialogComponent {
     }
   }
 
-  onFinalize(event: Event) {
+  onFinalize(event: string[]) {
     of(event)
       .pipe(
         debounceTime(250),
