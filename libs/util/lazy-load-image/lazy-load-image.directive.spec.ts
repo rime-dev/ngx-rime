@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {LazyLoadImageModule} from './lazy-load-image.module';
 import {TestBed} from '@angular/core/testing';
-import {LazyLoadImageDirective} from './lazy-load-image.directive';
 import {By} from '@angular/platform-browser';
+import {LazyLoadImageDirective} from './lazy-load-image.directive';
+import {LazyLoadImageModule} from './lazy-load-image.module';
 
 @Component({
   template: `
@@ -15,14 +15,14 @@ describe('LazyLoadImageDirective', () => {
   it('should create an instance', () => {
     const element = document.createElement('img');
     element.src = 'https://github.com/rime-dev/rng/blob/main/images/rng-logo.png';
-    const directive = new LazyLoadImageDirective(element as any);
+    const directive = new LazyLoadImageDirective(element as never);
     expect(directive).toBeTruthy();
   });
 });
 
 describe('LazyLoadImageDirective in component', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       declarations: [LazyLoadImageComponent],
       imports: [LazyLoadImageModule],
     }).compileComponents();
@@ -31,7 +31,7 @@ describe('LazyLoadImageDirective in component', () => {
   it('should create an instance', () => {
     const fixture = TestBed.createComponent(LazyLoadImageComponent);
     const element = fixture.debugElement.query(By.directive(LazyLoadImageDirective));
-    expect(fixture.nativeElement.getAttribute('src')).not.toBe(
+    expect((fixture.nativeElement as HTMLElement).getAttribute('src')).not.toBe(
       'https://github.com/rime-dev/rng/blob/main/images/rng-logo.png'
     );
     fixture.detectChanges();

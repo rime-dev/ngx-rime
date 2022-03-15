@@ -4,7 +4,7 @@ export interface Routes {
   path?: string;
   icon?: string;
   text?: string;
-  click?: unknown;
+  click?: () => void;
 }
 
 export interface UserInfo {
@@ -42,7 +42,9 @@ export class UserAccountPopupComponent {
     return this._userInfo;
   }
   private _userInfo!: UserInfo | null;
-  handleClickEvent(event: () => void) {
-    event();
+  handleClickEvent(event: (() => void) | undefined) {
+    if (event) {
+      event();
+    }
   }
 }

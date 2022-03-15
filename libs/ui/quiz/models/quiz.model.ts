@@ -6,7 +6,7 @@ export class Question {
   public type: QuestionType;
   public tags: string[];
   public level: number;
-  public answer?: number | boolean;
+  public answer?: number | boolean | string;
   public response?: number;
 
   constructor(question: Question) {

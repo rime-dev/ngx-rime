@@ -15,7 +15,7 @@ export class SatinizePipe implements PipeTransform {
   constructor(protected sanitizer: DomSanitizer) {}
 
   public transform(
-    value: any,
+    value: string,
     type: string
   ): SafeHtml | SafeStyle | SafeScript | SafeUrl | SafeResourceUrl {
     switch (type) {
