@@ -12,7 +12,7 @@ export const dataFilter =
       (query as ConditionalQueryFirestore[]).map(
         (eachQuery) =>
           (source = source.pipe(
-            map((documents) => arrayFilter(documents, eachQuery as ConditionalQueryFirestore))
+            map((documents) => arrayFilter(documents, eachQuery ))
           ))
       );
     } else {

@@ -7,11 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import {
-  AngularFireStorage,
-  AngularFireStorageReference,
-  AngularFireUploadTask,
-} from '@angular/fire/compat/storage';
+import {AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/compat/storage';
 import {SafeUrl} from '@angular/platform-browser';
 import {Observable, of, Subject} from 'rxjs';
 import {finalize} from 'rxjs/operators';

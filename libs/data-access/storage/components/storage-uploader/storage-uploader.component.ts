@@ -31,12 +31,12 @@ export class StorageUploaderComponent {
   }
   private internalDocument: string | undefined;
 
-  @Output() finalize: EventEmitter<any> = new EventEmitter<any>();
+  @Output() finalize: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   /** Hidden Input file */
   @ViewChild('file', {static: false}) file!: ElementRef<HTMLInputElement>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Record<string, never>) {
     this.isHovering = false;
     this.files = [];
     this.uploadedFiles = [];

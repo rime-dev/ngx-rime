@@ -36,7 +36,7 @@ export const DataFilter =
             (eachQuery) =>
               (propertyValue = propertyValue.pipe(
                 map((documents: any) =>
-                  arrayFilter(documents, eachQuery as ConditionalQueryFirestore)
+                  arrayFilter(documents, eachQuery )
                 )
               ))
           );
@@ -44,7 +44,7 @@ export const DataFilter =
           propertyValue = value;
           (query as ConditionalQueryFirestore[]).map(
             (eachQuery) =>
-              (propertyValue = arrayFilter(propertyValue, eachQuery as ConditionalQueryFirestore))
+              (propertyValue = arrayFilter(propertyValue, eachQuery ))
           );
         }
       } else {

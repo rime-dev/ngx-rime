@@ -89,7 +89,7 @@ export class FireDataMockService<T> {
     if (uid == null) {
       err = new Error(`No "${this.entityName}" key to delete`);
     }
-    return this.execute('delete', uid, err).pipe(map((result) => uid as string));
+    return this.execute('delete', uid, err).pipe(map((result) => uid ));
   }
 
   /**

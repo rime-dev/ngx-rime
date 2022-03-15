@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {Injectable} from '@angular/core';
 import {
   AngularFireStorage,
@@ -34,9 +37,9 @@ export class StorageUploadTaskService {
 
 @Injectable()
 export class StorageUploadTaskMockService extends StorageMock implements AngularFireStorage {
-  storage!: any;
-  private path!: any;
-  private file!: any;
+  storage!: never;
+  private path!: string;
+  private file!: Blob;
 
   ref(path: string): AngularFireStorageReference {
     this.path = path;
@@ -44,11 +47,13 @@ export class StorageUploadTaskMockService extends StorageMock implements Angular
     return reference as unknown as AngularFireStorageReference;
   }
   refFromURL(path: string): AngularFireStorageReference {
-    throw new Error('Method not implemented.');
+    this.path = path;
+    const reference = new MockStorageReference(StorageUploadTaskMockService, path, undefined);
+    return reference as unknown as AngularFireStorageReference;
   }
   upload(
     path: string,
-    data: any,
+    data: Blob,
     metadata?: firebase.storage.UploadMetadata
   ): AngularFireUploadTask {
     this.file = data;
@@ -67,11 +72,11 @@ export class StorageUploadTaskMockService extends StorageMock implements Angular
 class AngularFireUploadTaskMock implements AngularFireUploadTask {
   task!: firebase.storage.UploadTask;
   path!: string;
-  data: any;
-  metadata: any;
+  data: Blob;
+  metadata?: typeof StorageUploadTaskMockService;
   public reader!: FileReader;
   public percentageSubject!: Subject<number>;
-  constructor(path: string, data: any, metadata?: any) {
+  constructor(path: string, data: Blob, metadata?: typeof StorageUploadTaskMockService) {
     this.path = path;
     this.data = data;
     this.metadata = metadata;
@@ -88,7 +93,7 @@ class AngularFireUploadTaskMock implements AngularFireUploadTask {
     };
     reader.onload = () => {
       url = String(reader.result);
-      this.metadata.setURL(url);
+      this.metadata?.setURL(url);
       this.percentageSubject.complete();
     };
   }

@@ -106,7 +106,7 @@ export class AuthTestingService implements OnDestroy {
     this.ngZone.run(() => {
       this.router.navigate(['dashboard']);
     });
-    this.setUserData(user as User);
+    this.setUserData(user );
   }
 
   /* Setting up user data when sign in with username/password,
