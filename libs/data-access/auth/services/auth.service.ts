@@ -35,12 +35,12 @@ export class AuthService implements OnDestroy {
   signIn(email: string, password: string): Promise<void> {
     return this.angularFireAuth
       .signInWithEmailAndPassword(email, password)
-      .then((result) => {
+      .then(async (result) => {
         const user = result.user as User;
         if (user) {
-          this.ngZone.run(() => {
-            this.router.navigate(['/dashboard']);
-            this.setUserData(user);
+          await this.ngZone.run(async () => {
+            await this.router.navigate(['/dashboard']);
+            await this.setUserData(user);
           });
         }
       })
@@ -53,13 +53,13 @@ export class AuthService implements OnDestroy {
   signUp(email: string, password: string) {
     return this.angularFireAuth
       .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
+      .then(async (result) => {
         const user = result.user as User;
         if (user) {
           /* Call the SendVerificaitonMail() function when new user sign
           up and returns promise */
-          this.sendVerificationMail();
-          this.setUserData(user);
+          await this.sendVerificationMail();
+          await this.setUserData(user);
         }
       })
       .catch((error) => {
@@ -71,8 +71,8 @@ export class AuthService implements OnDestroy {
   public sendVerificationMail() {
     return this.angularFireAuth.currentUser
       .then((user) => user?.sendEmailVerification())
-      .then(() => {
-        this.router.navigate(['verify-email-address']);
+      .then(async () => {
+        await this.router.navigate(['verify-email-address']);
       });
   }
 
@@ -117,12 +117,12 @@ export class AuthService implements OnDestroy {
   public authLogin(provider: firebase.auth.AuthProvider) {
     return this.angularFireAuth
       .signInWithPopup(provider)
-      .then((result) => {
+      .then(async (result) => {
         if (result.user) {
-          this.ngZone.run(() => {
-            this.router.navigate(['dashboard']);
+          await this.ngZone.run(async () => {
+            await this.router.navigate(['dashboard']);
           });
-          this.setUserData(result.user as User);
+          await this.setUserData(result.user as User);
         }
       })
       .catch((error) => {
@@ -154,9 +154,9 @@ export class AuthService implements OnDestroy {
   }
   // Sign out
   public signOut() {
-    return this.angularFireAuth.signOut().then(() => {
+    return this.angularFireAuth.signOut().then(async () => {
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      await this.router.navigate(['sign-in']);
     });
   }
 

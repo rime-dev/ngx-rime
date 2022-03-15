@@ -181,8 +181,6 @@ export class MapComponent implements AfterViewInit {
 
   @HostBinding('attr.id') id = 'rng-map';
 
-  constructor() {}
-
   public updateMap() {
     if (this.map && this.map instanceof Map) {
       this.map.updateSize();
@@ -307,6 +305,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   private addMapOnClick() {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     this.map.un('click', () => {});
     this.map.on('click', (event) => {
       this.overlay.setPosition(undefined);
@@ -466,7 +465,7 @@ export class MapComponent implements AfterViewInit {
             text: size.toString(),
             fill: textFill,
             stroke: textStroke,
-          }) as Text,
+          }),
         }),
       ];
     } else {

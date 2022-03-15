@@ -162,7 +162,7 @@ export class ProjectInfoComponent implements OnDestroy {
             const data = {...this.project.data, accepted: false, group: null};
             const project = {...this.project, data};
             this.dataService.select('Project').update(project);
-            this.router.navigate(['../../project-list'], {relativeTo: this.route});
+            void this.router.navigate(['../../project-list'], {relativeTo: this.route});
             this.snackBar.open(this.translocoService.translate('project.declined'), '', {
               horizontalPosition: 'end',
               verticalPosition: 'top',

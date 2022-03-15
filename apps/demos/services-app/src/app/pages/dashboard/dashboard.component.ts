@@ -25,8 +25,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   sideRoutes: Routes[];
   userRoutes = [
     {
-      click: () => {
-        this.authService.signOut();
+      click: async () => {
+        await this.authService.signOut();
       },
       text: 'Logout',
       icon: 'logout',
@@ -86,7 +86,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private checkPermissions(user: any) {
     if (user.role && user.type && user.type !== 'provider' && user.role === 'user') {
-      this.router.navigate(['sign-in']);
+      void this.router.navigate(['sign-in']);
       this.snackBar.open('No tiene permisos para esta aplicación', '', {
         horizontalPosition: 'end',
         verticalPosition: 'top',

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {curveMonotoneX, extent, line, max, min, scaleLinear, scaleTime, select} from 'd3';
 @Component({
   selector: 'rng-earnings-chart',
@@ -21,8 +21,8 @@ export class EarningsChartComponent implements AfterViewInit, OnChanges {
   public yAxis: any;
   public lineGroup: any;
   public constructor(public chartElem: ElementRef) {}
-  public ngOnChanges(changes: any): void {
-    if (changes.hasOwnProperty('data') && this.data) {
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.data && this.data) {
       this.initializeChart();
       this.drawChart();
     }
@@ -44,7 +44,8 @@ export class EarningsChartComponent implements AfterViewInit, OnChanges {
       .select('.linechart')
       .append('svg')
       .attr('height', this.height);
-    this.svgInner = this.svg.append('g').style('transform', 'translate(' + 0 + 'px, ' + 5 + 'px)');
+    const translate = `translate(0px, 5px)`;
+    this.svgInner = this.svg.append('g').style('transform', translate);
     const maxValue = Number(max(this.data, (d: any) => d.value));
     const minValue = Number(min(this.data, (d: any) => d.value));
     const domainArray = [maxValue + 1, minValue - 1];

@@ -28,7 +28,8 @@ export class MockStorageReference<AngularFireStorageReference> {
     this._contents = null;
 
     if (parent) {
-      this.fullPath = parent.fullPath + '/' + name;
+      const fullpath = parent.fullPath as string;
+      this.fullPath = fullpath + '/' + name;
       parent._children[name] = this;
     } else {
       this.fullPath = name;
@@ -64,41 +65,33 @@ export class MockStorageReference<AngularFireStorageReference> {
 
   getDownloadURL() {
     return of(this.storage.getURL());
-    Promise.resolve(this.fullPath);
   }
 
   delete() {
     this._contents = null;
     return of();
-    Promise.resolve();
   }
 
   put(data: any) {
     this._contents = data;
     return of();
-    Promise.resolve();
   }
 
   putString(data: any) {
     this._contents = data;
     return of();
-    Promise.resolve();
   }
 
   getMetadata() {
     return of();
-    Promise.resolve();
   }
   updateMetadata() {
     return of();
-    Promise.resolve();
   }
   list() {
     return of();
-    Promise.resolve();
   }
   listAll() {
     return of();
-    Promise.resolve();
   }
 }

@@ -12,6 +12,7 @@ import {
   TRANSLOCO_LOADER,
   TranslocoTestingModule,
   TranslocoTestingOptions,
+  HashMap,
 } from '@ngneat/transloco';
 
 import {DateFormatStyles, TranslocoLocaleModule} from '@ngneat/transloco-locale';
@@ -58,6 +59,7 @@ const translocoConfiguration = {
   fallbackLang: 'es',
   prodMode: environment.production,
 };
+const translocoLangs: HashMap<Translation> = {en: en as Translation, es: es as Translation};
 @NgModule({
   imports: [
     TranslocoLocaleModule.forRoot({
@@ -89,7 +91,7 @@ export class TranslocoRootModule {}
 
 export function getTranslocoModule(options: TranslocoTestingOptions = {}) {
   return TranslocoTestingModule.forRoot({
-    langs: {en, es},
+    langs: translocoLangs,
     translocoConfig: translocoConfiguration,
     preloadLangs: true,
     ...options,

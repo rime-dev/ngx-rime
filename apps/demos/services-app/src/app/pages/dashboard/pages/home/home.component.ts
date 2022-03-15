@@ -77,13 +77,13 @@ export class HomeComponent implements OnDestroy {
   private calculateThisMonth(): string {
     const year = new Date().getFullYear();
     const month0 = new Date().getMonth() + 1;
-    const month = month0 < 10 ? '0' + month0 : month0;
+    const month = month0 < 10 ? '0' + month0.toString() : month0;
     return `${year}-${month}`;
   }
   private calculatePreviousMonth(): string {
     const year = new Date().getFullYear();
     const month0 = new Date().getMonth();
-    const month = month0 < 10 ? '0' + month0 : month0;
+    const month = month0 < 10 ? '0' + month0.toString() : month0;
     return `${year}-${month}`;
   }
 }

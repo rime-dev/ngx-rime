@@ -26,7 +26,7 @@ export class QuizPageComponent implements OnInit, OnDestroy {
 
   onFinalized(event: boolean): void {}
   onClosed(event: any) {
-    this.router.navigate(['/']);
+    void this.router.navigate(['/']);
   }
   private checkQuestions(questions: Question[]): Question[] {
     if (this.tags && this.tags !== 'random') {
@@ -51,20 +51,22 @@ export class QuizPageComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.quiz = this.activatedRoute.snapshot.paramMap.get('id');
-    this.difficulty = coerceNumberProperty(
-      this.activatedRoute.snapshot.queryParamMap.get('difficulty') as string
-    );
-    this.tags = this.activatedRoute.snapshot.queryParamMap.get('tags') as string;
-
-    this.httpClient
-      .get<Question[]>('questions_' + this.quiz?.toLowerCase())
-      .pipe(
-        // TODO: remove filter when back is made
-        map((questions: Question[]) => this.checkQuestions(questions)),
-        tap({next: (value: any) => (this.questions = value)}),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
+    if (this.quiz) {
+      this.difficulty = coerceNumberProperty(
+        this.activatedRoute.snapshot.queryParamMap.get('difficulty') as string
+      );
+      this.tags = this.activatedRoute.snapshot.queryParamMap.get('tags') as string;
+      const question = `questions_${this.quiz.toLowerCase()}`;
+      this.httpClient
+        .get<Question[]>(question)
+        .pipe(
+          // TODO: remove filter when back is made
+          map((questions: Question[]) => this.checkQuestions(questions)),
+          tap({next: (value: any) => (this.questions = value)}),
+          takeUntil(this.destroy$)
+        )
+        .subscribe();
+    }
   }
   ngOnDestroy(): void {
     this.destroy$.next();

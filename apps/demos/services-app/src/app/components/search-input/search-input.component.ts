@@ -79,7 +79,7 @@ export class SearchInputComponent implements AfterViewInit {
   }
   goToItem(id: string) {
     this.clearSearch();
-    this.router.navigate(['../dashboard/projects/project-view', id]);
+    void this.router.navigate(['../dashboard/projects/project-view', id]);
   }
   clearSearch() {
     this.searchForm.controls.searchInput.setValue('');

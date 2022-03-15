@@ -47,7 +47,7 @@ export class InvoiceViewComponent implements OnInit, OnDestroy {
           tap({
             next: (invoice: EntityState<Invoice>) => {
               if (!invoice) {
-                this.router.navigate(['../../not-found'], {relativeTo: this.route});
+                void this.router.navigate(['../../not-found'], {relativeTo: this.route});
               }
             },
           }),
@@ -157,7 +157,7 @@ export class InvoiceViewComponent implements OnInit, OnDestroy {
     if (invoice) {
       invoice = {...invoice};
       this.dataService.select('Invoice').delete(invoice);
-      this.router.navigate(['../../invoice-list'], {relativeTo: this.route});
+      void this.router.navigate(['../../invoice-list'], {relativeTo: this.route});
     }
   }
 }

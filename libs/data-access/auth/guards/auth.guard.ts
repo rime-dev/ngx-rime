@@ -12,11 +12,11 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.authService.isLoggedIn) {
-      this.router.navigate(['sign-in'], {queryParams: {returnUrl: state.url}});
+      void this.router.navigate(['sign-in'], {queryParams: {returnUrl: state.url}});
       return false;
     }
     if (!this.authService.hasEmailVerified) {
-      this.router.navigate(['verify-email-address']);
+      void this.router.navigate(['verify-email-address']);
       return false;
     }
     return true;

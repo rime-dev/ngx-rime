@@ -29,7 +29,7 @@ export class AuthTestingService implements OnDestroy {
   }
 
   // Sign in with email/password
-  signIn(email: string, password: string): Promise<void> {
+  async signIn(email: string, password: string): Promise<void> {
     const user: User = {
       uid: 'ABC',
       email: email,
@@ -37,15 +37,15 @@ export class AuthTestingService implements OnDestroy {
       photoURL: '',
       emailVerified: true,
     };
-    this.ngZone.run(() => {
-      this.router.navigate(['/dashboard']);
-      this.setUserData(user);
+    await this.ngZone.run(async () => {
+      await this.router.navigate(['/dashboard']);
+      await this.setUserData(user);
     });
     return Promise.resolve();
   }
 
   // Sign up with email/password
-  signUp(email: string, password: string) {
+  async signUp(email: string, password: string) {
     const user: User = {
       uid: 'ABC',
       email: email,
@@ -53,14 +53,14 @@ export class AuthTestingService implements OnDestroy {
       photoURL: '',
       emailVerified: true,
     };
-    this.sendVerificationMail();
-    this.setUserData(user);
+    await this.sendVerificationMail();
+    await this.setUserData(user);
     return Promise.resolve();
   }
 
   // Send email verfificaiton when new user sign up
-  public sendVerificationMail() {
-    this.router.navigate(['verify-email-address']);
+  public async sendVerificationMail() {
+    await this.router.navigate(['verify-email-address']);
   }
 
   // Reset Forggot password
@@ -79,13 +79,13 @@ export class AuthTestingService implements OnDestroy {
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
-    const user = JSON.parse(String(localStorage.getItem('user')));
+    const user = JSON.parse(String(localStorage.getItem('user'))) as Record<string, never>;
     return user !== null ? true : false;
   }
 
   // Returns true when user has a verified email
   get hasEmailVerified(): boolean {
-    const user = JSON.parse(String(localStorage.getItem('user')));
+    const user = JSON.parse(String(localStorage.getItem('user'))) as Record<string, never>;
     return user && user.emailVerified ? true : false;
   }
   // Sign in with Google
@@ -94,7 +94,7 @@ export class AuthTestingService implements OnDestroy {
   }
 
   // Auth logic to run auth providers
-  public authLogin(provider: firebase.auth.AuthProvider) {
+  public async authLogin(provider: firebase.auth.AuthProvider) {
     const user: User = {
       uid: 'ABC',
       email: 'carlos@gmail.com',
@@ -103,10 +103,10 @@ export class AuthTestingService implements OnDestroy {
       emailVerified: true,
     };
 
-    this.ngZone.run(() => {
-      this.router.navigate(['dashboard']);
+    await this.ngZone.run(async () => {
+      await this.router.navigate(['dashboard']);
     });
-    this.setUserData(user );
+    await this.setUserData(user);
   }
 
   /* Setting up user data when sign in with username/password,
@@ -127,9 +127,9 @@ export class AuthTestingService implements OnDestroy {
     return of(user);
   }
   // Sign out
-  public signOut() {
+  public async signOut() {
     localStorage.removeItem('user');
-    this.router.navigate(['sign-in']);
+    await this.router.navigate(['sign-in']);
   }
 
   ngOnDestroy() {

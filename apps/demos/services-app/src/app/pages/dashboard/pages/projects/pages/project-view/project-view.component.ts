@@ -22,11 +22,6 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
     private dataService: DataService
   ) {}
 
-  getCollaborators(collaboratorsBase: any[]) {
-    // this.collaboratorsArray = collaborators.filter((collaborator: any) =>
-    //   collaboratorsBase.some((cb: any) => collaborator.uid === cb)
-    // );
-  }
   ngOnInit(): void {
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       this.project$ = this.dataService
@@ -43,7 +38,7 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
           tap({
             next: (project: EntityState<Project>) => {
               if (!project) {
-                this.router.navigate(['../../not-found'], {relativeTo: this.route});
+                void this.router.navigate(['../../not-found'], {relativeTo: this.route});
               }
             },
           }),

@@ -66,7 +66,7 @@ export class GroupAddActivityDialogComponent {
       return this.activities;
     }
     return this.activities.filter((activity) => {
-      const originalLabel = activity.data.code.toLowerCase();
+      const originalLabel = String(activity.data.code.toLowerCase());
       const translatedLabel = this.translocoService
         .translate('activities.' + originalLabel)
         .toLowerCase();

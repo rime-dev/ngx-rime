@@ -8,8 +8,6 @@ import {Component, Input} from '@angular/core';
 export class CardComponent {
   @Input() group: any = undefined;
 
-  constructor() {}
-
   openTabForEmail(email: string): void {
     if (email) {
       window.open('mailto:' + email, '_blank');
