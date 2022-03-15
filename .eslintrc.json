@@ -12,7 +12,18 @@
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "plugins": [
+        "eslint-plugin-jsdoc",
+        "eslint-plugin-cypress",
+        "eslint-plugin-node",
+        "eslint-plugin-prefer-arrow",
+        "eslint-plugin-promise",
+        "eslint-plugin-standard"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
@@ -105,7 +116,9 @@
     },
     {
       "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
       "rules": {}
     }
   ]
