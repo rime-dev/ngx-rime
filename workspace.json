@@ -391,6 +391,12 @@
             "jestConfig": "apps/demos/services-app/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "check": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "nx lint services-app && nx test services-app && nx build services-app"
+          }
         }
       },
       "tags": []
