@@ -1,5 +1,9 @@
 import {EntityState} from '@rng/data-access/base/models/base.model';
+import {Activity} from '../app/models/activity.model';
+import {Group} from '../app/models/group.model';
+import {Invoice} from '../app/models/invoice.model';
 import {Project} from '../app/models/project.model';
+import {User} from '../app/models/user.model';
 
 export const projects: EntityState<Project>[] = [
   {
@@ -42,6 +46,7 @@ export const projects: EntityState<Project>[] = [
         },
       ],
       labels: ['urgent'],
+      comments: [],
     },
   },
   {
@@ -84,6 +89,7 @@ export const projects: EntityState<Project>[] = [
         },
       ],
       labels: ['urgent'],
+      comments: [],
     },
   },
   {
@@ -247,6 +253,7 @@ export const otherProjects: EntityState<Project>[] = [
       documents: [],
       activity: [],
       labels: ['deferrable'],
+      comments: [],
     },
   },
   {
@@ -271,6 +278,7 @@ export const otherProjects: EntityState<Project>[] = [
       documents: [],
       activity: [],
       labels: ['deferrable'],
+      comments: [],
     },
   },
   {
@@ -295,6 +303,7 @@ export const otherProjects: EntityState<Project>[] = [
       documents: [],
       activity: [],
       labels: ['deferrable'],
+      comments: [],
     },
   },
   {
@@ -319,6 +328,7 @@ export const otherProjects: EntityState<Project>[] = [
       documents: [],
       activity: [],
       labels: ['deferrable'],
+      comments: [],
     },
   },
   {
@@ -343,11 +353,12 @@ export const otherProjects: EntityState<Project>[] = [
       documents: [],
       activity: [],
       labels: ['deferrable'],
+      comments: [],
     },
   },
 ];
 
-const users = [
+const users: EntityState<User>[] = [
   {
     id: 'HgdTVUOGmgZ7XdPQhKCUZIZx6fT2',
     data: {
@@ -388,6 +399,7 @@ const users = [
       role: 'user',
       type: 'provider',
       nif: '23456789D',
+      stats: {},
     },
   },
   {
@@ -407,6 +419,7 @@ const users = [
       role: 'user',
       type: 'provider',
       nif: '23456789D',
+      stats: {},
     },
   },
   {
@@ -427,11 +440,12 @@ const users = [
       role: 'user',
       type: 'provider',
       nif: '23456789D',
+      stats: {},
     },
   },
 ];
 
-const groups = [
+const groups: EntityState<Group>[] = [
   {
     id: 'GS1',
     data: {
@@ -470,12 +484,14 @@ const groups = [
         coordinates: [-0.4775152206534386, 39.43470024249243],
       },
       logo: '',
-      background: '',
+      activities: [],
+      additionalInfo: [],
+      users: [],
     },
   },
 ];
 
-const invoices = [
+const invoices: EntityState<Invoice>[] = [
   {
     id: 'IS1',
     data: {
@@ -520,7 +536,7 @@ const invoices = [
   },
 ];
 
-const activities = [
+const activities: EntityState<Activity>[] = [
   {
     id: 'AS1',
     data: {

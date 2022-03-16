@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {EntityCollectionServiceBase, EntityCollectionServiceElementsFactory} from '@ngrx/data';
 import {ENTITY_CONFIG} from '../../constants/base.constant';
-import {StateEntityConfig} from '../../models/base.model';
+import {FireEntityCollectionDataServiceBase, StateEntityConfig} from '../../models/base.model';
 
 /**
  * A data service to use as global data management service.
@@ -25,7 +25,7 @@ import {StateEntityConfig} from '../../models/base.model';
  */
 @Injectable({providedIn: 'root'})
 export class DataService {
-  entitiesInstaces: Record<string, any> = {};
+  entitiesInstaces: Record<string, FireEntityCollectionDataServiceBase> = {};
   constructor(
     @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,
     serviceElementsFactory: EntityCollectionServiceElementsFactory
@@ -33,11 +33,14 @@ export class DataService {
     const plurals: Record<string, string> = this.entityConfig.pluralNames;
     for (const key in plurals) {
       if (Object.prototype.hasOwnProperty.call(plurals, key)) {
-        this.entitiesInstaces[key] = new EntityCollectionServiceBase(key, serviceElementsFactory);
+        this.entitiesInstaces[key] = new EntityCollectionServiceBase(
+          key,
+          serviceElementsFactory
+        ) as FireEntityCollectionDataServiceBase;
       }
     }
   }
-  select(entityName: string): EntityCollectionServiceBase<any> {
+  select(entityName: string): FireEntityCollectionDataServiceBase {
     return this.entitiesInstaces[entityName];
   }
 }

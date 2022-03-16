@@ -172,14 +172,12 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
   constructor(private _changeDetectorRef: ChangeDetectorRef, private ngZone: NgZone) {}
 
   onScroll(event: Event): void {
+    const tasrget = event.target as HTMLElement;
     const onScrollEvent = {
-      target: event.target,
+      target: tasrget,
       isScrolled: false,
     };
-    if (
-      (event.target as HTMLElement)?.scrollTop >
-      (this.rngToolbar.nativeElement as HTMLElement).offsetHeight
-    ) {
+    if (tasrget.scrollTop > (this.rngToolbar.nativeElement as HTMLElement).offsetHeight) {
       onScrollEvent.isScrolled = true;
     }
     this.scrolled = onScrollEvent;

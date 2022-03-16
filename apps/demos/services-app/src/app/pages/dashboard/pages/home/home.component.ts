@@ -1,9 +1,10 @@
 import {Component, OnDestroy} from '@angular/core';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {map, takeUntil, tap} from 'rxjs/operators';
 import {Invoice} from '../../../../models/invoice.model';
+import {User} from '../../../../models/user.model';
 
 @Component({
   selector: 'rng-home',
@@ -11,17 +12,16 @@ import {Invoice} from '../../../../models/invoice.model';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnDestroy {
-  public invoicesData$ = new BehaviorSubject([]);
+  public invoicesData$: BehaviorSubject<Record<string, string>[]> = new BehaviorSubject([{}]);
   public earnings$: BehaviorSubject<number> = new BehaviorSubject(0);
   public percentageFromPreviousMonth$: BehaviorSubject<number> = new BehaviorSubject(0);
   public invoices$: Observable<EntityState<Invoice>[]>;
-
-  private user$: Observable<any>;
+  private user$: Observable<EntityState<User>>;
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private dataService: DataService) {
+  constructor(dataService: DataService) {
     this.user$ = dataService.select('User').entities$.pipe(
-      map((users: any) => users[0]),
+      map((users: EntityState<User>[]) => users[0]),
       takeUntil(this.destroy$)
     );
     this.user$.subscribe();
@@ -29,7 +29,7 @@ export class HomeComponent implements OnDestroy {
     this.invoices$ = dataService
       .select('Invoice')
       .entities$.pipe(
-        tap({next: (invoices: any) => this.getEarningsFromInvoices(invoices)}),
+        tap({next: (invoices: EntityState<Invoice>[]) => this.getEarningsFromInvoices(invoices)}),
         takeUntil(this.destroy$)
       );
     this.invoices$.subscribe();
@@ -38,19 +38,19 @@ export class HomeComponent implements OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-  private getEarningsFromInvoices(invoices: any[]) {
-    invoices = invoices.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
-    const invoiceData: any = invoices.map((invoice: any) => ({
+  private getEarningsFromInvoices(invoices: EntityState<Invoice>[]) {
+    invoices = invoices.sort(
+      (a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime()
+    );
+    const invoiceData = invoices.map((invoice: EntityState<Invoice>) => ({
       value: invoice.data.cost,
       date: invoice.data.date,
     }));
     this.invoicesData$.next(invoiceData);
     const invoicesThisMonth = this.filterInvoicesInThisMonth(invoices);
     const invoicesPreviousMonth = this.filterInvoicesInPreviousMonth(invoices);
-    const costThisMonth = invoicesThisMonth.map((invoice: any) => Number(invoice.data.cost));
-    const costPreviousMonth = invoicesPreviousMonth.map((invoice: any) =>
-      Number(invoice.data.cost)
-    );
+    const costThisMonth = invoicesThisMonth.map((invoice) => Number(invoice.data.cost));
+    const costPreviousMonth = invoicesPreviousMonth.map((invoice) => Number(invoice.data.cost));
     const earningsThisMonth = costThisMonth.reduce((partialSum, a) => partialSum + a, 0);
     const earningsPreviousMonth = costPreviousMonth.reduce((partialSum, a) => partialSum + a, 0);
     const percentageFromPrevious =
@@ -64,14 +64,14 @@ export class HomeComponent implements OnDestroy {
     this.earnings$.next(earningsThisMonth);
     this.percentageFromPreviousMonth$.next(percentageFromPrevious);
   }
-  private filterInvoicesInThisMonth(invoices: any[]) {
+  private filterInvoicesInThisMonth(invoices: EntityState<Invoice>[]) {
     const thisMonth = this.calculateThisMonth();
-    const filtered = invoices.filter((invoice: any) => invoice.data.date.slice(0, 7) === thisMonth);
+    const filtered = invoices.filter((invoice) => invoice.data.date.slice(0, 7) === thisMonth);
     return filtered;
   }
-  private filterInvoicesInPreviousMonth(invoices: any[]) {
+  private filterInvoicesInPreviousMonth(invoices: EntityState<Invoice>[]) {
     const thisMonth = this.calculatePreviousMonth();
-    const filtered = invoices.filter((invoice: any) => invoice.data.date.slice(0, 7) === thisMonth);
+    const filtered = invoices.filter((invoice) => invoice.data.date.slice(0, 7) === thisMonth);
     return filtered;
   }
   private calculateThisMonth(): string {

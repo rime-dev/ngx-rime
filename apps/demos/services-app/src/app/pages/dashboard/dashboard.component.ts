@@ -2,13 +2,13 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {NavigationEnd, Router} from '@angular/router';
 import {TranslocoService} from '@ngneat/transloco';
-import {AuthService, User} from '@rng/data-access/auth';
+import {AuthService, User as UserAuth} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
-import {EntityState} from '@rng/data-access/base/models/base.model';
+import {ConditionalQueryFirestore, EntityState} from '@rng/data-access/base/models/base.model';
 import {Routes, UserInfo} from '@rng/ui/user-account-popup';
-import {log$} from 'apps/demos/services-app/src/app/decorators/log.decorator';
 import {Observable, Subject} from 'rxjs';
 import {filter, map, takeUntil, tap} from 'rxjs/operators';
+import {User} from '../../models/user.model';
 
 @Component({
   selector: 'rng-dashboard',
@@ -35,12 +35,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public hasSidenav = true;
   private destroy$: Subject<void> = new Subject();
-  public userAuth$: Observable<User | null>;
-  public user$!: Observable<UserInfo>;
+  public userAuth$: Observable<UserAuth | null>;
+  public user$!: Observable<UserInfo | null>;
   showLoginButton = false;
   showLogoutButton = false;
   showTitlePage = false;
-  scrolled!: Record<string, any>;
+  scrolled!: Record<string, unknown>;
   titlePage = '';
   constructor(
     private authService: AuthService,
@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.userAuth$
       .pipe(
         tap({
-          next: (userResult: User | null) => {
+          next: (userResult: UserAuth | null) => {
             this.loadUser(userResult?.uid);
           },
         }),
@@ -84,8 +84,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  private checkPermissions(user: any) {
-    if (user.role && user.type && user.type !== 'provider' && user.role === 'user') {
+  private checkPermissions(user: User | null): User | null {
+    if (user && user.role && user.type && user.type !== 'provider' && user.role === 'user') {
       void this.router.navigate(['sign-in']);
       this.snackBar.open('No tiene permisos para esta aplicación', '', {
         horizontalPosition: 'end',
@@ -97,22 +97,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return user;
   }
 
-  onScroll(event: any) {
-    this.showTitlePage = event.isScrolled;
+  onScroll(event: Record<string, unknown>) {
+    this.showTitlePage = event.isScrolled as boolean;
   }
 
   scrollToTop() {
-    this.scrolled.target.scrollTop = 0;
+    (this.scrolled.target as HTMLElement).scrollTop = 0;
   }
 
   ngOnInit(): void {
     this.getTitlePage(this.router.url);
     this.router.events
       .pipe(
-        filter((event: any) => event instanceof NavigationEnd),
+        filter((event) => event instanceof NavigationEnd),
         tap({
-          next: (event: any) => {
-            this.getTitlePage(event.url);
+          next: (event) => {
+            this.getTitlePage((event as NavigationEnd).url);
           },
         }),
         takeUntil(this.destroy$)
@@ -130,14 +130,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         .select('User')
         .getByKey(id)
         .pipe(
-          map((userResult: EntityState<User>) => userResult.data),
-          map((userResult: User) => this.checkPermissions(userResult)),
-          tap({next: (userResult: User) => this.loadDataByUser(userResult)})
+          map<unknown, User>((userResult) => (userResult as EntityState<User>).data ),
+          map<User | null, User | null>((userResult) => this.checkPermissions(userResult)),
+          tap({next: (userResult) => this.loadDataByUser(userResult)})
         );
     }
   }
 
-  private loadDataByUser(userResult: User) {
+  private loadDataByUser(userResult: User | null) {
     if (!userResult) {
       return;
     }
@@ -147,69 +147,69 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.loadCollaborators(userResult);
     this.loadInvoices(userResult);
   }
-  private loadActivities(userResult: any) {
+  private loadActivities(userResult: User) {
     if (!userResult) {
       return;
     }
     this.dataService.select('Activity').getAll();
   }
-  private loadGroups(userResult: any) {
+  private loadGroups(userResult: User) {
     if (!userResult) {
       return;
     }
     this.dataService.select('Group').getByKey(userResult.group);
   }
 
-  private loadProjects(userResult: any): void {
+  private loadProjects(userResult: User): void {
     if (!userResult) {
       return;
     }
-    const query = [
+    const query: ConditionalQueryFirestore[] = [
       {
         fieldPath: 'group',
         opStr: '==',
         value: userResult.group,
       },
     ];
-    this.dataService.select('Project').getWithQuery(query as any);
-    const query0 = [
+    this.dataService.select('Project').getWithQuery(query);
+    const query0: ConditionalQueryFirestore[] = [
       {
         fieldPath: 'group',
         opStr: '==',
         value: undefined,
       },
     ];
-    this.dataService.select('Project').getWithQuery(query0 as any);
+    this.dataService.select('Project').getWithQuery(query0);
   }
 
-  private loadCollaborators(userResult: any): void {
+  private loadCollaborators(userResult: User): void {
     if (!userResult) {
       return;
     }
-    const query1 = [
+    const query1: ConditionalQueryFirestore[] = [
       {
         fieldPath: 'group',
         opStr: '==',
         value: userResult.group,
       },
     ];
-    this.dataService.select('User').getWithQuery(query1 as any);
+    this.dataService.select('User').getWithQuery(query1);
   }
-  private loadInvoices(userResult: any): void {
+  private loadInvoices(userResult: User): void {
     if (!userResult) {
       return;
     }
-    const query = [
+    const query: ConditionalQueryFirestore[] = [
       {
         fieldPath: 'group',
         opStr: '==',
         value: userResult.group,
       },
     ];
-    this.dataService.select('Invoice').getWithQuery(query as any);
+    this.dataService.select('Invoice').getWithQuery(query);
   }
   private getTitlePage(url: string) {
-    const pathMatch = this.sideRoutes.filter((route: any) => url.includes(route.path))[0];
+    const pathMatch = this.sideRoutes.filter((route) => route.path && url.includes(route.path))[0];
     if (pathMatch && pathMatch.text) {
       this.titlePage = pathMatch.text;
     }

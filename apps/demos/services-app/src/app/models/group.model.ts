@@ -7,10 +7,10 @@ export interface Group {
   phone: string;
   web: string;
   type: string;
+  nif?: string;
   dateStart: string;
   location: Location;
-  logo: string;
-  background: string;
+  logo?: string;
   activities: string[];
   additionalInfo: string[];
   users: string[];

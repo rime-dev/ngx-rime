@@ -1,17 +1,20 @@
 import {FirebaseOptions} from '@angular/fire/app';
 import {FieldPath} from '@angular/fire/compat/firestore';
-import {EntityMetadataMap} from '@ngrx/data';
+import {EntityCollectionServiceBase, EntityMetadataMap} from '@ngrx/data';
 import {Update} from '@ngrx/entity';
 import {Observable} from 'rxjs';
 
+export type FireEntityCollectionDataServiceBase = EntityCollectionServiceBase<EntityState<never>> &
+  FireEntityCollectionDataService<EntityState<never>>;
+
 export interface EntityState<T> {
   id: string;
-  data: any;
+  data: T;
 }
 export interface StateEntityConfig {
   enablePersistence?: boolean;
   entityMetadata: EntityMetadataMap;
-  pluralNames: any;
+  pluralNames: Record<string, string>;
   mockData?: Record<string, any>;
 }
 export interface FirebaseConfig {

@@ -9,7 +9,6 @@ import {AuthTestingModule} from '@rng/data-access/auth';
 import {BaseTestingModule} from '@rng/data-access/base';
 import {ShellModule} from '@rng/ui/shell';
 import {UserAccountPopupModule} from '@rng/ui/user-account-popup';
-import {environment} from '../../../environments/environment';
 import {firebaseConfig} from '../../app.module';
 import {SearchInputModule} from '../../components/search-input/search-input.module';
 import {ThemeSwitcherModule} from '../../components/theme-switcher/theme-switcher.module';

@@ -7,19 +7,25 @@ export interface Project {
   type: ProjectType;
   state: ProjectState;
   accepted: boolean;
-  group: string;
+  group?: string;
   client: string;
   description: string;
   startDate: string;
   estimatedEndDate: string;
-  endingDate: string;
+  endingDate?: string;
   collaborators: string[];
   cost: number;
   documents: ProjectDocument[];
   activity: ProjectActivity[];
   labels: string[];
+  comments: ProjectComment[];
 }
 
+export interface ProjectComment {
+  user: string;
+  title: string;
+  description: string;
+}
 export interface ProjectActivity {
   date: string;
   user: string;
@@ -31,8 +37,10 @@ export interface ProjectActivity {
 export interface ProjectDocument {
   id: string;
   title: string;
+  subtitle?: string;
   url: string;
   format: string;
+  icon: string;
 }
 
 export type ProjectState = 'active' | 'inactive' | 'finished';
