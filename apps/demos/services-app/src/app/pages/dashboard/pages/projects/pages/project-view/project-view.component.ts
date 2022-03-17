@@ -12,7 +12,6 @@ import {map, takeUntil, tap} from 'rxjs/operators';
   styleUrls: ['./project-view.component.scss'],
 })
 export class ProjectViewComponent implements OnInit, OnDestroy {
-  public collaboratorsArray: any[] = [];
   public project$: Observable<EntityState<Project>> = of();
   private destroy$: Subject<void> = new Subject<void>();
 
