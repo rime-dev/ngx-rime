@@ -14,6 +14,6 @@ export class OtherProjectsComponent {
   public projects$: Observable<EntityState<Project>[]>;
 
   constructor(private dataService: DataService) {
-    this.projects$ = this.dataService.select('Project').entities$;
+    this.projects$ = this.dataService.select<Project>('Project').entities$;
   }
 }

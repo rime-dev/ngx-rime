@@ -1,11 +1,12 @@
 import {FirebaseOptions} from '@angular/fire/app';
 import {FieldPath} from '@angular/fire/compat/firestore';
-import {EntityCollectionServiceBase, EntityMetadataMap} from '@ngrx/data';
-import {Update} from '@ngrx/entity';
+import {EntityMetadataMap} from '@ngrx/data';
 import {Observable} from 'rxjs';
 
-export type FireEntityCollectionDataServiceBase = EntityCollectionServiceBase<EntityState<never>> &
-  FireEntityCollectionDataService<EntityState<never>>;
+export type FireEntityCollectionDataServiceBase<T> = FireEntityCollectionDataService<
+  // EntityCollectionServiceBase<EntityState<never>> &
+  EntityState<T>
+>;
 
 export interface EntityState<T> {
   id: string;
@@ -93,12 +94,14 @@ export type OrderByDirection = 'desc' | 'asc';
 
 /** A service that performs FIREBASE-like CRUD data operations for an entity collection */
 export interface FireEntityCollectionDataService<T> {
+  entities$: Observable<EntityState<T>[]>;
   add(entity: T): Observable<T>;
   delete(id: number | string): Observable<number | string>;
   getAll(): Observable<T[]>;
   getById(id: any): Observable<T>;
+  getByKey(id: any): Observable<T>;
   getWithLimit(limit: number): Observable<T[]>;
-  update(update: Update<T>): Observable<T>;
+  update(update: EntityState<T>): Observable<T>;
   getWithQuery(params: ConditionalQueryFirestore[]): Observable<T[]>;
 }
 

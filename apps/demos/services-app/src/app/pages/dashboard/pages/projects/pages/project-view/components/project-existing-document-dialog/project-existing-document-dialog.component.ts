@@ -1,5 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Update} from '@ngrx/entity';
 import {AuthService} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
@@ -96,7 +97,7 @@ export class ProjectExistingDocumentDialogComponent {
       user: this.authService.user$.value?.uid as string,
     };
     const activity = [...project.data.activity];
-    activity.push(newActivity);
+    activity.push(newActivity as ProjectActivity);
     const data = {...project?.data, activity};
     return {...project, data};
   }
@@ -114,7 +115,7 @@ export class ProjectExistingDocumentDialogComponent {
         result: document[property],
       };
       project = this.addActivity(activity, project);
-      this.dataService.select('Project').update(project);
+      this.dataService.select<Project>('Project').update(project);
       this.document = {...document};
     }
   }
@@ -132,7 +133,8 @@ export class ProjectExistingDocumentDialogComponent {
         result: document.title,
       };
       project = this.addActivity(activity, project);
-      this.dataService.select('Project').update(project);
+      const update: Update<Project> = {id: project.id, changes: project.data};
+      this.dataService.select<Project>('Project').update(project);
       this.matDialogRef.close();
     }
   }

@@ -1,6 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
+import {Update} from '@ngrx/entity';
 import {AuthService} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
@@ -101,7 +102,7 @@ export class ProjectDocumentsComponent implements OnInit, OnDestroy {
       user: this.authService.user$.value?.uid as string,
     };
     const activity = [...project.data.activity];
-    activity.push(newActivity);
+    activity.push(newActivity as ProjectActivity);
     const data = {...project?.data, activity};
     return {...project, data};
   }
@@ -117,7 +118,7 @@ export class ProjectDocumentsComponent implements OnInit, OnDestroy {
         result: documents.map((document) => document.title).join('. '),
       };
       project = this.addActivity(activity, project);
-      this.dataService.select('Project').update(project);
+      this.dataService.select<Project>('Project').update(project);
       this.filteredDocuments.next(this.project.data.documents);
       this.updateFormControl();
     }

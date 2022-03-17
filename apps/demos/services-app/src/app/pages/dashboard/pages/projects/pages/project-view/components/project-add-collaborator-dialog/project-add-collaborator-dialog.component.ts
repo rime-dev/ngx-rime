@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {User} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
+import {User} from 'apps/demos/services-app/src/app/models/user.model';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -11,6 +11,6 @@ import {Observable} from 'rxjs';
 export class ProjectAddCollaboratorDialogComponent {
   public users$: Observable<EntityState<User>[]>;
   constructor(private dataService: DataService) {
-    this.users$ = this.dataService.select('User').entities$;
+    this.users$ = this.dataService.select<User>('User').entities$;
   }
 }

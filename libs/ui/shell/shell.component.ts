@@ -15,6 +15,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import {MatDrawerMode, MatSidenav} from '@angular/material/sidenav';
+import {MatToolbar} from '@angular/material/toolbar';
 import {Subject} from 'rxjs';
 import {debounceTime, takeUntil, tap} from 'rxjs/operators';
 
@@ -141,7 +142,7 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
     Record<string, unknown>
   >();
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  @ViewChild('rngToolbar') rngToolbar!: ElementRef;
+  @ViewChild('rngToolbar') rngToolbar!: MatToolbar;
 
   @HostListener('window:resize')
   onResize() {
@@ -177,7 +178,9 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
       target: tasrget,
       isScrolled: false,
     };
-    if (tasrget.scrollTop > (this.rngToolbar.nativeElement as HTMLElement).offsetHeight) {
+    if (
+      tasrget.scrollTop > (this.rngToolbar._elementRef.nativeElement as HTMLElement)?.offsetHeight
+    ) {
       onScrollEvent.isScrolled = true;
     }
     this.scrolled = onScrollEvent;

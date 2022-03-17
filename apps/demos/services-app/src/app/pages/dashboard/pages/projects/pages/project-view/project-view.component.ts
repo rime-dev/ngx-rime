@@ -24,14 +24,14 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       this.project$ = this.dataService
-        .select('Project')
+        .select<Project>('Project')
         .entities$.pipe(
           map(
             (projects: EntityState<Project>[]) =>
               projects.filter((project) => project.id === params.id)[0]
           )
         );
-      this.dataService.select('Project').getByKey(params.id);
+      this.dataService.select<Project>('Project').getByKey(params.id);
       this.project$
         .pipe(
           tap({

@@ -1,6 +1,5 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
-import {User} from '@angular/fire/auth/firebase';
 import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatDialog} from '@angular/material/dialog';
@@ -15,7 +14,9 @@ import {
   Labels,
   Project,
   ProjectActivity,
+  ProjectState,
 } from 'apps/demos/services-app/src/app/models/project.model';
+import {User} from 'apps/demos/services-app/src/app/models/user.model';
 import {Observable, Subject} from 'rxjs';
 import {map, startWith, takeUntil, tap} from 'rxjs/operators';
 import {ProjectAddCollaboratorDialogComponent} from '../project-add-collaborator-dialog/project-add-collaborator-dialog.component';
@@ -62,7 +63,7 @@ export class ProjectInfoComponent implements OnDestroy {
       startWith(null),
       map((fruit: string | null) => (fruit ? this.filterLabels(fruit) : Labels.labels.slice()))
     );
-    this.users$ = this.dataService.select('User').entities$;
+    this.users$ = this.dataService.select<User>('User').entities$;
     this.loadCollaborators();
     this.stateChange$
       .pipe(tap({next: () => this.loadCollaborators()}), takeUntil(this.destroy$))
@@ -88,8 +89,8 @@ export class ProjectInfoComponent implements OnDestroy {
   }
   removeLabel(label: string): void {
     const index = this.project?.data.labels.indexOf(label);
-    if (index >= 0 && this.project) {
-      const labels = [...this.project?.data.labels];
+    if (index && index >= 0 && this.project) {
+      const labels = [...this.project.data.labels];
       labels.splice(index, 1);
       const data = {...this.project?.data, labels};
       let project = {...this.project, data};
@@ -105,14 +106,15 @@ export class ProjectInfoComponent implements OnDestroy {
 
   selectedLabel(event: MatAutocompleteSelectedEvent): void {
     if (this.project) {
-      const labels = [...this.project?.data.labels];
-      labels.push(event.option.value);
+      const labels = [...this.project.data.labels];
+      const value = event.option.value as string;
+      labels.push(value);
       const data = {...this.project?.data, labels};
       let project = {...this.project, data};
-      const activity = {
+      const activity: Partial<ProjectActivity> = {
         action: 'add',
         affected: 'label',
-        result: event.option.value,
+        result: value,
       };
       project = this.addActivity(activity, project);
       this.dataService.select('Project').update(project);
@@ -142,7 +144,7 @@ export class ProjectInfoComponent implements OnDestroy {
       user: this.authService.user$.value?.uid as string,
     };
     const activity = [...project.data.activity];
-    activity.push(newActivity);
+    activity.push(newActivity as ProjectActivity);
     const data = {...project?.data, activity};
     return {...project, data};
   }
@@ -159,7 +161,7 @@ export class ProjectInfoComponent implements OnDestroy {
       .subscribe((request) => {
         if (this.project) {
           if (request) {
-            const data = {...this.project.data, accepted: false, group: null};
+            const data = {...this.project.data, accepted: false, group: undefined};
             const project = {...this.project, data};
             this.dataService.select('Project').update(project);
             void this.router.navigate(['../../project-list'], {relativeTo: this.route});
@@ -194,7 +196,7 @@ export class ProjectInfoComponent implements OnDestroy {
     this.matDialog
       .open(ProjectChangeStateDialogComponent, {minWidth: '300px'})
       .afterClosed()
-      .subscribe((state: string) => {
+      .subscribe((state: ProjectState) => {
         if (state && state !== this.project?.data.state && this.project) {
           let data = {...this.project.data, state};
           if (state === 'finished') {
@@ -250,7 +252,7 @@ export class ProjectInfoComponent implements OnDestroy {
             (value: string) => value !== collaborator.id
           );
           const data = {...this.project?.data, collaborators};
-          let project = {...this.project, data};
+          let project: EntityState<Project> = {...this.project, data};
           const activity = {
             action: 'remove',
             affected: 'collaborator',

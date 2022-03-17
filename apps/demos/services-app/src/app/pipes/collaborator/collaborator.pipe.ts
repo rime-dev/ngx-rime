@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {User} from '@rng/data-access/auth';
 import {EntityState} from '@rng/data-access/base/models/base.model';
+import {User} from '../../models/user.model';
 
 @Pipe({
   name: 'collaboratorPipe',

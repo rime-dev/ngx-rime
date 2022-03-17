@@ -1,14 +1,7 @@
 <div class="lg:container p-8 flex flex-col mx-auto">
   <div class="flex flex-row items-center h-10">
     <span
-      class="
-        text-lg
-        font-medium
-        text-gray-700
-        dark:text-gray-200
-        overflow-hidden overflow-ellipsis
-        whitespace-nowrap
-      "
+      class="text-lg font-medium text-gray-700 dark:text-gray-200 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >{{ 'doneActions' | transloco }}</span
     >
     <button mat-icon-button class="ml-auto">
@@ -24,30 +17,20 @@
         class="absolute flex items-center justify-center w-6 h-6 bg-blue-200 rounded-full -left-3"
       >
         <img
-          [matTooltip]="(activity.user | collaboratorPipe: (users$ | async))?.data.name"
+          [matTooltip]="(activity.user | collaboratorPipe: (users$ | async)).data.name"
           class="rounded-full shadow-lg cursor-pointer"
           src="https://i.picsum.photos/id/1031/200/200.jpg?hmac=E9kagTB6aHlVO8qmJYAQYYGJP3IvPT_v0N3ju0Rc4Gw"
-          [alt]="(activity.user | collaboratorPipe: (users$ | async))?.data.name"
+          [alt]="(activity.user | collaboratorPipe: (users$ | async)).data.name"
         />
       </span>
       <div
-        class="
-          items-center
-          justify-between
-          p-4
-          bg-white
-          border border-gray-200
-          rounded-lg
-          shadow-sm
-          sm:flex
-          dark:bg-gray-700 dark:border-gray-600
-        "
+        class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600"
       >
         <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0 text-center">{{
           activity.date | translocoDate
         }}</time>
         <div class="text-sm font-normal text-gray-500 dark:text-gray-300">
-          {{ (activity.user | collaboratorPipe: (users$ | async))?.data.name }}
+          {{ (activity.user | collaboratorPipe: (users$ | async)).data.name }}
           {{ 'activity.' + activity.action | transloco }}
           <span class="font-semibold text-blue-600 dark:text-blue-500">
             <ng-container [ngSwitch]="activity.affected">
@@ -62,39 +45,20 @@
           </span>
           <div
             *ngIf="activity.affected === 'description'; else shortResults"
-            class="
-              p-3
-              text-xs
-              italic
-              font-normal
-              text-gray-500
-              border border-gray-200
-              rounded-lg
-              bg-gray-50
-              dark:bg-gray-800 dark:border-gray-500 dark:text-gray-300
-            "
+            class="p-3 text-xs italic font-normal text-gray-500 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-500 dark:text-gray-300"
           >
             {{ activity.result }}
           </div>
           <ng-template #shortResults>
             <span
-              class="
-                bg-gray-100
-                text-gray-800 text-xs
-                font-normal
-                mx-2
-                px-2.5
-                py-0.5
-                rounded
-                dark:bg-gray-700 dark:text-gray-300
-              "
+              class="bg-gray-100 text-gray-800 text-xs font-normal mx-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300"
             >
               <ng-container [ngSwitch]="activity.affected">
                 <ng-container *ngSwitchCase="'state'">{{
                   activity.result | transloco
                 }}</ng-container>
                 <ng-container *ngSwitchCase="'collaborator'">{{
-                  (activity.result | collaboratorPipe: (users$ | async))?.data.name
+                  (activity.result | collaboratorPipe: (users$ | async)).data.name
                 }}</ng-container>
                 <ng-container *ngSwitchCase="'label'">
                   {{ 'labels.' + activity.result | transloco }}

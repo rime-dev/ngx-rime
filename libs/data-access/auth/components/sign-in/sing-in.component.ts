@@ -20,10 +20,12 @@ export class SignInComponent {
     if (this.form.invalid) {
       return;
     }
-    this.authService.signIn(this.form.controls.email.value, this.form.controls.password.value);
+    const email = this.form.controls.email.value as string;
+    const password = this.form.controls.password.value as string;
+    void this.authService.signIn(email, password);
   }
 
   loginWithGoogle(): void {
-    this.authService.googleAuth();
+    void this.authService.googleAuth();
   }
 }

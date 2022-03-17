@@ -34,14 +34,14 @@ export class InvoiceViewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       this.invoice$ = this.dataService
-        .select('Invoice')
+        .select<Invoice>('Invoice')
         .entities$.pipe(
           map(
             (invoices: EntityState<Invoice>[]) =>
               invoices.filter((invoice) => invoice.id === params.id)[0]
           )
         );
-      this.dataService.select('Invoice').getByKey(params.id);
+      this.dataService.select<Invoice>('Invoice').getByKey(params.id);
       this.invoice$
         .pipe(
           tap({
@@ -94,7 +94,7 @@ export class InvoiceViewComponent implements OnInit, OnDestroy {
           if (data && data.title) {
             const data2 = {...invoice.data, title: data.title};
             const invoice2 = {...invoice, data: data2};
-            this.dataService.select('Invoice').update(invoice2);
+            this.dataService.select<Invoice>('Invoice').update(invoice2);
           }
         });
     }
@@ -112,7 +112,7 @@ export class InvoiceViewComponent implements OnInit, OnDestroy {
           if (data) {
             const data2 = {...invoice.data, description: data.description || ''};
             const invoice2 = {...invoice, data: data2};
-            this.dataService.select('Invoice').update(invoice2);
+            this.dataService.select<Invoice>('Invoice').update(invoice2);
           }
         });
     }
@@ -130,7 +130,7 @@ export class InvoiceViewComponent implements OnInit, OnDestroy {
           if (data) {
             const data2 = {...invoice.data, cost: data.cost};
             const invoice2 = {...invoice, data: data2};
-            this.dataService.select('Invoice').update(invoice2);
+            this.dataService.select<Invoice>('Invoice').update(invoice2);
           }
         });
     }
@@ -148,7 +148,7 @@ export class InvoiceViewComponent implements OnInit, OnDestroy {
           if (data) {
             const data2 = {...invoice.data, taxes: data.taxes};
             const invoice2 = {...invoice, data: data2};
-            this.dataService.select('Invoice').update(invoice2);
+            this.dataService.select<Invoice>('Invoice').update(invoice2);
           }
         });
     }
@@ -156,7 +156,7 @@ export class InvoiceViewComponent implements OnInit, OnDestroy {
   removeInvoice(invoice: EntityState<Invoice>) {
     if (invoice) {
       invoice = {...invoice};
-      this.dataService.select('Invoice').delete(invoice);
+      this.dataService.select<Invoice>('Invoice').delete(invoice.id);
       void this.router.navigate(['../../invoice-list'], {relativeTo: this.route});
     }
   }

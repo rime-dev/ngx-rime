@@ -4,6 +4,7 @@ import {DataService} from '@rng/data-access/base';
 import {StorageUploadTaskMockService, StorageUploadTaskService} from '@rng/data-access/storage';
 // eslint-disable-next-line max-len
 import {RequestIfTrueDialogComponent} from 'apps/demos/services-app/src/app/components/request-if-true-dialog/request-if-true-dialog.component';
+import {Invoice} from 'apps/demos/services-app/src/app/models/invoice.model';
 import {of} from 'rxjs';
 import {debounceTime, take, tap} from 'rxjs/operators';
 @Component({
@@ -45,7 +46,7 @@ export class IvoiceExistingDocumentDialogComponent {
           const data2 = {...this.invoice.data, url: null};
           const invoice2 = {...this.invoice, data: data2};
           this.invoice = invoice2;
-          this.dataService.select('Invoice').update(invoice2);
+          this.dataService.select<Invoice>('Invoice').update(invoice2);
         }
       });
   }
@@ -59,7 +60,7 @@ export class IvoiceExistingDocumentDialogComponent {
             const data2 = {...this.invoice.data, url: documents[0].url};
             const invoice2 = {...this.invoice, data: data2};
             this.invoice = invoice2;
-            this.dataService.select('Invoice').update(invoice2);
+            this.dataService.select<Invoice>('Invoice').update(invoice2);
           },
         })
       )

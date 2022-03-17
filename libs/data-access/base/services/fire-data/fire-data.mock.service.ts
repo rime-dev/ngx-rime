@@ -1,7 +1,6 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {Update} from '@ngrx/entity';
 import {Observable, of, throwError} from 'rxjs';
 import {catchError, delay, map, timeout} from 'rxjs/operators';
 import {ENTITY_CONFIG, ENTITY_NAME} from '../../constants/base.constant';
@@ -13,7 +12,6 @@ import {
   FirebaseMethods,
   FireDataMockObject,
   FireDataServiceError,
-  FireEntityCollectionDataService,
   StateEntityConfig,
 } from '../../models/base.model';
 import {generateUUID} from '../../utils/utils';
@@ -34,7 +32,7 @@ export class FireDataMockServiceFactory {
    *
    * @param entityName {string} Name of the entity type for this data service
    */
-  create<T>(entityName: string): FireEntityCollectionDataService<T> {
+  create<T>(entityName: string) {
     return new FireDataMockService<T>(entityName, this.entityConfig, this.angularFirestore);
   }
 }
@@ -89,7 +87,7 @@ export class FireDataMockService<T> {
     if (uid == null) {
       err = new Error(`No "${this.entityName}" key to delete`);
     }
-    return this.execute('delete', uid, err).pipe(map((result) => uid ));
+    return this.execute('delete', uid, err).pipe(map((result) => uid));
   }
 
   /**
@@ -149,11 +147,12 @@ export class FireDataMockService<T> {
    *
    * @param update
    */
-  update(update: Update<T>): Observable<any> {
+  update(update: EntityState<T>): Observable<any> {
     const id = update && update.id;
+    const changes = update && update.data;
     const updateOrError =
-      id == null ? new Error(`No "${this.entityName}" update data or id`) : update.changes;
-    return this.execute('update', id as string, updateOrError);
+      id === null ? new Error(`No "${this.entityName}" update data or id`) : changes;
+    return this.execute('update', id, updateOrError);
   }
 
   /**

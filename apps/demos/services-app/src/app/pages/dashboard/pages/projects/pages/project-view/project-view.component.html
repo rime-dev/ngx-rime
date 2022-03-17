@@ -1,42 +1,44 @@
-<div class="flex flex-row">
-  <button mat-icon-button class="self-center ml-4" [routerLink]="['../../project-list']">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <header class="max-w-7xl w-full py-6 px-4 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-200">
-      {{ (project$ | async)?.data.title }}
-    </h1>
-  </header>
-</div>
-<mat-tab-group animationDuration="0ms" color="primary">
-  <mat-tab>
-    <ng-template mat-tab-label>
-      {{ 'information' | transloco }}
-    </ng-template>
-    <ng-template matTabContent>
-      <rng-project-info [project]="project$ | async"></rng-project-info>
-    </ng-template>
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      {{ 'documents' | transloco }}
-    </ng-template>
-    <ng-template matTabContent>
-      <rng-project-documents [project]="project$ | async"></rng-project-documents>
-    </ng-template>
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label> {{ 'comments' | transloco }} </ng-template>
-    <ng-template matTabContent>
-      <rng-project-comments [project]="project$ | async"></rng-project-comments>
-    </ng-template>
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      {{ 'activity' | transloco }}
-    </ng-template>
-    <ng-template matTabContent>
-      <rng-project-activity [project]="project$ | async"></rng-project-activity>
-    </ng-template>
-  </mat-tab>
-</mat-tab-group>
+<ng-container *ngIf="project$ | async; let project">
+  <div class="flex flex-row">
+    <button mat-icon-button class="self-center ml-4" [routerLink]="['../../project-list']">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <header class="max-w-7xl w-full py-6 px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-200">
+        {{ project.data.title }}
+      </h1>
+    </header>
+  </div>
+  <mat-tab-group animationDuration="0ms" color="primary">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'information' | transloco }}
+      </ng-template>
+      <ng-template matTabContent>
+        <rng-project-info [project]="project$ | async"></rng-project-info>
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'documents' | transloco }}
+      </ng-template>
+      <ng-template matTabContent>
+        <rng-project-documents [project]="project$ | async"></rng-project-documents>
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label> {{ 'comments' | transloco }} </ng-template>
+      <ng-template matTabContent>
+        <rng-project-comments [project]="project$ | async"></rng-project-comments>
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'activity' | transloco }}
+      </ng-template>
+      <ng-template matTabContent>
+        <rng-project-activity [project]="project$ | async"></rng-project-activity>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</ng-container>

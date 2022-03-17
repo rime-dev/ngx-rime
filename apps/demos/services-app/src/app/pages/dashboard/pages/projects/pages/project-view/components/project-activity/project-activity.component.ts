@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {User} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
+import {User} from 'apps/demos/services-app/src/app/models/user.model';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -21,6 +21,6 @@ export class ProjectActivityComponent {
   private internalProject: any = {};
 
   constructor(dataService: DataService) {
-    this.users$ = dataService.select('User').entities$;
+    this.users$ = dataService.select<User>('User').entities$;
   }
 }

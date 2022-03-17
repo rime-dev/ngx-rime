@@ -39,7 +39,7 @@ export class InvoiceCreateDialogComponent {
     private dataService: DataService,
     private matSnackBar: MatSnackBar
   ) {
-    this.projects$ = this.dataService.select('Project').entities$;
+    this.projects$ = this.dataService.select<Project>('Project').entities$;
     if (this.data && this.data.path) {
       this.path = this.data.path;
     }

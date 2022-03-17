@@ -79,7 +79,7 @@ export class ProjectListComponent implements OnInit {
   }
   filterByType(type?: string): void {
     if (!type) {
-      this.activeProjects$ = this.dataService.select('Project').entities$.pipe(
+      this.activeProjects$ = this.dataService.select<Project>('Project').entities$.pipe(
         dataFilter([
           {fieldPath: 'state', opStr: '==', value: 'active'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
@@ -96,7 +96,7 @@ export class ProjectListComponent implements OnInit {
           tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
         );
 
-      this.inactiveProjects$ = this.dataService.select('Project').entities$.pipe(
+      this.inactiveProjects$ = this.dataService.select<Project>('Project').entities$.pipe(
         dataFilter([
           {fieldPath: 'state', opStr: '==', value: 'inactive'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
@@ -105,7 +105,7 @@ export class ProjectListComponent implements OnInit {
         tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
-      this.finishedProjects$ = this.dataService.select('Project').entities$.pipe(
+      this.finishedProjects$ = this.dataService.select<Project>('Project').entities$.pipe(
         dataFilter([
           {fieldPath: 'state', opStr: '==', value: 'finished'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
@@ -116,7 +116,7 @@ export class ProjectListComponent implements OnInit {
 
       this.filterByTypeSelected = 'all';
     } else {
-      this.activeProjects$ = this.dataService.select('Project').entities$.pipe(
+      this.activeProjects$ = this.dataService.select<Project>('Project').entities$.pipe(
         dataFilter([
           {fieldPath: 'state', opStr: '==', value: 'active'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
@@ -126,7 +126,7 @@ export class ProjectListComponent implements OnInit {
         tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
-      this.otherProjects$ = this.dataService.select('Project').entities$.pipe(
+      this.otherProjects$ = this.dataService.select<Project>('Project').entities$.pipe(
         dataFilter([
           {fieldPath: 'group', opStr: '==', value: undefined},
           {fieldPath: 'type', opStr: '==', value: type},
@@ -135,7 +135,7 @@ export class ProjectListComponent implements OnInit {
         tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
-      this.inactiveProjects$ = this.dataService.select('Project').entities$.pipe(
+      this.inactiveProjects$ = this.dataService.select<Project>('Project').entities$.pipe(
         dataFilter([
           {fieldPath: 'state', opStr: '==', value: 'inactive'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},
@@ -145,7 +145,7 @@ export class ProjectListComponent implements OnInit {
         tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
       );
 
-      this.finishedProjects$ = this.dataService.select('Project').entities$.pipe(
+      this.finishedProjects$ = this.dataService.select<Project>('Project').entities$.pipe(
         dataFilter([
           {fieldPath: 'state', opStr: '==', value: 'finished'},
           {fieldPath: 'group', opStr: '==', value: 'GS1'},

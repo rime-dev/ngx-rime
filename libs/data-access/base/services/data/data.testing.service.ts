@@ -1,14 +1,14 @@
 import {Inject, Injectable} from '@angular/core';
 import {EntityCollectionServiceBase, EntityCollectionServiceElementsFactory} from '@ngrx/data';
 import {ENTITY_CONFIG} from '../../constants/base.constant';
-import {FireEntityCollectionDataServiceBase, StateEntityConfig} from '../../models/base.model';
+import {FireEntityCollectionDataService, StateEntityConfig} from '../../models/base.model';
 
 /**
  * A data service to use as testing service in spec files, used in BaseTestingModule
  */
 @Injectable()
 export class DataTestingService {
-  entitiesInstaces: Record<string, FireEntityCollectionDataServiceBase> = {};
+  entitiesInstaces: Record<string, FireEntityCollectionDataService<never>> = {};
   constructor(
     @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,
     serviceElementsFactory: EntityCollectionServiceElementsFactory
@@ -19,11 +19,11 @@ export class DataTestingService {
         this.entitiesInstaces[key] = new EntityCollectionServiceBase(
           key,
           serviceElementsFactory
-        ) as FireEntityCollectionDataServiceBase;
+        ) as unknown as FireEntityCollectionDataService<never>;
       }
     }
   }
-  select(entityName: string): FireEntityCollectionDataServiceBase {
-    return this.entitiesInstaces[entityName];
+  select<T>(entityName: string): FireEntityCollectionDataService<T> {
+    return this.entitiesInstaces[entityName] as FireEntityCollectionDataService<T>;
   }
 }

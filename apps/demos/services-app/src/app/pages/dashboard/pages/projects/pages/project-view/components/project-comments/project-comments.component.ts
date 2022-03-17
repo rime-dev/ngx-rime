@@ -1,10 +1,10 @@
 import {Component, Input} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {AuthService, User} from '@rng/data-access/auth';
+import {Update} from '@ngrx/entity';
+import {AuthService} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
 import {Project, ProjectActivity} from 'apps/demos/services-app/src/app/models/project.model';
-import {Observable} from 'rxjs';
 import {ProjectAddCommentDialogComponent} from '../project-add-comment-dialog/project-add-comment-dialog.component';
 
 @Component({
@@ -51,7 +51,7 @@ export class ProjectCommentsComponent {
             result: comment.title,
           };
           project = this.addActivity(activity, project);
-          this.dataService.select('Project').update(project);
+          this.dataService.select<Project>('Project').update(project);
         }
       });
   }
@@ -66,7 +66,7 @@ export class ProjectCommentsComponent {
       user: this.authService.user$.value?.uid as string,
     };
     const activity = [...project.data.activity];
-    activity.push(newActivity);
+    activity.push(newActivity as ProjectActivity);
     const data = {...project?.data, activity};
     return {...project, data};
   }

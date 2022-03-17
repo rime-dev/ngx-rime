@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {EntityCollectionServiceBase, EntityCollectionServiceElementsFactory} from '@ngrx/data';
 import {ENTITY_CONFIG} from '../../constants/base.constant';
-import {FireEntityCollectionDataServiceBase, StateEntityConfig} from '../../models/base.model';
+import {FireEntityCollectionDataService, StateEntityConfig} from '../../models/base.model';
 
 /**
  * A data service to use as global data management service.
@@ -17,15 +17,15 @@ import {FireEntityCollectionDataServiceBase, StateEntityConfig} from '../../mode
  * export class ProductsComponent {
  *   public products$: Observable<any>;
  *   constructor(private dataService: DataService) {
- *     this.products$ = this.dataService.select('Product').entities$;
- *     this.dataService.select('Product').getAll();
+ *     this.products$ = this.dataService.select<Project>('Product').entities$;
+ *     this.dataService.select<Project>('Product').getAll();
  *   }
  * }
  * ```
  */
 @Injectable({providedIn: 'root'})
 export class DataService {
-  entitiesInstaces: Record<string, FireEntityCollectionDataServiceBase> = {};
+  entitiesInstaces: Record<string, FireEntityCollectionDataService<never>> = {};
   constructor(
     @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,
     serviceElementsFactory: EntityCollectionServiceElementsFactory
@@ -36,11 +36,11 @@ export class DataService {
         this.entitiesInstaces[key] = new EntityCollectionServiceBase(
           key,
           serviceElementsFactory
-        ) as FireEntityCollectionDataServiceBase;
+        ) as unknown as FireEntityCollectionDataService<never>;
       }
     }
   }
-  select(entityName: string): FireEntityCollectionDataServiceBase {
-    return this.entitiesInstaces[entityName];
+  select<T>(entityName: string): FireEntityCollectionDataService<T> {
+    return this.entitiesInstaces[entityName] as FireEntityCollectionDataService<T>;
   }
 }

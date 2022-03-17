@@ -20,14 +20,14 @@ export class HomeComponent implements OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(dataService: DataService) {
-    this.user$ = dataService.select('User').entities$.pipe(
+    this.user$ = dataService.select<User>('User').entities$.pipe(
       map((users: EntityState<User>[]) => users[0]),
       takeUntil(this.destroy$)
     );
     this.user$.subscribe();
 
     this.invoices$ = dataService
-      .select('Invoice')
+      .select<Invoice>('Invoice')
       .entities$.pipe(
         tap({next: (invoices: EntityState<Invoice>[]) => this.getEarningsFromInvoices(invoices)}),
         takeUntil(this.destroy$)

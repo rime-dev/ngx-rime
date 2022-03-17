@@ -1,7 +1,7 @@
 import {coerceNumberProperty} from '@angular/cdk/coercion';
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {User} from '@rng/data-access/auth';
+import {Update} from '@ngrx/entity';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
 import {StorageUploadTaskService} from '@rng/data-access/storage';
@@ -12,6 +12,7 @@ import {Observable, of} from 'rxjs';
 import {delay, map, tap} from 'rxjs/operators';
 import {RequestIfTrueDialogComponent} from '../../../../components/request-if-true-dialog/request-if-true-dialog.component';
 import {Group} from '../../../../models/group.model';
+import {User} from '../../../../models/user.model';
 import {GroupAddActivityDialogComponent} from './components/group-add-activity-dialog/group-add-activity-dialog.component';
 // eslint-disable-next-line max-len
 import {GroupAddAdditionalInfoDialogComponent} from './components/group-add-additional-info-dialog/group-add-additional-info-dialog.component';
@@ -45,8 +46,10 @@ export class ManagementComponent {
     private matDialog: MatDialog,
     private storageUploadTaskService: StorageUploadTaskService
   ) {
-    this.group$ = this.dataService.select('Group').entities$.pipe(map((groups) => groups[0]));
-    this.users$ = this.dataService.select('User').entities$;
+    this.group$ = this.dataService
+      .select<Group>('Group')
+      .entities$.pipe(map((groups) => groups[0]));
+    this.users$ = this.dataService.select<User>('User').entities$;
     this.point$ = this.group$.pipe(
       map((group: EntityState<Group>) =>
         this.transformCoordinatesToFeature(group.data.location.coordinates)
@@ -110,7 +113,7 @@ export class ManagementComponent {
                 const location = {...data.location, coordinates};
                 const data2 = {...group.data, location};
                 const group2 = {...group, data: data2};
-                this.dataService.select('Group').update(group2);
+                this.dataService.select<Group>('Group').update(group2);
               }
             },
           })
@@ -158,7 +161,7 @@ export class ManagementComponent {
           if (data && data.name) {
             const data2 = {...group.data, name: data.name};
             const group2 = {...group, data: data2};
-            this.dataService.select('Group').update(group2);
+            this.dataService.select<Group>('Group').update(group2);
           }
         });
     }
@@ -176,7 +179,7 @@ export class ManagementComponent {
           if (data && data.email) {
             const data2 = {...group.data, email: data.email};
             const group2 = {...group, data: data2};
-            this.dataService.select('Group').update(group2);
+            this.dataService.select<Group>('Group').update(group2);
           }
         });
     }
@@ -194,7 +197,7 @@ export class ManagementComponent {
           if (data && data.phone) {
             const data2 = {...group.data, phone: data.phone};
             const group2 = {...group, data: data2};
-            this.dataService.select('Group').update(group2);
+            this.dataService.select<Group>('Group').update(group2);
           }
         });
     }
@@ -212,7 +215,7 @@ export class ManagementComponent {
           if (data && data.web) {
             const data2 = {...group.data, web: data.web};
             const group2 = {...group, data: data2};
-            this.dataService.select('Group').update(group2);
+            this.dataService.select<Group>('Group').update(group2);
           }
         });
     }
@@ -230,7 +233,7 @@ export class ManagementComponent {
           if (data && data.nif) {
             const data2 = {...group.data, nif: data.nif};
             const group2 = {...group, data: data2};
-            this.dataService.select('Group').update(group2);
+            this.dataService.select<Group>('Group').update(group2);
           }
         });
     }
@@ -248,7 +251,7 @@ export class ManagementComponent {
           if (data && data.activities) {
             const data2 = {...group.data, activities: data.activities};
             const group2 = {...group, data: data2};
-            this.dataService.select('Group').update(group2);
+            this.dataService.select<Group>('Group').update(group2);
           }
         });
     }
@@ -274,7 +277,7 @@ export class ManagementComponent {
           this.storageUploadTaskService.delete(group.data.logo);
           const data2 = {...group.data, logo: null};
           const group2 = {...group, data: data2};
-          this.dataService.select('Group').update(group2);
+          this.dataService.select<Group>('Group').update(group2);
         }
       });
   }
@@ -285,7 +288,7 @@ export class ManagementComponent {
       }
       const data2 = {...group.data, logo: documents[0].url};
       const group2 = {...group, data: data2};
-      this.dataService.select('Group').update(group2);
+      this.dataService.select<Group>('Group').update(group2);
     }
   }
   private appendAdditionalInfo(group: any, data: any) {
@@ -294,7 +297,7 @@ export class ManagementComponent {
       additionalInfo.push(data.additionalInfo);
       const data2 = {...group.data, additionalInfo};
       const group2 = {...group, data: data2};
-      this.dataService.select('Group').update(group2);
+      this.dataService.select<Group>('Group').update(group2);
     }
   }
   private updateAdditionalInfo(group: any, index: number, data: any) {
@@ -305,7 +308,7 @@ export class ManagementComponent {
       );
       const data2 = {...group.data, additionalInfo};
       const group2 = {...group, data: data2};
-      this.dataService.select('Group').update(group2);
+      this.dataService.select<Group>('Group').update(group2);
     }
   }
 }

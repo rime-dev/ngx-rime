@@ -18,7 +18,7 @@ export class InfoProjectsComponent {
   public typeOfFinishedProjects: string[] = [];
 
   constructor(private dataService: DataService) {
-    this.finishedProjects$ = this.dataService.select('Project').entities$;
+    this.finishedProjects$ = this.dataService.select<Project>('Project').entities$;
     this.finishedProjectsInThisMonth$ = this.finishedProjects$.pipe(
       tap({
         next: (projects) => this.loadTypesOfFinishedProjects(projects),
@@ -37,7 +37,7 @@ export class InfoProjectsComponent {
   private filterFinishedProjectsInThisMonth(documents: EntityState<Project>[]) {
     const thisMonth = this.calculateThisMonth();
     const filteredDocuments = documents.filter(
-      (project: EntityState<Project>) => project.data.endingDate.slice(0, 7) === thisMonth
+      (project: EntityState<Project>) => project.data.endingDate?.slice(0, 7) === thisMonth
     );
     return filteredDocuments;
   }

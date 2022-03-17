@@ -87,7 +87,7 @@ export class SearchInputComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.projectsSearched$ = combineLatest([
       this.searchForm.controls.searchInput.valueChanges.pipe(startWith('')),
-      this.dataService.select('Project').entities$,
+      this.dataService.select<Project>('Project').entities$,
     ]).pipe(
       debounceTime(150),
       map((combine) =>

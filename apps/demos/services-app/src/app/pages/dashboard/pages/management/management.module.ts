@@ -13,7 +13,6 @@ import {MapModule} from '../../../../components/map/map.module';
 import {ManagementRoutingModule} from './management-routing.module';
 import {ManagementComponent} from './management.component';
 import {TeamComponent} from './components/team/team.component';
-import {CardComponent} from './components/card/card.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -36,7 +35,6 @@ import {GroupAddLocationDialogComponent} from './components/group-add-location-d
   declarations: [
     ManagementComponent,
     TeamComponent,
-    CardComponent,
     GroupAddNameDialogComponent,
     GroupAddWebDialogComponent,
     GroupAddPhoneDialogComponent,

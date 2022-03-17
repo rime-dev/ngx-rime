@@ -1,14 +1,7 @@
 <div class="lg:container p-8 flex flex-col mx-auto">
   <div class="flex flex-row items-center h-10">
     <span
-      class="
-        text-lg
-        font-medium
-        text-gray-700
-        dark:text-gray-200
-        overflow-hidden overflow-ellipsis
-        whitespace-nowrap
-      "
+      class="text-lg font-medium text-gray-700 dark:text-gray-200 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >{{ 'projectNotes' | transloco }}</span
     >
     <button
@@ -20,7 +13,9 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <mat-list *ngIf="project.data.comments">
+  <mat-list
+    *ngIf="project.data.comments && project.data.comments.length > 0; else noCommentsTemplate"
+  >
     <ng-container *ngFor="let comment of project.data.comments.slice().reverse()">
       <mat-list-item class="py-8 h-auto">
         <mat-icon mat-list-icon color="primary">description</mat-icon>
@@ -34,10 +29,12 @@
       <mat-divider></mat-divider>
     </ng-container>
   </mat-list>
-  <div *ngIf="!project.data.comments" class="flex flex-col h-48 text-center items-center">
-    <div class="m-auto h-36">
-      <p class="mb-4">{{ 'noComments' | transloco }}</p>
-      <img class="h-32 w-full" src="assets/undraw_not_found_-60-pq.svg" />
+  <ng-template #noCommentsTemplate>
+    <div class="flex flex-col h-48 text-center items-center">
+      <div class="m-auto h-36">
+        <p class="mb-4">{{ 'noComments' | transloco }}</p>
+        <img class="h-32 w-full" src="assets/undraw_not_found_-60-pq.svg" />
+      </div>
     </div>
-  </div>
+  </ng-template>
 </div>

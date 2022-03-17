@@ -8,6 +8,10 @@ import {ConditionalQueryFirestore, EntityState} from '@rng/data-access/base/mode
 import {Routes, UserInfo} from '@rng/ui/user-account-popup';
 import {Observable, Subject} from 'rxjs';
 import {filter, map, takeUntil, tap} from 'rxjs/operators';
+import {Activity} from '../../models/activity.model';
+import {Group} from '../../models/group.model';
+import {Invoice} from '../../models/invoice.model';
+import {Project} from '../../models/project.model';
 import {User} from '../../models/user.model';
 
 @Component({
@@ -49,28 +53,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private translocoService: TranslocoService
   ) {
-    this.sideRoutes = [
-      {
-        path: '/dashboard/home',
-        text: this.translocoService.translate('home'),
-        icon: 'home',
-      },
-      {
-        path: '/dashboard/projects',
-        text: this.translocoService.translate('projects'),
-        icon: 'work',
-      },
-      {
-        path: '/dashboard/invoices',
-        text: this.translocoService.translate('invoices'),
-        icon: 'receipt_long',
-      },
-      {
-        path: '/dashboard/management',
-        text: this.translocoService.translate('management'),
-        icon: 'admin_panel_settings',
-      },
-    ];
+    this.sideRoutes = [];
     this.userAuth$ = this.authService.user$;
     this.userAuth$
       .pipe(
@@ -118,6 +101,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe();
+    this.sideRoutes = [
+      {
+        path: '/dashboard/home',
+        text: this.translocoService.translate('home'),
+        icon: 'home',
+      },
+      {
+        path: '/dashboard/projects',
+        text: this.translocoService.translate('projects'),
+        icon: 'work',
+      },
+      {
+        path: '/dashboard/invoices',
+        text: this.translocoService.translate('invoices'),
+        icon: 'receipt_long',
+      },
+      {
+        path: '/dashboard/management',
+        text: this.translocoService.translate('management'),
+        icon: 'admin_panel_settings',
+      },
+    ];
   }
 
   ngOnDestroy(): void {
@@ -130,7 +135,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         .select('User')
         .getByKey(id)
         .pipe(
-          map<unknown, User>((userResult) => (userResult as EntityState<User>).data ),
+          map<unknown, User>((userResult) => (userResult as EntityState<User>).data),
           map<User | null, User | null>((userResult) => this.checkPermissions(userResult)),
           tap({next: (userResult) => this.loadDataByUser(userResult)})
         );
@@ -151,13 +156,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (!userResult) {
       return;
     }
-    this.dataService.select('Activity').getAll();
+    this.dataService.select<Activity>('Activity').getAll();
   }
   private loadGroups(userResult: User) {
     if (!userResult) {
       return;
     }
-    this.dataService.select('Group').getByKey(userResult.group);
+    this.dataService.select<Group>('Group').getByKey(userResult.group);
   }
 
   private loadProjects(userResult: User): void {
@@ -171,7 +176,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         value: userResult.group,
       },
     ];
-    this.dataService.select('Project').getWithQuery(query);
+    this.dataService.select<Project>('Project').getWithQuery(query);
     const query0: ConditionalQueryFirestore[] = [
       {
         fieldPath: 'group',
@@ -179,7 +184,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         value: undefined,
       },
     ];
-    this.dataService.select('Project').getWithQuery(query0);
+    this.dataService.select<Project>('Project').getWithQuery(query0);
   }
 
   private loadCollaborators(userResult: User): void {
@@ -193,7 +198,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         value: userResult.group,
       },
     ];
-    this.dataService.select('User').getWithQuery(query1);
+    this.dataService.select<Project>('User').getWithQuery(query1);
   }
   private loadInvoices(userResult: User): void {
     if (!userResult) {
@@ -206,7 +211,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         value: userResult.group,
       },
     ];
-    this.dataService.select('Invoice').getWithQuery(query);
+    this.dataService.select<Invoice>('Invoice').getWithQuery(query);
   }
   private getTitlePage(url: string) {
     const pathMatch = this.sideRoutes.filter((route) => route.path && url.includes(route.path))[0];

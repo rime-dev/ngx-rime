@@ -5,7 +5,7 @@
     </button>
     <header class="max-w-7xl w-full py-6 px-4 sm:px-6 lg:px-8">
       <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-200">
-        {{ (invoice$ | async)?.data.title }}
+        {{ invoice.data.title }}
       </h1>
     </header>
     <button mat-icon-button class="self-center ml-auto" [matMenuTriggerFor]="menu">
