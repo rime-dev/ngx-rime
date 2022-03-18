@@ -116,14 +116,14 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
    * Defines the routes in the side navigation bar
    */
   @Input()
-  set sideRoutes(value: Routes[]) {
+  set sideRoutes(value: Routes[] | null) {
     this._sideRoutes = value;
     this._changeDetectorRef.detectChanges();
   }
-  get sideRoutes(): Routes[] {
+  get sideRoutes(): Routes[] | null {
     return this._sideRoutes;
   }
-  private _sideRoutes!: Routes[];
+  private _sideRoutes!: Routes[] | null;
   /**
    * Shell layout has sidenav
    */

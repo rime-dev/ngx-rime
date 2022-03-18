@@ -6,8 +6,8 @@ import {AuthService, User as UserAuth} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {ConditionalQueryFirestore, EntityState} from '@rng/data-access/base/models/base.model';
 import {Routes, UserInfo} from '@rng/ui/user-account-popup';
-import {Observable, Subject} from 'rxjs';
-import {filter, map, takeUntil, tap} from 'rxjs/operators';
+import {Observable, of, Subject} from 'rxjs';
+import {filter, map, take, takeUntil, tap} from 'rxjs/operators';
 import {Activity} from '../../models/activity.model';
 import {Group} from '../../models/group.model';
 import {Invoice} from '../../models/invoice.model';
@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     alt: 'RNG APP',
   };
   topRoutes = [];
-  sideRoutes: Routes[];
+  sideRoutes$: Observable<Routes[]>;
   userRoutes = [
     {
       click: async () => {
@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private translocoService: TranslocoService
   ) {
-    this.sideRoutes = [];
+    this.sideRoutes$ = of([]);
     this.userAuth$ = this.authService.user$;
     this.userAuth$
       .pipe(
@@ -101,7 +101,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe();
-    this.sideRoutes = [
+    this.sideRoutes$ = this.translocoService.events$.pipe(map(() => this.getSideRoutes()));
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+  private getSideRoutes() {
+    return [
       {
         path: '/dashboard/home',
         text: this.translocoService.translate('home'),
@@ -123,11 +131,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         icon: 'admin_panel_settings',
       },
     ];
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
   private loadUser(id?: string): void {
     if (id) {
@@ -214,9 +217,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.dataService.select<Invoice>('Invoice').getWithQuery(query);
   }
   private getTitlePage(url: string) {
-    const pathMatch = this.sideRoutes.filter((route) => route.path && url.includes(route.path))[0];
-    if (pathMatch && pathMatch.text) {
-      this.titlePage = pathMatch.text;
-    }
+    this.sideRoutes$
+      .pipe(
+        map(
+          (routes: Routes[]) => routes.filter((route) => route.path && url.includes(route.path))[0]
+        ),
+        filter((value: Routes) => Boolean(value && value.text)),
+        tap({next: (value: Routes) => (this.titlePage = value.text as string)}),
+        take(1)
+      )
+      .subscribe();
   }
 }

@@ -6,6 +6,7 @@ import {dataFilter} from '@rng/data-access/base/operators';
 import {MapComponent} from 'apps/demos/services-app/src/app/components/map/map.component';
 import {Project} from 'apps/demos/services-app/src/app/models/project.model';
 import {Feature} from 'ol';
+import Geometry from 'ol/geom/Geometry';
 import Point from 'ol/geom/Point';
 import {fromLonLat} from 'ol/proj';
 import {Observable, of} from 'rxjs';
@@ -19,7 +20,7 @@ import {delay, tap} from 'rxjs/operators';
 export class ProjectListComponent implements OnInit {
   public tabSelected = 0;
   public filterByTypeSelected = 'all';
-  public points$: Observable<any[]> = of([]);
+  public points$: Observable<Feature<Geometry>[]> = of([]);
   public mapIsOpenOnMobile = false;
 
   public activeProjects$: Observable<EntityState<Project>[]>;

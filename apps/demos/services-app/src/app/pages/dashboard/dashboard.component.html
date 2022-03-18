@@ -1,6 +1,6 @@
 <rng-shell
   [topRoutes]="topRoutes"
-  [sideRoutes]="sideRoutes"
+  [sideRoutes]="sideRoutes$ | async"
   [logo]="logo"
   [appName]="appName"
   [hasSidenav]="hasSidenav"

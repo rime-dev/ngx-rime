@@ -28,6 +28,7 @@ import CircleStyle from 'ol/style/Circle';
 import Text from 'ol/style/Text';
 import View from 'ol/View';
 import {defaults as defaultInteraction} from 'ol/interaction';
+import Geometry from 'ol/geom/Geometry';
 
 const MAP = new InjectionToken<MapComponent>('MapComponent');
 const circleDistanceMultiplier = 1;
@@ -129,14 +130,17 @@ export class MapComponent implements AfterViewInit {
   private clusterCircles!: VectorLayer<any>;
 
   @Input()
-  set data(value) {
+  set data(value: Feature<Geometry>[] | null) {
+    if (!value) {
+      return;
+    }
     this._data = value;
-    this.addPoints(value);
+    this.addPoints(this._data);
   }
-  get data() {
+  get data(): Feature<Geometry>[] {
     return this._data;
   }
-  private _data: any[] | null = [];
+  private _data: Feature<Geometry>[] = [];
 
   @Input()
   set center(value) {
@@ -177,7 +181,9 @@ export class MapComponent implements AfterViewInit {
   }
   private _interactions: any = {};
 
-  @Output() featureSelected: EventEmitter<any> = new EventEmitter<any>();
+  @Output() featureSelected: EventEmitter<Feature<Geometry>> = new EventEmitter<
+    Feature<Geometry>
+  >();
 
   @HostBinding('attr.id') id = 'rng-map';
 
@@ -199,7 +205,7 @@ export class MapComponent implements AfterViewInit {
     }
   }
 
-  private addPoints(features: any) {
+  private addPoints(features: Feature<Geometry>[]) {
     const vectorSource = new VectorSource({features});
     const clusterSource = new Cluster({
       attributions: 'E-LARES',
@@ -254,10 +260,15 @@ export class MapComponent implements AfterViewInit {
       coerceBooleanProperty(coerceNumberProperty(extent[3]))
     );
   }
-  public fitToFeaturesExtent(features: any) {
+  public fitToFeaturesExtent(features: Feature<Geometry>[]) {
+    if (!features) {
+      return;
+    }
     // Calculate the extent of the cluster members.
     const extent = createEmpty();
-    features.forEach((feature: Feature<any>) => extend(extent, feature.getGeometry().getExtent()));
+    features.forEach((feature: Feature<Geometry>) =>
+      extend(extent, feature.getGeometry()?.getExtent() || [])
+    );
     const view = this.map.getView();
     // Zoom to the extent of the cluster members.
     if (features.length > 0 && this.isValidExtent(extent)) {
@@ -309,20 +320,20 @@ export class MapComponent implements AfterViewInit {
     this.map.un('click', () => {});
     this.map.on('click', (event) => {
       this.overlay.setPosition(undefined);
-      this.clusters.getFeatures(event.pixel).then((features: string | any[]) => {
+      void this.clusters.getFeatures(event.pixel).then((features: string | any[]) => {
         if (features.length > 0) {
-          const clusterMembers = features[0].get('features');
+          const clusterMembers = features[0].get('features') as Feature<Geometry>[];
           if (clusterMembers.length > 1) {
             // Calculate the extent of the cluster members.
             const extent = createEmpty();
-            clusterMembers.forEach((feature: Feature<any>) =>
-              extend(extent, feature.getGeometry().getExtent())
+            clusterMembers.forEach((feature: Feature<Geometry>) =>
+              extend(extent, feature.getGeometry()?.getExtent() || [])
             );
             const view = this.map.getView();
             // Zoom to the extent of the cluster members.
             view.fit(extent, {duration: 500, padding: [50, 50, 50, 50]});
           } else {
-            this.tooltipContext = {...(clusterMembers[0] as Feature<any>).getProperties()};
+            this.tooltipContext = {...clusterMembers[0].getProperties()};
             const coordinate = event.coordinate;
             this.overlay.setPosition(coordinate);
             this.featureSelected.emit(clusterMembers[0]);
@@ -335,14 +346,17 @@ export class MapComponent implements AfterViewInit {
   private addMapOnHover() {
     this.map.un('pointermove', () => {});
     this.map.on('pointermove', (event) => {
-      this.clusters.getFeatures(event.pixel).then((features: Feature<any>[]) => {
+      void this.clusters.getFeatures(event.pixel).then((features: Feature<Geometry>[]) => {
         if (features[0] !== this.hoverFeature) {
           // Display the convex hull on hover.
           this.hoverFeature = features[0];
           this.clusterHulls.setStyle(this.clusterHullStyle as any);
           // Change the cursor style to indicate that the cluster is clickable.
           this.map.getTargetElement().style.cursor =
-            this.hoverFeature && this.hoverFeature.get('features').length > 1 ? 'pointer' : '';
+            this.hoverFeature &&
+            (this.hoverFeature.get('features') as Feature<Geometry>[]).length > 1
+              ? 'pointer'
+              : '';
         }
       });
     });
@@ -383,7 +397,7 @@ export class MapComponent implements AfterViewInit {
    * @param clusterMember A feature from a cluster.
    * @return An icon style for the cluster member's location.
    */
-  private clusterMemberStyle(clusterMember: Feature<any>) {
+  private clusterMemberStyle(clusterMember: Feature<Geometry>) {
     return new Style({
       geometry: clusterMember.getGeometry(),
       image: innerCircle,
@@ -404,31 +418,31 @@ export class MapComponent implements AfterViewInit {
     if (cluster !== this.clickFeature || resolution !== this.clickResolution) {
       return;
     }
-    const clusterMembers = cluster.get('features');
-    const centerCoordinates = cluster.getGeometry().getCoordinates();
-    return this.generatePointsCircle(
-      clusterMembers.length,
-      cluster.getGeometry().getCoordinates(),
-      resolution
-    ).reduce((styles: any[], coordinates, i) => {
-      const point = new Point(coordinates);
-      const line = new LineString([centerCoordinates, coordinates]);
-      styles.unshift(
-        new Style({
-          geometry: line,
-          stroke: convexHullStroke,
-        })
-      );
-      styles.push(
-        this.clusterMemberStyle(
-          new Feature({
-            ...clusterMembers[i].getProperties(),
-            geometry: point,
+    const geometry = cluster.getGeometry();
+    const clusterMembers = cluster.get('features') as Feature<Geometry>[];
+    const centerCoordinates = geometry.getCoordinates() as number[];
+    return this.generatePointsCircle(clusterMembers.length, centerCoordinates, resolution).reduce(
+      (styles: unknown[], coordinates, i) => {
+        const point = new Point(coordinates);
+        const line = new LineString([centerCoordinates, coordinates]);
+        styles.unshift(
+          new Style({
+            geometry: line,
+            stroke: convexHullStroke,
           })
-        )
-      );
-      return styles;
-    }, []);
+        );
+        styles.push(
+          this.clusterMemberStyle(
+            new Feature({
+              ...clusterMembers[i].getProperties(),
+              geometry: point,
+            })
+          )
+        );
+        return styles;
+      },
+      []
+    );
   };
 
   /**
@@ -441,7 +455,7 @@ export class MapComponent implements AfterViewInit {
     if (cluster !== this.hoverFeature) {
       return;
     }
-    const originalFeatures = cluster.get('features');
+    const originalFeatures = cluster.get('features') as Feature<Geometry>[];
     const points = originalFeatures.map((feature: Feature<any>) =>
       feature.getGeometry().getCoordinates()
     );
