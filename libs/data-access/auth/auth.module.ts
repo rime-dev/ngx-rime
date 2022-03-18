@@ -8,11 +8,13 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
-import {Router, Routes} from '@angular/router';
+import {Router, RouterModule, Routes} from '@angular/router';
+import {LangDefinition, Translation, TranslocoModule, TranslocoService} from '@ngneat/transloco';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 import {SignInComponent} from './components/sign-in/sing-in.component';
 import {SignUpComponent} from './components/sign-up/sing-up.component';
 import {VerifyEmailComponent} from './components/verify-email/verify-email.component';
+import i18n from './i18n/i18n';
 import {AuthTestingService} from './services/auth.mock.service';
 import {AuthService} from './services/auth.service';
 const routes: Routes = [
@@ -38,10 +40,20 @@ export function initAuthRouter(router: Router) {
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
+    RouterModule,
+    TranslocoModule,
   ],
   exports: [SignInComponent, SignUpComponent, ForgotPasswordComponent, VerifyEmailComponent],
 })
-export class AuthComponentsModule {}
+export class AuthComponentsModule {
+  constructor(translocoService: TranslocoService) {
+    translocoService.getAvailableLangs().forEach((lang) => {
+      const language: string = (lang as LangDefinition).id || (lang as string);
+      const translation = (i18n as Record<string, Translation>)[language];
+      translocoService.setTranslation(translation, 'rngAuth/' + language);
+    });
+  }
+}
 
 @NgModule({
   imports: [CommonModule, AuthComponentsModule, AngularFireAuthModule, AngularFirestoreModule],
