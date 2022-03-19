@@ -8,6 +8,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
 import {Router, RouterModule, Routes} from '@angular/router';
 import {LangDefinition, Translation, TranslocoModule, TranslocoService} from '@ngneat/transloco';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
@@ -42,6 +43,7 @@ export function initAuthRouter(router: Router) {
     MatIconModule,
     RouterModule,
     TranslocoModule,
+    MatCardModule,
   ],
   exports: [SignInComponent, SignUpComponent, ForgotPasswordComponent, VerifyEmailComponent],
 })
