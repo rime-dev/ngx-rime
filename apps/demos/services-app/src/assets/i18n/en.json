@@ -73,6 +73,7 @@
   "doneActions": "Done actions",
   "actions.add": "Add",
   "actions.accept": "Accept",
+  "actions.delete": "Delete",
   "actions.decline": "Decline",
   "actions.edit": "Edit",
   "actions.close": "Close",

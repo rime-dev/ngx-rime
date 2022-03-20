@@ -7,7 +7,7 @@
     <button
       mat-icon-button
       class="ml-auto"
-      *ngIf="project.data.group"
+      *ngIf="project.data.group && project.data.state !== 'finished'"
       (click)="openDialogToAddComment()"
     >
       <mat-icon>add</mat-icon>

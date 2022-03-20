@@ -146,8 +146,12 @@ export class FireDataService<T> {
    */
   update(update: EntityState<T>): Observable<T> {
     const id = update && update.id;
+    const changesData = update && update.data && (update as any).changes;
+    const changesUpdate = update && (update as any).changes;
     const updateOrError =
-      id == null ? new Error(`No "${this.entityName}" update data or id`) : update.data;
+      id === null
+        ? new Error(`No "${this.entityName}" update data or id`)
+        : changesData || changesUpdate;
     return this.execute('update', id, updateOrError);
   }
 

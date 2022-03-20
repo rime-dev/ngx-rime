@@ -161,9 +161,9 @@ export class ProjectInfoComponent implements OnDestroy {
       .subscribe((request) => {
         if (this.project) {
           if (request) {
-            const data = {...this.project.data, accepted: false, group: undefined};
+            const data = {...this.project.data, accepted: false, group: null};
             const project = {...this.project, data};
-            this.dataService.select('Project').update(project);
+            this.dataService.select<Project>('Project').update(project);
             void this.router.navigate(['../../project-list'], {relativeTo: this.route});
             this.snackBar.open(this.translocoService.translate('project.declined'), '', {
               horizontalPosition: 'end',
@@ -178,16 +178,25 @@ export class ProjectInfoComponent implements OnDestroy {
     if (this.checkIfProjectIsFinished()) {
       return;
     }
-    if (this.project) {
-      const data = {...this.project.data, accepted: true, group: 'GS1'};
-      const project = {...this.project, data};
-      this.dataService.select('Project').update(project);
-      this.snackBar.open(this.translocoService.translate('project.accepted'), '', {
-        horizontalPosition: 'end',
-        verticalPosition: 'top',
-        duration: 3000,
+    this.matDialog
+      .open(RequestIfTrueDialogComponent, {
+        minWidth: '33vw',
+      })
+      .afterClosed()
+      .subscribe((request) => {
+        if (this.project) {
+          if (request) {
+            const data = {...this.project.data, accepted: true, group: 'GS1'};
+            const project = {...this.project, data};
+            this.dataService.select<Project>('Project').update(project);
+            this.snackBar.open(this.translocoService.translate('project.accepted'), '', {
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+              duration: 3000,
+            });
+          }
+        }
       });
-    }
   }
   openDialogToChangeState() {
     if (this.checkIfProjectIsFinished()) {

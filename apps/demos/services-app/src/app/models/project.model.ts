@@ -7,7 +7,7 @@ export interface Project {
   type: ProjectType;
   state: ProjectState;
   accepted: boolean;
-  group?: string;
+  group?: string | null;
   client: string;
   description: string;
   startDate: string;

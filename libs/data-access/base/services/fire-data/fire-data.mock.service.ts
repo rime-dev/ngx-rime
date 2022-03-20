@@ -149,9 +149,12 @@ export class FireDataMockService<T> {
    */
   update(update: EntityState<T>): Observable<any> {
     const id = update && update.id;
-    const changes = update && update.data;
+    const changesData = update && update.data && (update as any).changes;
+    const changesUpdate = update && (update as any).changes;
     const updateOrError =
-      id === null ? new Error(`No "${this.entityName}" update data or id`) : changes;
+      id === null
+        ? new Error(`No "${this.entityName}" update data or id`)
+        : changesData || changesUpdate;
     return this.execute('update', id, updateOrError);
   }
 
@@ -184,9 +187,7 @@ export class FireDataMockService<T> {
   private getObservableFromDelete(document: string, collection?: string) {
     let action = null;
     if (collection && this.mockData) {
-      this.mockData = this.mockData[collection].filter(
-        (entityData: any) => entityData.uid !== document
-      );
+      this.mockData[collection].filter((entityData: any) => entityData.id !== document);
       action = new Promise(() => {});
     }
     return of(action);
@@ -217,8 +218,8 @@ export class FireDataMockService<T> {
   private getObservableFromUpdate(entity?: EntityState<T>, collection?: string) {
     let action = null;
     if (collection && entity && this.mockData) {
-      this.mockData = this.mockData[collection].forEach((entityData: any) => {
-        if (entityData.uid === entity.id) {
+      this.mockData[collection].forEach((entityData: any) => {
+        if (entityData.id === entity.id) {
           entityData = entity;
         }
       });

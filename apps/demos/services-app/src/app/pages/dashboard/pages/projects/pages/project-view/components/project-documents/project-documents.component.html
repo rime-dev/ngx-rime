@@ -1,18 +1,16 @@
 <div class="lg:container p-8 flex flex-col mx-auto">
   <div class="flex flex-row items-center h-10">
     <span
-      class="
-        text-lg
-        font-medium
-        text-gray-700
-        dark:text-gray-200
-        overflow-hidden overflow-ellipsis
-        whitespace-nowrap
-      "
+      class="text-lg font-medium text-gray-700 dark:text-gray-200 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >{{ 'projectDocuments' | transloco }}</span
     >
 
-    <button mat-icon-button *ngIf="project.data.group" class="ml-auto" (click)="addDocument()">
+    <button
+      mat-icon-button
+      *ngIf="project.data.group && project.data.state !== 'finished'"
+      class="ml-auto"
+      (click)="addDocument()"
+    >
       <mat-icon>add</mat-icon>
     </button>
   </div>
@@ -45,59 +43,20 @@
   <ng-container *ngIf="filteredDocuments$ | async; let documents">
     <div
       *ngIf="documents.length > 0; else noDocumentsTemplate"
-      class="
-        mx-auto
-        w-full
-        space-y-2
-        sm:space-y-0
-        gap-2
-        grid grid-cols-1
-        sm:grid-cols-2
-        lg:grid-cols-3
-      "
+      class="mx-auto w-full space-y-2 sm:space-y-0 gap-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
     >
       <div
         matRipple
-        class="
-          w-full
-          mx-auto
-          bg-white
-          dark:bg-transparent
-          rounded-xl
-          shadow-md
-          overflow-hidden
-          md:max-w-2xl
-          cursor-pointer
-          border border-gray-200
-          dark:border-gray-500
-        "
+        class="w-full mx-auto bg-white dark:bg-transparent rounded-xl shadow-md overflow-hidden md:max-w-2xl cursor-pointer border border-gray-200 dark:border-gray-500"
         *ngFor="let document of filteredDocuments$ | async"
         (click)="viewDocument(document)"
       >
         <div class="max-w-4xl mx-auto grid grid-cols-1">
           <div
-            class="
-              relative
-              p-3
-              col-start-1
-              row-start-1
-              flex flex-col-reverse
-              rounded-lg
-              bg-gradient-to-t
-              from-gray-500
-              via-transparent
-            "
+            class="relative p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-gray-500 via-transparent"
           >
             <h1
-              class="
-                mt-1
-                text-lg
-                font-semibold
-                text-white
-                dark:sm:text-white
-                overflow-hidden
-                text-ellipsis
-              "
+              class="mt-1 text-lg font-semibold text-white dark:sm:text-white overflow-hidden text-ellipsis"
             >
               {{ document.title }}
             </h1>

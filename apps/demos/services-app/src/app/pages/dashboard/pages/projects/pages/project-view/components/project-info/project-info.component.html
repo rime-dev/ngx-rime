@@ -1,4 +1,17 @@
 <div *ngIf="project" class="lg:container p-8 flex flex-col mx-auto">
+  <div *ngIf="!project.data.group && !project.data.accepted" class="flex flex-col md:flex-row mb-4">
+    <div class="flex w-full md:w-1/2 mt-4 px-4">
+      <button mat-raised-button color="warn" class="w-full" (click)="acceptProject()">
+        {{ 'actions.accept' | transloco }}
+      </button>
+    </div>
+    <div class="flex w-full md:w-1/2 mt-4 px-4">
+      <button mat-raised-button color="warn" class="w-full" (click)="declineProject()">
+        {{ 'actions.decline' | transloco }}
+      </button>
+    </div>
+  </div>
+
   <ng-container *ngIf="project.data.group">
     <div class="flex flex-col-reverse md:flex-row w-full h-auto">
       <div class="flex flex-col w-full md:w-1/2">
@@ -12,18 +25,7 @@
           <div class="group flex flex-row relative" *ngFor="let user of users$ | async">
             <img
               [matTooltip]="user.data.name"
-              class="
-                group
-                rounded-full
-                h-12
-                w-12
-                mx-2
-                mat-elevation-z2
-                object-cover
-                cursor-pointer
-                relative
-                group-hover:opacity-50
-              "
+              class="group rounded-full h-12 w-12 mx-2 mat-elevation-z2 object-cover cursor-pointer relative group-hover:opacity-50"
               [src]="user.data.photoURL"
             />
             <div
@@ -217,23 +219,5 @@
         </div>
       </mat-list-item>
     </mat-action-list>
-  </div>
-  <div class="flex flex-col md:flex-row">
-    <div
-      class="flex w-full md:w-1/2 mt-4 px-4"
-      *ngIf="!project.data.group && !project.data.accepted"
-    >
-      <button mat-raised-button color="warn" class="w-full" (click)="declineProject()">
-        {{ 'actions.decline' | transloco }}
-      </button>
-    </div>
-    <div
-      class="flex w-full md:w-1/2 mt-4 px-4"
-      *ngIf="!project.data.group && !project.data.accepted"
-    >
-      <button mat-raised-button color="warn" class="w-full" (click)="acceptProject()">
-        {{ 'actions.accept' | transloco }}
-      </button>
-    </div>
   </div>
 </div>
