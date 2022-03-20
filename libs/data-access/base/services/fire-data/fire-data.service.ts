@@ -269,7 +269,13 @@ export class FireDataService<T> {
           .collection(collection)
           .doc(document)
           .snapshotChanges()
-          .pipe(map((object) => new FireDataObject(object)));
+          .pipe(
+            map((object) => {
+              console.log(object);
+
+              return new FireDataObject(object);
+            })
+          );
       } else if (!document && data) {
         let ref: CollectionReference<unknown>;
         ref = this.angularFirestore.collection(collection).ref;

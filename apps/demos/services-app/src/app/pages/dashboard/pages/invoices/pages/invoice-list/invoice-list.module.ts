@@ -13,7 +13,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {TranslocoModule} from '@ngneat/transloco';
 import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
-import {StorageMockModule} from '@rng/data-access/storage';
+import {StorageMockModule, StorageModule} from '@rng/data-access/storage';
 import {SatinizeModule} from '@rng/util/satinize';
 import {InvoiceCardComponent} from './components/invoice-card/invoice-card.component';
 import {InvoiceCreateDialogComponent} from './components/invoice-create-dialog/invoice-create-dialog.component';
@@ -35,8 +35,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatTooltipModule,
     TranslocoModule,
     TranslocoLocaleModule,
-    StorageMockModule,
-    // StorageModule,
+    // StorageMockModule,
+    StorageModule,
     MatDialogModule,
     SatinizeModule,
     MatMenuModule,

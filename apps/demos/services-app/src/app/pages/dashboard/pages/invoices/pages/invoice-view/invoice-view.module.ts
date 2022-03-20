@@ -18,7 +18,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {TranslocoModule} from '@ngneat/transloco';
 import {TranslocoLocaleModule} from '@ngneat/transloco-locale';
-import {StorageMockModule} from '@rng/data-access/storage';
+import {StorageMockModule, StorageModule} from '@rng/data-access/storage';
 import {SatinizeModule} from '@rng/util/satinize';
 import {RequestIfTrueModule} from 'apps/demos/services-app/src/app/components/request-if-true-dialog/request-if-true.module';
 import {InvoiceAddCostDialogComponent} from './components/invoice-add-cost-dialog/invoice-add-cost-dialog.component';
@@ -59,8 +59,8 @@ import {InvoiceViewComponent} from './invoice-view.component';
     MatSnackBarModule,
     MatDialogModule,
     MatRippleModule,
-    StorageMockModule,
-    // StorageModule,
+    //StorageMockModule,
+    StorageModule,
     MatDialogModule,
     SatinizeModule,
     MatMenuModule,

@@ -58,7 +58,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private checkPermissions(user: User | null): User | null {
-    if (user && user.role && user.type && user.type !== 'provider' && user.role === 'user') {
+    if (user && (!user.role || !user.type || user.type !== 'provider' || user.role === 'user')) {
+      if (!user.group) {
+        void this.router.navigate(['no-group']);
+        this.snackBar.open('No tiene un grupo asociado', '', {
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          duration: 3000,
+        });
+        return null;
+      }
       void this.router.navigate(['sign-in']);
       this.snackBar.open('No tiene permisos para esta aplicación', '', {
         horizontalPosition: 'end',
@@ -151,6 +160,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private loadDataByUser(userResult: User | null) {
+    console.log(userResult);
+
     if (!userResult) {
       return;
     }

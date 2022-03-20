@@ -25,7 +25,7 @@ import {GroupAddWebDialogComponent} from './components/group-add-web-dialog/grou
 import {GroupAddNifDialogComponent} from './components/group-add-nif-dialog/group-add-nif-dialog.component';
 import {MatRippleModule} from '@angular/material/core';
 import {GroupAddLogoDialogComponent} from './components/group-add-logo-dialog/group-add-logo-dialog.component';
-import {StorageMockModule} from '@rng/data-access/storage';
+import {StorageMockModule, StorageModule} from '@rng/data-access/storage';
 import {GroupAddActivityDialogComponent} from './components/group-add-activity-dialog/group-add-activity-dialog.component';
 // eslint-disable-next-line max-len
 import {GroupAddAdditionalInfoDialogComponent} from './components/group-add-additional-info-dialog/group-add-additional-info-dialog.component';
@@ -65,8 +65,8 @@ import {GroupAddLocationDialogComponent} from './components/group-add-location-d
     FormsModule,
     MatDialogModule,
     MatRippleModule,
-    StorageMockModule,
-    // StorageModule,
+    // StorageMockModule,
+    StorageModule,
   ],
 })
 export class ManagementModule {}

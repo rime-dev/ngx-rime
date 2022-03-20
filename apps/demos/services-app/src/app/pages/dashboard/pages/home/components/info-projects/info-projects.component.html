@@ -9,7 +9,10 @@
       {{ 'thismonth' | transloco }}</mat-card-subtitle
     >
   </mat-card-header>
-  <mat-card-content class="h-12 w-full overflow-y-hidden overflow-x-auto">
+  <mat-card-content
+    class="h-12 w-full overflow-y-hidden overflow-x-auto"
+    *ngIf="typeOfFinishedProjects && typeOfFinishedProjects.length > 0"
+  >
     <mat-chip-list>
       <mat-chip color="primary" selected *ngFor="let type of typeOfFinishedProjects">{{
         type | transloco

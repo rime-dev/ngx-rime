@@ -14,12 +14,9 @@
               <mat-card-subtitle>
                 <span
                   class="text-4lg text-white block mt-4"
-                  *ngIf="earnings$ | async; let earningValue; else: noEarningsTemplate"
+                  *ngIf="earnings$ | async; let earningValue"
                   >{{ earningValue | translocoCurrency }}</span
                 >
-                <ng-template #noEarningsTemplate>
-                  <span class="text-2lg text-white block mt-2">{{ 'noEarnings' | transloco }}</span>
-                </ng-template>
               </mat-card-subtitle>
               <mat-chip-list>
                 <mat-chip
@@ -30,7 +27,21 @@
                   {{ 'regardingTheMonthPrevious' | transloco }}</mat-chip
                 >
               </mat-chip-list>
-              <rng-earnings-chart class="h-20" [data]="invoicesData$ | async"></rng-earnings-chart>
+              <ng-container *ngIf="invoicesData$ | async; let invoicesData">
+                <rng-earnings-chart
+                  class="h-20"
+                  *ngIf="invoicesData && invoicesData.length > 0; else noSavingsTemplate"
+                  [data]="invoicesData"
+                ></rng-earnings-chart>
+              </ng-container>
+              <ng-template #noSavingsTemplate>
+                <div class="flex flex-col text-center items-center">
+                  <div class="m-auto">
+                    <p class="mb-4">{{ 'noEarnings' | transloco }}</p>
+                    <!-- <img class="h-32 w-full" src="assets/undraw_savings.svg" /> -->
+                  </div>
+                </div>
+              </ng-template>
             </mat-card-header>
           </mat-card>
         </div>
@@ -60,11 +71,8 @@
           class="w-full h-auto lg:h-full mat-elevation-z3"
           *ngIf="invoices$ | async; let invoices"
         >
-          <div
-            class="flex flex-col h-auto xl:h-48 text-center items-center"
-            *ngIf="invoices.length === 0"
-          >
-            <div class="m-auto h-36">
+          <div class="flex flex-col h-48 text-center items-center" *ngIf="invoices.length === 0">
+            <div class="m-auto h-auto h-36">
               <p class="mb-4">{{ 'noInvoices' | transloco }}</p>
               <img class="h-32 w-full" src="assets/undraw_not_found_-60-pq.svg" />
             </div>
