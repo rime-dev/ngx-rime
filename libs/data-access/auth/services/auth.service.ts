@@ -35,16 +35,13 @@ export class AuthService implements OnDestroy {
   signIn(email: string, password: string): Promise<void> {
     return this.angularFireAuth
       .signInWithEmailAndPassword(email, password)
-      .then(async (result) => {
+      .then((result) => {
         const user = result.user as User;
         if (user) {
-          await this.ngZone.run(async () => {
-            await this.router.navigate(['/dashboard']);
-            await this.setUserData(user);
-          });
+          this.navigateTo('/dashboard');
         }
       })
-      .catch((error) => {
+      .catch((error: Record<string, unknown>) => {
         window.alert(error.message);
       });
   }
@@ -59,10 +56,10 @@ export class AuthService implements OnDestroy {
           /* Call the SendVerificaitonMail() function when new user sign
           up and returns promise */
           await this.sendVerificationMail();
-          await this.setUserData(user);
+          // await this.setUserData(user);
         }
       })
-      .catch((error) => {
+      .catch((error: Record<string, unknown>) => {
         window.alert(error.message);
       });
   }
@@ -71,8 +68,8 @@ export class AuthService implements OnDestroy {
   public sendVerificationMail() {
     return this.angularFireAuth.currentUser
       .then((user) => user?.sendEmailVerification())
-      .then(async () => {
-        await this.router.navigate(['verify-email-address']);
+      .then(() => {
+        this.navigateTo('/verify-email-address');
       });
   }
 
@@ -99,13 +96,15 @@ export class AuthService implements OnDestroy {
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
-    const user = JSON.parse(String(localStorage.getItem('user')));
+    const localUser = String(localStorage.getItem('user'));
+    const user = JSON.parse(localUser) as Record<string, unknown>;
     return user !== null ? true : false;
   }
 
   // Returns true when user has a verified email
   get hasEmailVerified(): boolean {
-    const user = JSON.parse(String(localStorage.getItem('user')));
+    const localUser = String(localStorage.getItem('user'));
+    const user = JSON.parse(localUser) as Record<string, unknown>;
     return user && user.emailVerified ? true : false;
   }
   // Sign in with Google
@@ -117,12 +116,10 @@ export class AuthService implements OnDestroy {
   public authLogin(provider: firebase.auth.AuthProvider) {
     return this.angularFireAuth
       .signInWithPopup(provider)
-      .then(async (result) => {
+      .then((result) => {
         if (result.user) {
-          await this.ngZone.run(async () => {
-            await this.router.navigate(['dashboard']);
-          });
-          await this.setUserData(result.user as User);
+          this.navigateTo('/dashboard');
+          //await this.setUserData(result.user as User);
         }
       })
       .catch((error) => {
@@ -134,7 +131,9 @@ export class AuthService implements OnDestroy {
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   public setUserData(user: User) {
-    const userRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<unknown> = this.angularFirestore.doc(
+      `users/${user.uid}`
+    );
     const userData: User = {
       uid: user.uid,
       email: user.email,
@@ -147,20 +146,29 @@ export class AuthService implements OnDestroy {
     });
   }
   public getUserData(user: User) {
-    const userRef: AngularFirestoreDocument<any> = this.angularFirestore
+    const userRef: AngularFirestoreDocument<unknown> = this.angularFirestore
       .collection('users')
       .doc(`${user.uid}`);
     return userRef.get();
   }
   // Sign out
   public signOut() {
-    return this.angularFireAuth.signOut().then(async () => {
+    return this.angularFireAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      await this.router.navigate(['sign-in']);
+      this.navigateTo('/sign-in');
     });
   }
 
-  ngOnDestroy() {
+  private navigateTo(route: string) {
+    void this.ngZone.run(() => {
+      setTimeout(() => {
+        void this.router.navigate([route]);
+      }, 0);
+      // await this.setUserData(user);
+    });
+  }
+
+  public ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }

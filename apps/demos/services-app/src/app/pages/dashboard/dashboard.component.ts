@@ -1,3 +1,4 @@
+import {coerceBooleanProperty} from '@angular/cdk/coercion';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {NavigationEnd, Router} from '@angular/router';
@@ -6,7 +7,7 @@ import {AuthService, User as UserAuth} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {ConditionalQueryFirestore, EntityState} from '@rng/data-access/base/models/base.model';
 import {Routes, UserInfo} from '@rng/ui/user-account-popup';
-import {Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {filter, map, take, takeUntil, tap} from 'rxjs/operators';
 import {Activity} from '../../models/activity.model';
 import {Group} from '../../models/group.model';
@@ -26,7 +27,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     alt: 'RNG APP',
   };
   topRoutes = [];
-  sideRoutes$: Observable<Routes[]>;
+  sideRoutes$: BehaviorSubject<Routes[] | never[]> = new BehaviorSubject<Routes[] | never[]>([]);
   userRoutes = [
     {
       click: async () => {
@@ -53,18 +54,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private translocoService: TranslocoService
   ) {
-    this.sideRoutes$ = of([]);
     this.userAuth$ = this.authService.user$;
-    this.userAuth$
-      .pipe(
-        tap({
-          next: (userResult: UserAuth | null) => {
-            this.loadUser(userResult?.uid);
-          },
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
   }
 
   private checkPermissions(user: User | null): User | null {
@@ -89,6 +79,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.userAuth$
+      .pipe(
+        filter((userResult: UserAuth | null) => coerceBooleanProperty(userResult)),
+        tap({
+          next: (userResult: UserAuth | null) => {
+            this.loadUser(userResult?.uid);
+          },
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
     this.getTitlePage(this.router.url);
     this.router.events
       .pipe(
@@ -101,7 +102,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe();
-    this.sideRoutes$ = this.translocoService.events$.pipe(map(() => this.getSideRoutes()));
+    this.sideRoutes$.next(this.getSideRoutes());
+    this.translocoService.events$
+      .pipe(map(() => this.sideRoutes$.next(this.getSideRoutes())))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
   }
 
   ngOnDestroy(): void {
