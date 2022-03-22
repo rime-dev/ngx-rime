@@ -2,7 +2,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
 import {AngularFirestore, CollectionReference, FieldPath} from '@angular/fire/compat/firestore';
 import {Observable, of, throwError} from 'rxjs';
-import {catchError, delay, map, timeout} from 'rxjs/operators';
+import {catchError, delay, map, switchMap, switchMapTo, tap, timeout} from 'rxjs/operators';
 import {ENTITY_CONFIG, ENTITY_NAME} from '../../constants/base.constant';
 import {
   ConditionalQueryFirestore,
@@ -249,6 +249,13 @@ export class FireDataService<T> {
     return ref;
   }
 
+  private checkIfCollectionExists(collection: string) {
+    return this.angularFirestore
+      .collection(collection)
+      .ref.limit(1)
+      .get()
+      .then((query) => query.empty);
+  }
   /**
    * Gets an observable of the DocumentSnapshot or QuerySnapshot
    *
@@ -271,8 +278,6 @@ export class FireDataService<T> {
           .snapshotChanges()
           .pipe(
             map((object) => {
-              console.log(object);
-
               return new FireDataObject(object);
             })
           );
