@@ -8,7 +8,10 @@
   </h1>
 </div>
 <div mat-dialog-content class="flex flex-col md:w-96" *ngIf="activities$ | async; let activities">
-  <mat-form-field class="example-chip-list" appearance="outline">
+  <mat-form-field
+    appearance="outline"
+    *ngIf="activities && activities.length && activities.length > 0; else noActivitiesTemplate"
+  >
     <mat-chip-list #chipList aria-label="Labels selection">
       <mat-chip
         *ngFor="let activity of group.data.activities"
@@ -40,6 +43,11 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
+  <ng-template #noActivitiesTemplate>
+    <div class="h-32 self-center flex items-center">
+      {{ 'noActivities' | transloco }}
+    </div>
+  </ng-template>
 </div>
 <div mat-dialog-actions>
   <button

@@ -10,17 +10,17 @@
 <div mat-dialog-content class="flex flex-col md:w-96">
   <mat-form-field appearance="outline">
     <mat-label>{{ 'address' | transloco }}</mat-label>
-    <input #textInput matInput [value]="group.data.location.text" />
+    <input #textInput matInput [value]="group.data.location?.text" />
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>{{ 'longitude' | transloco }}</mat-label>
 
-    <input #longitudeInput matInput [value]="group.data.location.coordinates[0]" />
+    <input #longitudeInput matInput [value]="group.data.location?.coordinates[0]" />
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>{{ 'latitude' | transloco }}</mat-label>
 
-    <input #latitudeInput matInput [value]="group.data.location.coordinates[1]" />
+    <input #latitudeInput matInput [value]="group.data.location?.coordinates[1]" />
   </mat-form-field>
 </div>
 <div mat-dialog-actions>

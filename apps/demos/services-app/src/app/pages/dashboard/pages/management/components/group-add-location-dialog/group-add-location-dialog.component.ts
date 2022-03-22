@@ -11,7 +11,9 @@ export class GroupAddLocationDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) private data: any) {
     if (this.data && this.data.group) {
       this.group = this.data.group;
-      this.coordinates = this.group.data.location.coordinates;
+      if (this.group.data.location && this.group.data.location.coordinates) {
+        this.coordinates = this.group.data.location.coordinates;
+      }
     }
   }
 }

@@ -165,8 +165,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
     this.loadActivities(userResult);
     this.loadGroups(userResult);
-    this.loadProjects(userResult);
     this.loadCollaborators(userResult);
+    this.loadProjects(userResult);
     this.loadInvoices(userResult);
   }
   private loadActivities(userResult: User) {

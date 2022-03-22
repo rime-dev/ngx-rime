@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {TranslocoService} from '@ngneat/transloco';
 import {DataFilter, DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
 import {Project} from 'apps/demos/services-app/src/app/models/project.model';
@@ -37,7 +38,8 @@ export class InvoiceCreateDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public matDialogRef: MatDialogRef<InvoiceCreateDialogComponent>,
     private dataService: DataService,
-    private matSnackBar: MatSnackBar
+    private matSnackBar: MatSnackBar,
+    private translocoService: TranslocoService
   ) {
     this.projects$ = this.dataService.select<Project>('Project').entities$;
     if (this.data && this.data.path) {
@@ -49,14 +51,14 @@ export class InvoiceCreateDialogComponent {
   }
   openSnackBar(message: string, action: string) {
     this.matSnackBar.open(message, action, {
-      duration: 200000,
+      duration: 3000,
       horizontalPosition: 'end',
       verticalPosition: 'top',
     });
   }
   submitInvoice() {
     if (!this.form.valid) {
-      this.openSnackBar('Faltan datos', '');
+      this.openSnackBar(this.translocoService.translate('missingData'), '');
       return;
     }
     this.matDialogRef.close(this.form.getRawValue());

@@ -9,7 +9,7 @@ import {Feature} from 'ol';
 import Point from 'ol/geom/Point';
 import {fromLonLat} from 'ol/proj';
 import {Observable, of} from 'rxjs';
-import {delay, map, tap} from 'rxjs/operators';
+import {delay, filter, map, tap} from 'rxjs/operators';
 import {RequestIfTrueDialogComponent} from '../../../../components/request-if-true-dialog/request-if-true-dialog.component';
 import {Group} from '../../../../models/group.model';
 import {User} from '../../../../models/user.model';
@@ -52,7 +52,7 @@ export class ManagementComponent {
     this.users$ = this.dataService.select<User>('User').entities$;
     this.point$ = this.group$.pipe(
       map((group: EntityState<Group>) =>
-        this.transformCoordinatesToFeature(group.data.location.coordinates)
+        this.transformCoordinatesToFeature(group.data.location?.coordinates)
       ),
       delay(0),
       tap({
@@ -64,7 +64,7 @@ export class ManagementComponent {
     );
   }
   private transformCoordinatesToFeature(coordinates: number[]) {
-    if (coordinates[0] && coordinates[1]) {
+    if (coordinates && coordinates[0] && coordinates[1]) {
       return [
         new Feature({
           geometry: new Point(fromLonLat(coordinates)),
@@ -292,8 +292,20 @@ export class ManagementComponent {
     }
   }
   private appendAdditionalInfo(group: any, data: any) {
-    if (data && data.additionalInfo) {
+    if (
+      data &&
+      data.additionalInfo &&
+      group.data.additionalInfo &&
+      group.data.additionalInfo.length &&
+      group.data.additionalInfo.length > 0
+    ) {
       const additionalInfo = [...group.data.additionalInfo];
+      additionalInfo.push(data.additionalInfo);
+      const data2 = {...group.data, additionalInfo};
+      const group2 = {...group, data: data2};
+      this.dataService.select<Group>('Group').update(group2);
+    } else {
+      const additionalInfo = [];
       additionalInfo.push(data.additionalInfo);
       const data2 = {...group.data, additionalInfo};
       const group2 = {...group, data: data2};

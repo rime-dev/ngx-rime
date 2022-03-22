@@ -27,8 +27,9 @@ export class FireDataObject {
   public id: string;
   public data: Record<string, any>;
   constructor(data: Record<string, any>) {
-    this.id = data.payload.id;
-    this.data = data.payload.data();
+    const payload = data.payload || data;
+    this.id = payload?.id;
+    this.data = payload?.data();
   }
 }
 

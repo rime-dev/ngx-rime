@@ -2,7 +2,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
 import {AngularFirestore, CollectionReference, FieldPath} from '@angular/fire/compat/firestore';
 import {Observable, of, throwError} from 'rxjs';
-import {catchError, delay, map, switchMap, switchMapTo, tap, timeout} from 'rxjs/operators';
+import {catchError, delay, filter, map, switchMap, switchMapTo, tap, timeout} from 'rxjs/operators';
 import {ENTITY_CONFIG, ENTITY_NAME} from '../../constants/base.constant';
 import {
   ConditionalQueryFirestore,
@@ -246,6 +246,7 @@ export class FireDataService<T> {
         ref = conditions[key](element);
       }
     }
+
     return ref;
   }
 
@@ -285,8 +286,14 @@ export class FireDataService<T> {
         let ref: CollectionReference<unknown>;
         ref = this.angularFirestore.collection(collection).ref;
         ref = this.getCollectionReferenceByConditions(ref, data);
-        action = of(
-          ref.get().then((data0) => data0.docs.map((object) => new FireDataObject(object)))
+        action = of(ref.get()).pipe(
+          switchMap((promise) => promise),
+          map((objects) => objects.docs),
+          map((data0) =>
+            data0
+              .map((object) => new FireDataObject(object))
+              .filter((object) => (object.id && object.data ? true : false))
+          )
         );
       }
     }

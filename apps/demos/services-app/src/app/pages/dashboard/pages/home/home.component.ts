@@ -42,10 +42,14 @@ export class HomeComponent implements OnDestroy {
     invoices = invoices.sort(
       (a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime()
     );
-    const invoiceData = invoices.map((invoice: EntityState<Invoice>) => ({
-      value: invoice.data.cost,
-      date: invoice.data.date,
-    }));
+    const invoiceData = invoices
+      .filter((invoice: EntityState<Invoice>) =>
+        invoice && invoice.data && invoice.data.cost && invoice.data.date ? true : false
+      )
+      .map((invoice: EntityState<Invoice>) => ({
+        value: invoice.data.cost,
+        date: invoice.data.date,
+      }));
     this.invoicesData$.next(invoiceData);
     const invoicesThisMonth = this.filterInvoicesInThisMonth(invoices);
     const invoicesPreviousMonth = this.filterInvoicesInPreviousMonth(invoices);
@@ -66,12 +70,16 @@ export class HomeComponent implements OnDestroy {
   }
   private filterInvoicesInThisMonth(invoices: EntityState<Invoice>[]) {
     const thisMonth = this.calculateThisMonth();
-    const filtered = invoices.filter((invoice) => invoice.data.date.slice(0, 7) === thisMonth);
+    const filtered = invoices.filter(
+      (invoice) => invoice.data && invoice.data.date && invoice.data.date.slice(0, 7) === thisMonth
+    );
     return filtered;
   }
   private filterInvoicesInPreviousMonth(invoices: EntityState<Invoice>[]) {
     const thisMonth = this.calculatePreviousMonth();
-    const filtered = invoices.filter((invoice) => invoice.data.date.slice(0, 7) === thisMonth);
+    const filtered = invoices.filter(
+      (invoice) => invoice.data && invoice.data.date && invoice.data.date.slice(0, 7) === thisMonth
+    );
     return filtered;
   }
   private calculateThisMonth(): string {

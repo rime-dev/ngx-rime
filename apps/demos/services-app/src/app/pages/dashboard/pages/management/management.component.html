@@ -43,35 +43,35 @@
               <div>
                 <h3 matSubheader>{{ 'name' | transloco }}</h3>
                 <button mat-list-item (click)="changeName(group)">
-                  {{ group.data.name }}
+                  {{ group.data.name || ('noInformation' | transloco) }}
                 </button>
               </div>
 
               <div>
                 <h3 matSubheader>{{ 'email' | transloco }}</h3>
                 <button mat-list-item (click)="changeEmail(group)">
-                  {{ group.data.email }}
+                  {{ group.data.email || ('noInformation' | transloco) }}
                 </button>
               </div>
 
               <div>
                 <h3 matSubheader>{{ 'phone' | transloco }}</h3>
                 <button mat-list-item (click)="changePhone(group)">
-                  {{ group.data.phone }}
+                  {{ group.data.phone || ('noInformation' | transloco) }}
                 </button>
               </div>
 
               <div>
                 <h3 matSubheader>{{ 'web' | transloco }}</h3>
                 <button mat-list-item (click)="changeWeb(group)">
-                  {{ group.data.web }}
+                  {{ group.data.web || ('noInformation' | transloco) }}
                 </button>
               </div>
 
               <div>
                 <h3 matSubheader>{{ 'idcard' | transloco }}</h3>
                 <button mat-list-item (click)="changeNif(group)">
-                  {{ group.data.nif }}
+                  {{ group.data.nif || ('noInformation' | transloco) }}
                 </button>
               </div>
             </mat-action-list>
@@ -120,7 +120,15 @@
                 </button>
               </h3>
               <mat-list-item class="h-auto">
-                <mat-chip-list aria-label="Activities">
+                <mat-chip-list
+                  aria-label="Activities"
+                  *ngIf="
+                    group.data.activities &&
+                      group.data.activities.length &&
+                      group.data.activities.length > 0;
+                    else noActivitiesTemplate
+                  "
+                >
                   <mat-chip
                     color="primary"
                     selected
@@ -128,6 +136,9 @@
                     >{{ 'activities.' + activity | transloco }}</mat-chip
                   >
                 </mat-chip-list>
+                <ng-template #noActivitiesTemplate>
+                  {{ 'noInformation' | transloco }}
+                </ng-template>
               </mat-list-item>
             </mat-list>
           </div>
@@ -145,7 +156,15 @@
         </button>
       </mat-menu>
     </div>
-    <mat-card class="mat-elevation-z3 rounded-lg">
+    <mat-card
+      class="mat-elevation-z3 rounded-lg"
+      *ngIf="
+        group.data.additionalInfo &&
+          group.data.additionalInfo.length &&
+          group.data.additionalInfo.length > 0;
+        else noAdditionalInfoTemplate
+      "
+    >
       <mat-action-list class="w-full" *ngFor="let info of group.data.additionalInfo; let i = index">
         <h3 matSubheader>{{ 'text' | transloco }} {{ i + 1 }}</h3>
         <mat-list-item class="h-auto mb-2" (click)="changeAdditionalInfo(group, info, i)">
@@ -154,6 +173,11 @@
         </mat-list-item>
       </mat-action-list>
     </mat-card>
+    <ng-template #noAdditionalInfoTemplate>
+      <mat-card class="mat-elevation-z3 rounded-lg">
+        <span>{{ 'noAdditionalInformation' | transloco }}</span>
+      </mat-card>
+    </ng-template>
     <div class="flex flex-row items-center w-full">
       <h1 class="text-xl font-medium my-6">{{ 'location' | transloco }}</h1>
       <button mat-icon-button class="ml-auto" [matMenuTriggerFor]="menuLocation">
@@ -170,7 +194,9 @@
         <h3 matSubheader>{{ 'address' | transloco }}</h3>
         <mat-list-item class="h-auto mb-2" (click)="changeLocation(group)">
           <mat-icon mat-list-icon>place</mat-icon>
-          <span class="py-4"> {{ group.data.location.text }}</span>
+          <span class="py-4">
+            {{ group.data.location?.text || ('noInformation' | transloco) }}</span
+          >
         </mat-list-item>
       </mat-action-list>
       <mat-list class="w-full">

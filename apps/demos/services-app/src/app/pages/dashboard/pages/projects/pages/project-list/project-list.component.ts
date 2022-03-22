@@ -68,13 +68,17 @@ export class ProjectListComponent implements OnInit {
   loadDataPoints(projects: EntityState<Project>[]) {
     if (projects) {
       this.points$ = of([
-        ...projects.map(
-          (project: EntityState<Project>) =>
-            new Feature({
-              geometry: new Point(fromLonLat(project.data.location.coordinates)),
-              data: project.data,
-            })
-        ),
+        ...projects
+          .filter((project: EntityState<Project>) =>
+            project.data && project.data.location ? true : false
+          )
+          .map(
+            (project: EntityState<Project>) =>
+              new Feature({
+                geometry: new Point(fromLonLat(project.data.location?.coordinates)),
+                data: project.data,
+              })
+          ),
       ]);
     }
   }
