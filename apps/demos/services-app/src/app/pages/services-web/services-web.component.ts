@@ -5,4 +5,11 @@ import {Component} from '@angular/core';
   templateUrl: './services-web.component.html',
   styleUrls: ['./services-web.component.scss'],
 })
-export class ServicesWebComponent {}
+export class ServicesWebComponent {
+  appName = 'E-Servicios';
+  logo = {
+    src: 'assets/rng-logo.png',
+    alt: 'E-Servicios',
+  };
+  topRoutes = [];
+}
