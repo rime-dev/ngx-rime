@@ -28,8 +28,8 @@ export class FireDataObject {
   public data: Record<string, any>;
   constructor(data: Record<string, any>) {
     const payload = data.payload || data;
-    this.id = payload?.id;
-    this.data = payload?.data();
+    this.id = payload?.doc?.id || payload?.id;
+    this.data = payload?.doc?.data() || payload?.data();
   }
 }
 
