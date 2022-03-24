@@ -1,13 +1,13 @@
 <rng-shell [topRoutes]="topRoutes" [logo]="logo" [appName]="appName">
   <!-- HERO SECTION -->
   <section
-    class="w-full h-auto py-12 lg:py-24 relative flex flex-col lg:flex-row bg-primary"
+    class="w-full h-auto py-12 xl:py-18 relative flex flex-col lg:flex-row bg-primary"
     style="border-bottom-left-radius: 50% 10%; border-bottom-right-radius: 50% 10%"
   >
     <main
       class="flex py-10 mx-auto max-w-2xl px-4 sm:py-12 sm:px-6 md:py-16 lg:py-20 lg:px-8 xl:py-28"
     >
-      <div class="sm:text-center lg:text-left">
+      <div class="text-center lg:text-left">
         <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
           <span class="block xl:inline"> E-LARES te ayuda en lo que necesites para </span>
           <span class="block text-indigo-400 xl:inline">tu hogar</span>
@@ -38,7 +38,7 @@
       </div>
     </main>
     <div
-      class="flex pt-10 mx-auto max-w-7xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28"
+      class="flex pt-0 pb-10 mx-auto max-w-7xl px-4 md:pt-0 md:pb-12 sm:px-6 lg:pt-20 lg:px-8 xl:pt-28"
     >
       <img
         class="h-24 w-auto m-auto object-cover sm:h-32 md:h-56 lg:h-72"
@@ -48,6 +48,49 @@
     </div>
   </section>
   <!-- HERO SECTION -->
+  <!-- SERVICE REQUEST -->
+  <section
+    class="flex flex-col md:flex-row w-full h-auto max-w-5xl mx-auto"
+    style="margin-top: -3.5rem"
+  >
+    <div class="flex flex-col m-auto items-center">
+      <div class="hexagon-wrap">
+        <div
+          matRipple
+          class="h-24 w-24 rounded-2xl mb-2 hexagon bg-accent flex items-center place-content-center"
+          color="accent"
+        >
+          <span class="color-primary text-2xl">1</span>
+        </div>
+      </div>
+      <span class="text-lg text-gray-900">Servicio</span>
+    </div>
+    <div class="flex flex-col m-auto items-center">
+      <div class="hexagon-wrap">
+        <div
+          matRipple
+          class="h-24 w-24 rounded-2xl mb-2 hexagon bg-accent flex items-center place-content-center"
+          color="accent"
+        >
+          <span class="color-primary text-2xl">2</span>
+        </div>
+      </div>
+      <span class="text-lg text-gray-900">Ubicación</span>
+    </div>
+    <div class="flex flex-col m-auto items-center">
+      <div class="hexagon-wrap">
+        <div
+          matRipple
+          class="h-24 w-24 rounded-2xl mb-2 hexagon bg-accent flex items-center place-content-center"
+          color="accent"
+        >
+          <span class="color-primary text-2xl">3</span>
+        </div>
+      </div>
+      <span class="text-lg text-gray-900">Contacto</span>
+    </div>
+  </section>
+  <!--
   <section class="w-full h-auto flex" style="margin-top: -3rem">
     <button mat-raised-button class="m-auto h-24 w-24 rounded-2xl" color="accent">
       <mat-icon color="primary">add</mat-icon>
@@ -64,7 +107,7 @@
     <button mat-raised-button class="m-auto h-24 w-24 rounded-2xl" color="accent">
       <mat-icon color="primary">add</mat-icon>
     </button>
-  </section>
+  </section> -->
 </rng-shell>
 
 <!-- Ejemplo con vector -->

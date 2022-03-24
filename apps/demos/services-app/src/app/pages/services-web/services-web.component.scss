@@ -1,5 +1,10 @@
-/* =========== hero =========== */
-
+.hexagon {
+  -webkit-clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+}
+.hexagon-wrap {
+  filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));
+}
 .header_hero {
   height: 900px;
 }
