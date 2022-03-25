@@ -10,10 +10,10 @@ import {Activity} from '../../models/activity.model';
   styleUrls: ['./services-web.component.scss'],
 })
 export class ServicesWebComponent implements OnInit {
-  appName = 'E-Servicios';
+  appName = 'E-LARES';
   logo = {
     src: 'assets/rng-logo.png',
-    alt: 'E-Servicios',
+    alt: 'E-LARES',
   };
   topRoutes = [];
   public activities$!: Observable<EntityState<Activity>[] | null>;
