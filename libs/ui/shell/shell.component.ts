@@ -23,6 +23,7 @@ export interface ShellLogo {
   src: string;
   alt?: string;
 }
+export type ToolbarColor = 'primary' | 'accent';
 export interface Routes {
   path?: string;
   icon?: string;
@@ -136,6 +137,19 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
     return this._hasSidenav;
   }
   private _hasSidenav = false;
+
+  /**
+   * Defines the color of the toolbar
+   */
+  @Input()
+  set toolbarColor(value: ToolbarColor) {
+    this._toolbarColor = value;
+    this._changeDetectorRef.detectChanges();
+  }
+  get toolbarColor(): ToolbarColor {
+    return this._toolbarColor;
+  }
+  private _toolbarColor!: ToolbarColor;
 
   @Input() scrolled: Record<string, unknown> = {};
   @Output() scrolledChange: EventEmitter<Record<string, unknown>> = new EventEmitter<

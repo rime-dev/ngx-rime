@@ -1,13 +1,21 @@
-<rng-shell [topRoutes]="topRoutes" [logo]="logo" [appName]="appName">
-  <!-- HERO SECTION -->
-  <!--
-    section style="
-        background-image: url(assets/images/header-image.jpg);
-    background-size: cover;
-    background-position: center;
+<rng-shell [topRoutes]="topRoutes" [logo]="logo" [appName]="appName" [toolbarColor]="'accent'">
+  <button
+    mat-button
+    topBarItem
+    color="primary"
+    *ngIf="(userAuth$ | async) === null"
+    [routerLink]="['sign-in']"
+    class="ml-auto"
+  >
+    Acceso
+  </button>
+  <rng-user-account-popup
+    *ngIf="userAuth$ | async; let user"
+    [userInfo]="user"
+    [routes]="userRoutes"
+  ></rng-user-account-popup>
 
-    border-bottom-left-radius: 50% 10%; border-bottom-right-radius: 50% 10%
-  -->
+  <!-- HERO SECTION -->
   <section class="w-full h-auto py-6 relative flex flex-col">
     <!-- bg-primary-->
     <main
@@ -24,26 +32,9 @@
         </h1>
       </div>
     </main>
-    <!-- <div
-      class="pt-0 pb-10 mx-auto max-w-7xl hidden lg:flex px-4 md:pt-0 md:pb-12 sm:px-6 lg:pt-20 lg:px-8 xl:pt-28"
-    >
-      <img
-        class="h-24 w-auto m-auto object-cover sm:h-32 md:h-56 lg:h-64 xl:h-72"
-        src="assets/undraw_under_construction_white.svg"
-        alt="Header Image"
-      />
-    </div> -->
   </section>
   <!-- HERO SECTION -->
-  <!-- <div class="z-20 hexagon-wrap">
-          <div
-            matRipple
-            class="h-24 w-24 rounded-2xl mb-2 hexagon bg-accent flex items-center place-content-center cursor-pointer"
-            color="accent"
-          >
-            <span class="color-primary text-2xl">1</span>
-          </div>
-        </div> -->
+
   <!-- SERVICE REQUEST -->
   <section
     class="flex flex-col w-full h-auto max-w-md md:max-w-2xl lg:max-w-5xl mx-auto"
@@ -51,55 +42,84 @@
   >
     <mat-card class="rounded-2xl">
       <mat-card-content>
-        <div class="flex flex-col md:flex-row">
-          <div class="flex flex-col m-auto items-center w-full mt-0">
-            <div>
-              <span
-                class="flex text-center my-4 justify-center text-2xl font-semibold text-gray-700 capitalize dark:text-white"
-                >Servicio</span
-              >
-              <mat-form-field appearance="outline">
-                <mat-label>Servicio</mat-label>
-                <mat-select>
-                  <mat-option
-                    *ngFor="let activity of activities$ | async"
-                    [value]="activity.data.code"
-                  >
-                    {{ 'activities.' + activity.data.code | transloco }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+        <form novalidate [formGroup]="requestServiceForm">
+          <div class="flex flex-col md:flex-row">
+            <div class="flex flex-col m-auto items-center w-full mt-0">
+              <div class="h-40 w-full">
+                <span
+                  class="flex text-center my-4 justify-center text-2xl font-semibold text-gray-700 capitalize dark:text-white"
+                  >Servicio</span
+                >
+                <mat-form-field appearance="outline" class="w-full px-10">
+                  <mat-label>Servicio</mat-label>
+                  <mat-select formControlName="activity">
+                    <mat-option
+                      *ngFor="let activity of activities$ | async"
+                      [value]="activity.data.code"
+                    >
+                      {{ 'activities.' + activity.data.code | transloco }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="flex flex-col m-auto items-center w-full mt-0">
+              <div class="h-40 w-full">
+                <span
+                  class="flex text-center my-4 justify-center text-2xl font-semibold text-gray-700 capitalize dark:text-white"
+                  >Ubicación</span
+                >
+                <mat-form-field appearance="outline" class="w-full px-10">
+                  <mat-label>Código postal</mat-label>
+                  <input type="text" matInput formControlName="location" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="flex flex-col m-auto items-center w-full mt-0">
+              <div class="h-40 w-full">
+                <span
+                  class="flex text-center my-4 justify-center text-2xl font-semibold text-gray-700 capitalize dark:text-white"
+                  >Contacto</span
+                >
+                <mat-form-field appearance="outline" class="w-full px-10">
+                  <mat-label>Email</mat-label>
+                  <input type="email" matInput formControlName="email" />
+                </mat-form-field>
+              </div>
             </div>
           </div>
-          <div class="flex flex-col m-auto items-center w-full mt-0">
-            <div>
-              <span
-                class="flex text-center my-4 justify-center text-2xl font-semibold text-gray-700 capitalize dark:text-white"
-                >Ubicación</span
-              >
-              <mat-form-field appearance="outline">
-                <mat-label>Ciudad</mat-label>
-                <mat-select>
-                  <mat-option> Valencia </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
+          <div class="flex">
+            <button
+              mat-raised-button
+              color="primary"
+              class="rounded-3xl mx-auto text-xl h-12"
+              style="margin-bottom: -2.5rem"
+            >
+              Solicitar
+            </button>
           </div>
-          <div class="flex flex-col m-auto items-center w-full mt-0">
-            <div>
-              <span
-                class="flex text-center my-4 justify-center text-2xl font-semibold text-gray-700 capitalize dark:text-white"
-                >Contacto</span
-              >
-              <!-- <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
-                <input type="email" />
-              </mat-form-field> -->
-            </div>
-          </div>
-        </div>
+        </form>
       </mat-card-content>
     </mat-card>
+  </section>
+  <section *ngIf="activities$ | async; let activities" class="bg-white dark:bg-gray-900">
+    <div class="container px-6 py-12 mx-auto">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div *ngFor="let activity of activities">
+          <div class="flex mt-4">
+            <mat-icon color="primary">{{ activity.data.icon }}</mat-icon>
+            <h1 class="ml-2 text-xl font-semibold text-gray-800 dark:text-white">
+              {{ 'activities.' + activity.data.code | transloco }}
+            </h1>
+          </div>
+
+          <p class="mt-2 text-gray-500 dark:text-gray-400">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim fusce tortor, ac sed
+            malesuada blandit. Et mi gravida sem feugiat.
+          </p>
+        </div>
+      </div>
+    </div>
   </section>
 </rng-shell>
 

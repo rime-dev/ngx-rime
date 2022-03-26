@@ -78,7 +78,7 @@
         <mat-toolbar
           #rngToolbar
           class="w-full z-50 duration-150"
-          [color]="!hasSidenav ? 'primary' : 'accent'"
+          [color]="toolbarColor ? toolbarColor : !hasSidenav ? 'primary' : 'accent'"
           [class.mat-elevation-z2]="scrolled?.isScrolled"
         >
           <div class="mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -100,7 +100,8 @@
                 <div *ngIf="appName && !hasSidenav" class="flex-shrink-0 mr-4">
                   <span class="h-8 w-8 text-xl text">{{ appName }}</span>
                 </div>
-                <ng-content *ngIf="hasSidenav" select="[topBarItem]"></ng-content>
+                <ng-content select="[topBarItem]"></ng-content>
+                <!-- *ngIf="hasSidenav" -->
                 <div *ngIf="topRoutes && topRoutes.length > 0">
                   <div class="mr-4 flex items-baseline space-x-4">
                     <button mat-button *ngFor="let route of topRoutes" [routerLink]="route.path">
