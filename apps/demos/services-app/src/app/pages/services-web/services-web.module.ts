@@ -8,12 +8,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {RouterModule} from '@angular/router';
 import {TranslocoModule} from '@ngneat/transloco';
 import {ShellModule} from '@rng/ui/shell';
 import {UserAccountPopupModule} from '@rng/ui/user-account-popup';
 import {ServicesWebRoutingModule} from './services-web-routing.module';
 import {ServicesWebComponent} from './services-web.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [ServicesWebComponent],
@@ -33,6 +35,8 @@ import {ServicesWebComponent} from './services-web.component';
     FormsModule,
     UserAccountPopupModule,
     RouterModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class ServicesWebModule {}

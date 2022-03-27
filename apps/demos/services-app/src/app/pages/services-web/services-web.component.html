@@ -43,7 +43,7 @@
     <mat-card class="rounded-2xl">
       <mat-card-content>
         <form novalidate [formGroup]="requestServiceForm">
-          <div class="flex flex-col md:flex-row">
+          <div class="flex flex-col lg:flex-row">
             <div class="flex flex-col m-auto items-center w-full mt-0">
               <div class="h-40 w-full">
                 <span
@@ -94,8 +94,16 @@
               color="primary"
               class="rounded-3xl mx-auto text-xl h-12"
               style="margin-bottom: -2.5rem"
+              [disabled]="sendRequestLoading"
+              (click)="sendRequest()"
             >
-              Solicitar
+              <mat-spinner
+                *ngIf="sendRequestLoading"
+                diameter="25"
+                color="accent"
+                class="m-auto"
+              ></mat-spinner>
+              <span *ngIf="!sendRequestLoading">Solicitar</span>
             </button>
           </div>
         </form>
