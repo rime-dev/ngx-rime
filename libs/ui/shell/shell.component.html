@@ -1,5 +1,10 @@
 <div class="min-h-full relative flex flex-col" style="height: 100vh">
-  <mat-sidenav-container [hasBackdrop]="hasBackdrop" (backdropClick)="sidenavOpened = false">
+  <!-- Remove backgroun color with theme library -->
+  <mat-sidenav-container
+    [hasBackdrop]="hasBackdrop"
+    (backdropClick)="sidenavOpened = false"
+    class="bg-accent"
+  >
     <mat-sidenav
       *ngIf="hasSidenav"
       #sidenav

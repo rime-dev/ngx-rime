@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AngularFireFunctions} from '@angular/fire/compat/functions';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {TranslocoService} from '@ngneat/transloco';
 import {AuthService, User as UserAuth} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
@@ -35,12 +36,13 @@ export class ServicesWebComponent implements OnInit {
   public sendRequestLoading = false;
   public user$!: Observable<UserInfo | null>;
   public userAuth$: Observable<UserAuth | null>;
-
+  public language!: string;
   constructor(
     private dataService: DataService,
     private authService: AuthService,
     private matSnackBar: MatSnackBar,
-    private angularFireFunctions: AngularFireFunctions
+    private angularFireFunctions: AngularFireFunctions,
+    private translocoService: TranslocoService
   ) {
     this.requestServiceForm = new FormGroup({
       activity: new FormControl('', Validators.required),
@@ -48,6 +50,7 @@ export class ServicesWebComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
     });
     this.userAuth$ = this.authService.user$;
+    this.language = this.translocoService.getActiveLang();
   }
 
   ngOnInit(): void {

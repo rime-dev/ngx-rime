@@ -16,6 +16,8 @@ import {UserAccountPopupModule} from '@rng/ui/user-account-popup';
 import {ServicesWebRoutingModule} from './services-web-routing.module';
 import {ServicesWebComponent} from './services-web.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {FooterModule} from '../../components/footer/footer.module';
+import {ThemeSwitcherModule} from '../../components/theme-switcher/theme-switcher.module';
 
 @NgModule({
   declarations: [ServicesWebComponent],
@@ -37,6 +39,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     RouterModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    FooterModule,
+    ThemeSwitcherModule,
   ],
 })
 export class ServicesWebModule {}

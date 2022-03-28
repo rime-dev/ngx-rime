@@ -1,22 +1,13 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 @use 'sass:map';
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
 @include mat.core();
-
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
 @import '@angular/material/theming';
 
 @mixin _palette-styles($palette) {
-  background: mat.get-color-from-palette($palette);
+  background: mat.get-color-from-palette($palette, background);
   color: mat.get-color-from-palette($palette, default-contrast);
 }
 @mixin sidenav-component-theme($theme) {
@@ -25,10 +16,11 @@
   $warn: map.get($theme, warn);
   $foreground: map.get($theme, foreground);
   $background: map.get($theme, background);
+
   .mat-sidenav,
   .mat-drawer-container,
   .mat-sidenav-container {
-    background: #ffffff; //mat.get-color-from-palette($background, app-bar);
+    background: mat.get-color-from-palette($background, background);
     color: mat.get-color-from-palette($foreground, text);
     &[color='primary'] {
       @include _palette-styles($primary);
@@ -49,7 +41,7 @@
   $background: map.get($theme, background);
   .cdk-overlay-pane {
     .overlay-background {
-      background: mat.get-color-from-palette($background, app-bar);
+      background: mat.get-color-from-palette($background, background);
     }
     border-radius: 14px;
     &.mat-tooltip-panel {
@@ -77,7 +69,7 @@
   $foreground: map.get($theme, foreground);
   $background: map.get($theme, background);
   .rng-search-input {
-    background: mat.get-color-from-palette($background, app-bar);
+    background: mat.get-color-from-palette($background, background);
     color: mat.get-color-from-palette($foreground, text);
     &[color='primary'] {
       @include _palette-styles($primary);
@@ -92,6 +84,7 @@
 }
 
 $mat-rng: (
+  0: #ffffff,
   50: #f0f0f0,
   100: #f0f0f0,
   // lighter
@@ -125,6 +118,7 @@ $mat-rng: (
   ),
 );
 $mat-rng-dark: (
+  0: #ffffff,
   50: #f0f0f0,
   100: #f0f0f0,
   // lighter
@@ -175,7 +169,6 @@ $rng-default-theme: mat.define-light-theme(
     ),
   )
 );
-
 $rng-dark-theme: mat.define-dark-theme(
   (
     color: (
@@ -186,32 +179,6 @@ $rng-dark-theme: mat.define-dark-theme(
   )
 );
 
-// @include mat.all-component-themes($rng-default-theme);
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$rng-app-primary: mat.define-palette(mat.$indigo-palette);
-$rng-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$rng-app-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$rng-app-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $rng-app-primary,
-      accent: $rng-app-accent,
-      warn: $rng-app-warn,
-    ),
-  )
-);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
 @include mat.all-component-themes($rng-default-theme);
 @include sidenav-component-theme($rng-default-theme);
 @include overlay-component-theme($rng-default-theme);

@@ -1,14 +1,16 @@
 <rng-shell [topRoutes]="topRoutes" [logo]="logo" [appName]="appName" [toolbarColor]="'accent'">
+  <rng-theme-switcher class="ml-auto" topBarItem></rng-theme-switcher>
+
   <button
     mat-button
     topBarItem
     color="primary"
     *ngIf="(userAuth$ | async) === null"
     [routerLink]="['sign-in']"
-    class="ml-auto"
   >
     Acceso
   </button>
+
   <rng-user-account-popup
     *ngIf="userAuth$ | async; let user"
     [userInfo]="user"
@@ -40,7 +42,7 @@
     class="flex flex-col w-full h-auto max-w-md md:max-w-2xl lg:max-w-5xl mx-auto"
     style="margin-top: -3.5rem"
   >
-    <mat-card class="rounded-2xl">
+    <mat-card class="rounded-2xl mat-elevation-z0 border">
       <mat-card-content>
         <form novalidate [formGroup]="requestServiceForm">
           <div class="flex flex-col lg:flex-row">
@@ -110,25 +112,29 @@
       </mat-card-content>
     </mat-card>
   </section>
-  <section *ngIf="activities$ | async; let activities" class="bg-white dark:bg-gray-900">
+  <section *ngIf="activities$ | async | slice: 0:12; let activities" class="mt-8">
     <div class="container px-6 py-12 mx-auto">
+      <span
+        class="flex text-center justify-center my-4 text-2xl font-semibold text-gray-700 capitalize dark:text-white"
+        >Actividades populares</span
+      >
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        <div *ngFor="let activity of activities">
-          <div class="flex mt-4">
-            <mat-icon color="primary">{{ activity.data.icon }}</mat-icon>
-            <h1 class="ml-2 text-xl font-semibold text-gray-800 dark:text-white">
-              {{ 'activities.' + activity.data.code | transloco }}
-            </h1>
-          </div>
+        <mat-card class="rounded-2xl mat-elevation-z0 border" *ngFor="let activity of activities">
+          <mat-card-header>
+            <mat-icon mat-card-avatar color="primary">{{ activity.data.icon }}</mat-icon>
 
-          <p class="mt-2 text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim fusce tortor, ac sed
-            malesuada blandit. Et mi gravida sem feugiat.
-          </p>
-        </div>
+            <mat-card-title *ngIf="activity.data.name">
+              {{ activity.data.name[language] }}
+            </mat-card-title>
+            <mat-card-subtitle *ngIf="activity.data.description">
+              {{ activity.data.description[language] }}
+            </mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
       </div>
     </div>
   </section>
+  <rng-footer></rng-footer>
 </rng-shell>
 
 <!--
