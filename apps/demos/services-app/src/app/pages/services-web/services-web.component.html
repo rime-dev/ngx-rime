@@ -1,13 +1,7 @@
 <rng-shell [topRoutes]="topRoutes" [logo]="logo" [appName]="appName" [toolbarColor]="'accent'">
   <rng-theme-switcher class="ml-auto" topBarItem></rng-theme-switcher>
 
-  <button
-    mat-button
-    topBarItem
-    color="primary"
-    *ngIf="(userAuth$ | async) === null"
-    [routerLink]="['sign-in']"
-  >
+  <button mat-button topBarItem *ngIf="(userAuth$ | async) === null" [routerLink]="['sign-in']">
     Acceso
   </button>
 

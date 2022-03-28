@@ -123,7 +123,7 @@ $mat-rng-dark: (
   100: #f0f0f0,
   // lighter
   200: #f0f0f0,
-  300: #375984,
+  300: #6c8ab1,
   400: #375984,
   500: #375984,
   600: #375984,
@@ -156,7 +156,7 @@ $rng-default-primary: mat.define-palette($mat-rng, A700);
 $rng-default-accent: mat.define-palette($mat-rng, A400);
 $rng-default-warn: mat.define-palette($mat-rng, 900);
 
-$rng-dark-primary: mat.define-palette($mat-rng-dark, A700);
+$rng-dark-primary: mat.define-palette($mat-rng-dark, 300);
 $rng-dark-accent: mat.define-palette($mat-rng-dark, A400);
 $rng-dark-warn: mat.define-palette($mat-rng-dark, 900);
 
@@ -215,12 +215,12 @@ mat-chip.mat-chip.mat-chip-selected {
 $color-config: mat.get-color-config($rng-default-theme);
 .bg-primary {
   background-color: mat.get-color-from-palette(map.get($color-config, 'primary'), A700);
-  color: white;
+  // color: white;
 }
 
 .bg-accent {
   background: mat.get-color-from-palette(map.get($color-config, 'accent'), A400);
-  color: white;
+  // color: white;
 }
 .color-primary {
   color: mat.get-color-from-palette(map.get($color-config, 'primary'), A700);

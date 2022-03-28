@@ -1,11 +1,11 @@
-<footer class="text-center lg:text-left text-gray-600">
+<footer class="text-center lg:text-left">
   <mat-divider></mat-divider>
   <div class="flex justify-center items-center lg:justify-between p-6">
     <div class="mr-12 hidden lg:block">
-      <span>Get connected with us on social networks:</span>
+      <span>{{ 'footer.getConnectedWithUsOnSocialNetworks' | transloco }}:</span>
     </div>
     <div class="flex justify-center">
-      <a href="https://www.facebook.com/E-lares-106921367858147" class="mr-6 text-gray-600">
+      <a href="https://www.facebook.com/E-lares-106921367858147" target="_blank" class="mr-6">
         <svg
           aria-hidden="true"
           focusable="false"
@@ -22,7 +22,7 @@
           ></path>
         </svg>
       </a>
-      <!-- <a href="#!" class="mr-6 text-gray-600">
+      <!-- <a href="#!" target="_blank"  class="mr-6">
         <svg
           aria-hidden="true"
           focusable="false"
@@ -39,7 +39,7 @@
           ></path>
         </svg>
       </a> -->
-      <a href="https://g.page/e-lares?gm" class="mr-6 text-gray-600">
+      <a href="https://g.page/e-lares?gm" target="_blank" class="mr-6">
         <svg
           aria-hidden="true"
           focusable="false"
@@ -56,7 +56,7 @@
           ></path>
         </svg>
       </a>
-      <a href="#!" class="mr-6 text-gray-600">
+      <a href="https://www.instagram.com/elaresinmobiliarias/" target="_blank" class="mr-6">
         <svg
           aria-hidden="true"
           focusable="false"
@@ -73,7 +73,7 @@
           ></path>
         </svg>
       </a>
-      <a href="https://www.linkedin.com/company/e-lares" class="mr-6 text-gray-600">
+      <a href="https://www.linkedin.com/company/e-lares" target="_blank" class="mr-6">
         <svg
           aria-hidden="true"
           focusable="false"
@@ -90,7 +90,7 @@
           ></path>
         </svg>
       </a>
-      <!-- <a href="#!" class="text-gray-600">
+      <!-- <a href="#!" target="_blank"  class="">
         <svg
           aria-hidden="true"
           focusable="false"
@@ -131,50 +131,58 @@
           E-LARES
         </h6>
         <p>
-          Encuentra lo que necesites para tu hogar. Descubre nuestros servicios de reformas,
-          búsqueda de inmuebles, gestiones legales...
-        </p>
-      </div>
-      <div class="">
-        <h6 class="uppercase font-semibold mb-4 flex justify-center md:justify-start">Products</h6>
-        <p class="mb-4">
-          <a href="#!" class="text-gray-600">Angular</a>
-        </p>
-        <p class="mb-4">
-          <a href="#!" class="text-gray-600">React</a>
-        </p>
-        <p class="mb-4">
-          <a href="#!" class="text-gray-600">Vue</a>
-        </p>
-        <p>
-          <a href="#!" class="text-gray-600">Laravel</a>
+          {{ 'footer.description' | transloco }}
         </p>
       </div>
       <div class="">
         <h6 class="uppercase font-semibold mb-4 flex justify-center md:justify-start">
-          Useful links
+          {{ 'footer.products' | transloco }}
         </h6>
         <p class="mb-4">
-          <a href="#!" class="text-gray-600">Pricing</a>
+          <a href="https://e-lares.com/portal/inmobiliario" class="">{{
+            'footer.realStateWebsite' | transloco
+          }}</a>
         </p>
         <p class="mb-4">
-          <a href="#!" class="text-gray-600">Settings</a>
+          <a href="https://services.e-lares.com" class="">
+            {{ 'footer.servicesWebsite' | transloco }}</a
+          >
         </p>
         <p class="mb-4">
-          <a href="#!" class="text-gray-600">Orders</a>
+          <a href="https://e-lares.com/login" class="">
+            {{ 'footer.realStatePlatform' | transloco }}</a
+          >
         </p>
-        <p>
-          <a href="#!" class="text-gray-600">Help</a>
+        <p class="mb-4">
+          <a href="https://services.e-lares.com/sign-in" class="">{{
+            'footer.servicesPlatform' | transloco
+          }}</a>
         </p>
       </div>
       <div class="">
-        <h6 class="uppercase font-semibold mb-4 flex justify-center md:justify-start">Contact</h6>
+        <h6 class="uppercase font-semibold mb-4 flex justify-center md:justify-start">
+          {{ 'footer.usefulLinks' | transloco }}
+        </h6>
+        <p class="mb-4">
+          <a href="https://e-lares.com" class="">{{ 'footer.home' | transloco }}</a>
+        </p>
+        <p class="mb-4">
+          <a href="https://e-lares.com/pricing" class=""> {{ 'footer.pricing' | transloco }}</a>
+        </p>
+        <p class="mb-4">
+          <a href="https://e-lares.com/contact" class=""> {{ 'footer.contact' | transloco }}</a>
+        </p>
+      </div>
+      <div class="">
+        <h6 class="uppercase font-semibold mb-4 flex justify-center md:justify-start">
+          {{ 'footer.contact' | transloco }}
+        </h6>
         <p class="flex items-center justify-center md:justify-start mb-4">
-          <mat-icon color="primary" class="mr-4">place</mat-icon>
+          <mat-icon class="mr-4">place</mat-icon>
           Valencia, España
         </p>
         <p class="flex items-center justify-center md:justify-start mb-4">
-          <mat-icon color="primary" class="mr-4">phone</mat-icon>
+          <mat-icon class="mr-4">phone</mat-icon>
           info@e-lares.com
         </p>
       </div>
@@ -182,6 +190,6 @@
   </div>
   <div class="text-center p-6">
     <span>© 2022 Copyright:</span>
-    <a class="text-gray-600 font-semibold ml-2" href="https://e-lares.com/">E-LARES</a>
+    <a class="font-semibold ml-2" href="https://e-lares.com/">E-LARES</a>
   </div>
 </footer>
