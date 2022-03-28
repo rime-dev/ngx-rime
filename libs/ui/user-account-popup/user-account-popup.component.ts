@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {Router} from '@angular/router';
 
 export interface Routes {
   path?: string;
@@ -42,9 +43,16 @@ export class UserAccountPopupComponent {
     return this._userInfo;
   }
   private _userInfo!: UserInfo | null;
+  constructor(private router: Router) {}
   handleClickEvent(event: (() => void) | undefined) {
     if (event) {
       event();
     }
+  }
+  handleRouterEvent(path: string | undefined) {
+    if (!path) {
+      return;
+    }
+    void this.router.navigate([path]);
   }
 }

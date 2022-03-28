@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AngularFireFunctions} from '@angular/fire/compat/functions';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -6,8 +6,9 @@ import {TranslocoService} from '@ngneat/transloco';
 import {AuthService, User as UserAuth} from '@rng/data-access/auth';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
-import {UserInfo} from '@rng/ui/user-account-popup';
-import {Observable} from 'rxjs';
+import {Routes, UserInfo} from '@rng/ui/user-account-popup';
+import {Observable, Subject} from 'rxjs';
+import {map, takeUntil} from 'rxjs/operators';
 import {Activity} from '../../models/activity.model';
 
 @Component({
@@ -15,7 +16,7 @@ import {Activity} from '../../models/activity.model';
   templateUrl: './services-web.component.html',
   styleUrls: ['./services-web.component.scss'],
 })
-export class ServicesWebComponent implements OnInit {
+export class ServicesWebComponent implements OnInit, OnDestroy {
   public appName = 'E-LARES';
   public logo = {
     src: 'assets/rng-logo.png',
@@ -24,19 +25,12 @@ export class ServicesWebComponent implements OnInit {
   public topRoutes = [];
   public activities$!: Observable<EntityState<Activity>[] | null>;
   public requestServiceForm: FormGroup;
-  public userRoutes = [
-    {
-      click: async () => {
-        await this.authService.signOut();
-      },
-      text: 'Logout',
-      icon: 'logout',
-    },
-  ];
+  public userRoutes: Routes[] = [];
   public sendRequestLoading = false;
   public user$!: Observable<UserInfo | null>;
   public userAuth$: Observable<UserAuth | null>;
   public language!: string;
+  private destroy$: Subject<void> = new Subject();
   constructor(
     private dataService: DataService,
     private authService: AuthService,
@@ -56,6 +50,30 @@ export class ServicesWebComponent implements OnInit {
   ngOnInit(): void {
     this.activities$ = this.dataService.select<Activity>('Activity').entities$;
     this.dataService.select<Activity>('Activity').getAll();
+    this.translocoService.events$
+      .pipe(map(() => (this.userRoutes = this.getUserRoutes())))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+  getUserRoutes() {
+    return [
+      {
+        path: '/dashboard',
+        text: this.translocoService.translate('platform'),
+        icon: 'dashboard',
+      },
+      {
+        click: async () => {
+          await this.authService.signOut();
+        },
+        text: this.translocoService.translate('logout'),
+        icon: 'logout',
+      },
+    ];
   }
   sendRequest() {
     if (!this.requestServiceForm.valid) {

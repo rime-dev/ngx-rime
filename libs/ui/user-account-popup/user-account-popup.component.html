@@ -72,7 +72,7 @@
       color="primary"
       class="px-8"
       *ngFor="let route of routes"
-      (click)="handleClickEvent(route.click)"
+      (click)="route.click ? handleClickEvent(route.click) : handleRouterEvent(route.path)"
     >
       <mat-icon color="primary">{{ route.icon }}</mat-icon>
       {{ route.text }}

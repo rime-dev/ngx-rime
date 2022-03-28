@@ -1,5 +1,8 @@
 {
   "home": "Home",
+  "platform": "Platform",
+  "access": "Access",
+  "logout": "Log out",
   "areYouSure": "Are you sure?",
   "support": "Support",
   "support.helpContact": "Do you need help? Contact us",

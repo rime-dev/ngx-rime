@@ -1,5 +1,8 @@
 {
   "home": "Inicio",
+  "platform": "Plataforma",
+  "access": "Acceso",
+  "logout": "Cerrar sesión",
   "areYouSure": "¿Está seguro?",
   "support": "Soporte",
   "support.helpContact": "Si necesitas ayuda, contacta con nosotros",
