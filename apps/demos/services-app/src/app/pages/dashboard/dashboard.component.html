@@ -15,7 +15,7 @@
     (click)="scrollToTop()"
     *ngIf="showTitlePage"
   >
-    {{ titlePage }}
+    {{ titlePage | transloco }}
   </button>
   <rng-search-input class="ml-auto mr-2 w-full" topBarItem></rng-search-input>
   <rng-theme-switcher class="ml-auto" topBarItem></rng-theme-switcher>

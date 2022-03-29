@@ -7,7 +7,7 @@
 @import '@angular/material/theming';
 
 @mixin _palette-styles($palette) {
-  background: mat.get-color-from-palette($palette, background);
+  background: mat.get-color-from-palette($palette, default);
   color: mat.get-color-from-palette($palette, default-contrast);
 }
 @mixin sidenav-component-theme($theme) {
@@ -17,9 +17,41 @@
   $foreground: map.get($theme, foreground);
   $background: map.get($theme, background);
 
-  .mat-sidenav,
   .mat-drawer-container,
   .mat-sidenav-container {
+    background: mat.get-color-from-palette($background, background);
+    color: mat.get-color-from-palette($foreground, text);
+    &[color='primary'] {
+      @include _palette-styles($primary);
+    }
+    &[color='accent'] {
+      @include _palette-styles($accent);
+    }
+    &[color='warn'] {
+      @include _palette-styles($warn);
+    }
+  }
+  .mat-sidenav {
+    background: mat.get-color-from-palette($background, background);
+    color: mat.get-color-from-palette($foreground, text);
+    &[color='primary'] {
+      @include _palette-styles($primary);
+    }
+    &[color='accent'] {
+      @include _palette-styles($accent);
+    }
+    &[color='warn'] {
+      @include _palette-styles($warn);
+    }
+  }
+}
+@mixin card-component-theme($theme) {
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
+  $foreground: map.get($theme, foreground);
+  $background: map.get($theme, background);
+  .mat-card {
     background: mat.get-color-from-palette($background, background);
     color: mat.get-color-from-palette($foreground, text);
     &[color='primary'] {
@@ -178,18 +210,18 @@ $rng-dark-theme: mat.define-dark-theme(
     ),
   )
 );
-
 @include mat.all-component-themes($rng-default-theme);
 @include sidenav-component-theme($rng-default-theme);
 @include overlay-component-theme($rng-default-theme);
 @include rng-search-input-component-theme($rng-default-theme);
-
+@include card-component-theme($rng-default-theme);
 .dark {
   @include mat.core-color($rng-dark-theme);
   @include mat.all-component-colors($rng-dark-theme);
   @include sidenav-component-theme($rng-dark-theme);
   @include overlay-component-theme($rng-dark-theme);
   @include rng-search-input-component-theme($rng-dark-theme);
+  @include card-component-theme($rng-dark-theme);
 }
 
 html,

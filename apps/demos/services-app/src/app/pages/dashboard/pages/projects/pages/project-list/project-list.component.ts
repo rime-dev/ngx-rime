@@ -42,7 +42,7 @@ export class ProjectListComponent implements OnInit {
       if (state[0] === 'state' && state[1] === 'active') {
         this.tabSelected = 0;
       }
-      if (state[0] === 'group' && state[1] === undefined) {
+      if (state[0] === 'group' && state[1] === null) {
         this.tabSelected = 1;
       }
       if (state[0] === 'state' && state[1] === 'inactive') {
@@ -96,7 +96,7 @@ export class ProjectListComponent implements OnInit {
       this.otherProjects$ = this.dataService
         .select('Project')
         .entities$.pipe(
-          dataFilter({fieldPath: 'group', opStr: '==', value: undefined}),
+          dataFilter({fieldPath: 'group', opStr: '==', value: null}),
           delay(0),
           tap({next: (documents: EntityState<Project>[]) => this.loadDataPoints(documents)})
         );
@@ -133,7 +133,7 @@ export class ProjectListComponent implements OnInit {
 
       this.otherProjects$ = this.dataService.select<Project>('Project').entities$.pipe(
         dataFilter([
-          {fieldPath: 'group', opStr: '==', value: undefined},
+          {fieldPath: 'group', opStr: '==', value: null},
           {fieldPath: 'type', opStr: '==', value: type},
         ]),
         delay(0),

@@ -61,6 +61,8 @@ export class TeamComponent implements OnInit, OnDestroy {
   }
   private filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.users.filter((option: any) => option.data.name.toLowerCase().includes(filterValue));
+    return this.users.filter((option: any) =>
+      option.data.name?.toLowerCase().includes(filterValue)
+    );
   }
 }

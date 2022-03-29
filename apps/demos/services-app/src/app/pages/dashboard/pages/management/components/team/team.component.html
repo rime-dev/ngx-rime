@@ -33,10 +33,18 @@
           <mat-card-header class="relative">
             <img
               mat-card-avatar
+              *ngIf="user.data.photoURL; else userNoImageTemplate"
               [alt]="user.data.name"
               class="object-cover object-center"
               [src]="user.data.photoURL"
             />
+            <ng-template #userNoImageTemplate>
+              <button type="button" class="mat-elevation-z0 text-2xl" mat-mini-fab color="primary">
+                <span class="sr-only">Open user menu</span>
+                <mat-icon>person</mat-icon>
+              </button>
+            </ng-template>
+
             <mat-card-title>{{ user.data.name }}</mat-card-title>
             <mat-card-subtitle>{{ user.data.headline }}</mat-card-subtitle>
           </mat-card-header>

@@ -54,6 +54,7 @@ export class ServicesWebComponent implements OnInit, OnDestroy {
       .pipe(map(() => (this.userRoutes = this.getUserRoutes())))
       .pipe(takeUntil(this.destroy$))
       .subscribe();
+    this.userRoutes = this.getUserRoutes();
   }
   ngOnDestroy(): void {
     this.destroy$.next();

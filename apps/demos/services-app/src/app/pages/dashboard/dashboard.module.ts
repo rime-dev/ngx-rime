@@ -9,6 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {TranslocoModule} from '@ngneat/transloco';
 import {AuthModule} from '@rng/data-access/auth';
 import {ShellModule} from '@rng/ui/shell';
 import {UserAccountPopupModule} from '@rng/ui/user-account-popup';
@@ -37,6 +38,7 @@ import {DashboardComponent} from './dashboard.component';
     AuthModule,
     SearchInputModule,
     ThemeSwitcherModule,
+    TranslocoModule,
   ],
 })
 export class DashboardModule {}

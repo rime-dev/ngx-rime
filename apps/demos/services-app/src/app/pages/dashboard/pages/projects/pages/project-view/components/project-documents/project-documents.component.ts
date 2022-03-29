@@ -7,7 +7,7 @@ import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
 import {Project, ProjectActivity} from 'apps/demos/services-app/src/app/models/project.model';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
-import {map, startWith, takeUntil, tap} from 'rxjs/operators';
+import {filter, map, startWith, takeUntil, tap} from 'rxjs/operators';
 import {ProjectDocumentDialogComponent} from '../project-document-dialog/project-document-dialog.component';
 import {ProjectExistingDocumentDialogComponent} from '../project-existing-document-dialog/project-existing-document-dialog.component';
 @Component({
@@ -40,11 +40,14 @@ export class ProjectDocumentsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.filteredDocuments.next(this.project.data.documents);
+    if (this.project.data.documents) {
+      this.filteredDocuments.next(this.project.data.documents);
+    }
 
     this.documentsFormControl.valueChanges
       .pipe(
         startWith(''),
+        filter(() => this.project.data.documents && this.project.data.documents.length > 0),
         map((value) => this.filter(value)),
         tap({
           next: (value) => this.filteredDocuments.next(value),

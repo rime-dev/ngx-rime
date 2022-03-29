@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
   styleUrls: ['./other-projects.component.scss'],
 })
 export class OtherProjectsComponent {
-  @DataFilter({fieldPath: 'group', opStr: '==', value: undefined})
+  @DataFilter({fieldPath: 'group', opStr: '==', value: null})
   public projects$: Observable<EntityState<Project>[]>;
 
   constructor(private dataService: DataService) {

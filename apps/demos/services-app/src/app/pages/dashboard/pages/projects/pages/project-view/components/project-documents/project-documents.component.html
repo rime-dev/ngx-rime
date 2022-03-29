@@ -42,7 +42,7 @@
   </div>
   <ng-container *ngIf="filteredDocuments$ | async; let documents">
     <div
-      *ngIf="documents.length > 0; else noDocumentsTemplate"
+      *ngIf="documents && documents.length > 0; else noDocumentsTemplate"
       class="mx-auto w-full space-y-2 sm:space-y-0 gap-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
     >
       <div

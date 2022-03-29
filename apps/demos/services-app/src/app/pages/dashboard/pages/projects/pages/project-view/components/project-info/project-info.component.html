@@ -215,7 +215,7 @@
       <mat-list-item class="h-auto">
         <mat-icon mat-list-icon>place</mat-icon>
         <div mat-line class="whitespace-normal py-4">
-          {{ project.data.location.text }}
+          {{ project.data.location?.text || 'noInformation' | transloco }}
         </div>
       </mat-list-item>
     </mat-action-list>

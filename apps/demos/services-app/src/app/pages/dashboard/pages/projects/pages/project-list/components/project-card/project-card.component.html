@@ -10,7 +10,9 @@
           <mat-icon>{{ project.data.type | projectTypePipe }}</mat-icon>
         </div>
         <mat-card-title>{{ project.data.title }}</mat-card-title>
-        <mat-card-subtitle>{{ project.data.location.text }}</mat-card-subtitle>
+        <mat-card-subtitle>{{
+          project.data.location?.text || 'noInformation' | transloco
+        }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="m-0">
         <div class="flex flex-row w-full justify-end pr-2" *ngIf="project.data.group">

@@ -246,7 +246,6 @@ export class FireDataService<T> {
         ref = conditions[key](element);
       }
     }
-
     return ref;
   }
 

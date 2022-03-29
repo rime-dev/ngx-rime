@@ -149,7 +149,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private loadUser(id?: string): void {
     if (id) {
       this.user$ = this.dataService
-        .select('User')
+        .select<User>('User')
         .getByKey(id)
         .pipe(
           map<unknown, User>((userResult) => (userResult as EntityState<User>).data),
@@ -198,7 +198,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       {
         fieldPath: 'group',
         opStr: '==',
-        value: undefined,
+        value: null,
       },
     ];
     this.dataService.select<Project>('Project').getWithQuery(query0);
@@ -215,7 +215,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         value: userResult.group,
       },
     ];
-    this.dataService.select<Project>('User').getWithQuery(query1);
+    this.dataService.select<User>('User').getWithQuery(query1);
   }
   private loadInvoices(userResult: User): void {
     if (!userResult) {

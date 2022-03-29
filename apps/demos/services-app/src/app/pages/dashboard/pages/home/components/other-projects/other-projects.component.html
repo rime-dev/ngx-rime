@@ -3,15 +3,11 @@
     mat-button
     class="w-full card-title text-left"
     [routerLink]="['../projects/project-list']"
-    [state]="['group', undefined]"
+    [state]="['group', null]"
   >
     {{ 'projects.offered' | transloco }}
   </button>
-  <button
-    mat-icon-button
-    [routerLink]="['../projects/project-list']"
-    [state]="['group', undefined]"
-  >
+  <button mat-icon-button [routerLink]="['../projects/project-list']" [state]="['group', null]">
     <mat-icon>read_more</mat-icon>
   </button>
 </div>
