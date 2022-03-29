@@ -1,13 +1,13 @@
 <div *ngIf="project" class="lg:container p-8 flex flex-col mx-auto">
   <div *ngIf="!project.data.group && !project.data.accepted" class="flex flex-col md:flex-row mb-4">
     <div class="flex w-full md:w-1/2 mt-4 px-4">
-      <button mat-raised-button color="warn" class="w-full" (click)="acceptProject()">
-        {{ 'actions.accept' | transloco }}
+      <button mat-flat-button color="primary" class="w-full rounded-2xl" (click)="declineProject()">
+        {{ 'actions.decline' | transloco }}
       </button>
     </div>
     <div class="flex w-full md:w-1/2 mt-4 px-4">
-      <button mat-raised-button color="warn" class="w-full" (click)="declineProject()">
-        {{ 'actions.decline' | transloco }}
+      <button mat-flat-button color="primary" class="w-full rounded-2xl" (click)="acceptProject()">
+        {{ 'actions.accept' | transloco }}
       </button>
     </div>
   </div>
@@ -79,7 +79,7 @@
       <mat-list-item class="h-auto">
         <mat-icon mat-list-icon>description</mat-icon>
         <div mat-line class="whitespace-normal py-4">
-          {{ project.data.description }}
+          {{ project.data.description || 'noInformation' | transloco }}
         </div>
       </mat-list-item>
     </mat-action-list>
@@ -90,14 +90,18 @@
   <div class="flex flex-col p-4">
     <mat-action-list>
       <mat-list-item>
-        <mat-icon mat-list-icon>{{ project.data.type | projectTypePipe }}</mat-icon>
-        <div mat-line class="text-gray-500">Tipo</div>
-        <div mat-line class="whitespace-normal">{{ project.data.type | transloco }}</div>
+        <mat-icon mat-list-icon>{{ (project.data.type | projectTypePipe) || 'work' }}</mat-icon>
+        <div mat-line class="text-gray-500">{{ 'type' | transloco }}</div>
+        <div mat-line class="whitespace-normal">
+          {{ (project.data.type | transloco) || ('noInformation' | transloco) }}
+        </div>
       </mat-list-item>
       <mat-list-item>
         <mat-icon mat-list-icon>money</mat-icon>
-        <div mat-line class="text-gray-500">Coste</div>
-        <div mat-line class="whitespace-normal">{{ project.data.cost | translocoCurrency }}</div>
+        <div mat-line class="text-gray-500">{{ 'cost' | transloco }}</div>
+        <div mat-line class="whitespace-normal">
+          {{ (project.data.cost | translocoCurrency) || ('noInformation' | transloco) }}
+        </div>
       </mat-list-item>
       <mat-list-item>
         <mat-icon mat-list-icon>event</mat-icon>
@@ -105,11 +109,13 @@
         <div mat-line class="whitespace-normal">
           {{
             project.data.startDate
-              | translocoDate
-                : {
-                    dateStyle: 'long',
-                    timeStyle: 'short'
-                  }
+              ? (project.data.startDate
+                | translocoDate
+                  : {
+                      dateStyle: 'long',
+                      timeStyle: 'short'
+                    })
+              : ('noInformation' | transloco)
           }}
         </div>
       </mat-list-item>
@@ -119,11 +125,13 @@
         <div mat-line class="whitespace-normal">
           {{
             project.data.estimatedEndDate
-              | translocoDate
-                : {
-                    dateStyle: 'long',
-                    timeStyle: 'short'
-                  }
+              ? (project.data.estimatedEndDate
+                | translocoDate
+                  : {
+                      dateStyle: 'long',
+                      timeStyle: 'short'
+                    })
+              : ('noInformation' | transloco)
           }}
         </div>
       </mat-list-item>
@@ -198,14 +206,19 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-    <mat-chip-list aria-label="Labels" *ngIf="!editLabels">
-      <mat-chip
-        *ngFor="let label of project.data.labels"
-        [style.backgroundColor]="labels.getColor(label)"
-        class="text-white"
-        >{{ 'labels.' + label | transloco }}</mat-chip
-      >
-    </mat-chip-list>
+    <ng-container *ngIf="project.data.labels; else noLabelsTemplate">
+      <mat-chip-list aria-label="Labels" *ngIf="!editLabels">
+        <mat-chip
+          *ngFor="let label of project.data.labels"
+          [style.backgroundColor]="labels.getColor(label)"
+          class="text-white"
+          >{{ 'labels.' + label | transloco }}</mat-chip
+        >
+      </mat-chip-list>
+    </ng-container>
+    <ng-template #noLabelsTemplate>
+      {{ 'noLabels' | transloco }}
+    </ng-template>
   </div>
   <span class="text-lg font-medium h-10 flex items-center text-gray-700 dark:text-gray-200">{{
     'location' | transloco

@@ -1,7 +1,6 @@
 import {coerceNumberProperty} from '@angular/cdk/coercion';
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {Update} from '@ngrx/entity';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
 import {StorageUploadTaskService} from '@rng/data-access/storage';
@@ -9,12 +8,11 @@ import {Feature} from 'ol';
 import Point from 'ol/geom/Point';
 import {fromLonLat} from 'ol/proj';
 import {Observable, of} from 'rxjs';
-import {delay, filter, map, tap} from 'rxjs/operators';
+import {delay, map, tap} from 'rxjs/operators';
 import {RequestIfTrueDialogComponent} from '../../../../components/request-if-true-dialog/request-if-true-dialog.component';
 import {Group} from '../../../../models/group.model';
 import {User} from '../../../../models/user.model';
 import {GroupAddActivityDialogComponent} from './components/group-add-activity-dialog/group-add-activity-dialog.component';
-// eslint-disable-next-line max-len
 import {GroupAddAdditionalInfoDialogComponent} from './components/group-add-additional-info-dialog/group-add-additional-info-dialog.component';
 import {GroupAddEmailDialogComponent} from './components/group-add-email-dialog/group-add-email-dialog.component';
 import {GroupAddLocationDialogComponent} from './components/group-add-location-dialog/group-add-location-dialog.component';

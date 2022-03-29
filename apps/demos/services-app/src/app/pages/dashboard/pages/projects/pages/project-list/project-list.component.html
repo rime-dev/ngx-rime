@@ -75,21 +75,7 @@
     </div>
   </div>
   <div
-    class="
-      md:grid
-      w-full
-      h-full
-      pt-0
-      pb-6
-      px-4
-      md:pb-6 md:pt-20 md:px-6
-      adapt-map-project
-      relative
-      md:fixed
-      right-0
-      top-0
-      z-40
-    "
+    class="md:grid w-full h-full pt-0 pb-6 px-4 md:pb-6 md:pt-20 md:px-6 adapt-map-project relative md:fixed right-0 top-0 z-40"
     [class.hidden]="!mapIsOpenOnMobile"
     [class.grid]="mapIsOpenOnMobile"
     [class.subcontainer]="mapIsOpenOnMobile"
@@ -98,6 +84,8 @@
       #map
       class="grid w-full h-full rounded-2xl overflow-hidden"
       [data]="points$ | async"
+      [center]="center"
+      [zoom]="zoom"
       [overlayClickTemplate]="mapClickTemplate"
     ></rng-map>
   </div>

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DataService} from '@rng/data-access/base';
 import {EntityState} from '@rng/data-access/base/models/base.model';
@@ -18,6 +18,8 @@ import {delay, tap} from 'rxjs/operators';
   styleUrls: ['./project-list.component.scss'],
 })
 export class ProjectListComponent implements OnInit {
+  public center: number[] = [];
+  public zoom = 7;
   public tabSelected = 0;
   public filterByTypeSelected = 'all';
   public points$: Observable<Feature<Geometry>[]> = of([]);
@@ -79,7 +81,31 @@ export class ProjectListComponent implements OnInit {
                 data: project.data,
               })
           ),
-      ]);
+      ]).pipe(
+        delay(0),
+        tap({
+          next: (features: Feature<Point>[]) => this.setCenterOfMap(features),
+        }),
+        tap({
+          next: (features: Feature<Point>[]) => this.setZoomOfMap(features),
+        })
+      );
+    }
+  }
+  setCenterOfMap(features: Feature<Point>[]) {
+    const geometry = features[0]?.getGeometry();
+    if (geometry) {
+      this.center = geometry.getCoordinates();
+    } else {
+      this.center = [0, 0];
+    }
+  }
+  setZoomOfMap(features: Feature<Point>[]) {
+    const geometry = features[0]?.getGeometry();
+    if (geometry) {
+      this.zoom = 15;
+    } else {
+      this.zoom = 1;
     }
   }
   filterByType(type?: string): void {
