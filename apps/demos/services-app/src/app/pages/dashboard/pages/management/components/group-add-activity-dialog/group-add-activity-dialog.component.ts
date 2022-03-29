@@ -54,7 +54,10 @@ export class GroupAddActivityDialogComponent {
     if (this.group) {
       this.activitiesInput.nativeElement.value = '';
       this.activityControl.setValue(null);
-      const activities = [...this.group?.data.activities];
+      let activities: any = [];
+      if (this.group?.data.activities) {
+        activities = [...this.group?.data.activities];
+      }
       activities.push(event.option.value);
       const data = {...this.group?.data, activities};
       this.group = {...this.group, data};
