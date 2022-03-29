@@ -51,29 +51,50 @@ const localeToCurrencyMapping = {
   'en-US': 'EUR',
   'es-EN': 'USD',
 };
+const availableLangs = ['es', 'en'];
+const defaultLang = 'es';
 
+const defaultLangFactory = (availableLangsInput: string[], defaultLangInput: string) => {
+  const userLang = navigator.language;
+  const lang = userLang.split('-')[1] ? userLang.split('-')[0] : userLang;
+  return availableLangsInput.includes(lang) ? lang : defaultLangInput;
+};
+const defaultLocaleFactory = (availableLangsInput: string[], defaultLangInput: string) => {
+  const userLang = navigator.language;
+  return availableLangsInput.includes(userLang) ? userLang : defaultLangInput;
+};
+const defaultCurrencyFactory = (availableLangsInput: string[]) => {
+  const userLang = navigator.language;
+  if (availableLangsInput.includes(userLang) && userLang === 'en-US') {
+    return 'USD';
+  } else {
+    return 'EUR';
+  }
+};
 const translocoConfiguration = {
-  availableLangs: ['es', 'en'],
-  defaultLang: 'es',
+  availableLangs: availableLangs,
+  defaultLang: defaultLangFactory(availableLangs, defaultLang),
   reRenderOnLangChange: true,
-  fallbackLang: 'es',
+  fallbackLang: defaultLangFactory(availableLangs, defaultLang),
   prodMode: environment.production,
 };
 const translocoLangs: HashMap<Translation> = {en: en as Translation, es: es as Translation};
+
 @NgModule({
   imports: [
     TranslocoLocaleModule.forRoot({
-      defaultLocale: 'es-ES',
+      defaultLocale: defaultLocaleFactory(availableLangs, defaultLang),
       langToLocaleMapping: {
         en: 'en-US',
         es: 'es-ES',
       },
-      defaultCurrency: 'EUR',
+      defaultCurrency: defaultCurrencyFactory(availableLangs),
       localeToCurrencyMapping,
       localeConfig: {
         global: globalFormatConfig,
         localeBased: {
           'es-ES': esESFormatConfig,
+          'en-US': esESFormatConfig,
         },
       },
     }),
