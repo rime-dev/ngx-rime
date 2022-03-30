@@ -15,7 +15,7 @@ export class TasksComponent implements OnInit {
   public form: FormGroup;
   public addMode = false;
   public editMode = false;
-  public selectedTask!: EntityState | undefined;
+  public selectedTask!: EntityState<any> | undefined;
   constructor(private dataService: DataService, private formBuilder: FormBuilder) {
     this.tasks$ = this.dataService.select('Task').entities$;
     this.form = this.formBuilder.group({
@@ -28,12 +28,12 @@ export class TasksComponent implements OnInit {
   addTask() {
     this.addMode = !this.addMode;
   }
-  editTask(task: EntityState) {
+  editTask(task: EntityState<any>) {
     this.editMode = !this.editMode;
     this.selectedTask = task;
     this.form.patchValue(this.selectedTask?.data);
   }
-  removeTask(task: EntityState) {
+  removeTask(task: EntityState<any>) {
     this.editMode = !this.editMode;
     const data = this.form.getRawValue();
     this.dataService.select('Task').delete(task.id);

@@ -10,7 +10,7 @@ export class LazyLoadImageDirective implements AfterViewInit {
 
   @Input() src!: string;
 
-  constructor(private el: ElementRef) {
+  constructor(private el: ElementRef<HTMLElement>) {
     this.srcAttr =
       'data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
   }

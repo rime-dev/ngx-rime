@@ -1,5 +1,5 @@
 {
-  "name": "@rng/util",
+  "name": "@rng/feature",
   "version": "0.0.0",
   "description": "Common utilities",
   "dependencies": {

@@ -2,6 +2,7 @@ const {guessProductionMode} = require('@ngneat/tailwind');
 
 module.exports = {
   prefix: '',
+  important: true,
   purge: {
     enabled: guessProductionMode(),
     content: ['./apps/**/*.{html,ts}', './libs/**/*.{html,ts}'],
@@ -11,7 +12,9 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      visibility: ["group-hover"],
+    },
   },
   plugins: [],
 };

@@ -8,9 +8,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "target": "ES2020",
+    "module": "ES2020",
+    "lib": ["ES2020", "DOM"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -22,7 +22,8 @@
       "@rng/ui": ["libs/ui/index.ts"],
       "@rng/ui/*": ["libs/ui/*"],
       "@rng/util": ["libs/util/index.ts"],
-      "@rng/util/*": ["libs/util/*"]
+      "@rng/util/*": ["libs/util/*"],
+      "rng/lib1": ["libs/lib1/src/index.ts"]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": true,

@@ -1,6 +1,6 @@
 {
   "root": true,
-  "ignorePatterns": ["!**/*", "*.d.ts"],
+  "ignorePatterns": ["!**/*", "*.d.ts", ".storybook/*"],
   "overrides": [
     {
       "files": ["*.ts"],
@@ -11,25 +11,34 @@
         "createDefaultProgram": true
       },
       "extends": [
-        "plugin:@angular-eslint/ng-cli-compat",
-        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
         "plugin:@angular-eslint/recommended",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "plugins": [
+        "eslint-plugin-jsdoc",
+        "eslint-plugin-cypress",
+        "eslint-plugin-node",
+        "eslint-plugin-prefer-arrow",
+        "eslint-plugin-promise",
+        "eslint-plugin-standard"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
           {
-            "type": "attribute",
-            "prefix": "m",
+            "type": ["element", "attribute"],
+            "prefix": "rng",
             "style": "kebab-case"
           }
         ],
         "@angular-eslint/component-selector": [
           "error",
           {
-            "type": "element",
-            "prefix": "m",
+            "type": ["element", "attribute"],
+            "prefix": "rng",
             "style": "kebab-case"
           }
         ],
@@ -55,7 +64,22 @@
           }
         ],
         "no-shadow": "off",
-        "@typescript-eslint/no-shadow": "error"
+        "@typescript-eslint/no-shadow": "error",
+        "@typescript-eslint/no-explicit-any": [
+          "warn",
+          {
+            "ignoreRestArgs": true
+          }
+        ],
+        "@typescript-eslint/no-unsafe-call": "warn",
+        "@typescript-eslint/no-unsafe-assignment": "warn",
+        "@typescript-eslint/unbound-method": "off",
+        "@typescript-eslint/no-unsafe-member-access": "warn",
+        "no-unsafe-optional-chaining": "warn",
+        "@typescript-eslint/no-unsafe-argument": "warn",
+        "@typescript-eslint/no-unsafe-return": "warn",
+        "@typescript-eslint/no-floating-promises": "warn",
+        "@typescript-eslint/no-empty-function": "off"
       }
     },
     {
@@ -107,7 +131,9 @@
     },
     {
       "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
       "rules": {}
     }
   ]

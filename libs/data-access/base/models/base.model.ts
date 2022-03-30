@@ -1,17 +1,22 @@
 import {FirebaseOptions} from '@angular/fire/app';
 import {FieldPath} from '@angular/fire/compat/firestore';
 import {EntityMetadataMap} from '@ngrx/data';
-import {Update} from '@ngrx/entity';
 import {Observable} from 'rxjs';
 
-export interface EntityState {
+export type FireEntityCollectionDataServiceBase<T> = FireEntityCollectionDataService<
+  // EntityCollectionServiceBase<EntityState<never>> &
+  EntityState<T>
+>;
+
+export interface EntityState<T> {
   id: string;
-  data: any;
+  data: T;
 }
 export interface StateEntityConfig {
   enablePersistence?: boolean;
   entityMetadata: EntityMetadataMap;
-  pluralNames: any;
+  pluralNames: Record<string, string>;
+  mockData?: Record<string, any>;
 }
 export interface FirebaseConfig {
   options: FirebaseOptions;
@@ -22,8 +27,18 @@ export class FireDataObject {
   public id: string;
   public data: Record<string, any>;
   constructor(data: Record<string, any>) {
-    this.id = data.payload.doc.id;
-    this.data = data.payload.doc.data();
+    const payload = data.payload || data;
+    this.id = payload?.doc?.id || payload?.id;
+    this.data = payload?.doc?.data() || payload?.data();
+  }
+}
+
+export class FireDataMockObject {
+  public id: string;
+  public data: Record<string, any>;
+  constructor(data: Record<string, any>) {
+    this.id = data.id;
+    this.data = data.data;
   }
 }
 
@@ -80,11 +95,31 @@ export type OrderByDirection = 'desc' | 'asc';
 
 /** A service that performs FIREBASE-like CRUD data operations for an entity collection */
 export interface FireEntityCollectionDataService<T> {
+  entities$: Observable<EntityState<T>[]>;
   add(entity: T): Observable<T>;
   delete(id: number | string): Observable<number | string>;
   getAll(): Observable<T[]>;
   getById(id: any): Observable<T>;
+  getByKey(id: any): Observable<T>;
   getWithLimit(limit: number): Observable<T[]>;
+  update(update: EntityState<T>): Observable<T>;
   getWithQuery(params: ConditionalQueryFirestore[]): Observable<T[]>;
-  update(update: Update<T>): Observable<T>;
 }
+
+export const filterOperator = {
+  '<': (data: any, value: any) => data < value,
+  '<=': (data: any, value: any) => data <= value,
+  '==': (data: any, value: any) => data === value,
+  '!=': (data: any, value: any) => data !== value,
+  '>=': (data: any, value: any) => data >= value,
+  '>': (data: any, value: any) => data > value,
+  'array-contains': (data: any[], value: any) => data.includes(value),
+  in: () => (data: any, value: any) => data.some(value),
+  'array-contains-any': () => null,
+  'not-in': (data: any, value: any) => !data.some(value),
+};
+
+export const arrayFilter = (array: any[], query: ConditionalQueryFirestore) =>
+  array.filter((doc: any) =>
+    filterOperator[query.opStr](doc.data[query?.fieldPath as string], query?.value)
+  );

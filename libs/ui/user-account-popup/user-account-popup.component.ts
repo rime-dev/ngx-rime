@@ -1,16 +1,17 @@
 import {Component, Input} from '@angular/core';
+import {Router} from '@angular/router';
 
 export interface Routes {
   path?: string;
   icon?: string;
   text?: string;
-  click?: unknown;
+  click?: () => void;
 }
 
 export interface UserInfo {
   displayName?: string;
   email?: string;
-  photoUrl?: string;
+  photoURL?: string;
   uid?: string;
 }
 
@@ -42,8 +43,16 @@ export class UserAccountPopupComponent {
     return this._userInfo;
   }
   private _userInfo!: UserInfo | null;
-  constructor() {}
-  handleClickEvent(event: any) {
-    event();
+  constructor(private router: Router) {}
+  handleClickEvent(event: (() => void) | undefined) {
+    if (event) {
+      event();
+    }
+  }
+  handleRouterEvent(path: string | undefined) {
+    if (!path) {
+      return;
+    }
+    void this.router.navigate([path]);
   }
 }

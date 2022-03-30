@@ -1,10 +1,21 @@
 <button
   type="button"
   mat-mini-fab
-  *ngIf="userInfo && userInfo.photoUrl"
+  *ngIf="!userInfo"
   class="bg-contain bg-center mat-elevation-z0"
+  color="primary"
+>
+  <span class="sr-only">Open user menu</span>
+  <mat-icon>person</mat-icon>
+</button>
+<button
+  type="button"
+  mat-mini-fab
+  *ngIf="userInfo && userInfo.photoURL"
+  class="bg-contain bg-center mat-elevation-z0"
+  color="primary"
   [matMenuTriggerFor]="userMenu"
-  [ngStyle]="{'background-image': 'url(' + userInfo?.photoUrl + ')'}"
+  [ngStyle]="{'background-image': 'url(' + userInfo?.photoURL + ')'}"
 >
   <span class="sr-only">Open user menu</span>
 </button>
@@ -12,7 +23,8 @@
   type="button"
   class="mat-elevation-z0 text-2xl"
   mat-mini-fab
-  *ngIf="userInfo && !userInfo.photoUrl"
+  *ngIf="userInfo && !userInfo.photoURL"
+  color="primary"
   [matMenuTriggerFor]="userMenu"
 >
   <span class="sr-only">Open user menu</span>
@@ -20,16 +32,22 @@
   <span *ngIf="!userInfo?.displayName">{{ userInfo?.email | slice: 0:1 | uppercase }}</span>
 </button>
 <mat-menu #userMenu="matMenu">
-  <div (click)="$event.stopPropagation(); $event.preventDefault()">
+  <div style="width: 280px" (click)="$event.stopPropagation(); $event.preventDefault()">
     <div class="flex items-center px-10 pt-5 pb-5 flex-col mb-2">
       <div class="flex flex-shrink-0 w-full p-2 justify-center">
         <img
-          *ngIf="userInfo?.photoUrl"
+          *ngIf="userInfo?.photoURL"
           class="h-20 w-20 rounded-full m-auto"
-          [src]="userInfo?.photoUrl"
+          [src]="userInfo?.photoURL"
           [alt]="userInfo?.displayName"
         />
-        <button mat-fab type="button" *ngIf="!userInfo?.photoUrl" class="mat-elevation-z0 text-3xl">
+        <button
+          mat-fab
+          type="button"
+          *ngIf="!userInfo?.photoURL"
+          color="primary"
+          class="mat-elevation-z0 text-3xl"
+        >
           <span *ngIf="userInfo?.displayName">{{
             userInfo?.displayName | slice: 0:1 | uppercase
           }}</span>
@@ -37,20 +55,26 @@
         </button>
       </div>
       <div class="mt-2">
-        <div *ngIf="userInfo?.displayName" class="text-lg font-medium leading-none mb-2">
+        <div
+          *ngIf="userInfo?.displayName"
+          class="text-lg text-center font-medium leading-none mb-2"
+        >
           {{ userInfo?.displayName }}
         </div>
-        <div
-          *ngIf="userInfo?.email"
-          class="text-sm font-medium leading-none text-gray-700 mb-1 text-center"
-        >
+        <div *ngIf="userInfo?.email" class="text-medium font-thin leading-none mb-1 text-center">
           {{ userInfo?.email }}
         </div>
       </div>
     </div>
     <mat-divider></mat-divider>
-    <button mat-menu-item *ngFor="let route of routes" (click)="handleClickEvent(route.click)">
-      <mat-icon>{{ route.icon }}</mat-icon>
+    <button
+      mat-menu-item
+      color="primary"
+      class="px-8"
+      *ngFor="let route of routes"
+      (click)="route.click ? handleClickEvent(route.click) : handleRouterEvent(route.path)"
+    >
+      <mat-icon color="primary">{{ route.icon }}</mat-icon>
       {{ route.text }}
     </button>
   </div>

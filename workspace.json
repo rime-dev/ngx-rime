@@ -44,7 +44,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": []
     },
     "feature": {
       "projectType": "library",
@@ -89,7 +90,10 @@
             ]
           }
         }
-      }
+      },
+      "tags": [
+        "feature"
+      ]
     },
     "quiz-app": {
       "projectType": "application",
@@ -188,7 +192,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "rng-app": {
       "projectType": "application",
@@ -287,7 +292,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "task-app": {
       "projectType": "application",
@@ -386,7 +392,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "ui": {
       "projectType": "library",
@@ -438,7 +445,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/ui/.storybook"
-            }
+            },
+            "projectBuildConfig": "ui:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -456,7 +464,8 @@
             "outputPath": "dist/storybook/ui",
             "config": {
               "configFolder": "libs/ui/.storybook"
-            }
+            },
+            "projectBuildConfig": "ui:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -464,7 +473,8 @@
             }
           }
         }
-      }
+      },
+      "tags": []
     },
     "util": {
       "projectType": "library",
@@ -516,7 +526,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/util/.storybook"
-            }
+            },
+            "projectBuildConfig": "util:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -534,7 +545,8 @@
             "outputPath": "dist/storybook/util",
             "config": {
               "configFolder": "libs/util/.storybook"
-            }
+            },
+            "projectBuildConfig": "util:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -542,39 +554,8 @@
             }
           }
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular",
-    "packageManager": "npm"
-  },
-  "schematics": {
-    "@nrwl/angular": {
-      "application": {
-        "linter": "eslint"
       },
-      "library": {
-        "linter": "eslint"
-      },
-      "storybook-configuration": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/angular:application": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:component": {
-      "style": "scss"
+      "tags": []
     }
-  },
-  "defaultProject": "rng-app"
+  }
 }

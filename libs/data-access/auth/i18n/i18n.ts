@@ -1,0 +1,46 @@
+const translate = {
+  es: {
+    resetPassword: 'Reestablecer la contraseña',
+    forgotPassword: '¿Has olvidado la contraseña?',
+    requestEmailToResetPassword:
+      'Por favor, introduce tu email para solicitar un cambio de contraseña',
+    email: 'Email',
+    password: 'Contraseña',
+    enterValidEmail: 'Introduce un email válido',
+    fieldRequired: 'Este campo es requerido',
+    logIn: 'Login',
+    signIn: 'Acceso',
+    signUp: 'Registro',
+    goBackTo: 'Volver a',
+    signInToYourAccount: 'Inicia sesión en tu cuenta',
+    doNotHaveAnAccount: '¿No tienes cuenta?',
+    alreadyHaveAnAccount: '¿Ya tienes una cuenta?',
+    resendVerificationEmail: 'Reenviar email de verificación',
+    pleaseCheckYourEmailAndClickOnTheLinkToVerifyYourEmailAddress:
+      'Por favor, revisa tu email y haz click en el link para verificar el email',
+    weHaveSentAConfirmationEmailTo: 'Hemos enviado un email de confirmación a',
+    thankYouForRegistering: 'Gracias por registrarte',
+  },
+  en: {
+    resetPassword: 'Reset password',
+    forgotPassword: 'Forgot password?',
+    requestEmailToResetPassword: 'Please enter your email address to request a password reset.',
+    email: 'Email',
+    password: 'Password',
+    enterValidEmail: 'Enter a valid email',
+    fieldRequired: 'This field is required',
+    logIn: 'Login',
+    signIn: 'Sig in',
+    signUp: 'Sig up',
+    goBackTo: 'Go back to',
+    signInToYourAccount: 'Sign in to your account',
+    doNotHaveAnAccount: "Don't have an account?",
+    alreadyHaveAnAccount: 'Already have an account?',
+    resendVerificationEmail: 'Resend Verification Email',
+    pleaseCheckYourEmailAndClickOnTheLinkToVerifyYourEmailAddress:
+      'Please check your email and click on the link to verfiy your email address',
+    weHaveSentAConfirmationEmailTo: 'We have sent a confirmation email to',
+    thankYouForRegistering: 'Thank You for Registering',
+  },
+};
+export default translate;

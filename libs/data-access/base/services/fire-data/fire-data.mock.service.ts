@@ -1,29 +1,27 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
-import {AngularFirestore, CollectionReference, FieldPath} from '@angular/fire/compat/firestore';
-import {Update} from '@ngrx/entity';
-import {Store} from '@ngrx/store';
-import {isObservable, observable, Observable, of, throwError} from 'rxjs';
-import {catchError, delay, map, tap, timeout} from 'rxjs/operators';
-import {ENTITY_CONFIG, ENTITY_NAME} from '../constants/base.constant';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {Observable, of, throwError} from 'rxjs';
+import {catchError, delay, map, timeout} from 'rxjs/operators';
+import {ENTITY_CONFIG, ENTITY_NAME} from '../../constants/base.constant';
 import {
+  arrayFilter,
   ConditionalQueryFirestore,
   EntityState,
   FirebaseData,
   FirebaseMethods,
-  FireDataObject,
+  FireDataMockObject,
   FireDataServiceError,
-  FireEntityCollectionDataService,
-  OrderByDirection,
   StateEntityConfig,
-} from '../models/base.model';
+} from '../../models/base.model';
+import {generateUUID} from '../../utils/utils';
 
 /**
  * A wrapper of DefaultDataServiceFactory.
  * Creates the FireDataService instance for the given entity.
  */
 @Injectable()
-export class FireDataServiceFactory {
+export class FireDataMockServiceFactory {
   constructor(
     @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,
     private angularFirestore: AngularFirestore
@@ -34,8 +32,8 @@ export class FireDataServiceFactory {
    *
    * @param entityName {string} Name of the entity type for this data service
    */
-  create<T>(entityName: string): FireEntityCollectionDataService<T> {
-    return new FireDataService<T>(entityName, this.entityConfig, this.angularFirestore);
+  create<T>(entityName: string) {
+    return new FireDataMockService<T>(entityName, this.entityConfig, this.angularFirestore);
   }
 }
 
@@ -43,7 +41,7 @@ export class FireDataServiceFactory {
  * A basic service for CRUD operations connected with Firebase.
  * Creates an instance of each entity.
  */
-export class FireDataService<T> implements FireEntityCollectionDataService<T> {
+export class FireDataMockService<T> {
   protected internalName!: string;
   protected delete404OK: boolean;
   protected entityName!: string;
@@ -54,17 +52,19 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
   protected getDelay = 0;
   protected saveDelay = 0;
   protected timeout = 0;
-
+  private mockData;
   constructor(
     @Inject(ENTITY_NAME) entityName: string,
     @Inject(ENTITY_CONFIG) entityConfig: StateEntityConfig,
     private angularFirestore: AngularFirestore
   ) {
     this.entityConfig = entityConfig;
-    this.internalName = `${entityName} FireDataService`;
+    this.internalName = `${entityName} FireDataMockService`;
     this.entityName = entityName;
     this.collectionName = this.getCollectionName(entityName);
+
     this.delete404OK = true;
+    this.mockData = entityConfig.mockData;
   }
 
   /**
@@ -87,7 +87,7 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
     if (uid == null) {
       err = new Error(`No "${this.entityName}" key to delete`);
     }
-    return this.execute('delete', uid, err).pipe(map((result) => uid as string));
+    return this.execute('delete', uid, err).pipe(map((result) => uid));
   }
 
   /**
@@ -147,11 +147,15 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
    *
    * @param update
    */
-  update(update: Update<T>): Observable<any> {
+  update(update: EntityState<T>): Observable<any> {
     const id = update && update.id;
+    const changesData = update && update.data && (update as any).changes;
+    const changesUpdate = update && (update as any).changes;
     const updateOrError =
-      id == null ? new Error(`No "${this.entityName}" update data or id`) : update.changes;
-    return this.execute('update', id as string, updateOrError);
+      id === null
+        ? new Error(`No "${this.entityName}" update data or id`)
+        : changesData || changesUpdate;
+    return this.execute('update', id, updateOrError);
   }
 
   /**
@@ -182,8 +186,9 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
    */
   private getObservableFromDelete(document: string, collection?: string) {
     let action = null;
-    if (collection) {
-      action = this.angularFirestore.collection(collection).doc(document).delete();
+    if (collection && this.mockData) {
+      this.mockData[collection].filter((entityData: any) => entityData.id !== document);
+      action = new Promise(() => {});
     }
     return of(action);
   }
@@ -196,10 +201,12 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
    */
   private getObservableFromSet(data: any, collection?: string) {
     let action = null;
-    if (collection) {
-      action = this.angularFirestore.collection(collection).add(data);
+    if (collection && this.mockData) {
+      const id = generateUUID();
+      action = {id, data: {...data, uid: id}};
+      this.mockData[collection].push(action);
     }
-    return of(); // Empty observable. It is not possible to set the new Doc obs.
+    return of(action);
   }
 
   /**
@@ -208,36 +215,41 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
    * @param update The object to be updated in the collection
    * @param collection The collection name
    */
-  private getObservableFromUpdate(entity?: EntityState, collection?: string) {
+  private getObservableFromUpdate(entity?: EntityState<T>, collection?: string) {
     let action = null;
-    if (collection && entity) {
-      action = this.angularFirestore.collection(collection).doc(entity.id).update(entity.data);
+    if (collection && entity && this.mockData) {
+      this.mockData[collection].forEach((entityData: any) => {
+        if (entityData.id === entity.id) {
+          entityData = entity;
+        }
+      });
+      action = new Promise(() => {});
     } else {
       action = new Error(`No "${this.entityName}" update data or id`);
     }
     return of(action);
   }
 
-  private getCollectionReferenceByConditions(ref: CollectionReference<unknown>, data: any) {
+  private getCollectionReferenceByConditions(ref: any[], data: any) {
     const conditions: any = {
-      limit: (limit: number) => ref.limit(limit),
-      limitToLast: (limit: number) => ref.limitToLast(limit),
+      limit: (limit: number) => ref.slice(0, limit),
+      limitToLast: (limit: number) => ref.slice(limit),
       where: (queries: ConditionalQueryFirestore[]) => {
         queries.forEach((query: ConditionalQueryFirestore) => {
-          ref.where(query.fieldPath, query.opStr, query.value);
+          ref = arrayFilter(ref, query);
         });
         return ref;
       },
-      orderBy: (fieldPath: string | FieldPath, directionStr?: OrderByDirection) =>
-        ref.orderBy(fieldPath, directionStr),
-      startAt: (uid: string) =>
-        ref.startAt(this.angularFirestore.collection(this.collectionName).doc(uid)),
-      startAfter: (uid: string) =>
-        ref.startAfter(this.angularFirestore.collection(this.collectionName).doc(uid)),
-      endBefore: (uid: string) =>
-        ref.endBefore(this.angularFirestore.collection(this.collectionName).doc(uid)),
-      endAt: (uid: string) =>
-        ref.endAt(this.angularFirestore.collection(this.collectionName).doc(uid)),
+      // orderBy: (fieldPath: string | FieldPath, directionStr?: OrderByDirection) =>
+      //   ref.orderBy(fieldPath, directionStr),
+      // startAt: (uid: string) =>
+      //   ref.startAt(this.angularFirestore.collection(this.collectionName).doc(uid)),
+      // startAfter: (uid: string) =>
+      //   ref.startAfter(this.angularFirestore.collection(this.collectionName).doc(uid)),
+      // endBefore: (uid: string) =>
+      //   ref.endBefore(this.angularFirestore.collection(this.collectionName).doc(uid)),
+      // endAt: (uid: string) =>
+      //   ref.endAt(this.angularFirestore.collection(this.collectionName).doc(uid)),
     };
     for (const key in data) {
       if (Object.prototype.hasOwnProperty.call(data, key)) {
@@ -257,28 +269,19 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
    */
   private getObservableFromGet(document?: any, data?: any, collection?: string) {
     let action = null;
-    if (collection) {
+    if (collection && this.mockData) {
       if (!document && !data) {
-        action = this.angularFirestore
-          .collection(collection)
-          .snapshotChanges()
-          .pipe(map((data0) => data0.map((object) => new FireDataObject(object))));
+        action = this.mockData[collection].map((object: any) => new FireDataMockObject(object));
       } else if (document && !data) {
-        action = this.angularFirestore
-          .collection(collection)
-          .doc(document)
-          .snapshotChanges()
-          .pipe(map((object) => new FireDataObject(object)));
+        action = this.mockData[collection]
+          .filter((object: any) => object.id === document)
+          .map((object: any) => new FireDataMockObject(object))[0];
       } else if (!document && data) {
-        let ref: CollectionReference<unknown>;
-        ref = this.angularFirestore.collection(collection).ref;
-        ref = this.getCollectionReferenceByConditions(ref, data);
-        action = of(
-          ref.get().then((data0) => data0.docs.map((object) => new FireDataObject(object)))
-        );
+        const filterData = this.getCollectionReferenceByConditions(this.mockData[collection], data);
+        action = filterData.map((object: any) => new FireDataMockObject(object));
       }
     }
-    return action;
+    return of(action);
   }
 
   /**
@@ -298,7 +301,7 @@ export class FireDataService<T> implements FireEntityCollectionDataService<T> {
       delete: () => this.getObservableFromDelete(req.document, collection),
       set: () => this.getObservableFromSet(req.data, collection),
       update: () => this.getObservableFromUpdate(req.data, collection),
-      get: () => this.getObservableFromGet(req.data?.uid, req.data, collection),
+      get: () => this.getObservableFromGet(req.document, req.data, collection),
     };
     let result$: Observable<any>;
     result$ = observableFromMethod[`${method}`]();

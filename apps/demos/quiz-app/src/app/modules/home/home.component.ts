@@ -25,7 +25,7 @@ export class HomeComponent {
     this.quizSelected = quiz;
   }
   goToQuiz(quiz: any) {
-    this.router.navigate(['quiz-page', quiz.title], {
+    void this.router.navigate(['quiz-page', quiz.title], {
       relativeTo: this.route,
       queryParams: {difficulty: this.difficulty, tags: [this.tags]},
     });
