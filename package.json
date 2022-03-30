@@ -48,7 +48,7 @@
     "add_material": "ng add @angular/material",
     "generate_directive": "npx nx g directive lazy-load-image/lazy-load-image --project=util --export"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "13.2.6",
     "@angular/cdk": "13.2.6",
