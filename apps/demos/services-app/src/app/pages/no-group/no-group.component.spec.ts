@@ -1,4 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {getTranslocoModule} from '../../transloco-root.module';
 import {NoGroupComponent} from './no-group.component';
 
 describe('NoGroupComponent', () => {
@@ -7,6 +8,7 @@ describe('NoGroupComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NoGroupComponent],
+      imports: [getTranslocoModule()],
     }).compileComponents();
   });
 
