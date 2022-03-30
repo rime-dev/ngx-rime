@@ -13,6 +13,7 @@ import {
   TranslocoTestingModule,
   TranslocoTestingOptions,
   HashMap,
+  getBrowserLang,
 } from '@ngneat/transloco';
 
 import {DateFormatStyles, TranslocoLocaleModule} from '@ngneat/transloco-locale';
@@ -52,16 +53,24 @@ const localeToCurrencyMapping = {
   'es-EN': 'USD',
 };
 const availableLangs = ['es', 'en'];
+const availableLocales = ['es-ES', 'en-US'];
 const defaultLang = 'es';
 
 const defaultLangFactory = (availableLangsInput: string[], defaultLangInput: string) => {
-  const userLang = navigator.language;
-  const lang = userLang.split('-')[1] ? userLang.split('-')[0] : userLang;
-  return availableLangsInput.includes(lang) ? lang : defaultLangInput;
+  let activeLang = defaultLangInput;
+  const browserLang = getBrowserLang();
+  if (browserLang && availableLangsInput.includes(browserLang) && browserLang !== activeLang) {
+    activeLang = browserLang;
+  }
+  return activeLang;
 };
 const defaultLocaleFactory = (availableLangsInput: string[], defaultLangInput: string) => {
-  const userLang = navigator.language;
-  return availableLangsInput.includes(userLang) ? userLang : defaultLangInput;
+  let activeLang = defaultLangInput;
+  const browserLang = navigator.language;
+  if (browserLang && availableLangsInput.includes(browserLang) && browserLang !== activeLang) {
+    activeLang = browserLang;
+  }
+  return activeLang;
 };
 const defaultCurrencyFactory = (availableLangsInput: string[]) => {
   const userLang = navigator.language;
@@ -83,12 +92,12 @@ const translocoLangs: HashMap<Translation> = {en: en as Translation, es: es as T
 @NgModule({
   imports: [
     TranslocoLocaleModule.forRoot({
-      defaultLocale: defaultLocaleFactory(availableLangs, defaultLang),
+      defaultLocale: defaultLocaleFactory(availableLocales, defaultLang),
       langToLocaleMapping: {
         en: 'en-US',
         es: 'es-ES',
       },
-      defaultCurrency: defaultCurrencyFactory(availableLangs),
+      defaultCurrency: defaultCurrencyFactory(availableLocales),
       localeToCurrencyMapping,
       localeConfig: {
         global: globalFormatConfig,
