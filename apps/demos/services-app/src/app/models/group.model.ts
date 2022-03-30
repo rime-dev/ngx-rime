@@ -10,6 +10,7 @@ export interface Group {
   nif?: string;
   dateStart: string;
   location: Location;
+  coverage?: string[];
   logo?: string;
   activities: string[];
   additionalInfo: string[];

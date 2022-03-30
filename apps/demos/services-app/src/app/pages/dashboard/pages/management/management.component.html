@@ -199,6 +199,60 @@
           >
         </mat-list-item>
       </mat-action-list>
+      <mat-action-list class="w-full">
+        <h3 matSubheader>{{ 'longitude' | transloco }}</h3>
+        <mat-list-item class="h-auto mb-2" (click)="changeLocation(group)">
+          <mat-icon mat-list-icon>public</mat-icon>
+          <span class="py-4">
+            {{
+              group.data.location &&
+              group.data.location.coordinates &&
+              group.data.location.coordinates[0]
+                ? group.data.location.coordinates[0]
+                : ('noInformation' | transloco)
+            }}</span
+          >
+        </mat-list-item>
+      </mat-action-list>
+      <mat-action-list class="w-full">
+        <h3 matSubheader>{{ 'latitude' | transloco }}</h3>
+        <mat-list-item class="h-auto mb-2" (click)="changeLocation(group)">
+          <mat-icon mat-list-icon>public</mat-icon>
+          <span class="py-4">
+            {{
+              group.data.location &&
+              group.data.location.coordinates &&
+              group.data.location.coordinates[1]
+                ? group.data.location.coordinates[1]
+                : ('noInformation' | transloco)
+            }}</span
+          >
+        </mat-list-item>
+      </mat-action-list>
+      <mat-list>
+        <h3 matSubheader>
+          {{ 'coverage' | transloco }} ({{ 'postalCode' | transloco }})
+          <button mat-icon-button class="ml-auto" (click)="changePostalCode(group)">
+            <mat-icon color="primary">edit</mat-icon>
+          </button>
+        </h3>
+        <mat-list-item class="h-auto">
+          <mat-chip-list
+            aria-label="Postal code"
+            *ngIf="
+              group.data.coverage && group.data.coverage.length && group.data.coverage.length > 0;
+              else noCoverageTemplate
+            "
+          >
+            <mat-chip color="primary" selected *ngFor="let postalCode of group.data.coverage">{{
+              postalCode
+            }}</mat-chip>
+          </mat-chip-list>
+          <ng-template #noCoverageTemplate>
+            {{ 'noInformation' | transloco }}
+          </ng-template>
+        </mat-list-item>
+      </mat-list>
       <mat-list class="w-full">
         <h3 matSubheader>{{ 'map' | transloco }}</h3>
       </mat-list>

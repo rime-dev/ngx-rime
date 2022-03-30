@@ -20,6 +20,7 @@ import {GroupAddLogoDialogComponent} from './components/group-add-logo-dialog/gr
 import {GroupAddNameDialogComponent} from './components/group-add-name-dialog/group-add-name-dialog.component';
 import {GroupAddNifDialogComponent} from './components/group-add-nif-dialog/group-add-nif-dialog.component';
 import {GroupAddPhoneDialogComponent} from './components/group-add-phone-dialog/group-add-phone-dialog.component';
+import {GroupAddPostalCodeDialogComponent} from './components/group-add-postal-code-dialog/group-add-postal-code-dialog.component';
 import {GroupAddWebDialogComponent} from './components/group-add-web-dialog/group-add-web-dialog.component';
 
 @Component({
@@ -248,6 +249,24 @@ export class ManagementComponent {
         .subscribe((data: any) => {
           if (data && data.activities) {
             const data2 = {...group.data, activities: data.activities};
+            const group2 = {...group, data: data2};
+            this.dataService.select<Group>('Group').update(group2);
+          }
+        });
+    }
+  }
+  changePostalCode(group: EntityState<Group>) {
+    if (group) {
+      this.matDialog
+        .open(GroupAddPostalCodeDialogComponent, {
+          data: {group},
+          minWidth: '33vw',
+          minHeight: '33vh',
+        })
+        .afterClosed()
+        .subscribe((data: Record<string, string[]>) => {
+          if (data && data.coverage) {
+            const data2 = {...group.data, coverage: data.coverage};
             const group2 = {...group, data: data2};
             this.dataService.select<Group>('Group').update(group2);
           }

@@ -11,18 +11,7 @@
       (focus)="onFocus($event)"
       (blur)="onBlur($event)"
       [formControlName]="'searchInput'"
-      class="
-        rng-search-input
-        h-10
-        px-5
-        pr-10
-        text-sm
-        focus:outline-none
-        max-w-full
-        ml-auto
-        invisible
-        md:visible
-      "
+      class="rng-search-input h-10 px-5 pr-10 text-sm focus:outline-none max-w-full ml-auto invisible md:visible"
       style="width: 200px"
       [class.w-full]="isFocused"
       [class.rounded-t-2xl]="isFocused"
@@ -60,17 +49,7 @@
     cdkConnectedOverlayPush
   >
     <div
-      class="
-        relative
-        w-full
-        h-full
-        md:h-2/5
-        flex flex-col
-        p-4
-        rounded-b-2xl
-        mat-elevation-z2
-        overlay-background
-      "
+      class="relative w-full h-full md:h-2/5 flex flex-col p-4 rounded-b-2xl mat-elevation-z2 overlay-background"
     >
       <div *ngIf="inputSearch.clientWidth <= 300">
         <form
@@ -88,18 +67,7 @@
             [placeholder]="'search' | transloco"
             matInput
             [formControlName]="'searchInput'"
-            class="
-              rng-search-input
-              h-10
-              px-5
-              pr-10
-              text-sm
-              focus:outline-none
-              max-w-full
-              ml-auto
-              w-full
-              rounded-t-2xl
-            "
+            class="rng-search-input h-10 px-5 pr-10 text-sm focus:outline-none max-w-full ml-auto w-full rounded-t-2xl"
           />
           <button mat-icon-button (click)="clearSearch()">
             <mat-icon *ngIf="this.searchForm.controls.searchInput.valueChanges | async"
