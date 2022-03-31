@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
-  selector: 'rng-forgot-password',
+  selector: 'ngx-rime-forgot-password',
   templateUrl: './forgot-password.component.html',
 })
 export class ForgotPasswordComponent {

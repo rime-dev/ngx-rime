@@ -52,7 +52,7 @@ export class AuthComponentsModule {
     translocoService.getAvailableLangs().forEach((lang) => {
       const language: string = (lang as LangDefinition).id || (lang as string);
       const translation = (i18n as Record<string, Translation>)[language];
-      translocoService.setTranslation(translation, 'rngAuth/' + language);
+      translocoService.setTranslation(translation, 'ngx-rimeAuth/' + language);
     });
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@rime-dev/ui",
+  "name": "@ngx-rime/ui",
   "version": "0.1.0",
   "description": "User Interface utilities",
   "dependencies": {

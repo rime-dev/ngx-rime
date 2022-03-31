@@ -1,21 +1,21 @@
 <input type="file" #file class="hidden" (change)="onChange($event)" [multiple]="true" />
 <div
   class="dropzone min-w-min min-h-min w-full h-full items-center text-center p-4"
-  rng-dropzone
+  ngx-rime-dropzone
   (hovered)="toggleHover($event)"
   (dropped)="onDrop($event)"
   (click)="onClick()"
   [class.hovering]="isHovering"
   *ngIf="!files || files.length === 0"
 >
-  <span>{{ 'rngStorageUploader.dragAndDropAFile' | transloco }}</span>
-  <button mat-button class="mt-4">{{ 'rngStorageUploader.uploadAFile' | transloco }}</button>
+  <span>{{ 'ngx-rimeStorageUploader.dragAndDropAFile' | transloco }}</span>
+  <button mat-button class="mt-4">{{ 'ngx-rimeStorageUploader.uploadAFile' | transloco }}</button>
 </div>
 
-<rng-storage-upload-task
+<ngx-rime-storage-upload-task
   *ngFor="let item of files"
   [file]="item"
   [path]="path"
   [document]="document"
   (finalize)="onFinalize($event)"
-></rng-storage-upload-task>
+></ngx-rime-storage-upload-task>

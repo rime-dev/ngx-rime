@@ -5,7 +5,7 @@
       "projectType": "library",
       "root": "libs/data-access",
       "sourceRoot": "libs/data-access",
-      "prefix": "rng",
+      "prefix": "ngx-rime",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -51,7 +51,7 @@
       "projectType": "library",
       "root": "libs/feature",
       "sourceRoot": "libs/feature",
-      "prefix": "rng",
+      "prefix": "ngx-rime",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -99,7 +99,7 @@
       "projectType": "application",
       "root": "apps/demos/quiz-app",
       "sourceRoot": "apps/demos/quiz-app/src",
-      "prefix": "rng",
+      "prefix": "ngx-rime",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -195,11 +195,11 @@
       },
       "tags": []
     },
-    "rng-app": {
+    "ngx-rime-app": {
       "projectType": "application",
-      "root": "apps/rng-app",
-      "sourceRoot": "apps/rng-app/src",
-      "prefix": "rng",
+      "root": "apps/ngx-rime-app",
+      "sourceRoot": "apps/ngx-rime-app/src",
+      "prefix": "ngx-rime",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -207,18 +207,18 @@
             "{options.outputPath}"
           ],
           "options": {
-            "outputPath": "dist/apps/rng-app",
-            "index": "apps/rng-app/src/index.html",
-            "main": "apps/rng-app/src/main.ts",
-            "polyfills": "apps/rng-app/src/polyfills.ts",
-            "tsConfig": "apps/rng-app/tsconfig.app.json",
+            "outputPath": "dist/apps/ngx-rime-app",
+            "index": "apps/ngx-rime-app/src/index.html",
+            "main": "apps/ngx-rime-app/src/main.ts",
+            "polyfills": "apps/ngx-rime-app/src/polyfills.ts",
+            "tsConfig": "apps/ngx-rime-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "apps/rng-app/src/favicon.ico",
-              "apps/rng-app/src/assets"
+              "apps/ngx-rime-app/src/favicon.ico",
+              "apps/ngx-rime-app/src/assets"
             ],
             "styles": [
-              "apps/rng-app/src/styles.scss"
+              "apps/ngx-rime-app/src/styles.scss"
             ],
             "scripts": []
           },
@@ -238,8 +238,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "apps/rng-app/src/environments/environment.ts",
-                  "with": "apps/rng-app/src/environments/environment.prod.ts"
+                  "replace": "apps/ngx-rime-app/src/environments/environment.ts",
+                  "with": "apps/ngx-rime-app/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -259,10 +259,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "rng-app:build:production"
+              "browserTarget": "ngx-rime-app:build:production"
             },
             "development": {
-              "browserTarget": "rng-app:build:development"
+              "browserTarget": "ngx-rime-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -270,25 +270,25 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "rng-app:build"
+            "browserTarget": "ngx-rime-app:build"
           }
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "apps/rng-app/src/**/*.ts",
-              "apps/rng-app/src/**/*.html"
+              "apps/ngx-rime-app/src/**/*.ts",
+              "apps/ngx-rime-app/src/**/*.html"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/apps/rng-app"
+            "coverage/apps/ngx-rime-app"
           ],
           "options": {
-            "jestConfig": "apps/rng-app/jest.config.js",
+            "jestConfig": "apps/ngx-rime-app/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -299,7 +299,7 @@
       "projectType": "application",
       "root": "apps/demos/task-app",
       "sourceRoot": "apps/demos/task-app/src",
-      "prefix": "rng",
+      "prefix": "ngx-rime",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -399,7 +399,7 @@
       "projectType": "library",
       "root": "libs/ui",
       "sourceRoot": "libs/ui",
-      "prefix": "rng",
+      "prefix": "ngx-rime",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -480,7 +480,7 @@
       "projectType": "library",
       "root": "libs/util",
       "sourceRoot": "libs/util",
-      "prefix": "rng",
+      "prefix": "ngx-rime",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",

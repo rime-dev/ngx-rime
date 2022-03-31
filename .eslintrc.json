@@ -30,7 +30,7 @@
           "error",
           {
             "type": ["element", "attribute"],
-            "prefix": "rng",
+            "prefix": "ngx-rime",
             "style": "kebab-case"
           }
         ],
@@ -38,7 +38,7 @@
           "error",
           {
             "type": ["element", "attribute"],
-            "prefix": "rng",
+            "prefix": "ngx-rime",
             "style": "kebab-case"
           }
         ],

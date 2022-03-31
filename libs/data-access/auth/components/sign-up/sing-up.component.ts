@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
-  selector: 'rng-sign-up',
+  selector: 'ngx-rime-sign-up',
   templateUrl: './sign-up.component.html',
 })
 export class SignUpComponent {

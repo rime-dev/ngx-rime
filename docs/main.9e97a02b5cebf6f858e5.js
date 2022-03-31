@@ -1,4 +1,4 @@
-(self.webpackChunkrng = self.webpackChunkrng || []).push([
+(self.webpackChunkngx-rime = self.webpackChunkngx-rime || []).push([
   [179],
   {
     667: (t) => {
@@ -5867,7 +5867,7 @@
       let Fi = (() => {
           class t {
             constructor() {
-              this.title = 'rng-app';
+              this.title = 'ngx-rime-app';
             }
           }
           return (
@@ -5876,7 +5876,7 @@
             }),
             (t.ɵcmp = At({
               type: t,
-              selectors: [['rng-root']],
+              selectors: [['ngx-rime-root']],
               decls: 61,
               vars: 1,
               consts: [

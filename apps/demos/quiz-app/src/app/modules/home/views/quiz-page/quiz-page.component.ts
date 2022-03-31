@@ -2,12 +2,12 @@ import {coerceNumberProperty} from '@angular/cdk/coercion';
 import {HttpClient} from '@angular/common/http';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Question, QuizMode} from '@rime-dev/ui/quiz';
+import {Question, QuizMode} from '@ngx-rime/ui/quiz';
 import {Subject} from 'rxjs';
 import {map, takeUntil, tap} from 'rxjs/operators';
 
 @Component({
-  selector: 'rng-quiz-page',
+  selector: 'ngx-rime-quiz-page',
   templateUrl: './quiz-page.component.html',
   styleUrls: ['./quiz-page.component.scss'],
 })

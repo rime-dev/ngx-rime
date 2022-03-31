@@ -14,7 +14,7 @@ import {Question, QuestionOption} from '../../models/quiz.model';
 import {QuizService} from '../../services/quiz.service';
 import {QuizOptionComponent} from '../quiz-option/quiz-option.component';
 @Component({
-  selector: 'rng-quiz-question',
+  selector: 'ngx-rime-quiz-question',
   templateUrl: './quiz-question.component.html',
   styleUrls: ['./quiz-question.component.scss'],
 })

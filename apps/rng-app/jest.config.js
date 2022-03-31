@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'rng-app',
+  displayName: 'ngx-rime-app',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/apps/rng-app',
+  coverageDirectory: '../../coverage/apps/ngx-rime-app',
   transform: {
     '^.+.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

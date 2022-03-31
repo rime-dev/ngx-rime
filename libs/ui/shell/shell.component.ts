@@ -33,7 +33,7 @@ export interface Routes {
   divider?: boolean;
 }
 @Component({
-  selector: 'rng-shell',
+  selector: 'ngx-rime-shell',
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -156,7 +156,7 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
     Record<string, unknown>
   >();
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  @ViewChild('rngToolbar') rngToolbar!: MatToolbar;
+  @ViewChild('ngx-rimeToolbar') ngx-rimeToolbar!: MatToolbar;
 
   @HostListener('window:resize')
   onResize() {
@@ -193,7 +193,7 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
       isScrolled: false,
     };
     if (
-      tasrget.scrollTop > (this.rngToolbar._elementRef.nativeElement as HTMLElement)?.offsetHeight
+      tasrget.scrollTop > (this.ngx-rimeToolbar._elementRef.nativeElement as HTMLElement)?.offsetHeight
     ) {
       onScrollEvent.isScrolled = true;
     }

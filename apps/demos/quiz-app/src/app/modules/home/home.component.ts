@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-  selector: 'rng-home',
+  selector: 'ngx-rime-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })

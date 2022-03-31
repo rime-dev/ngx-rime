@@ -13,7 +13,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "rng",
+            "prefix": "ngx-rime",
             "style": "camelCase"
           }
         ],
@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "rng",
+            "prefix": "ngx-rime",
             "style": "kebab-case"
           }
         ]

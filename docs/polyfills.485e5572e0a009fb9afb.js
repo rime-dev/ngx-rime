@@ -1,4 +1,4 @@
-(self.webpackChunkrng = self.webpackChunkrng || []).push([
+(self.webpackChunkngx-rime = self.webpackChunkngx-rime || []).push([
   [429],
   {
     255: (e, t, n) => {

@@ -9,17 +9,17 @@
         alt="Logo"
       /> -->
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        {{ 'rngAuth.signInToYourAccount' | transloco }}
+        {{ 'ngx-rimeAuth.signInToYourAccount' | transloco }}
       </h2>
     </div>
     <form [formGroup]="form" class="mt-8 space-y-6" (ngSubmit)="submit()">
       <input type="hidden" name="remember" value="true" />
       <div class="rounded-md -space-y-px">
         <mat-form-field class="w-full" appearance="outline">
-          <mat-label>{{ 'rngAuth.email' | transloco }}</mat-label>
+          <mat-label>{{ 'ngx-rimeAuth.email' | transloco }}</mat-label>
           <input
             matInput
-            [placeholder]="'rngAuth.email' | transloco"
+            [placeholder]="'ngx-rimeAuth.email' | transloco"
             name="email"
             type="email"
             formControlName="email"
@@ -27,17 +27,17 @@
             required
           />
           <mat-error *ngIf="form.get('email')?.errors?.email">
-            {{ 'rngAuth.enterValidEmail' | transloco }}
+            {{ 'ngx-rimeAuth.enterValidEmail' | transloco }}
           </mat-error>
           <mat-error *ngIf="form.get('email')?.errors?.required">{{
-            'rngAuth.fieldRequired' | transloco
+            'ngx-rimeAuth.fieldRequired' | transloco
           }}</mat-error>
         </mat-form-field>
         <mat-form-field class="w-full" appearance="outline">
-          <mat-label>{{ 'rngAuth.password' | transloco }}</mat-label>
+          <mat-label>{{ 'ngx-rimeAuth.password' | transloco }}</mat-label>
           <input
             matInput
-            [placeholder]="'rngAuth.email' | transloco"
+            [placeholder]="'ngx-rimeAuth.email' | transloco"
             name="password"
             [type]="hide ? 'password' : 'text'"
             formControlName="password"
@@ -48,7 +48,7 @@
             hide ? 'visibility_off' : 'visibility'
           }}</mat-icon>
           <mat-error *ngIf="form.get('password')?.errors?.required">{{
-            'rngAuth.fieldRequired' | transloco
+            'ngx-rimeAuth.fieldRequired' | transloco
           }}</mat-error>
         </mat-form-field>
       </div>
@@ -56,13 +56,13 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center">
           <span>
-            {{ 'rngAuth.doNotHaveAnAccount' | transloco }}
+            {{ 'ngx-rimeAuth.doNotHaveAnAccount' | transloco }}
 
             <a
               routerLink="/register-user"
               class="font-medium text-indigo-600 hover:text-indigo-500"
             >
-              {{ 'rngAuth.signUp' | transloco }}
+              {{ 'ngx-rimeAuth.signUp' | transloco }}
             </a>
           </span>
         </div>
@@ -72,13 +72,13 @@
             routerLink="/forgot-password"
             class="font-medium text-indigo-600 hover:text-indigo-500"
           >
-            {{ 'rngAuth.forgotPassword' | transloco }}
+            {{ 'ngx-rimeAuth.forgotPassword' | transloco }}
           </a>
         </div>
       </div>
 
       <button mat-raised-button type="submit" color="primary" class="relative w-full">
-        {{ 'rngAuth.signIn' | transloco }}
+        {{ 'ngx-rimeAuth.signIn' | transloco }}
       </button>
 
       <!-- <mat-divider></mat-divider>

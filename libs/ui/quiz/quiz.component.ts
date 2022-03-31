@@ -18,7 +18,7 @@ import {Question, QuizMode} from './models/quiz.model';
 import {QuizService} from './services/quiz.service';
 
 @Component({
-  selector: 'rng-quiz',
+  selector: 'ngx-rime-quiz',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
 })

@@ -1,18 +1,18 @@
 import {Component, OnDestroy} from '@angular/core';
-import {User} from '@rime-dev/data-access/auth';
-import {AuthService} from '@rime-dev/data-access/auth/services/auth.service';
+import {User} from '@ngx-rime/data-access/auth';
+import {AuthService} from '@ngx-rime/data-access/auth/services/auth.service';
 import {Observable, Subject} from 'rxjs';
 
 @Component({
-  selector: 'rng-root',
+  selector: 'ngx-rime-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnDestroy {
-  title = 'rng-app';
+  title = 'ngx-rime-app';
   logo = {
-    src: 'assets/rng-logo.png',
-    alt: 'RNG APP',
+    src: 'assets/ngx-rime-logo.png',
+    alt: 'NGX-RIME APP',
   };
   topRoutes = [
     {

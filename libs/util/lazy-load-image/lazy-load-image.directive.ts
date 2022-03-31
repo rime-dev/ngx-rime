@@ -3,7 +3,7 @@ import {timer} from 'rxjs';
 import {take} from 'rxjs/operators';
 
 @Directive({
-  selector: 'img[rngLazyLoadImage]',
+  selector: 'img[ngx-rimeLazyLoadImage]',
 })
 export class LazyLoadImageDirective implements AfterViewInit {
   @HostBinding('attr.src') srcAttr!: string;

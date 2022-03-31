@@ -15,15 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@rime-dev/data-access": ["libs/data-access/index.ts"],
-      "@rime-dev/data-access/*": ["libs/data-access/*"],
-      "@rime-dev/feature": ["libs/feature/index.ts"],
-      "@rime-dev/feature/*": ["libs/feature/*"],
-      "@rime-dev/ui": ["libs/ui/index.ts"],
-      "@rime-dev/ui/*": ["libs/ui/*"],
-      "@rime-dev/util": ["libs/util/index.ts"],
-      "@rime-dev/util/*": ["libs/util/*"],
-      "rng/lib1": ["libs/lib1/src/index.ts"]
+      "@ngx-rime/data-access": ["libs/data-access/index.ts"],
+      "@ngx-rime/data-access/*": ["libs/data-access/*"],
+      "@ngx-rime/feature": ["libs/feature/index.ts"],
+      "@ngx-rime/feature/*": ["libs/feature/*"],
+      "@ngx-rime/ui": ["libs/ui/index.ts"],
+      "@ngx-rime/ui/*": ["libs/ui/*"],
+      "@ngx-rime/util": ["libs/util/index.ts"],
+      "@ngx-rime/util/*": ["libs/util/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": true,

@@ -1,5 +1,5 @@
 {
-  "name": "@rime-dev/data-access",
+  "name": "@ngx-rime/data-access",
   "version": "0.1.0",
   "description": "Back End utilities",
   "dependencies": {

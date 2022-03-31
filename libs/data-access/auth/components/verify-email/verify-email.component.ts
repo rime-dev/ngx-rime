@@ -4,7 +4,7 @@ import {User} from '../../models/auth.model';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
-  selector: 'rng-verify-email',
+  selector: 'ngx-rime-verify-email',
   templateUrl: './verify-email.component.html',
 })
 export class VerifyEmailComponent {

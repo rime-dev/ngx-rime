@@ -49,7 +49,7 @@
           for (e && e(n); s < l.length; s++) t.o(r, (a = l[s])) && r[a] && r[a][0](), (r[l[s]] = 0);
           return t.O(i);
         },
-        n = (self.webpackChunkrng = self.webpackChunkrng || []);
+        n = (self.webpackChunkngx-rime = self.webpackChunkngx-rime || []);
       n.forEach(e.bind(null, 0)), (n.push = e.bind(null, n.push.bind(n)));
     })();
 })();

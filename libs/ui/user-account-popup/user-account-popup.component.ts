@@ -16,7 +16,7 @@ export interface UserInfo {
 }
 
 @Component({
-  selector: 'rng-user-account-popup',
+  selector: 'ngx-rime-user-account-popup',
   templateUrl: './user-account-popup.component.html',
   styleUrls: ['./user-account-popup.component.scss'],
 })

@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Update} from '@ngrx/entity';
-import {DataService} from '@rime-dev/data-access/base';
-import {EntityState} from '@rime-dev/data-access/base/models/base.model';
+import {DataService} from '@ngx-rime/data-access/base';
+import {EntityState} from '@ngx-rime/data-access/base/models/base.model';
 import {Observable} from 'rxjs';
 
 @Component({
-  selector: 'rng-tasks',
+  selector: 'ngx-rime-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss'],
 })

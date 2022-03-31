@@ -1,5 +1,5 @@
 {
-  "name": "@rime-dev/util",
+  "name": "@ngx-rime/util",
   "version": "0.1.0",
   "description": "Common utilities",
   "dependencies": {

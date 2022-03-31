@@ -6,7 +6,7 @@ import {LazyLoadImageModule} from './lazy-load-image.module';
 
 @Component({
   template: `
-    <img rngLazyLoadImage src="https://github.com/rime-dev/rng/blob/main/images/rng-logo.png" />
+    <img ngx-rimeLazyLoadImage src="https://github.com/rime-dev/ngx-rime/blob/main/images/ngx-rime-logo.png" />
   `,
 })
 class LazyLoadImageComponent {}
@@ -14,7 +14,7 @@ class LazyLoadImageComponent {}
 describe('LazyLoadImageDirective', () => {
   it('should create an instance', () => {
     const element = document.createElement('img');
-    element.src = 'https://github.com/rime-dev/rng/blob/main/images/rng-logo.png';
+    element.src = 'https://github.com/rime-dev/ngx-rime/blob/main/images/ngx-rime-logo.png';
     const directive = new LazyLoadImageDirective(element as never);
     expect(directive).toBeTruthy();
   });
@@ -32,11 +32,11 @@ describe('LazyLoadImageDirective in component', () => {
     const fixture = TestBed.createComponent(LazyLoadImageComponent);
     const element = fixture.debugElement.query(By.directive(LazyLoadImageDirective));
     expect((fixture.nativeElement as HTMLElement).getAttribute('src')).not.toBe(
-      'https://github.com/rime-dev/rng/blob/main/images/rng-logo.png'
+      'https://github.com/rime-dev/ngx-rime/blob/main/images/ngx-rime-logo.png'
     );
     fixture.detectChanges();
     expect(element.attributes.src).toBe(
-      'https://github.com/rime-dev/rng/blob/main/images/rng-logo.png'
+      'https://github.com/rime-dev/ngx-rime/blob/main/images/ngx-rime-logo.png'
     );
   });
 });
