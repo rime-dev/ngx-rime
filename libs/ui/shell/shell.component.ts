@@ -156,7 +156,7 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
     Record<string, unknown>
   >();
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  @ViewChild('ngx-rimeToolbar') ngx-rimeToolbar!: MatToolbar;
+  @ViewChild('NgxRimeToolbar') NgxRimeToolbar!: MatToolbar;
 
   @HostListener('window:resize')
   onResize() {
@@ -193,7 +193,7 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
       isScrolled: false,
     };
     if (
-      tasrget.scrollTop > (this.ngx-rimeToolbar._elementRef.nativeElement as HTMLElement)?.offsetHeight
+      tasrget.scrollTop > (this.NgxRimeToolbar._elementRef.nativeElement as HTMLElement)?.offsetHeight
     ) {
       onScrollEvent.isScrolled = true;
     }

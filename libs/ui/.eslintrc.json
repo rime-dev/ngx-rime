@@ -14,7 +14,7 @@
           {
             "type": "attribute",
             "prefix": "ngx-rime",
-            "style": "camelCase"
+            "style": "kebab-case"
           }
         ],
         "@angular-eslint/component-selector": [
