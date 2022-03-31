@@ -7,7 +7,7 @@ import {FireEntityCollectionDataService, StateEntityConfig} from '../../models/b
  * A data service to use as testing service in spec files, used in BaseTestingModule
  */
 @Injectable()
-export class DataTestingService {
+export class RimeDataTestingService {
   entitiesInstaces: Record<string, FireEntityCollectionDataService<never>> = {};
   constructor(
     @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,

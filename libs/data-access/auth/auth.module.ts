@@ -11,18 +11,18 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {Router, RouterModule, Routes} from '@angular/router';
 import {LangDefinition, Translation, TranslocoModule, TranslocoService} from '@ngneat/transloco';
-import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
-import {SignInComponent} from './components/sign-in/sing-in.component';
-import {SignUpComponent} from './components/sign-up/sing-up.component';
-import {VerifyEmailComponent} from './components/verify-email/verify-email.component';
+import {RimeForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
+import {RimeSignInComponent} from './components/sign-in/sing-in.component';
+import {RimeSignUpComponent} from './components/sign-up/sing-up.component';
+import {RimeVerifyEmailComponent} from './components/verify-email/verify-email.component';
 import i18n from './i18n/i18n';
-import {AuthTestingService} from './services/auth.mock.service';
-import {AuthService} from './services/auth.service';
+import {RimeAuthTestingService} from './services/auth.mock.service';
+import {RimeAuthService} from './services/auth.service';
 const routes: Routes = [
-  {path: 'sign-in', component: SignInComponent},
-  {path: 'register-user', component: SignUpComponent},
-  {path: 'forgot-password', component: ForgotPasswordComponent},
-  {path: 'verify-email-address', component: VerifyEmailComponent},
+  {path: 'sign-in', component: RimeSignInComponent},
+  {path: 'register-user', component: RimeSignUpComponent},
+  {path: 'forgot-password', component: RimeForgotPasswordComponent},
+  {path: 'verify-email-address', component: RimeVerifyEmailComponent},
 ];
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function initAuthRouter(router: Router) {
@@ -31,7 +31,7 @@ export function initAuthRouter(router: Router) {
 }
 
 @NgModule({
-  declarations: [SignInComponent, SignUpComponent, ForgotPasswordComponent, VerifyEmailComponent],
+  declarations: [RimeSignInComponent, RimeSignUpComponent, RimeForgotPasswordComponent, RimeVerifyEmailComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -45,9 +45,9 @@ export function initAuthRouter(router: Router) {
     TranslocoModule,
     MatCardModule,
   ],
-  exports: [SignInComponent, SignUpComponent, ForgotPasswordComponent, VerifyEmailComponent],
+  exports: [RimeSignInComponent, RimeSignUpComponent, RimeForgotPasswordComponent, RimeVerifyEmailComponent],
 })
-export class AuthComponentsModule {
+export class RimeAuthComponentsModule {
   constructor(translocoService: TranslocoService) {
     translocoService.getAvailableLangs().forEach((lang) => {
       const language: string = (lang as LangDefinition).id || (lang as string);
@@ -58,9 +58,9 @@ export class AuthComponentsModule {
 }
 
 @NgModule({
-  imports: [CommonModule, AuthComponentsModule, AngularFireAuthModule, AngularFirestoreModule],
+  imports: [CommonModule, RimeAuthComponentsModule, AngularFireAuthModule, AngularFirestoreModule],
   providers: [
-    AuthService,
+    RimeAuthService,
     {
       provide: APP_INITIALIZER,
       useFactory: initAuthRouter,
@@ -69,15 +69,15 @@ export class AuthComponentsModule {
     },
   ],
 })
-export class AuthModule {}
+export class RimeAuthModule {}
 
 @NgModule({
-  imports: [CommonModule, AuthComponentsModule],
+  imports: [CommonModule, RimeAuthComponentsModule],
   providers: [
     {
-      provide: AuthService,
-      useClass: AuthTestingService,
+      provide: RimeAuthService,
+      useClass: RimeAuthTestingService,
     },
   ],
 })
-export class AuthTestingModule {}
+export class RimeAuthTestingModule {}

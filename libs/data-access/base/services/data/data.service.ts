@@ -14,7 +14,7 @@ import {FireEntityCollectionDataService, StateEntityConfig} from '../../models/b
  *   templateUrl: './products.component.html',
  *   styleUrls: ['./products.component.scss'],
  * })
- * export class ProductsComponent {
+ * export class RimeProductsComponent {
  *   public products$: Observable<any>;
  *   constructor(private dataService: DataService) {
  *     this.products$ = this.dataService.select<Project>('Product').entities$;
@@ -24,7 +24,7 @@ import {FireEntityCollectionDataService, StateEntityConfig} from '../../models/b
  * ```
  */
 @Injectable({providedIn: 'root'})
-export class DataService {
+export class RimeDataService {
   entitiesInstaces: Record<string, FireEntityCollectionDataService<never>> = {};
   constructor(
     @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,

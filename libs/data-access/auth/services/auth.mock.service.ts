@@ -6,7 +6,7 @@ import {BehaviorSubject, of, Subject} from 'rxjs';
 import {User} from '../models/auth.model';
 
 @Injectable()
-export class AuthTestingService implements OnDestroy {
+export class RimeAuthTestingService implements OnDestroy {
   private destroy$: Subject<void> = new Subject();
   public user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>({
     uid: 'ABC',

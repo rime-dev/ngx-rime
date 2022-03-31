@@ -9,9 +9,9 @@ import {
 } from '@angular/fire/compat/storage';
 import firebase from 'firebase/compat';
 import {Observable, of, Subject} from 'rxjs';
-import {MockStorageReference} from './firebase-reference-mock';
+import {RimeMockStorageReference} from './firebase-reference-mock';
 
-export abstract class StorageMock {
+export abstract class RimeStorageMock {
   private static dataURL: string;
 
   static setURL(value: string) {
@@ -22,7 +22,7 @@ export abstract class StorageMock {
   }
 }
 @Injectable()
-export class StorageUploadTaskService {
+export class RimeStorageUploadTaskService {
   constructor(private angularFireStorage: AngularFireStorage) {}
   ref(path: string) {
     return this.angularFireStorage.ref(path);
@@ -36,19 +36,19 @@ export class StorageUploadTaskService {
 }
 
 @Injectable()
-export class StorageUploadTaskMockService extends StorageMock implements AngularFireStorage {
+export class RimeStorageUploadTaskMockService extends RimeStorageMock implements AngularFireStorage {
   storage!: never;
   private path!: string;
   private file!: Blob;
 
   ref(path: string): AngularFireStorageReference {
     this.path = path;
-    const reference = new MockStorageReference(StorageUploadTaskMockService, path, undefined);
+    const reference = new RimeMockStorageReference(RimeStorageUploadTaskMockService, path, undefined);
     return reference as unknown as AngularFireStorageReference;
   }
   refFromURL(path: string): AngularFireStorageReference {
     this.path = path;
-    const reference = new MockStorageReference(StorageUploadTaskMockService, path, undefined);
+    const reference = new RimeMockStorageReference(RimeStorageUploadTaskMockService, path, undefined);
     return reference as unknown as AngularFireStorageReference;
   }
   upload(
@@ -60,7 +60,7 @@ export class StorageUploadTaskMockService extends StorageMock implements Angular
     const angularFireUploadTaskMock = new AngularFireUploadTaskMock(
       path,
       this.file,
-      StorageUploadTaskMockService
+      RimeStorageUploadTaskMockService
     );
     return angularFireUploadTaskMock;
   }
@@ -73,10 +73,10 @@ class AngularFireUploadTaskMock implements AngularFireUploadTask {
   task!: firebase.storage.UploadTask;
   path!: string;
   data: Blob;
-  metadata?: typeof StorageUploadTaskMockService;
+  metadata?: typeof RimeStorageUploadTaskMockService;
   public reader!: FileReader;
   public percentageSubject!: Subject<number>;
-  constructor(path: string, data: Blob, metadata?: typeof StorageUploadTaskMockService) {
+  constructor(path: string, data: Blob, metadata?: typeof RimeStorageUploadTaskMockService) {
     this.path = path;
     this.data = data;
     this.metadata = metadata;

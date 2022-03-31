@@ -10,25 +10,25 @@ import {
 } from '@angular/core';
 import {from, Subject} from 'rxjs';
 import {delay, finalize, map, takeUntil, tap} from 'rxjs/operators';
-import {Question, QuestionOption} from '../../models/quiz.model';
-import {QuizService} from '../../services/quiz.service';
-import {QuizOptionComponent} from '../quiz-option/quiz-option.component';
+import {RimeQuestion, RimeQuestionOption} from '../../models/quiz.model';
+import {RimeQuizService} from '../../services/quiz.service';
+import {RimeQuizOptionComponent} from '../quiz-option/quiz-option.component';
 @Component({
   selector: 'rime-quiz-question',
   templateUrl: './quiz-question.component.html',
   styleUrls: ['./quiz-question.component.scss'],
 })
-export class QuizQuestionComponent implements OnDestroy {
+export class RimeQuizQuestionComponent implements OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
 
   @Input()
-  get question(): Question {
+  get question(): RimeQuestion {
     return this._question;
   }
-  set question(value: Question) {
-    this._question = new Question({...value, index: this.index});
+  set question(value: RimeQuestion) {
+    this._question = new RimeQuestion({...value, index: this.index});
   }
-  private _question: Question = {
+  private _question: RimeQuestion = {
     title: '',
     options: [],
     type: 'single',
@@ -45,14 +45,14 @@ export class QuizQuestionComponent implements OnDestroy {
   }
   private _index = 0;
 
-  @Output() selected: EventEmitter<Question> = new EventEmitter<Question>();
+  @Output() selected: EventEmitter<RimeQuestion> = new EventEmitter<RimeQuestion>();
 
   // Query all child elements
-  @ViewChildren(QuizOptionComponent) options!: QueryList<QuizOptionComponent>;
+  @ViewChildren(RimeQuizOptionComponent) options!: QueryList<RimeQuizOptionComponent>;
 
-  constructor(private ngZone: NgZone, private quizService: QuizService) {}
+  constructor(private ngZone: NgZone, private rimeQuizService: RimeQuizService) {}
 
-  private onResponseOption(option: QuestionOption, event: number): QuestionOption {
+  private onResponseOption(option: RimeQuestionOption, event: number): RimeQuestionOption {
     if (option.index === event && option) {
       option.response = true;
       this.question = {...this.question, response: option.index, index: this.index, dirty: true};
@@ -62,14 +62,14 @@ export class QuizQuestionComponent implements OnDestroy {
     return option;
   }
   onSelectOption(event: number) {
-    if (this.quizService.getMode() !== 'exam') {
+    if (this.rimeQuizService.getMode() !== 'exam') {
       return;
     }
     this.ngZone.runOutsideAngular(() =>
       from(this.question.options)
         .pipe(
-          tap((option: QuestionOption) => (option.parentQuestion = this.question)),
-          map((option: QuestionOption) => this.onResponseOption(option, event)),
+          tap((option: RimeQuestionOption) => (option.parentQuestion = this.question)),
+          map((option: RimeQuestionOption) => this.onResponseOption(option, event)),
           delay(1000),
           finalize(() => this.ngZone.runTask(() => this.selected.next(this.question))),
           takeUntil(this.destroy$)

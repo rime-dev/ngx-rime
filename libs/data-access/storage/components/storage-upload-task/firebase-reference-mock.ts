@@ -5,7 +5,7 @@
 
 import {of} from 'rxjs';
 
-export class MockStorageReference<AngularFireStorageReference> {
+export class RimeMockStorageReference<AngularFireStorageReference> {
   public bucket: any;
   public storage: any;
   public parent: any;
@@ -17,7 +17,7 @@ export class MockStorageReference<AngularFireStorageReference> {
   constructor(
     storage: any,
     name: string,
-    parent?: MockStorageReference<AngularFireStorageReference>
+    parent?: RimeMockStorageReference<AngularFireStorageReference>
   ) {
     this.bucket = parent ? parent.bucket : name;
     this.storage = storage;
@@ -52,7 +52,7 @@ export class MockStorageReference<AngularFireStorageReference> {
     // create child reference
     const childPath = paths.shift();
     if (childPath && !this._children[childPath]) {
-      this._children[childPath] = new MockStorageReference(this.storage, childPath, this);
+      this._children[childPath] = new RimeMockStorageReference(this.storage, childPath, this);
     }
     if (childPath) {
       if (paths.length === 0) {

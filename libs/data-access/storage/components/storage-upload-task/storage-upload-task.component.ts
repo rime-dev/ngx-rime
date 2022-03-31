@@ -11,9 +11,9 @@ import {AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/
 import {SafeUrl} from '@angular/platform-browser';
 import {Observable, of, Subject} from 'rxjs';
 import {finalize} from 'rxjs/operators';
-import {StorageUploadTaskService} from './storage-upload-task.service';
+import {RimeStorageUploadTaskService} from './storage-upload-task.service';
 
-const STORAGE_UPLOADER_TOKEN = new InjectionToken<StorageUploadTaskComponent>(
+const STORAGE_UPLOADER_TOKEN = new InjectionToken<RimeStorageUploadTaskComponent>(
   'StorageUploadTaskComponent'
 );
 
@@ -21,9 +21,9 @@ const STORAGE_UPLOADER_TOKEN = new InjectionToken<StorageUploadTaskComponent>(
   selector: 'rime-storage-upload-task',
   templateUrl: './storage-upload-task.component.html',
   styleUrls: ['./storage-upload-task.component.scss'],
-  providers: [{provide: STORAGE_UPLOADER_TOKEN, useExisting: StorageUploadTaskComponent}],
+  providers: [{provide: STORAGE_UPLOADER_TOKEN, useExisting: RimeStorageUploadTaskComponent}],
 })
-export class StorageUploadTaskComponent implements OnInit, OnDestroy {
+export class RimeStorageUploadTaskComponent implements OnInit, OnDestroy {
   public satinizedFile$!: Observable<string | SafeUrl | undefined>;
   public satinizedFileSubject: Subject<string | SafeUrl | undefined>;
   public objectURL!: string;
@@ -58,7 +58,7 @@ export class StorageUploadTaskComponent implements OnInit, OnDestroy {
   }
   private internalDocument: string | undefined;
 
-  constructor(private storageUploadService: StorageUploadTaskService) {
+  constructor(private storageUploadService: RimeStorageUploadTaskService) {
     this.documentUploadedSubject = new Subject();
     this.documentUploaded$ = this.documentUploadedSubject.asObservable();
     this.percentage$ = of(0);

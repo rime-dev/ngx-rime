@@ -11,7 +11,7 @@ import {Observable, of, throwError} from 'rxjs';
 import {delay, dematerialize, filter, materialize, mergeMap, switchMap} from 'rxjs/operators';
 import {coerceNumberProperty} from '@angular/cdk/coercion';
 @Injectable()
-export class MockInterceptor implements HttpInterceptor {
+export class RimeMockInterceptor implements HttpInterceptor {
   constructor(@Inject('VALUES') private _values: any) {}
 
   get values(): any {
@@ -88,12 +88,12 @@ export class MockInterceptor implements HttpInterceptor {
       .pipe(dematerialize());
   }
 }
-export class Mock {
+export class RimeMock {
   static provider(values: any) {
     return [
       {
         provide: HTTP_INTERCEPTORS,
-        useClass: MockInterceptor,
+        useClass: RimeMockInterceptor,
         multi: true,
       },
       {

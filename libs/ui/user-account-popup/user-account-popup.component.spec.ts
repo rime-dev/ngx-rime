@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {UserAccountPopupComponent} from './user-account-popup.component';
-import {UserAccountPopupModule} from './user-account-popup.module';
+import {RimeUserAccountPopupComponent} from './user-account-popup.component';
+import {RimeUserAccountPopupModule} from './user-account-popup.module';
 import {RouterTestingModule} from '@angular/router/testing';
-describe('UserAccountPopupComponent', () => {
-  let component: UserAccountPopupComponent;
-  let fixture: ComponentFixture<UserAccountPopupComponent>;
+describe('RimeUserAccountPopupComponent', () => {
+  let component: RimeUserAccountPopupComponent;
+  let fixture: ComponentFixture<RimeUserAccountPopupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UserAccountPopupComponent],
-      imports: [UserAccountPopupModule, RouterTestingModule],
+      declarations: [RimeUserAccountPopupComponent],
+      imports: [RimeUserAccountPopupModule, RouterTestingModule],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserAccountPopupComponent);
+    fixture = TestBed.createComponent(RimeUserAccountPopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

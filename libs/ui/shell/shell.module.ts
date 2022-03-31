@@ -10,11 +10,11 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {RouterModule} from '@angular/router';
-import {UserAccountPopupModule} from '@ngx-rime/ui/user-account-popup';
-import {ShellComponent} from './shell.component';
+import {RimeUserAccountPopupModule} from '@ngx-rime/ui/user-account-popup';
+import {RimeShellComponent} from './shell.component';
 
 @NgModule({
-  declarations: [ShellComponent],
+  declarations: [RimeShellComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -22,14 +22,14 @@ import {ShellComponent} from './shell.component';
     MatToolbarModule,
     MatMenuModule,
     MatDividerModule,
-    UserAccountPopupModule,
+    RimeUserAccountPopupModule,
     RouterModule,
     MatSidenavModule,
     MatListModule,
     MatTooltipModule,
   ],
-  exports: [ShellComponent],
+  exports: [RimeShellComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{provide: MATERIAL_SANITY_CHECKS, useValue: false}],
 })
-export class ShellModule {}
+export class RimeShellModule {}

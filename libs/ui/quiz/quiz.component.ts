@@ -13,16 +13,16 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import {QuizQuestionComponent} from './components/quiz-question/quiz-question.component';
-import {Question, QuizMode} from './models/quiz.model';
-import {QuizService} from './services/quiz.service';
+import {RimeQuizQuestionComponent} from './components/quiz-question/quiz-question.component';
+import {RimeQuestion, RimeQuizMode} from './models/quiz.model';
+import {RimeQuizService} from './services/quiz.service';
 
 @Component({
   selector: 'rime-quiz',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
 })
-export class QuizComponent implements AfterViewInit, OnDestroy {
+export class RimeQuizComponent implements AfterViewInit, OnDestroy {
   public progress = 0;
   public currentIndex = 0;
   public canBeFinalized = false;
@@ -42,27 +42,27 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
    * Defines the questions
    */
   @Input()
-  get questions(): Question[] {
+  get questions(): RimeQuestion[] {
     return this._questions;
   }
-  set questions(value: Question[]) {
+  set questions(value: RimeQuestion[]) {
     this._questions = coerceArray(value);
     this.quizService.setQuestions(value);
   }
-  private _questions: Question[] = [];
+  private _questions: RimeQuestion[] = [];
 
   /**
    * Defines the quiz mode
    */
   @Input()
-  get mode(): QuizMode {
+  get mode(): RimeQuizMode {
     return this.internalMode;
   }
-  set mode(value: QuizMode) {
+  set mode(value: RimeQuizMode) {
     this.internalMode = value;
     this.quizService.setMode(value);
   }
-  private internalMode: QuizMode = 'exam';
+  private internalMode: RimeQuizMode = 'exam';
 
   /**
    * Closed emitter behaviour
@@ -75,7 +75,7 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   @Output() finalized: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   // Query all child elements
-  @ViewChildren(QuizQuestionComponent) questionsComponent!: QueryList<QuizQuestionComponent>;
+  @ViewChildren(RimeQuizQuestionComponent) questionsComponent!: QueryList<RimeQuizQuestionComponent>;
 
   @HostBinding('attr.tabIndex') tabIndex = 1;
 
@@ -129,7 +129,7 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   constructor(
     private focusMonitor: FocusMonitor,
     private elementRef: ElementRef<HTMLElement>,
-    private quizService: QuizService
+    private quizService: RimeQuizService
   ) {}
 
   ngAfterViewInit(): void {
@@ -139,8 +139,8 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.focusMonitor.stopMonitoring(this.elementRef);
   }
-  private updateQuestion(question: Question) {
-    this.questions = this.questions.map((question0: Question, i: number) => {
+  private updateQuestion(question: RimeQuestion) {
+    this.questions = this.questions.map((question0: RimeQuestion, i: number) => {
       if (i === question.index) {
         return question;
       }
@@ -148,7 +148,7 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
     });
     this.quizService.setQuestions(this.questions);
   }
-  onSelectQuestion(question: Question): void {
+  onSelectQuestion(question: RimeQuestion): void {
     if (question.dirty) {
       const totalIndex = this.questions.length;
       if ((question.index as number) < totalIndex - 1) {
@@ -199,7 +199,7 @@ export class QuizComponent implements AfterViewInit, OnDestroy {
 
   private checkIfCanBeFinlized(): boolean {
     return this.questions.every(
-      (question: Question) => question.response || question.response === 0
+      (question: RimeQuestion) => question.response || question.response === 0
     );
   }
 }

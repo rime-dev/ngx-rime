@@ -23,7 +23,7 @@ export interface FirebaseConfig {
   entityConfig: StateEntityConfig;
 }
 
-export class FireDataObject {
+export class RimeFireDataObject {
   public id: string;
   public data: Record<string, any>;
   constructor(data: Record<string, any>) {
@@ -33,7 +33,7 @@ export class FireDataObject {
   }
 }
 
-export class FireDataMockObject {
+export class RimeFireDataMockObject {
   public id: string;
   public data: Record<string, any>;
   constructor(data: Record<string, any>) {
@@ -57,7 +57,7 @@ export interface FirebaseData {
  * @param error the HttpErrorResponse or the error thrown by the service
  * @param requestData the HTTP request information such as the method and the url.
  */
-export class FireDataServiceError {
+export class RimeFireDataServiceError {
   error!: any;
   requestData!: FirebaseData | null;
   message!: string | null;

@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ShellComponent} from './shell.component';
-import {ShellModule} from './shell.module';
-describe('ShellComponent', () => {
-  let component: ShellComponent;
-  let fixture: ComponentFixture<ShellComponent>;
+import {RimeShellComponent} from './shell.component';
+import {RimeShellModule} from './shell.module';
+describe('RimeShellComponent', () => {
+  let component: RimeShellComponent;
+  let fixture: ComponentFixture<RimeShellComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShellComponent],
-      imports: [ShellModule],
+      declarations: [RimeShellComponent],
+      imports: [RimeShellModule],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShellComponent);
+    fixture = TestBed.createComponent(RimeShellComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

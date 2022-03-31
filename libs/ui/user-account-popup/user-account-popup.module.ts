@@ -6,9 +6,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {UserAccountPopupComponent} from './user-account-popup.component';
+import {RimeUserAccountPopupComponent} from './user-account-popup.component';
 @NgModule({
-  declarations: [UserAccountPopupComponent],
+  declarations: [RimeUserAccountPopupComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -17,7 +17,7 @@ import {UserAccountPopupComponent} from './user-account-popup.component';
     MatMenuModule,
     MatDividerModule,
   ],
-  exports: [UserAccountPopupComponent],
+  exports: [RimeUserAccountPopupComponent],
   providers: [{provide: MATERIAL_SANITY_CHECKS, useValue: false}],
 })
-export class UserAccountPopupModule {}
+export class RimeUserAccountPopupModule {}

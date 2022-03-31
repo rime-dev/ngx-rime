@@ -1,21 +1,21 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Question, QuizMode} from '../models/quiz.model';
+import {RimeQuestion, RimeQuizMode} from '../models/quiz.model';
 
 @Injectable()
-export class QuizService {
-  private mode$: BehaviorSubject<QuizMode> = new BehaviorSubject<QuizMode>('exam');
-  private questions$: BehaviorSubject<Question[]> = new BehaviorSubject<Question[]>([]);
-  getMode(): QuizMode {
+export class RimeQuizService {
+  private mode$: BehaviorSubject<RimeQuizMode> = new BehaviorSubject<RimeQuizMode>('exam');
+  private questions$: BehaviorSubject<RimeQuestion[]> = new BehaviorSubject<RimeQuestion[]>([]);
+  getMode(): RimeQuizMode {
     return this.mode$.value;
   }
-  setMode(value: QuizMode): void {
+  setMode(value: RimeQuizMode): void {
     this.mode$.next(value);
   }
-  getQuestions(): Question[] {
+  getQuestions(): RimeQuestion[] {
     return this.questions$.value;
   }
-  setQuestions(value: Question[]): void {
+  setQuestions(value: RimeQuestion[]): void {
     this.questions$.next(value);
   }
 }

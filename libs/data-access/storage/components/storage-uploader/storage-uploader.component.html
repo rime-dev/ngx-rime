@@ -1,9 +1,9 @@
 <input type="file" #file class="hidden" (change)="onChange($event)" [multiple]="true" />
 <div
   class="dropzone min-w-min min-h-min w-full h-full items-center text-center p-4"
-  ngx-rime-dropzone
-  (hovered)="toggleHover($event)"
-  (dropped)="onDrop($event)"
+  rime-dropzone
+  (hovered)="toggleHover"
+  (dropped)="onDrop"
   (click)="onClick()"
   [class.hovering]="isHovering"
   *ngIf="!files || files.length === 0"
@@ -12,10 +12,10 @@
   <button mat-button class="mt-4">{{ 'ngx-rimeStorageUploader.uploadAFile' | transloco }}</button>
 </div>
 
-<ngx-rime-storage-upload-task
+<rime-storage-upload-task
   *ngFor="let item of files"
   [file]="item"
   [path]="path"
   [document]="document"
   (finalize)="onFinalize($event)"
-></ngx-rime-storage-upload-task>
+></rime-storage-upload-task>

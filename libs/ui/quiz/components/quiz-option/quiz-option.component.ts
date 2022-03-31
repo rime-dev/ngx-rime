@@ -7,28 +7,28 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import {Question, QuestionOption, QuizMode} from '../../models/quiz.model';
-import {QuizService} from '../../services/quiz.service';
+import {RimeQuestion, RimeQuestionOption, RimeQuizMode} from '../../models/quiz.model';
+import {RimeQuizService} from '../../services/quiz.service';
 
 @Component({
   selector: 'rime-quiz-option',
   templateUrl: './quiz-option.component.html',
   styleUrls: ['./quiz-option.component.scss'],
 })
-export class QuizOptionComponent implements OnInit {
+export class RimeQuizOptionComponent implements OnInit {
   public solution = false;
-  public mode: QuizMode;
+  public mode: RimeQuizMode;
 
-  @Input() parentQuestion!: Question;
+  @Input() parentQuestion!: RimeQuestion;
 
   @Input()
-  get option(): QuestionOption {
+  get option(): RimeQuestionOption {
     return this._option;
   }
-  set option(value: QuestionOption) {
+  set option(value: RimeQuestionOption) {
     this._option = value;
   }
-  private _option!: QuestionOption;
+  private _option!: RimeQuestionOption;
 
   @Input()
   get index(): number {
@@ -47,7 +47,7 @@ export class QuizOptionComponent implements OnInit {
     }
   }
 
-  @Output() selected: EventEmitter<QuestionOption> = new EventEmitter<QuestionOption>();
+  @Output() selected: EventEmitter<RimeQuestionOption> = new EventEmitter<RimeQuestionOption>();
 
   @HostListener('click', ['$event'])
   _handleClick(event: Event) {
@@ -61,8 +61,8 @@ export class QuizOptionComponent implements OnInit {
     this.selectOption();
   }
 
-  constructor(private quizService: QuizService) {
-    this.mode = this.quizService.getMode();
+  constructor(private rimeQuizService: RimeQuizService) {
+    this.mode = this.rimeQuizService.getMode();
   }
 
   selectOption() {

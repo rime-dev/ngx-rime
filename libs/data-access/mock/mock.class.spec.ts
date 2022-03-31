@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
-import {ComponentFixture, getTestBed, TestBed, waitForAsync} from '@angular/core/testing';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RimeMock } from './mock.class';
 
-import {Mock} from './mock.class';
-import {CommonModule} from '@angular/common';
-import {HttpClient} from '@angular/common/http';
 
 const items: any[] = [
   {
@@ -33,7 +33,7 @@ describe('Mock', () => {
       TestBed.configureTestingModule({
         declarations: [ItemsMockedComponent],
         imports: [CommonModule, HttpClientTestingModule],
-        providers: [Mock.provider(items)],
+        providers: [RimeMock.provider(items)],
       }).compileComponents();
     })
   );

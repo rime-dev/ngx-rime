@@ -5,4 +5,4 @@ import {RimeLazyLoadImageDirective} from './lazy-load-image.directive';
   declarations: [RimeLazyLoadImageDirective],
   exports: [RimeLazyLoadImageDirective],
 })
-export class LazyLoadImageModule {}
+export class RimeLazyLoadImageModule {}

@@ -8,7 +8,7 @@ import {finalize, take, tap} from 'rxjs/operators';
   templateUrl: './storage-uploader.component.html',
   styleUrls: ['./storage-uploader.component.scss'],
 })
-export class StorageUploaderComponent {
+export class RimeStorageUploaderComponent {
   public isHovering: boolean;
   public files: File[];
   public uploadedFiles: string[];

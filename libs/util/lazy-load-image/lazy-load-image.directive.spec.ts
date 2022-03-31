@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 import {RimeLazyLoadImageDirective} from './lazy-load-image.directive';
-import {LazyLoadImageModule} from './lazy-load-image.module';
+import {RimeLazyLoadImageModule} from './lazy-load-image.module';
 
 @Component({
   template: `
@@ -24,7 +24,7 @@ describe('RimeLazyLoadImageDirective in component', () => {
   beforeEach(() => {
     void TestBed.configureTestingModule({
       declarations: [LazyLoadImageComponent],
-      imports: [LazyLoadImageModule],
+      imports: [RimeLazyLoadImageModule],
     }).compileComponents();
   });
 

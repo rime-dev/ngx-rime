@@ -1,15 +1,15 @@
-export class Question {
+export class RimeQuestion {
   public index?: number;
   public title: string;
-  public options: QuestionOption[];
+  public options:RimeQuestionOption[];
   public dirty?: boolean;
-  public type: QuestionType;
+  public type: RimeQuestionType;
   public tags: string[];
   public level: number;
   public answer?: number | boolean | string;
   public response?: number;
 
-  constructor(question: Question) {
+  constructor(question: RimeQuestion) {
     this.index = question.index;
     this.title = question.title;
     this.dirty = question.dirty;
@@ -37,7 +37,7 @@ export class Question {
         if (Object.prototype.hasOwnProperty.call(question, key)) {
           const element = question[key as never];
           if (key.includes('option') && element !== null && element !== undefined) {
-            const option: QuestionOption = {text: element, index};
+            const option: RimeQuestionOption = {text: element, index};
             this.options.push(option);
             index++;
           }
@@ -47,11 +47,11 @@ export class Question {
   }
 }
 
-export type QuestionType = 'single' | 'boolean' | 'multiple';
+export type RimeQuestionType = 'single' | 'boolean' | 'multiple';
 
-export type QuizMode = 'exam' | 'solution';
-export interface QuestionOption {
-  parentQuestion?: Question;
+export type RimeQuizMode = 'exam' | 'solution';
+export interface RimeQuestionOption {
+  parentQuestion?: RimeQuestion;
   index?: number;
   text: string;
   response?: boolean;
