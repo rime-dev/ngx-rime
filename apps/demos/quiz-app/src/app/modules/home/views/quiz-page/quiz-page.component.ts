@@ -2,7 +2,7 @@ import {coerceNumberProperty} from '@angular/cdk/coercion';
 import {HttpClient} from '@angular/common/http';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Question, QuizMode} from '@rng/ui/quiz';
+import {Question, QuizMode} from '@rime-dev/ui/quiz';
 import {Subject} from 'rxjs';
 import {map, takeUntil, tap} from 'rxjs/operators';
 

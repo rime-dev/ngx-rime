@@ -1,6 +1,6 @@
 {
-  "name": "@rng/feature",
-  "version": "0.0.0",
+  "name": "@rime-dev/feature",
+  "version": "0.1.0",
   "description": "Common utilities",
   "dependencies": {
     "tslib": "^2.0.0"

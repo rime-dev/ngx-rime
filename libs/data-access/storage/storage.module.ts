@@ -7,7 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {LangDefinition, Translation, TranslocoModule, TranslocoService} from '@ngneat/transloco';
-import {SatinizeModule} from '@rng/util/satinize';
+import {SatinizeModule} from '@rime-dev/util/satinize';
 import {StorageUploadTaskComponent} from './components/storage-upload-task/storage-upload-task.component';
 import {
   StorageUploadTaskMockService,
