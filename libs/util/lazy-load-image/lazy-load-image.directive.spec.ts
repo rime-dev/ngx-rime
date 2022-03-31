@@ -1,26 +1,26 @@
 import {Component} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
-import {LazyLoadImageDirective} from './lazy-load-image.directive';
+import {RimeLazyLoadImageDirective} from './lazy-load-image.directive';
 import {LazyLoadImageModule} from './lazy-load-image.module';
 
 @Component({
   template: `
-    <img ngx-rimeLazyLoadImage src="https://github.com/rime-dev/ngx-rime/blob/main/images/ngx-rime-logo.png" />
+    <img rimeLazyLoadImage src="https://github.com/rime-dev/ngx-rime/blob/main/images/ngx-rime-logo.png" />
   `,
 })
 class LazyLoadImageComponent {}
 
-describe('LazyLoadImageDirective', () => {
+describe('RimeLazyLoadImageDirective', () => {
   it('should create an instance', () => {
     const element = document.createElement('img');
     element.src = 'https://github.com/rime-dev/ngx-rime/blob/main/images/ngx-rime-logo.png';
-    const directive = new LazyLoadImageDirective(element as never);
+    const directive = new RimeLazyLoadImageDirective(element as never);
     expect(directive).toBeTruthy();
   });
 });
 
-describe('LazyLoadImageDirective in component', () => {
+describe('RimeLazyLoadImageDirective in component', () => {
   beforeEach(() => {
     void TestBed.configureTestingModule({
       declarations: [LazyLoadImageComponent],
@@ -30,7 +30,7 @@ describe('LazyLoadImageDirective in component', () => {
 
   it('should create an instance', () => {
     const fixture = TestBed.createComponent(LazyLoadImageComponent);
-    const element = fixture.debugElement.query(By.directive(LazyLoadImageDirective));
+    const element = fixture.debugElement.query(By.directive(RimeLazyLoadImageDirective));
     expect((fixture.nativeElement as HTMLElement).getAttribute('src')).not.toBe(
       'https://github.com/rime-dev/ngx-rime/blob/main/images/ngx-rime-logo.png'
     );

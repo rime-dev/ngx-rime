@@ -4,7 +4,7 @@ import {from} from 'rxjs';
 import {finalize, take, tap} from 'rxjs/operators';
 
 @Component({
-  selector: 'ngx-rime-storage-uploader',
+  selector: 'rime-storage-uploader',
   templateUrl: './storage-uploader.component.html',
   styleUrls: ['./storage-uploader.component.scss'],
 })

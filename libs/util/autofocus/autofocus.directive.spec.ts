@@ -1,22 +1,22 @@
 import {Component} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
-import {NgxRimeAutofocusDirective} from './autofocus.directive';
-import {NgxRimeAutofocusModule} from './autofocus.module';
+import {RimeAutofocusDirective} from './autofocus.directive';
+import {RimeAutofocusModule} from './autofocus.module';
 @Component({
   template: ` <input ngx-rimeAutofocus /> `,
 })
 class AutofocusInputComponent {}
 
-describe('NgxRimeAutofocusDirective', () => {
+describe('RimeAutofocusDirective', () => {
   it('should create an instance', () => {});
 });
 
-describe('NgxRimeAutofocusDirective in component', () => {
+describe('RimeAutofocusDirective in component', () => {
   beforeEach(() => {
     void TestBed.configureTestingModule({
       declarations: [AutofocusInputComponent],
-      imports: [NgxRimeAutofocusModule],
+      imports: [RimeAutofocusModule],
     }).compileComponents();
   });
 
@@ -25,7 +25,7 @@ describe('NgxRimeAutofocusDirective in component', () => {
     fixture.detectChanges();
     jest.spyOn(fixture.nativeElement as HTMLElement, 'focus');
     expect((fixture.nativeElement as HTMLElement).focus).not.toHaveBeenCalled();
-    const element = fixture.debugElement.query(By.directive(NgxRimeAutofocusDirective));
+    const element = fixture.debugElement.query(By.directive(RimeAutofocusDirective));
     fixture.detectChanges();
     jest.spyOn(element.nativeElement as HTMLElement, 'focus');
     expect((element.nativeElement as HTMLElement).focus).toHaveBeenCalled();

@@ -6,7 +6,7 @@ import {EntityState} from '@ngx-rime/data-access/base/models/base.model';
 import {Observable} from 'rxjs';
 
 @Component({
-  selector: 'ngx-rime-tasks',
+  selector: 'rime-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss'],
 })

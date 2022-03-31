@@ -5,7 +5,7 @@
       "projectType": "library",
       "root": "libs/data-access",
       "sourceRoot": "libs/data-access",
-      "prefix": "ngx-rime",
+      "prefix": "rime",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -51,7 +51,7 @@
       "projectType": "library",
       "root": "libs/feature",
       "sourceRoot": "libs/feature",
-      "prefix": "ngx-rime",
+      "prefix": "rime",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -99,7 +99,7 @@
       "projectType": "application",
       "root": "apps/demos/quiz-app",
       "sourceRoot": "apps/demos/quiz-app/src",
-      "prefix": "ngx-rime",
+      "prefix": "rime",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -199,7 +199,7 @@
       "projectType": "application",
       "root": "apps/ngx-rime-app",
       "sourceRoot": "apps/ngx-rime-app/src",
-      "prefix": "ngx-rime",
+      "prefix": "rime",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -299,7 +299,7 @@
       "projectType": "application",
       "root": "apps/demos/task-app",
       "sourceRoot": "apps/demos/task-app/src",
-      "prefix": "ngx-rime",
+      "prefix": "rime",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -399,7 +399,7 @@
       "projectType": "library",
       "root": "libs/ui",
       "sourceRoot": "libs/ui",
-      "prefix": "ngx-rime",
+      "prefix": "rime",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -480,7 +480,7 @@
       "projectType": "library",
       "root": "libs/util",
       "sourceRoot": "libs/util",
-      "prefix": "ngx-rime",
+      "prefix": "rime",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",

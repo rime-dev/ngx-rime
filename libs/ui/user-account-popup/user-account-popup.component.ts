@@ -16,7 +16,7 @@ export interface UserInfo {
 }
 
 @Component({
-  selector: 'ngx-rime-user-account-popup',
+  selector: 'rime-user-account-popup',
   templateUrl: './user-account-popup.component.html',
   styleUrls: ['./user-account-popup.component.scss'],
 })

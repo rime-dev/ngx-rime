@@ -7,7 +7,7 @@ import {Subject} from 'rxjs';
 import {map, takeUntil, tap} from 'rxjs/operators';
 
 @Component({
-  selector: 'ngx-rime-quiz-page',
+  selector: 'rime-quiz-page',
   templateUrl: './quiz-page.component.html',
   styleUrls: ['./quiz-page.component.scss'],
 })

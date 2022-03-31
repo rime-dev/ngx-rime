@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
-  selector: 'ngx-rime-sign-in',
+  selector: 'rime-sign-in',
   templateUrl: './sign-in.component.html',
 })
 export class SignInComponent {

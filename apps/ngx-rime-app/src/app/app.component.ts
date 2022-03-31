@@ -4,7 +4,7 @@ import {AuthService} from '@ngx-rime/data-access/auth/services/auth.service';
 import {Observable, Subject} from 'rxjs';
 
 @Component({
-  selector: 'ngx-rime-root',
+  selector: 'rime-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })

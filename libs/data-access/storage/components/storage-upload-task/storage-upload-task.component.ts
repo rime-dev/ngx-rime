@@ -18,7 +18,7 @@ const STORAGE_UPLOADER_TOKEN = new InjectionToken<StorageUploadTaskComponent>(
 );
 
 @Component({
-  selector: 'ngx-rime-storage-upload-task',
+  selector: 'rime-storage-upload-task',
   templateUrl: './storage-upload-task.component.html',
   styleUrls: ['./storage-upload-task.component.scss'],
   providers: [{provide: STORAGE_UPLOADER_TOKEN, useExisting: StorageUploadTaskComponent}],

@@ -30,15 +30,15 @@
           "error",
           {
             "type": ["element", "attribute"],
-            "prefix": "ngx-rime",
-            "style": "kebab-case"
+            "prefix": "rime",
+            "style": "camelCase"
           }
         ],
         "@angular-eslint/component-selector": [
           "error",
           {
             "type": ["element", "attribute"],
-            "prefix": "ngx-rime",
+            "prefix": "rime",
             "style": "kebab-case"
           }
         ],
