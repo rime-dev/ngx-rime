@@ -1,7 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
-import {User} from '@ngx-rime/data-access/auth';
-import {AuthService} from '@ngx-rime/data-access/auth/services/auth.service';
-import {Observable, Subject} from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { RimeRoutes, RimeShellLogo } from '@ngx-rime/ui/shell';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'rime-root',
@@ -10,17 +9,17 @@ import {Observable, Subject} from 'rxjs';
 })
 export class AppComponent implements OnDestroy {
   title = 'ngx-rime-app';
-  logo = {
+  logo: RimeShellLogo = {
     src: 'assets/ngx-rime-logo.png',
     alt: 'NGX-RIME APP',
   };
-  topRoutes = [
+  topRoutes: RimeRoutes[] = [
     {
       path: '/home',
       text: 'Home',
     },
   ];
-  sideRoutes = [
+  sideRoutes: RimeRoutes[] = [
     {
       path: '/dashboard',
       text: 'Home',
@@ -41,23 +40,12 @@ export class AppComponent implements OnDestroy {
       divider: true,
     },
   ];
-  userRoutes = [
-    {
-      click: () => {
-        this.authService.signOut();
-      },
-      text: 'Logout',
-      icon: 'logout',
-    },
-  ];
+
   private destroy$: Subject<void> = new Subject();
-  public user$: Observable<User | null>;
   showLoginButton = false;
   showLogoutButton = false;
 
-  constructor(private authService: AuthService) {
-    this.user$ = this.authService.user$;
-  }
+
 
   ngOnDestroy(): void {
     this.destroy$.next();

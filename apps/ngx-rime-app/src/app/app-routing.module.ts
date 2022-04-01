@@ -1,6 +1,5 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from '@ngx-rime/data-access/auth';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -10,7 +9,6 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    canActivate: [AuthGuard],
     loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule),
   },
 ];
