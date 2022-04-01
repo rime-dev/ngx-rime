@@ -18,6 +18,9 @@
   <a href="https://circleci.com/gh/rime-dev/ngx-rime/tree/main">
     <img src="https://circleci.com/gh/rime-dev/ngx-rime/tree/main.svg?style=shield" alt="CI status" />
   </a>&nbsp;
+  <a href="https://www.npmjs.com/@ngx-rime/util">
+    <img src="https://img.shields.io/npm/v/@ngx-rime/util?color=limegreen&label=NPM%20package&logo=npm&logoColor=%23fff" alt="Rime on npm" />
+  </a>&nbsp;
   <a href="https://github.com/rime-dev/ngx-rime/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/rime-dev/ngx-rime"></a>&nbsp;
 </p>
 
