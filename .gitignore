@@ -46,7 +46,7 @@ Thumbs.db
 .vscode/settings.json
 
 debug.log
-package-lock.json
+# package-lock.json
 
 **/environment.ts
 **/environment.prod.ts
