@@ -4,7 +4,7 @@ import {asyncScheduler, BehaviorSubject, interval, of, Subject} from 'rxjs';
 import {finalize, take, tap, throttleTime} from 'rxjs/operators';
 
 @Injectable()
-export class StorageMockService {
+export class RimeStorageMockService {
   public percentage$: BehaviorSubject<number | undefined>;
   public downloadURL$: BehaviorSubject<string | undefined>;
   public task: AngularFireUploadTask | undefined;

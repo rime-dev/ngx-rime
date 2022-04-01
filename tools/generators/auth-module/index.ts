@@ -2,8 +2,8 @@ import {chain, externalSchematic, Rule} from '@angular-devkit/schematics';
 import * as path from 'path';
 
 export default function (schema: any): Rule {
-  if (!schema.name.startsWith('rng-')) {
-    throw new Error(`rng modules must be prefixed with 'rng-'`);
+  if (!schema.name.startsWith('ngx-rime-')) {
+    throw new Error(`ngx-rime modules must be prefixed with 'ngx-rime-'`);
   }
 
   return chain([

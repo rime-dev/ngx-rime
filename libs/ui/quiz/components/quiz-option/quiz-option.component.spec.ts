@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {QuizModule} from '../../quiz.module';
-import {QuizOptionComponent} from './quiz-option.component';
+import {RimeQuizModule} from '../../quiz.module';
+import {RimeQuizOptionComponent} from './quiz-option.component';
 
-describe('QuizOptionComponent', () => {
-  let component: QuizOptionComponent;
-  let fixture: ComponentFixture<QuizOptionComponent>;
+describe('RimeQuizOptionComponent', () => {
+  let component: RimeQuizOptionComponent;
+  let fixture: ComponentFixture<RimeQuizOptionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [QuizOptionComponent],
-      imports: [QuizModule],
+      declarations: [RimeQuizOptionComponent],
+      imports: [RimeQuizModule],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuizOptionComponent);
+    fixture = TestBed.createComponent(RimeQuizOptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

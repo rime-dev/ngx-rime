@@ -11,7 +11,7 @@ import {
 @Pipe({
   name: 'satinize',
 })
-export class SatinizePipe implements PipeTransform {
+export class RimeSatinizePipe implements PipeTransform {
   constructor(protected sanitizer: DomSanitizer) {}
 
   public transform(

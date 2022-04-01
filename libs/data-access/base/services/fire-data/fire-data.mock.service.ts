@@ -1,3 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {HttpErrorResponse} from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
@@ -10,8 +17,8 @@ import {
   EntityState,
   FirebaseData,
   FirebaseMethods,
-  FireDataMockObject,
-  FireDataServiceError,
+  RimeFireDataMockObject,
+  RimeFireDataServiceError,
   StateEntityConfig,
 } from '../../models/base.model';
 import {generateUUID} from '../../utils/utils';
@@ -21,7 +28,7 @@ import {generateUUID} from '../../utils/utils';
  * Creates the FireDataService instance for the given entity.
  */
 @Injectable()
-export class FireDataMockServiceFactory {
+export class RimeFireDataMockServiceFactory {
   constructor(
     @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,
     private angularFirestore: AngularFirestore
@@ -33,7 +40,7 @@ export class FireDataMockServiceFactory {
    * @param entityName {string} Name of the entity type for this data service
    */
   create<T>(entityName: string) {
-    return new FireDataMockService<T>(entityName, this.entityConfig, this.angularFirestore);
+    return new RimeFireDataMockService<T>(entityName, this.entityConfig, this.angularFirestore);
   }
 }
 
@@ -41,7 +48,7 @@ export class FireDataMockServiceFactory {
  * A basic service for CRUD operations connected with Firebase.
  * Creates an instance of each entity.
  */
-export class FireDataMockService<T> {
+export class RimeFireDataMockService<T> {
   protected internalName!: string;
   protected delete404OK: boolean;
   protected entityName!: string;
@@ -271,14 +278,14 @@ export class FireDataMockService<T> {
     let action = null;
     if (collection && this.mockData) {
       if (!document && !data) {
-        action = this.mockData[collection].map((object: any) => new FireDataMockObject(object));
+        action = this.mockData[collection].map((object: any) => new RimeFireDataMockObject(object));
       } else if (document && !data) {
         action = this.mockData[collection]
           .filter((object: any) => object.id === document)
-          .map((object: any) => new FireDataMockObject(object))[0];
+          .map((object: any) => new RimeFireDataMockObject(object))[0];
       } else if (!document && data) {
         const filterData = this.getCollectionReferenceByConditions(this.mockData[collection], data);
-        action = filterData.map((object: any) => new FireDataMockObject(object));
+        action = filterData.map((object: any) => new RimeFireDataMockObject(object));
       }
     }
     return of(action);
@@ -330,7 +337,7 @@ export class FireDataMockService<T> {
       if (ok) {
         return ok;
       }
-      const error = new FireDataServiceError(err, reqData);
+      const error = new RimeFireDataServiceError(err, reqData);
       return throwError(error);
     };
   }

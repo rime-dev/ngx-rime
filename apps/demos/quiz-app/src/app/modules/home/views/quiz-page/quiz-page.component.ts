@@ -2,19 +2,19 @@ import {coerceNumberProperty} from '@angular/cdk/coercion';
 import {HttpClient} from '@angular/common/http';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Question, QuizMode} from '@rng/ui/quiz';
+import {RimeQuestion, RimeQuizMode} from '@ngx-rime/ui/quiz';
 import {Subject} from 'rxjs';
 import {map, takeUntil, tap} from 'rxjs/operators';
 
 @Component({
-  selector: 'rng-quiz-page',
+  selector: 'rime-quiz-page',
   templateUrl: './quiz-page.component.html',
   styleUrls: ['./quiz-page.component.scss'],
 })
 export class QuizPageComponent implements OnInit, OnDestroy {
-  questions: Question[] = [];
+  questions: RimeQuestion[] = [];
   public quiz: string | null = null;
-  public quizMode: QuizMode = 'exam';
+  public quizMode: RimeQuizMode = 'exam';
   public difficulty = 0;
   public tags = 'random';
   private destroy$: Subject<void> = new Subject<void>();
@@ -28,18 +28,18 @@ export class QuizPageComponent implements OnInit, OnDestroy {
   onClosed(event: any) {
     void this.router.navigate(['/']);
   }
-  private checkQuestions(questions: Question[]): Question[] {
+  private checkQuestions(questions: RimeQuestion[]): RimeQuestion[] {
     if (this.tags && this.tags !== 'random') {
-      questions = questions.filter((question: Question) =>
+      questions = questions.filter((question: RimeQuestion) =>
         question.tags.some((tag: string) => tag === this.tags)
       );
     }
     if (this.difficulty !== 0) {
-      questions = questions.filter((question: Question) => question.level === this.difficulty);
+      questions = questions.filter((question: RimeQuestion) => question.level === this.difficulty);
     } else if (this.difficulty === 0) {
-      const easy = questions.filter((question: Question) => question.level === 1).slice(0, 15);
-      const medium = questions.filter((question: Question) => question.level === 2).slice(0, 10);
-      const hard = questions.filter((question: Question) => question.level === 3).slice(0, 5);
+      const easy = questions.filter((question: RimeQuestion) => question.level === 1).slice(0, 15);
+      const medium = questions.filter((question: RimeQuestion) => question.level === 2).slice(0, 10);
+      const hard = questions.filter((question: RimeQuestion) => question.level === 3).slice(0, 5);
       questions = [...easy, ...medium, ...hard];
     }
     const arr = questions
@@ -58,10 +58,10 @@ export class QuizPageComponent implements OnInit, OnDestroy {
       this.tags = this.activatedRoute.snapshot.queryParamMap.get('tags') as string;
       const question = `questions_${this.quiz.toLowerCase()}`;
       this.httpClient
-        .get<Question[]>(question)
+        .get<RimeQuestion[]>(question)
         .pipe(
           // TODO: remove filter when back is made
-          map((questions: Question[]) => this.checkQuestions(questions)),
+          map((questions: RimeQuestion[]) => this.checkQuestions(questions)),
           tap({next: (value: any) => (this.questions = value)}),
           takeUntil(this.destroy$)
         )

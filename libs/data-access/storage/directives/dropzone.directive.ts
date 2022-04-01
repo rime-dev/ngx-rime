@@ -1,10 +1,9 @@
 import {Directive, HostListener, Output, EventEmitter} from '@angular/core';
 
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[rng-dropzone]',
+  selector: '[rimeDropzone]',
 })
-export class DropzoneDirective {
+export class RimeDropzoneDirective {
   @Output() dropped = new EventEmitter<FileList>();
   @Output() hovered = new EventEmitter<boolean>();
 

@@ -23,13 +23,13 @@
 
 <div class="questions-container h-full p-4">
   <div *ngFor="let question of questions; let i = index">
-    <rng-quiz-question
+    <rime-quiz-question
       *ngIf="i === currentIndex"
       [index]="i"
       [question]="question"
       (selected)="onSelectQuestion($event)"
     >
-    </rng-quiz-question>
+    </rime-quiz-question>
   </div>
 </div>
 <div class="block">

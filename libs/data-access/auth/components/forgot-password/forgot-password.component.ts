@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../services/auth.service';
+import {RimeAuthService} from '../../services/auth.service';
 
 @Component({
-  selector: 'rng-forgot-password',
+  selector: 'rime-forgot-password',
   templateUrl: './forgot-password.component.html',
 })
-export class ForgotPasswordComponent {
+export class RimeForgotPasswordComponent {
   form: FormGroup;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder) {
+  constructor(private rimeAuthService: RimeAuthService, private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
     });
@@ -19,6 +19,6 @@ export class ForgotPasswordComponent {
     if (this.form.invalid) {
       return;
     }
-    this.authService.forgotPassword(this.form.controls.email.value);
+    this.rimeAuthService.forgotPassword(this.form.controls.email.value);
   }
 }

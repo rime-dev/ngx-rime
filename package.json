@@ -1,6 +1,6 @@
 {
-  "name": "rng",
-  "version": "0.0.0",
+  "name": "ngx-rime",
+  "version": "0.1.0",
   "license": "MIT",
   "engines": {
     "npm": ">=6.0.0",
@@ -32,14 +32,14 @@
     "help": "nx help",
     "lint:all": "nx workspace-lint && nx run-many --projects=data-access,feature,ui,util --target=lint",
     "test:all": "nx run-many --projects=data-access,feature,ui,util  --target=test --browsers ChromeHeadless",
-    "build:all": "nx run-many --projects=data-access,feature,ui,util  --target=build",
+    "build:all": "nx clear-cache && nx run-many --projects=data-access,feature,ui,util  --target=build",
     "check:ui": "nx lint ui && nx test ui --browsers ChromeHeadless && nx build ui",
     "check:util": "nx lint util && nx test util --browsers ChromeHeadless && nx build util",
     "check:feature": "nx lint feature && nx test feature --browsers ChromeHeadless && nx build feature",
     "check:data-access": "nx lint data-access && nx test data-access --browsers ChromeHeadless && nx build data-access",
     "check": "nx clear-cache && npm run lint:all && npm run test:all && npm run build:all",
-    "add-auth-module": "npm run workspace-schematic -- auth-module module-name --project=rng-project",
-    "main_build_github": "nx build --project rng-app --output-path docs --base-href https://rime-dev.github.io/rng/",
+    "add-auth-module": "npm run workspace-schematic -- auth-module module-name --project=ngx-rime-project",
+    "main_build_github": "nx build --project ngx-rime-app --output-path docs --base-href https://rime-dev.github.io/ngx-rime/",
     "generate_story_for_project": "nx g @nrwl/angular:storybook-configuration project-name",
     "run_story_for_project": "nx run project-name:storybook",
     "run_story_for_ui": "nx run ui:storybook",
@@ -48,7 +48,7 @@
     "add_material": "ng add @angular/material",
     "generate_directive": "npx nx g directive lazy-load-image/lazy-load-image --project=util --export"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "13.2.6",
     "@angular/cdk": "13.2.6",

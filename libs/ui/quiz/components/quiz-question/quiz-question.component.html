@@ -19,12 +19,12 @@
   <span class="font-mono text-xl font-medium">{{ question.title }}</span>
 </div>
 <div class="flex flex-col mb-4 p-4">
-  <rng-quiz-option
+  <rime-quiz-option
     *ngFor="let option of question.options; let i = index"
     [option]="option"
     [parentQuestion]="question"
     [index]="i"
     (selected)="onSelectOption(i)"
   >
-  </rng-quiz-option>
+  </rime-quiz-option>
 </div>

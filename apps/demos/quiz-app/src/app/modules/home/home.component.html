@@ -3,11 +3,11 @@
 </mat-toolbar>
 <div class="container mx-auto h-full pt-8">
   <div class="max-w-md mx-auto md:max-w-2xl" *ngIf="!quizSelected">
-    <rng-target-card
+    <ngx-rime-target-card
       *ngFor="let quiz of allQuiz"
       [quiz]="quiz"
       (selected)="handleSelectedQuiz($event)"
-    ></rng-target-card>
+    ></ngx-rime-target-card>
   </div>
   <div class="max-w-md mx-auto md:max-w-2xl" *ngIf="quizSelected">
     <div class="flex flex-row mb-4">

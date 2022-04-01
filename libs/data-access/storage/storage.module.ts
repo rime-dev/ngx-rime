@@ -7,21 +7,21 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {LangDefinition, Translation, TranslocoModule, TranslocoService} from '@ngneat/transloco';
-import {SatinizeModule} from '@rng/util/satinize';
-import {StorageUploadTaskComponent} from './components/storage-upload-task/storage-upload-task.component';
+import {RimeSatinizeModule} from '@ngx-rime/util/satinize';
+import {RimeStorageUploadTaskComponent} from './components/storage-upload-task/storage-upload-task.component';
 import {
-  StorageUploadTaskMockService,
-  StorageUploadTaskService,
+  RimeStorageUploadTaskMockService,
+  RimeStorageUploadTaskService,
 } from './components/storage-upload-task/storage-upload-task.service';
 import i18n from './components/storage-uploader/i18n/i18n';
-import {StorageUploaderComponent} from './components/storage-uploader/storage-uploader.component';
-import {DropzoneDirective} from './directives/dropzone.directive';
+import {RimeStorageUploaderComponent} from './components/storage-uploader/storage-uploader.component';
+import {RimeDropzoneDirective} from './directives/dropzone.directive';
 
-export const STORAGE_UPLOAD_TASK_BASE = new InjectionToken<StorageUploadTaskBase>(
+export const STORAGE_UPLOAD_TASK_BASE = new InjectionToken<RimeStorageUploadTaskBase>(
   'STORAGE_UPLOAD_TASK_BASE'
 );
 
-export interface StorageUploadTaskBase {
+export interface RimeStorageUploadTaskBase {
   uploadDocument: (path: string, file: File) => void;
 }
 /**
@@ -38,24 +38,24 @@ export interface StorageUploadTaskBase {
     HttpClientModule,
     FireStorageModule,
     MatListModule,
-    SatinizeModule,
+    RimeSatinizeModule,
   ],
 
-  declarations: [StorageUploaderComponent, DropzoneDirective, StorageUploadTaskComponent],
-  exports: [StorageUploaderComponent, DropzoneDirective, StorageUploadTaskComponent],
-  providers: [StorageUploadTaskService],
+  declarations: [RimeStorageUploaderComponent, RimeDropzoneDirective, RimeStorageUploadTaskComponent],
+  exports: [RimeStorageUploaderComponent, RimeDropzoneDirective, RimeStorageUploadTaskComponent],
+  providers: [RimeStorageUploadTaskService],
 })
-export class StorageModule {
+export class RimeStorageModule {
   constructor(translocoService: TranslocoService) {
     translocoService.getAvailableLangs().forEach((lang) => {
       const language: string = (lang as LangDefinition).id || (lang as string);
       const translation = (i18n as Record<string, Translation>)[language];
-      translocoService.setTranslation(translation, 'rngStorageUploader/' + language);
+      translocoService.setTranslation(translation, 'ngx-rimeStorageUploader/' + language);
     });
   }
-  static firebase(): ModuleWithProviders<StorageModule> {
+  static firebase(): ModuleWithProviders<RimeStorageModule> {
     return {
-      ngModule: StorageModule,
+      ngModule: RimeStorageModule,
       providers: [],
     };
   }
@@ -66,14 +66,14 @@ export class StorageModule {
  * Configure with fake `firebase`.
  */
 @NgModule({
-  imports: [StorageModule],
-  exports: [StorageModule],
-  providers: [{provide: StorageUploadTaskService, useClass: StorageUploadTaskMockService}],
+  imports: [RimeStorageModule],
+  exports: [RimeStorageModule],
+  providers: [{provide: RimeStorageUploadTaskService, useClass: RimeStorageUploadTaskMockService}],
 })
-export class StorageMockModule {
-  static firebase(): ModuleWithProviders<StorageMockModule> {
+export class RimeStorageMockModule {
+  static firebase(): ModuleWithProviders<RimeStorageMockModule> {
     return {
-      ngModule: StorageMockModule,
+      ngModule: RimeStorageMockModule,
       providers: [],
     };
   }

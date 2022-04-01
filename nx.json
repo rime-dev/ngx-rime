@@ -1,5 +1,5 @@
 {
-  "npmScope": "rng",
+  "npmScope": "ngx-rime",
   "affected": {
     "defaultBase": "main"
   },
@@ -39,7 +39,7 @@
     "defaultCollection": "@nrwl/angular",
     "packageManager": "npm"
   },
-  "defaultProject": "rng-app",
+  "defaultProject": "ngx-rime-app",
   "generators": {
     "@nrwl/angular": {
       "application": {

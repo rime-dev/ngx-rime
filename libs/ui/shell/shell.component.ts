@@ -1,44 +1,42 @@
-import {BooleanInput} from '@angular/cdk/coercion';
+import { BooleanInput } from '@angular/cdk/coercion';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component,
-  ElementRef,
-  EventEmitter,
+  Component, EventEmitter,
   HostListener,
   Input,
   NgZone,
   OnDestroy,
   OnInit,
   Output,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
-import {MatDrawerMode, MatSidenav} from '@angular/material/sidenav';
-import {MatToolbar} from '@angular/material/toolbar';
-import {Subject} from 'rxjs';
-import {debounceTime, takeUntil, tap} from 'rxjs/operators';
+import { MatDrawerMode, MatSidenav } from '@angular/material/sidenav';
+import { MatToolbar } from '@angular/material/toolbar';
+import { Subject } from 'rxjs';
+import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 
-export interface ShellLogo {
+export interface RimeShellLogo {
   src: string;
   alt?: string;
 }
-export type ToolbarColor = 'primary' | 'accent';
-export interface Routes {
+export type RimeToolbarColor = 'primary' | 'accent';
+export interface RimeRoutes {
   path?: string;
   icon?: string;
   text?: string;
-  children?: Routes[];
+  children?: RimeRoutes[];
   opened?: boolean;
   divider?: boolean;
 }
 @Component({
-  selector: 'rng-shell',
+  selector: 'rime-shell',
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
+export class RimeShellComponent implements OnInit, AfterContentInit, OnDestroy {
   static ngAcceptInputType_elevation: BooleanInput;
 
   public sidenavOpened = false;
@@ -79,14 +77,14 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
    * Defines the URL to render the main image
    */
   @Input()
-  set logo(value: ShellLogo) {
+  set logo(value: RimeShellLogo) {
     this._logo = value;
     this._changeDetectorRef.detectChanges();
   }
-  get logo(): ShellLogo {
+  get logo(): RimeShellLogo {
     return this._logo;
   }
-  private _logo!: ShellLogo;
+  private _logo!: RimeShellLogo;
 
   /**
    * Defines the application name
@@ -105,26 +103,26 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
    * Defines the routes in the top navigation bar
    */
   @Input()
-  set topRoutes(value: Routes[]) {
+  set topRoutes(value: RimeRoutes[]) {
     this._topRoutes = value;
     this._changeDetectorRef.detectChanges();
   }
-  get topRoutes(): Routes[] {
+  get topRoutes(): RimeRoutes[] {
     return this._topRoutes;
   }
-  private _topRoutes!: Routes[];
+  private _topRoutes!: RimeRoutes[];
   /**
    * Defines the routes in the side navigation bar
    */
   @Input()
-  set sideRoutes(value: Routes[] | null) {
+  set sideRoutes(value: RimeRoutes[] | null) {
     this._sideRoutes = value;
     this._changeDetectorRef.detectChanges();
   }
-  get sideRoutes(): Routes[] | null {
+  get sideRoutes(): RimeRoutes[] | null {
     return this._sideRoutes;
   }
-  private _sideRoutes!: Routes[] | null;
+  private _sideRoutes!: RimeRoutes[] | null;
   /**
    * Shell layout has sidenav
    */
@@ -142,21 +140,21 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
    * Defines the color of the toolbar
    */
   @Input()
-  set toolbarColor(value: ToolbarColor) {
+  set toolbarColor(value: RimeToolbarColor) {
     this._toolbarColor = value;
     this._changeDetectorRef.detectChanges();
   }
-  get toolbarColor(): ToolbarColor {
+  get toolbarColor(): RimeToolbarColor {
     return this._toolbarColor;
   }
-  private _toolbarColor!: ToolbarColor;
+  private _toolbarColor!: RimeToolbarColor;
 
   @Input() scrolled: Record<string, unknown> = {};
   @Output() scrolledChange: EventEmitter<Record<string, unknown>> = new EventEmitter<
     Record<string, unknown>
   >();
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  @ViewChild('rngToolbar') rngToolbar!: MatToolbar;
+  @ViewChild('RimeToolbar') RimeToolbar!: MatToolbar;
 
   @HostListener('window:resize')
   onResize() {
@@ -193,7 +191,7 @@ export class ShellComponent implements OnInit, AfterContentInit, OnDestroy {
       isScrolled: false,
     };
     if (
-      tasrget.scrollTop > (this.rngToolbar._elementRef.nativeElement as HTMLElement)?.offsetHeight
+      tasrget.scrollTop > (this.RimeToolbar._elementRef.nativeElement as HTMLElement)?.offsetHeight
     ) {
       onScrollEvent.isScrolled = true;
     }

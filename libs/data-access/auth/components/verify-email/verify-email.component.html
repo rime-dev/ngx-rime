@@ -9,16 +9,16 @@
         alt="Workflow"
       /> -->
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        {{ 'rngAuth.thankYouForRegistering' | transloco }}
+        {{ 'ngx-rimeAuth.thankYouForRegistering' | transloco }}
       </h2>
       <div *ngIf="user$ | async">
         <p class="text-center">
-          {{ 'rngAuth.weHaveSentAConfirmationEmailTo' | transloco }}
+          {{ 'ngx-rimeAuth.weHaveSentAConfirmationEmailTo' | transloco }}
           <strong>{{ (user$ | async)?.email }}</strong
           >.
         </p>
         <p class="text-center">
-          {{ 'rngAuth.pleaseCheckYourEmailAndClickOnTheLinkToVerifyYourEmailAddress' | transloco }}
+          {{ 'ngx-rimeAuth.pleaseCheckYourEmailAndClickOnTheLinkToVerifyYourEmailAddress' | transloco }}
         </p>
       </div>
     </div>
@@ -28,9 +28,9 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center"></div>
         <div class="text-sm">
-          {{ 'rngAuth.goBackTo' | transloco }}
+          {{ 'ngx-rimeAuth.goBackTo' | transloco }}
           <a routerLink="/sign-in" class="font-medium text-indigo-600 hover:text-indigo-500">
-            {{ 'rngAuth.logIn' | transloco }}
+            {{ 'ngx-rimeAuth.logIn' | transloco }}
           </a>
         </div>
       </div>
@@ -42,7 +42,7 @@
         class="relative w-full"
         (click)="sendVerificationMail()"
       >
-        {{ 'rngAuth.resendVerificationEmail' | transloco }}
+        {{ 'ngx-rimeAuth.resendVerificationEmail' | transloco }}
       </button>
     </div>
   </mat-card>

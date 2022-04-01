@@ -1,3 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {HttpErrorResponse} from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
 import {AngularFirestore, CollectionReference, FieldPath} from '@angular/fire/compat/firestore';
@@ -9,8 +16,8 @@ import {
   EntityState,
   FirebaseData,
   FirebaseMethods,
-  FireDataObject,
-  FireDataServiceError,
+  RimeFireDataObject,
+  RimeFireDataServiceError,
   OrderByDirection,
   StateEntityConfig,
 } from '../../models/base.model';
@@ -20,7 +27,7 @@ import {
  * Creates the FireDataService instance for the given entity.
  */
 @Injectable()
-export class FireDataServiceFactory {
+export class RimeFireDataServiceFactory {
   constructor(
     @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,
     private angularFirestore: AngularFirestore
@@ -32,7 +39,7 @@ export class FireDataServiceFactory {
    * @param entityName {string} Name of the entity type for this data service
    */
   create<T>(entityName: string) {
-    return new FireDataService<T>(entityName, this.entityConfig, this.angularFirestore);
+    return new RimeFireDataService<T>(entityName, this.entityConfig, this.angularFirestore);
   }
 }
 
@@ -40,7 +47,7 @@ export class FireDataServiceFactory {
  * A basic service for CRUD operations connected with Firebase.
  * Creates an instance of each entity.
  */
-export class FireDataService<T> {
+export class RimeFireDataService<T> {
   protected internalName!: string;
   protected delete404OK: boolean;
   protected entityName!: string;
@@ -270,7 +277,7 @@ export class FireDataService<T> {
         action = this.angularFirestore
           .collection(collection)
           .snapshotChanges()
-          .pipe(map((data0) => data0.map((object) => new FireDataObject(object))));
+          .pipe(map((data0) => data0.map((object) => new RimeFireDataObject(object))));
       } else if (document && !data) {
         action = this.angularFirestore
           .collection(collection)
@@ -278,7 +285,7 @@ export class FireDataService<T> {
           .snapshotChanges()
           .pipe(
             map((object) => {
-              return new FireDataObject(object);
+              return new RimeFireDataObject(object);
             })
           );
       } else if (!document && data) {
@@ -290,7 +297,7 @@ export class FireDataService<T> {
           map((objects) => objects.docs),
           map((data0) =>
             data0
-              .map((object) => new FireDataObject(object))
+              .map((object) => new RimeFireDataObject(object))
               .filter((object) => (object.id && object.data ? true : false))
           )
         );
@@ -345,7 +352,7 @@ export class FireDataService<T> {
       if (ok) {
         return ok;
       }
-      const error = new FireDataServiceError(err, reqData);
+      const error = new RimeFireDataServiceError(err, reqData);
       return throwError(error);
     };
   }

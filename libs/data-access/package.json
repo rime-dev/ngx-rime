@@ -1,6 +1,6 @@
 {
-  "name": "@rng/data-access",
-  "version": "0.0.0",
+  "name": "@ngx-rime/data-access",
+  "version": "0.1.0",
   "description": "Back End utilities",
   "dependencies": {
     "tslib": "^2.0.0"

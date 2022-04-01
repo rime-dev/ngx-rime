@@ -14,10 +14,10 @@ import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {ENTITY_CONFIG} from './constants/base.constant';
 import {FirebaseConfig} from './models/base.model';
-import {DataService} from './services/data/data.service';
-import {DataTestingService} from './services/data/data.testing.service';
-import {FireDataMockServiceFactory} from './services/fire-data/fire-data.mock.service';
-import {FireDataServiceFactory} from './services/fire-data/fire-data.service';
+import {RimeDataService} from './services/data/data.service';
+import {RimeDataTestingService} from './services/data/data.testing.service';
+import {RimeFireDataMockServiceFactory} from './services/fire-data/fire-data.mock.service';
+import {RimeFireDataServiceFactory} from './services/fire-data/fire-data.service';
 
 const firebaseConfigFactory = (firebaseConfig: FirebaseConfig) => {
   const firebaseOptions = firebaseConfig.options;
@@ -64,12 +64,12 @@ const firebaseConfigFactory = (firebaseConfig: FirebaseConfig) => {
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
-  providers: [{provide: DefaultDataServiceFactory, useClass: FireDataServiceFactory}],
+  providers: [{provide: DefaultDataServiceFactory, useClass: RimeFireDataServiceFactory}],
 })
-export class BaseModule {
-  static firebase(firebaseConfig: FirebaseConfig): ModuleWithProviders<BaseModule> {
+export class RimeBaseModule {
+  static firebase(firebaseConfig: FirebaseConfig): ModuleWithProviders<RimeBaseModule> {
     return {
-      ngModule: BaseModule,
+      ngModule: RimeBaseModule,
       providers: firebaseConfigFactory(firebaseConfig),
     };
   }
@@ -94,12 +94,12 @@ export class BaseModule {
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
-  providers: [{provide: DefaultDataServiceFactory, useClass: FireDataMockServiceFactory}],
+  providers: [{provide: DefaultDataServiceFactory, useClass: RimeFireDataMockServiceFactory}],
 })
-export class BaseMockModule {
-  static firebase(firebaseConfig: FirebaseConfig): ModuleWithProviders<BaseMockModule> {
+export class RimeBaseMockModule {
+  static firebase(firebaseConfig: FirebaseConfig): ModuleWithProviders<RimeBaseMockModule> {
     return {
-      ngModule: BaseMockModule,
+      ngModule: RimeBaseMockModule,
       providers: firebaseConfigFactory(firebaseConfig),
     };
   }
@@ -118,12 +118,12 @@ export class BaseMockModule {
     EffectsModule.forRoot(),
     EntityDataModule.forRoot({}),
   ],
-  providers: [{provide: DataService, useClass: DataTestingService}],
+  providers: [{provide: RimeDataService, useClass: RimeDataTestingService}],
 })
-export class BaseTestingModule {
-  static firebase(firebaseConfig: FirebaseConfig): ModuleWithProviders<BaseTestingModule> {
+export class RimeBaseTestingModule {
+  static firebase(firebaseConfig: FirebaseConfig): ModuleWithProviders<RimeBaseTestingModule> {
     return {
-      ngModule: BaseTestingModule,
+      ngModule: RimeBaseTestingModule,
       providers: firebaseConfigFactory(firebaseConfig),
     };
   }

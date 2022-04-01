@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
-import {LazyLoadImageDirective} from './lazy-load-image.directive';
+import {RimeLazyLoadImageDirective} from './lazy-load-image.directive';
 
 @NgModule({
-  declarations: [LazyLoadImageDirective],
-  exports: [LazyLoadImageDirective],
+  declarations: [RimeLazyLoadImageDirective],
+  exports: [RimeLazyLoadImageDirective],
 })
-export class LazyLoadImageModule {}
+export class RimeLazyLoadImageModule {}

@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
-import {SatinizePipe} from './satinize.pipe';
+import {RimeSatinizePipe} from './satinize.pipe';
 
 @NgModule({
-  declarations: [SatinizePipe],
-  exports: [SatinizePipe],
+  declarations: [RimeSatinizePipe],
+  exports: [RimeSatinizePipe],
 })
-export class SatinizeModule {}
+export class RimeSatinizeModule {}

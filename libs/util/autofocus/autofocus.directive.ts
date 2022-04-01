@@ -1,9 +1,9 @@
 import {AfterViewInit, Directive, ElementRef} from '@angular/core';
 
 @Directive({
-  selector: '[rngAutofocus]',
+  selector: '[rimeAutofocus]',
 })
-export class RngAutofocusDirective implements AfterViewInit {
+export class RimeAutofocusDirective implements AfterViewInit {
   constructor(private host: ElementRef<HTMLElement>) {}
 
   ngAfterViewInit() {

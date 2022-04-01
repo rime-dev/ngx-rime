@@ -1,6 +1,6 @@
 {
-  "name": "@rng/util",
-  "version": "0.0.0",
+  "name": "@ngx-rime/util",
+  "version": "0.1.0",
   "description": "Common utilities",
   "dependencies": {
     "tslib": "^2.0.0"

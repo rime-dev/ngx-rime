@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
-import {RngAutofocusDirective} from './autofocus.directive';
+import {RimeAutofocusDirective} from './autofocus.directive';
 
 @NgModule({
-  declarations: [RngAutofocusDirective],
-  exports: [RngAutofocusDirective],
+  declarations: [RimeAutofocusDirective],
+  exports: [RimeAutofocusDirective],
 })
-export class RngAutofocusModule {}
+export class RimeAutofocusModule {}

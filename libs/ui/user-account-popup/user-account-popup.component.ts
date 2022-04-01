@@ -1,14 +1,14 @@
 import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
 
-export interface Routes {
+export interface RimeRoutes {
   path?: string;
   icon?: string;
   text?: string;
   click?: () => void;
 }
 
-export interface UserInfo {
+export interface RimeUserInfo {
   displayName?: string;
   email?: string;
   photoURL?: string;
@@ -16,33 +16,33 @@ export interface UserInfo {
 }
 
 @Component({
-  selector: 'rng-user-account-popup',
+  selector: 'rime-user-account-popup',
   templateUrl: './user-account-popup.component.html',
   styleUrls: ['./user-account-popup.component.scss'],
 })
-export class UserAccountPopupComponent {
+export class RimeUserAccountPopupComponent {
   /**
    * Defines the routes in the menu
    */
   @Input()
-  set routes(value: Routes[]) {
+  set routes(value: RimeRoutes[]) {
     this._routes = value;
   }
-  get routes(): Routes[] {
+  get routes(): RimeRoutes[] {
     return this._routes;
   }
-  private _routes!: Routes[];
+  private _routes!: RimeRoutes[];
   /**
    * Defines the user information
    */
   @Input()
-  set userInfo(value: UserInfo | null) {
+  set userInfo(value: RimeUserInfo | null) {
     this._userInfo = value;
   }
-  get userInfo(): UserInfo | null {
+  get userInfo(): RimeUserInfo | null {
     return this._userInfo;
   }
-  private _userInfo!: UserInfo | null;
+  private _userInfo!: RimeUserInfo | null;
   constructor(private router: Router) {}
   handleClickEvent(event: (() => void) | undefined) {
     if (event) {

@@ -1,6 +1,6 @@
 {
-  "name": "@rng/ui",
-  "version": "0.0.0",
+  "name": "@ngx-rime/ui",
+  "version": "0.1.0",
   "description": "User Interface utilities",
   "dependencies": {
     "tslib": "^2.0.0"

@@ -14,7 +14,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "rng",
+            "prefix": "rime",
             "style": "camelCase"
           }
         ],
@@ -22,7 +22,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "rng",
+            "prefix": "rime",
             "style": "kebab-case"
           }
         ]

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
-  selector: 'rng-target-card',
+  selector: 'rime-target-card',
   templateUrl: './target-card.component.html',
   styleUrls: ['./target-card.component.scss'],
 })

@@ -1,19 +1,19 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs';
 import {User} from '../../models/auth.model';
-import {AuthService} from '../../services/auth.service';
+import {RimeAuthService} from '../../services/auth.service';
 
 @Component({
-  selector: 'rng-verify-email',
+  selector: 'rime-verify-email',
   templateUrl: './verify-email.component.html',
 })
-export class VerifyEmailComponent {
+export class RimeVerifyEmailComponent {
   public user$: Observable<User | null>;
-  constructor(private authService: AuthService) {
-    this.user$ = this.authService.user$;
+  constructor(private rimeAuthService: RimeAuthService) {
+    this.user$ = this.rimeAuthService.user$;
   }
 
   sendVerificationMail() {
-    this.authService.sendVerificationMail();
+    this.rimeAuthService.sendVerificationMail();
   }
 }

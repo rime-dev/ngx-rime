@@ -1,16 +1,15 @@
-import {Directive, EventEmitter, Input, Output} from '@angular/core';
 import {
   AngularFireStorage,
   AngularFireStorageReference,
   AngularFireUploadTask,
-  fromTask,
+  fromTask
 } from '@angular/fire/compat/storage';
 import firebase from 'firebase/compat';
-import {StringFormat, UploadMetadata} from 'firebase/storage';
-import {Observable, of} from 'rxjs';
-import {finalize, map} from 'rxjs/operators';
+import { StringFormat, UploadMetadata } from 'firebase/storage';
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-export class angularFireStorage implements AngularFireStorage {
+export class RimeangularFireStorage implements AngularFireStorage {
   storage!: firebase.storage.Storage;
   constructor() {}
   ref(path: string): AngularFireStorageReference {
