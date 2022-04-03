@@ -19,7 +19,7 @@ import {
   FirebaseMethods,
   RimeFireDataMockObject,
   RimeFireDataServiceError,
-  StateEntityConfig,
+  RimeStateEntityConfig,
 } from '../../models/base.model';
 import {generateUUID} from '../../utils/utils';
 
@@ -30,7 +30,7 @@ import {generateUUID} from '../../utils/utils';
 @Injectable()
 export class RimeFireDataMockServiceFactory {
   constructor(
-    @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,
+    @Inject(ENTITY_CONFIG) private entityConfig: RimeStateEntityConfig,
     private angularFirestore: AngularFirestore
   ) {}
 
@@ -53,7 +53,7 @@ export class RimeFireDataMockService<T> {
   protected delete404OK: boolean;
   protected entityName!: string;
   protected collectionName!: string;
-  protected entityConfig!: StateEntityConfig;
+  protected entityConfig!: RimeStateEntityConfig;
   protected entityUrl!: string;
   protected entitiesUrl!: string;
   protected getDelay = 0;
@@ -62,7 +62,7 @@ export class RimeFireDataMockService<T> {
   private mockData;
   constructor(
     @Inject(ENTITY_NAME) entityName: string,
-    @Inject(ENTITY_CONFIG) entityConfig: StateEntityConfig,
+    @Inject(ENTITY_CONFIG) entityConfig: RimeStateEntityConfig,
     private angularFirestore: AngularFirestore
   ) {
     this.entityConfig = entityConfig;

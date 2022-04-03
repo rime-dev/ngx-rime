@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {EntityCollectionServiceBase, EntityCollectionServiceElementsFactory} from '@ngrx/data';
 import {ENTITY_CONFIG} from '../../constants/base.constant';
-import {FireEntityCollectionDataService, StateEntityConfig} from '../../models/base.model';
+import {FireEntityCollectionDataService, RimeStateEntityConfig} from '../../models/base.model';
 
 /**
  * A data service to use as testing service in spec files, used in BaseTestingModule
@@ -10,7 +10,7 @@ import {FireEntityCollectionDataService, StateEntityConfig} from '../../models/b
 export class RimeDataTestingService {
   entitiesInstaces: Record<string, FireEntityCollectionDataService<never>> = {};
   constructor(
-    @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,
+    @Inject(ENTITY_CONFIG) private entityConfig: RimeStateEntityConfig,
     serviceElementsFactory: EntityCollectionServiceElementsFactory
   ) {
     const plurals: Record<string, string> = this.entityConfig.pluralNames;
