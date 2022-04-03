@@ -1,7 +1,11 @@
 {
   "name": "ngx-rime",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rime-dev/ngx-rime.git"
+  },
   "engines": {
     "npm": ">=6.0.0",
     "node": ">=14.0.0"
@@ -46,7 +50,11 @@
     "run_story_for_util": "nx run util:storybook",
     "generate_tailwind": "nx generate @ngneat/tailwind:nx-setup",
     "add_material": "ng add @angular/material",
-    "generate_directive": "npx nx g directive lazy-load-image/lazy-load-image --project=util --export"
+    "generate_directive": "npx nx g directive lazy-load-image/lazy-load-image --project=util --export",
+    "npm_publish_util": "cd dist/libs/util && npm version 0.1.1 && npm pack && npm publish",
+    "npm_publish_ui": "cd dist/libs/ui && npm version 0.1.1 && npm pack && npm publish",
+    "npm_publish_feature": "cd dist/libs/feature && npm version 0.1.1 && npm pack && npm publish",
+    "npm_publish_data_access": "cd dist/libs/data-access && npm version 0.1.1 && npm pack && npm publish"
   },
   "private": false,
   "dependencies": {

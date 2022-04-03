@@ -19,7 +19,7 @@ import {
   RimeFireDataObject,
   RimeFireDataServiceError,
   OrderByDirection,
-  StateEntityConfig,
+  RimeStateEntityConfig,
 } from '../../models/base.model';
 
 /**
@@ -29,7 +29,7 @@ import {
 @Injectable()
 export class RimeFireDataServiceFactory {
   constructor(
-    @Inject(ENTITY_CONFIG) private entityConfig: StateEntityConfig,
+    @Inject(ENTITY_CONFIG) private entityConfig: RimeStateEntityConfig,
     private angularFirestore: AngularFirestore
   ) {}
 
@@ -52,7 +52,7 @@ export class RimeFireDataService<T> {
   protected delete404OK: boolean;
   protected entityName!: string;
   protected collectionName!: string;
-  protected entityConfig!: StateEntityConfig;
+  protected entityConfig!: RimeStateEntityConfig;
   protected entityUrl!: string;
   protected entitiesUrl!: string;
   protected getDelay = 0;
@@ -61,7 +61,7 @@ export class RimeFireDataService<T> {
 
   constructor(
     @Inject(ENTITY_NAME) entityName: string,
-    @Inject(ENTITY_CONFIG) entityConfig: StateEntityConfig,
+    @Inject(ENTITY_CONFIG) entityConfig: RimeStateEntityConfig,
     private angularFirestore: AngularFirestore
   ) {
     this.entityConfig = entityConfig;
