@@ -14,7 +14,7 @@ import {ENTITY_CONFIG, ENTITY_NAME} from '../../constants/base.constant';
 import {
   arrayFilter,
   ConditionalQueryFirestore,
-  EntityState,
+  RimeEntityState,
   FirebaseData,
   FirebaseMethods,
   RimeFireDataMockObject,
@@ -154,7 +154,7 @@ export class RimeFireDataMockService<T> {
    *
    * @param update
    */
-  update(update: EntityState<T>): Observable<any> {
+  update(update: RimeEntityState<T>): Observable<any> {
     const id = update && update.id;
     const changesData = update && update.data && (update as any).changes;
     const changesUpdate = update && (update as any).changes;
@@ -222,7 +222,7 @@ export class RimeFireDataMockService<T> {
    * @param update The object to be updated in the collection
    * @param collection The collection name
    */
-  private getObservableFromUpdate(entity?: EntityState<T>, collection?: string) {
+  private getObservableFromUpdate(entity?: RimeEntityState<T>, collection?: string) {
     let action = null;
     if (collection && entity && this.mockData) {
       this.mockData[collection].forEach((entityData: any) => {
