@@ -2,6 +2,10 @@
   "name": "ngx-rime",
   "version": "0.1.0",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rime-dev/ngx-rime.git"
+  },
   "engines": {
     "npm": ">=6.0.0",
     "node": ">=14.0.0"
