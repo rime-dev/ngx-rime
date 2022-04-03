@@ -28,7 +28,7 @@
 
 The Rime team develops components, directives, services and schematics to build Angular applications. The team maintains several npm packages.
 
-| Package            | Description                                                                                                                                                  |                    |
+| Package            | Description                                                                                                                                                  | Docs                   |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ |
 | `@ngx-rime/data-access` | Library that contains services and utilities for interacting with a back-end system.                                                                         | [Docs][data-access-readme] |
 | `@ngx-rime/feature`     | Smart UI components for Business Use Cases specific to that feature.                                                                                         | [Docs][feature-readme]     |
@@ -42,6 +42,6 @@ The Rime team develops components, directives, services and schematics to build 
 
 [ngx-rime-docs]: https://rime-dev.github.io/ngx-rime
 [data-access-readme]: https://github.com/rime-dev/ngx-rime/blob/main/libs/data-access/README.md
-[feature-docs]: https://github.com/rime-dev/ngx-rime/blob/main/libs/feature/README.md
-[ui-docs]: https://github.com/rime-dev/ngx-rime/blob/main/libs/ui/README.md
-[util-docs]: https://github.com/rime-dev/ngx-rime/blob/main/libs/util/README.md
+[feature-readme]: https://github.com/rime-dev/ngx-rime/blob/main/libs/feature/README.md
+[ui-readme]: https://github.com/rime-dev/ngx-rime/blob/main/libs/ui/README.md
+[util-readme]: https://github.com/rime-dev/ngx-rime/blob/main/libs/util/README.md
