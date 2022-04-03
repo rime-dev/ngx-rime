@@ -1,18 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {FirebaseOptions} from '@angular/fire/app';
 import {FieldPath} from '@angular/fire/compat/firestore';
 import {EntityMetadataMap} from '@ngrx/data';
 import {Observable} from 'rxjs';
 
 export type FireEntityCollectionDataServiceBase<T> = FireEntityCollectionDataService<
-  // EntityCollectionServiceBase<EntityState<never>> &
-  EntityState<T>
+  RimeEntityState<T>
 >;
 
-export interface EntityState<T> {
+export interface RimeEntityState<T> {
   id: string;
   data: T;
 }
-export interface StateEntityConfig {
+export interface RimeStateEntityConfig {
   enablePersistence?: boolean;
   entityMetadata: EntityMetadataMap;
   pluralNames: Record<string, string>;
@@ -20,7 +26,7 @@ export interface StateEntityConfig {
 }
 export interface FirebaseConfig {
   options: FirebaseOptions;
-  entityConfig: StateEntityConfig;
+  entityConfig: RimeStateEntityConfig;
 }
 
 export class RimeFireDataObject {
@@ -95,14 +101,14 @@ export type OrderByDirection = 'desc' | 'asc';
 
 /** A service that performs FIREBASE-like CRUD data operations for an entity collection */
 export interface FireEntityCollectionDataService<T> {
-  entities$: Observable<EntityState<T>[]>;
+  entities$: Observable<RimeEntityState<T>[]>;
   add(entity: T): Observable<T>;
   delete(id: number | string): Observable<number | string>;
   getAll(): Observable<T[]>;
   getById(id: any): Observable<T>;
   getByKey(id: any): Observable<T>;
   getWithLimit(limit: number): Observable<T[]>;
-  update(update: EntityState<T>): Observable<T>;
+  update(update: RimeEntityState<T>): Observable<T>;
   getWithQuery(params: ConditionalQueryFirestore[]): Observable<T[]>;
 }
 

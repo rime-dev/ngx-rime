@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Update} from '@ngrx/entity';
 import {DataService} from '@ngx-rime/data-access/base';
-import {EntityState} from '@ngx-rime/data-access/base/models/base.model';
+import {RimeEntityState} from '@ngx-rime/data-access/base/models/base.model';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -15,7 +15,7 @@ export class TasksComponent implements OnInit {
   public form: FormGroup;
   public addMode = false;
   public editMode = false;
-  public selectedTask!: EntityState<any> | undefined;
+  public selectedTask!: RimeEntityState<any> | undefined;
   constructor(private dataService: DataService, private formBuilder: FormBuilder) {
     this.tasks$ = this.dataService.select('Task').entities$;
     this.form = this.formBuilder.group({
@@ -28,12 +28,12 @@ export class TasksComponent implements OnInit {
   addTask() {
     this.addMode = !this.addMode;
   }
-  editTask(task: EntityState<any>) {
+  editTask(task: RimeEntityState<any>) {
     this.editMode = !this.editMode;
     this.selectedTask = task;
     this.form.patchValue(this.selectedTask?.data);
   }
-  removeTask(task: EntityState<any>) {
+  removeTask(task: RimeEntityState<any>) {
     this.editMode = !this.editMode;
     const data = this.form.getRawValue();
     this.dataService.select('Task').delete(task.id);
