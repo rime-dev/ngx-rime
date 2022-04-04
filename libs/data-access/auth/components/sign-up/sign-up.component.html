@@ -9,17 +9,17 @@
         alt="Workflow"
       /> -->
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        {{ 'ngx-rimeAuth.signUp' | transloco }}
+        {{ 'rimeAuth.signUp' | transloco }}
       </h2>
     </div>
     <form [formGroup]="form" class="mt-8 space-y-6" (ngSubmit)="submit()">
       <input type="hidden" name="remember" value="true" />
       <div class="rounded-md -space-y-px">
         <mat-form-field class="w-full" appearance="outline">
-          <mat-label>{{ 'ngx-rimeAuth.email' | transloco }}</mat-label>
+          <mat-label>{{ 'rimeAuth.email' | transloco }}</mat-label>
           <input
             matInput
-            [placeholder]="'ngx-rimeAuth.email' | transloco"
+            [placeholder]="'rimeAuth.email' | transloco"
             name="email"
             type="email"
             formControlName="email"
@@ -27,17 +27,17 @@
             required
           />
           <mat-error *ngIf="form.get('email')?.errors?.email">{{
-            'ngx-rimeAuth.enterValidEmail' | transloco
+            'rimeAuth.enterValidEmail' | transloco
           }}</mat-error>
           <mat-error *ngIf="form.get('email')?.errors?.required">{{
-            'ngx-rimeAuth.fieldRequired' | transloco
+            'rimeAuth.fieldRequired' | transloco
           }}</mat-error>
         </mat-form-field>
         <mat-form-field class="w-full" appearance="outline">
-          <mat-label>{{ 'ngx-rimeAuth.password' | transloco }}</mat-label>
+          <mat-label>{{ 'rimeAuth.password' | transloco }}</mat-label>
           <input
             matInput
-            [placeholder]="'ngx-rimeAuth.password' | transloco"
+            [placeholder]="'rimeAuth.password' | transloco"
             name="password"
             type="password"
             formControlName="password"
@@ -45,7 +45,7 @@
             required
           />
           <mat-error *ngIf="form.get('password')?.errors?.required">{{
-            'ngx-rimeAuth.fieldRequired' | transloco
+            'rimeAuth.fieldRequired' | transloco
           }}</mat-error>
         </mat-form-field>
       </div>
@@ -54,14 +54,14 @@
         <div class="flex items-center"></div>
 
         <div class="text-sm">
-          {{ 'ngx-rimeAuth.alreadyHaveAnAccount' | transloco }}
+          {{ 'rimeAuth.alreadyHaveAnAccount' | transloco }}
           <a routerLink="/sign-in" class="font-medium text-indigo-600 hover:text-indigo-500">
-            {{ 'ngx-rimeAuth.logIn' | transloco }}
+            {{ 'rimeAuth.logIn' | transloco }}
           </a>
         </div>
       </div>
       <button mat-raised-button type="submit" color="primary" class="relative w-full">
-        {{ 'ngx-rimeAuth.signUp' | transloco }}
+        {{ 'rimeAuth.signUp' | transloco }}
       </button>
     </form>
   </mat-card>
