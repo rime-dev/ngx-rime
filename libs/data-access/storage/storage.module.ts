@@ -50,7 +50,7 @@ export class RimeStorageModule {
     translocoService.getAvailableLangs().forEach((lang) => {
       const language: string = (lang as LangDefinition).id || (lang as string);
       const translation = (i18n as Record<string, Translation>)[language];
-      translocoService.setTranslation(translation, 'ngx-rimeStorageUploader/' + language);
+      translocoService.setTranslation(translation, 'rimeStorageUploader/' + language);
     });
   }
   static firebase(): ModuleWithProviders<RimeStorageModule> {
