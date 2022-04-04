@@ -154,7 +154,7 @@ export class RimeShellComponent implements OnInit, AfterContentInit, OnDestroy {
     Record<string, unknown>
   >();
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  @ViewChild('RimeToolbar') RimeToolbar!: MatToolbar;
+  @ViewChild('rimeToolbar') rimeToolbar!: MatToolbar;
 
   @HostListener('window:resize')
   onResize() {
@@ -191,7 +191,7 @@ export class RimeShellComponent implements OnInit, AfterContentInit, OnDestroy {
       isScrolled: false,
     };
     if (
-      tasrget.scrollTop > (this.RimeToolbar._elementRef.nativeElement as HTMLElement)?.offsetHeight
+      tasrget.scrollTop > (this.rimeToolbar._elementRef.nativeElement as HTMLElement)?.offsetHeight
     ) {
       onScrollEvent.isScrolled = true;
     }
