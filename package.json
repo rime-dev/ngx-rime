@@ -1,6 +1,6 @@
 {
   "name": "ngx-rime",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -51,10 +51,11 @@
     "generate_tailwind": "nx generate @ngneat/tailwind:nx-setup",
     "add_material": "ng add @angular/material",
     "generate_directive": "npx nx g directive lazy-load-image/lazy-load-image --project=util --export",
-    "npm_publish_util": "cd dist/libs/util && npm version 0.1.1 && npm pack && npm publish",
-    "npm_publish_ui": "cd dist/libs/ui && npm version 0.1.1 && npm pack && npm publish",
-    "npm_publish_feature": "cd dist/libs/feature && npm version 0.1.1 && npm pack && npm publish",
-    "npm_publish_data_access": "cd dist/libs/data-access && npm version 0.1.1 && npm pack && npm publish"
+    "npm_publish_util": "cd dist/libs/util && npm version 0.1.2 && npm pack && npm publish",
+    "npm_publish_ui": "cd dist/libs/ui && npm version 0.1.2 && npm pack && npm publish",
+    "npm_publish_feature": "cd dist/libs/feature && npm version 0.1.2 && npm pack && npm publish",
+    "npm_publish_data_access": "cd dist/libs/data-access && npm version 0.1.2 && npm pack && npm publish",
+    "npm_publish_libs": "npm run npm_publish_util && npm run npm_publish_ui && npm run npm_publish_feature && npm run npm_publish_data_access"
   },
   "private": false,
   "dependencies": {
@@ -135,7 +136,7 @@
     "postcss": "^8.3.6",
     "postcss-import": "^14.0.2",
     "postcss-preset-env": "^6.7.0",
-    "postcss-url": "^10.1.1",
+    "postcss-url": "^10.1.2",
     "prettier": "2.5.1",
     "tailwindcss": "^2.2.7",
     "ts-jest": "27.0.3",
