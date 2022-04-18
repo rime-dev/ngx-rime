@@ -64,7 +64,7 @@
     "npm_publish_ui": "cd dist/libs/ui && npm version 0.1.2 && npm pack && npm publish",
     "npm_publish_feature": "cd dist/libs/feature && npm version 0.1.2 && npm pack && npm publish",
     "npm_publish_data_access": "cd dist/libs/data-access && npm version 0.1.2 && npm pack && npm publish",
-    "npm_publish_libs": "npm run npm_publish_util && npm run npm_publish_ui && npm run npm_publish_feature && npm run npm_publish_data_access"
+    "publish:libs": "nx workspace-generator publish"
   },
   "private": false,
   "dependencies": {

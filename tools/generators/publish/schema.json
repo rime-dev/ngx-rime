@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "publish",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version to publish",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What's the new version?"
+    }
+  },
+  "required": ["version"]
+}

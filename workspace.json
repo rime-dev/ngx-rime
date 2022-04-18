@@ -9,9 +9,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/data-access"
-          ],
+          "outputs": ["dist/libs/data-access"],
           "options": {
             "project": "libs/data-access/ng-package.json"
           },
@@ -27,9 +25,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/data-access"
-          ],
+          "outputs": ["coverage/libs/data-access"],
           "options": {
             "jestConfig": "libs/data-access/jest.config.js",
             "passWithNoTests": true
@@ -38,10 +34,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/data-access/**/*.ts",
-              "libs/data-access/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/data-access/**/*.ts", "libs/data-access/**/*.html"]
           }
         }
       },
@@ -55,9 +48,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/feature"
-          ],
+          "outputs": ["dist/libs/feature"],
           "options": {
             "project": "libs/feature/ng-package.json"
           },
@@ -73,9 +64,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/feature"
-          ],
+          "outputs": ["coverage/libs/feature"],
           "options": {
             "jestConfig": "libs/feature/jest.config.js",
             "passWithNoTests": true
@@ -84,16 +73,99 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/feature/**/*.ts",
-              "libs/feature/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/feature/**/*.ts", "libs/feature/**/*.html"]
           }
         }
       },
-      "tags": [
-        "feature"
-      ]
+      "tags": ["feature"]
+    },
+    "ngx-rime-app": {
+      "projectType": "application",
+      "root": "apps/ngx-rime-app",
+      "sourceRoot": "apps/ngx-rime-app/src",
+      "prefix": "rime",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/ngx-rime-app",
+            "index": "apps/ngx-rime-app/src/index.html",
+            "main": "apps/ngx-rime-app/src/main.ts",
+            "polyfills": "apps/ngx-rime-app/src/polyfills.ts",
+            "tsConfig": "apps/ngx-rime-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/ngx-rime-app/src/favicon.ico", "apps/ngx-rime-app/src/assets"],
+            "styles": ["apps/ngx-rime-app/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/ngx-rime-app/src/environments/environment.ts",
+                  "with": "apps/ngx-rime-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-rime-app:build:production"
+            },
+            "development": {
+              "browserTarget": "ngx-rime-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngx-rime-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/ngx-rime-app/src/**/*.ts", "apps/ngx-rime-app/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/ngx-rime-app"],
+          "options": {
+            "jestConfig": "apps/ngx-rime-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     },
     "quiz-app": {
       "projectType": "application",
@@ -103,9 +175,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/demos/quiz-app",
             "index": "apps/demos/quiz-app/src/index.html",
@@ -113,13 +183,8 @@
             "polyfills": "apps/demos/quiz-app/src/polyfills.ts",
             "tsConfig": "apps/demos/quiz-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/demos/quiz-app/src/favicon.ico",
-              "apps/demos/quiz-app/src/assets"
-            ],
-            "styles": [
-              "apps/demos/quiz-app/src/styles.scss"
-            ],
+            "assets": ["apps/demos/quiz-app/src/favicon.ico", "apps/demos/quiz-app/src/assets"],
+            "styles": ["apps/demos/quiz-app/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -184,111 +249,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/demos/quiz-app"
-          ],
+          "outputs": ["coverage/apps/demos/quiz-app"],
           "options": {
             "jestConfig": "apps/demos/quiz-app/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
-    "ngx-rime-app": {
-      "projectType": "application",
-      "root": "apps/ngx-rime-app",
-      "sourceRoot": "apps/ngx-rime-app/src",
-      "prefix": "rime",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
-          "options": {
-            "outputPath": "dist/apps/ngx-rime-app",
-            "index": "apps/ngx-rime-app/src/index.html",
-            "main": "apps/ngx-rime-app/src/main.ts",
-            "polyfills": "apps/ngx-rime-app/src/polyfills.ts",
-            "tsConfig": "apps/ngx-rime-app/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/ngx-rime-app/src/favicon.ico",
-              "apps/ngx-rime-app/src/assets"
-            ],
-            "styles": [
-              "apps/ngx-rime-app/src/styles.scss"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "apps/ngx-rime-app/src/environments/environment.ts",
-                  "with": "apps/ngx-rime-app/src/environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "ngx-rime-app:build:production"
-            },
-            "development": {
-              "browserTarget": "ngx-rime-app:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "ngx-rime-app:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/ngx-rime-app/src/**/*.ts",
-              "apps/ngx-rime-app/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/ngx-rime-app"
-          ],
-          "options": {
-            "jestConfig": "apps/ngx-rime-app/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -303,9 +266,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/demos/task-app",
             "index": "apps/demos/task-app/src/index.html",
@@ -313,13 +274,8 @@
             "polyfills": "apps/demos/task-app/src/polyfills.ts",
             "tsConfig": "apps/demos/task-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/demos/task-app/src/favicon.ico",
-              "apps/demos/task-app/src/assets"
-            ],
-            "styles": [
-              "apps/demos/task-app/src/styles.scss"
-            ],
+            "assets": ["apps/demos/task-app/src/favicon.ico", "apps/demos/task-app/src/assets"],
+            "styles": ["apps/demos/task-app/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -384,9 +340,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/demos/task-app"
-          ],
+          "outputs": ["coverage/apps/demos/task-app"],
           "options": {
             "jestConfig": "apps/demos/task-app/jest.config.js",
             "passWithNoTests": true
@@ -403,9 +357,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/ui"
-          ],
+          "outputs": ["dist/libs/ui"],
           "options": {
             "project": "libs/ui/ng-package.json"
           },
@@ -421,9 +373,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ui"
-          ],
+          "outputs": ["coverage/libs/ui"],
           "options": {
             "jestConfig": "libs/ui/jest.config.js",
             "passWithNoTests": true
@@ -432,10 +382,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/**/*.ts",
-              "libs/ui/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/ui/**/*.ts", "libs/ui/**/*.html"]
           }
         },
         "storybook": {
@@ -456,9 +403,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/ui",
@@ -484,9 +429,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/util"
-          ],
+          "outputs": ["dist/libs/util"],
           "options": {
             "project": "libs/util/ng-package.json"
           },
@@ -502,9 +445,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/util"
-          ],
+          "outputs": ["coverage/libs/util"],
           "options": {
             "jestConfig": "libs/util/jest.config.js",
             "passWithNoTests": true
@@ -513,10 +454,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/util/**/*.ts",
-              "libs/util/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/util/**/*.ts", "libs/util/**/*.html"]
           }
         },
         "storybook": {
@@ -537,9 +475,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/util",
