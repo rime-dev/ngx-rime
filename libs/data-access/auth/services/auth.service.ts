@@ -1,11 +1,13 @@
-import {Injectable, NgZone, OnDestroy} from '@angular/core';
+import {Inject, Injectable, NgZone, OnDestroy} from '@angular/core';
 import {GoogleAuthProvider} from '@angular/fire/auth';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
 import {Router} from '@angular/router';
 import firebase from 'firebase/compat';
 import {BehaviorSubject, Subject} from 'rxjs';
+import {RimeAuthConfig} from '../auth.module';
 import {User} from '../models/auth.model';
+import {RIME_AUTH_CONFIG} from '../models/auth.token';
 
 @Injectable({providedIn: 'root'})
 export class RimeAuthService implements OnDestroy {
@@ -13,6 +15,7 @@ export class RimeAuthService implements OnDestroy {
   public user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
 
   constructor(
+    @Inject(RIME_AUTH_CONFIG) private rimeAuthConfig: RimeAuthConfig,
     public angularFirestore: AngularFirestore,
     private angularFireAuth: AngularFireAuth,
     public router: Router,
@@ -48,6 +51,9 @@ export class RimeAuthService implements OnDestroy {
 
   // Sign up with email/password
   signUp(email: string, password: string) {
+    if (this.rimeAuthConfig.disableRegister) {
+      return;
+    }
     return this.angularFireAuth
       .createUserWithEmailAndPassword(email, password)
       .then(async (result) => {

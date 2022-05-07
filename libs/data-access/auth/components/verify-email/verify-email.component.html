@@ -29,7 +29,11 @@
         <div class="flex items-center"></div>
         <div class="text-sm">
           {{ 'rimeAuth.goBackTo' | transloco }}
-          <a routerLink="/sign-in" class="font-medium text-indigo-600 hover:text-indigo-500">
+          <a
+            mat-button
+            routerLink="/sign-in"
+            class="font-medium text-indigo-600 hover:text-indigo-500"
+          >
             {{ 'rimeAuth.logIn' | transloco }}
           </a>
         </div>

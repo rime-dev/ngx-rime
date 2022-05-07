@@ -1,6 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {RimeAuthConfig} from '../../auth.module';
 import {RimeAuthService} from '../../services/auth.service';
+import {RIME_AUTH_CONFIG} from '../../models/auth.token';
 
 @Component({
   selector: 'rime-sign-up',
@@ -8,20 +10,26 @@ import {RimeAuthService} from '../../services/auth.service';
 })
 export class RimeSignUpComponent {
   form: FormGroup;
-  constructor(private rimeAuthService: RimeAuthService, private formBuilder: FormBuilder) {
+  constructor(
+    @Inject(RIME_AUTH_CONFIG) public rimeAuthConfig: RimeAuthConfig,
+    private rimeAuthService: RimeAuthService,
+    private formBuilder: FormBuilder
+  ) {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
   submit(): void {
-    if (this.form.invalid) {
+    if (this.form.invalid || this.rimeAuthConfig.disableRegister) {
       return;
     }
-    this.rimeAuthService.signUp(this.form.controls.email.value, this.form.controls.password.value);
+    const user = String(this.form.controls.email.value);
+    const password = String(this.form.controls.password.value);
+    void this.rimeAuthService.signUp(user, password);
   }
 
   googleAuth(): void {
-    this.rimeAuthService.googleAuth();
+    void this.rimeAuthService.googleAuth();
   }
 }
