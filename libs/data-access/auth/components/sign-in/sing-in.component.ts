@@ -1,5 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {RimeAuthConfig} from '../../auth.module';
+import {RIME_AUTH_CONFIG} from '../../models/auth.token';
 import {RimeAuthService} from '../../services/auth.service';
 
 @Component({
@@ -9,7 +11,11 @@ import {RimeAuthService} from '../../services/auth.service';
 export class RimeSignInComponent {
   form: FormGroup;
   hide: boolean;
-  constructor(private rimeAuthService: RimeAuthService, private formBuilder: FormBuilder) {
+  constructor(
+    @Inject(RIME_AUTH_CONFIG) public rimeAuthConfig: RimeAuthConfig,
+    private rimeAuthService: RimeAuthService,
+    private formBuilder: FormBuilder
+  ) {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],

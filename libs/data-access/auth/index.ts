@@ -2,6 +2,7 @@ export * from './auth.module';
 export * from './services/auth.service';
 export * from './guards/auth.guard';
 export * from './models/auth.model';
+export * from './models/auth.token';
 export * from './components/forgot-password/forgot-password.component';
 export * from './components/sign-in/sing-in.component';
 export * from './components/sign-up/sing-up.component';

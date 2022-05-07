@@ -54,11 +54,12 @@
       </div>
 
       <div class="flex items-center justify-between">
-        <div class="flex items-center">
+        <div class="flex items-center" *ngIf="!rimeAuthConfig.disableRegister">
           <span>
             {{ 'rimeAuth.doNotHaveAnAccount' | transloco }}
 
             <a
+              mat-button
               routerLink="/register-user"
               class="font-medium text-indigo-600 hover:text-indigo-500"
             >
@@ -69,6 +70,7 @@
 
         <div class="text-sm">
           <a
+            mat-button
             routerLink="/forgot-password"
             class="font-medium text-indigo-600 hover:text-indigo-500"
           >
