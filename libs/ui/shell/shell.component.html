@@ -11,7 +11,7 @@
       [mode]="sidenavMode"
       [opened]="sidenavOpened"
       (keydown.escape)="sidenavOpened = false"
-      class="md:block m-1.5 rounded-xl"
+      class="md:block m-1.5 rounded-2xl"
       [attr.color]="'primary'"
       color="primary"
       [ngClass]="{
@@ -30,6 +30,7 @@
             <ng-container *ngIf="!route.children && route.path">
               <mat-list-item
                 [routerLink]="route.path"
+                (click)="onClickItem()"
                 [matTooltip]="!fixedSidenavOpened && route.text ? route.text : ''"
                 matTooltipPosition="right"
               >
@@ -53,6 +54,7 @@
               <ng-container *ngFor="let childRoute of route.children">
                 <mat-list-item
                   [routerLink]="childRoute.path"
+                  (click)="onClickItem()"
                   *ngIf="route.opened"
                   [matTooltip]="!fixedSidenavOpened ? '' + route.text : ''"
                   matTooltipPosition="right"
@@ -113,7 +115,12 @@
                 <!-- *ngIf="hasSidenav" -->
                 <div *ngIf="topRoutes && topRoutes.length > 0">
                   <div class="mr-4 flex items-baseline space-x-4">
-                    <button mat-button *ngFor="let route of topRoutes" [routerLink]="route.path">
+                    <button
+                      mat-button
+                      *ngFor="let route of topRoutes"
+                      [routerLink]="route.path"
+                      (click)="onClickItem()"
+                    >
                       <mat-icon *ngIf="route.icon" class="mr-4">{{ route.icon }}</mat-icon>
                       <span *ngIf="route.text">{{ route.text }}</span>
                     </button>
