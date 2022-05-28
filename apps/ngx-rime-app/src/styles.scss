@@ -1,32 +1,24 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
+@use 'sass:map';
 @include mat.core();
+@import '../../../libs/theming/styles/styles.scss';
 
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-$mat-ngx-rime: (
+$mat-rime: (
+  0: #ffffff,
   50: #f0f0f0,
   100: #f0f0f0,
   // lighter
   200: #f0f0f0,
-  300: #537aac,
-  400: #537aac,
-  500: #537aac,
-  600: #537aac,
+  300: #607d8b,
+  400: #607d8b,
+  500: #607d8b,
+  600: #607d8b,
   700: #375984,
   800: #375984,
   900: #843737,
-  A100: #537aac,
-  A200: #537aac,
-  A400: #537aac,
+  A100: #607d8b,
+  A200: #607d8b,
+  A400: #ffffff,
   A700: #375984,
   contrast: (
     50: white,
@@ -41,26 +33,27 @@ $mat-ngx-rime: (
     900: white,
     A100: white,
     A200: white,
-    A400: white,
+    A400: #375984,
     A700: white,
   ),
 );
-$mat-ngx-rime-dark: (
+$mat-rime-dark: (
+  0: #ffffff,
   50: #f0f0f0,
   100: #f0f0f0,
   // lighter
   200: #f0f0f0,
-  300: #375984,
+  300: #6c8ab1,
   400: #375984,
   500: #375984,
   600: #375984,
-  700: #537aac,
-  800: #537aac,
+  700: #607d8b,
+  800: #607d8b,
   900: #ad4848,
-  A100: #537aac,
-  A200: #537aac,
-  A400: #537aac,
-  A700: #375984,
+  A100: #607d8b,
+  A200: #607d8b,
+  A400: #303030,
+  A700: #18273a,
   contrast: (
     50: white,
     100: white,
@@ -79,71 +72,31 @@ $mat-ngx-rime-dark: (
   ),
 );
 
-$ngx-rime-default-primary: mat.define-palette($mat-ngx-rime, A700);
-$ngx-rime-default-accent: mat.define-palette($mat-ngx-rime, A400);
-$ngx-rime-default-warn: mat.define-palette($mat-ngx-rime, 900);
+$rime-default-primary: mat.define-palette($mat-rime, A700);
+$rime-default-accent: mat.define-palette($mat-rime, A400);
+$rime-default-warn: mat.define-palette($mat-rime, 900);
 
-$ngx-rime-dark-primary: mat.define-palette($mat-ngx-rime-dark, 500);
-$ngx-rime-dark-accent: mat.define-palette($mat-ngx-rime-dark, 100);
-$ngx-rime-dark-warn: mat.define-palette($mat-ngx-rime-dark, 900);
+$rime-dark-primary: mat.define-palette($mat-rime-dark, 300);
+$rime-dark-accent: mat.define-palette($mat-rime-dark, A400);
+$rime-dark-warn: mat.define-palette($mat-rime-dark, 900);
 
-$ngx-rime-default-theme: mat.define-light-theme(
+$rime-default-theme: mat.define-light-theme(
   (
     color: (
-      primary: $ngx-rime-default-primary,
-      accent: $ngx-rime-default-accent,
-      warn: $ngx-rime-default-warn,
+      primary: $rime-default-primary,
+      accent: $rime-default-accent,
+      warn: $rime-default-warn,
+    ),
+  )
+);
+$rime-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $rime-dark-primary,
+      accent: $rime-dark-accent,
+      warn: $rime-dark-warn,
     ),
   )
 );
 
-$ngx-rime-dark-theme: mat.define-dark-theme(
-  (
-    color: (
-      primary: $ngx-rime-dark-primary,
-      accent: $ngx-rime-dark-accent,
-      warn: $ngx-rime-dark-warn,
-    ),
-  )
-);
-
-// @include mat.all-component-themes($ngx-rime-default-theme);
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$ngx-rime-app-primary: mat.define-palette(mat.$indigo-palette);
-$ngx-rime-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$ngx-rime-app-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$ngx-rime-app-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $ngx-rime-app-primary,
-      accent: $ngx-rime-app-accent,
-      warn: $ngx-rime-app-warn,
-    ),
-  )
-);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($ngx-rime-default-theme);
-
-.dark {
-  @include mat.core-color($ngx-rime-dark-theme);
-}
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
+@include rime-theming($rime-default-theme, $rime-dark-theme);

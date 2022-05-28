@@ -42,6 +42,7 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "port": 4400,
+            "projectBuildConfig": "data-access:build-storybook",
             "config": {
               "configFolder": "libs/data-access/.storybook"
             }
@@ -115,6 +116,46 @@
         }
       },
       "tags": ["feature"]
+    },
+    "theming": {
+      "projectType": "library",
+      "root": "libs/theming",
+      "sourceRoot": "libs/theming",
+      "prefix": "rime",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/theming"],
+          "options": {
+            "project": "libs/theming/ng-package.json",
+            "tsConfig": "libs/theming/tsconfig.lib.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/theming/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/theming/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/theming"],
+          "options": {
+            "jestConfig": "libs/theming/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/theming/**/*.ts", "libs/theming/**/*.html"]
+          }
+        }
+      },
+      "tags": ["theming"]
     },
     "ngx-rime-app": {
       "projectType": "application",

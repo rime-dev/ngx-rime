@@ -1,0 +1,18 @@
+{
+  "name": "@ngx-rime/theming",
+  "version": "0.1.2",
+  "description": "Smart UI for Business Use Cases",
+  "keywords": [
+    "Angular"
+  ],
+  "homepage": "https://github.com/rime-dev/ngx-rime",
+  "author": "Carlos Bayarri Cebrecos",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rime-dev/ngx-rime.git"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

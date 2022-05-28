@@ -1,146 +1,9 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
 @include mat.core();
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-@import '@angular/material/theming';
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import '../../../libs/theming/styles/styles.scss';
 
-@mixin _palette-styles($palette) {
-  background: mat.get-color-from-palette($palette, default);
-  color: mat.get-color-from-palette($palette, default-contrast);
-}
-@mixin sidenav-component-theme($theme) {
-  $primary: map.get($theme, primary);
-  $accent: map.get($theme, accent);
-  $warn: map.get($theme, warn);
-  $foreground: map.get($theme, foreground);
-  $background: map.get($theme, background);
-
-  .mat-drawer-container,
-  .mat-sidenav-container {
-    background: mat.get-color-from-palette($background, background);
-    color: mat.get-color-from-palette($foreground, text);
-    &[color='primary'] {
-      @include _palette-styles($primary);
-    }
-    &[color='accent'] {
-      @include _palette-styles($accent);
-    }
-    &[color='warn'] {
-      @include _palette-styles($warn);
-    }
-  }
-  .mat-sidenav {
-    background: mat.get-color-from-palette($background, background);
-    color: mat.get-color-from-palette($foreground, text);
-    &[color='primary'] {
-      @include _palette-styles($primary);
-    }
-    &[color='accent'] {
-      @include _palette-styles($accent);
-    }
-    &[color='warn'] {
-      @include _palette-styles($warn);
-    }
-  }
-}
-@mixin card-component-theme($theme) {
-  $primary: map.get($theme, primary);
-  $accent: map.get($theme, accent);
-  $warn: map.get($theme, warn);
-  $foreground: map.get($theme, foreground);
-  $background: map.get($theme, background);
-  .mat-card {
-    background: mat.get-color-from-palette($background, background);
-    color: mat.get-color-from-palette($foreground, text);
-    border-radius: 0.75rem !important;
-    &[color='primary'] {
-      @include _palette-styles($primary);
-    }
-    &[color='accent'] {
-      @include _palette-styles($accent);
-    }
-    &[color='warn'] {
-      @include _palette-styles($warn);
-    }
-  }
-}
-@mixin overlay-component-theme($theme) {
-  $primary: map.get($theme, primary);
-  $accent: map.get($theme, accent);
-  $warn: map.get($theme, warn);
-  $foreground: map.get($theme, foreground);
-  $background: map.get($theme, background);
-  .cdk-overlay-pane {
-    .overlay-background {
-      background: mat.get-color-from-palette($background, background);
-    }
-    border-radius: 14px;
-    &.mat-tooltip-panel {
-      background: transparent;
-    }
-    .mat-dialog-container {
-      border-radius: 12px;
-
-      @media screen and (max-width: 500px) {
-        .mat-dialog-content {
-          // max-height: 80vh;
-          height: 80vh;
-        }
-      }
-    }
-    color: mat.get-color-from-palette($foreground, text);
-    &[color='primary'] {
-      @include _palette-styles($primary);
-    }
-    &[color='accent'] {
-      @include _palette-styles($accent);
-    }
-    &[color='warn'] {
-      @include _palette-styles($warn);
-    }
-  }
-}
-// This fixes https://github.com//issues/4609
-.mat-dialog-override {
-  height: 0px;
-  mat-dialog-container {
-    > :first-child {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-    mat-dialog-content,
-    div[mat-dialog-content] {
-      flex-grow: 1;
-      max-height: unset;
-    }
-  }
-}
-@mixin elares-search-input-component-theme($theme) {
-  $primary: map.get($theme, primary);
-  $accent: map.get($theme, accent);
-  $warn: map.get($theme, warn);
-  $foreground: map.get($theme, foreground);
-  $background: map.get($theme, background);
-  .elares-search-input {
-    background: mat.get-color-from-palette($background, background);
-    color: mat.get-color-from-palette($foreground, text);
-    &[color='primary'] {
-      @include _palette-styles($primary);
-    }
-    &[color='accent'] {
-      @include _palette-styles($accent);
-    }
-    &[color='warn'] {
-      @include _palette-styles($warn);
-    }
-  }
-}
-
-$mat-rng: (
+$mat-rime: (
   0: #ffffff,
   50: #f0f0f0,
   100: #f0f0f0,
@@ -174,7 +37,7 @@ $mat-rng: (
     A700: white,
   ),
 );
-$mat-elares-dark: (
+$mat-rime-dark: (
   0: #ffffff,
   50: #f0f0f0,
   100: #f0f0f0,
@@ -209,108 +72,31 @@ $mat-elares-dark: (
   ),
 );
 
-$elares-default-primary: mat.define-palette($mat-rng, A700);
-$elares-default-accent: mat.define-palette($mat-rng, A400);
-$elares-default-warn: mat.define-palette($mat-rng, 900);
+$rime-default-primary: mat.define-palette($mat-rime, A700);
+$rime-default-accent: mat.define-palette($mat-rime, A400);
+$rime-default-warn: mat.define-palette($mat-rime, 900);
 
-$elares-dark-primary: mat.define-palette($mat-elares-dark, 300);
-$elares-dark-accent: mat.define-palette($mat-elares-dark, A400);
-$elares-dark-warn: mat.define-palette($mat-elares-dark, 900);
+$rime-dark-primary: mat.define-palette($mat-rime-dark, 300);
+$rime-dark-accent: mat.define-palette($mat-rime-dark, A400);
+$rime-dark-warn: mat.define-palette($mat-rime-dark, 900);
 
-$elares-default-theme: mat.define-light-theme(
+$rime-default-theme: mat.define-light-theme(
   (
     color: (
-      primary: $elares-default-primary,
-      accent: $elares-default-accent,
-      warn: $elares-default-warn,
+      primary: $rime-default-primary,
+      accent: $rime-default-accent,
+      warn: $rime-default-warn,
     ),
   )
 );
-$elares-dark-theme: mat.define-dark-theme(
+$rime-dark-theme: mat.define-dark-theme(
   (
     color: (
-      primary: $elares-dark-primary,
-      accent: $elares-dark-accent,
-      warn: $elares-dark-warn,
+      primary: $rime-dark-primary,
+      accent: $rime-dark-accent,
+      warn: $rime-dark-warn,
     ),
   )
 );
-@include mat.all-component-themes($elares-default-theme);
-@include sidenav-component-theme($elares-default-theme);
-@include overlay-component-theme($elares-default-theme);
-@include elares-search-input-component-theme($elares-default-theme);
-@include card-component-theme($elares-default-theme);
-.dark {
-  @include mat.core-color($elares-dark-theme);
-  @include mat.all-component-colors($elares-dark-theme);
-  @include sidenav-component-theme($elares-dark-theme);
-  @include overlay-component-theme($elares-dark-theme);
-  @include elares-search-input-component-theme($elares-dark-theme);
-  @include card-component-theme($elares-dark-theme);
-}
 
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
-
-mat-card.mat-card {
-  border-radius: 8px;
-  min-width: 16rem;
-}
-mat-chip.mat-chip {
-  user-select: none;
-}
-mat-chip.mat-chip.mat-chip-selected {
-  cursor: pointer;
-}
-
-$color-config: mat.get-color-config($elares-default-theme);
-.bg-primary {
-  background-color: mat.get-color-from-palette(map.get($color-config, 'primary'), A700);
-  // color: white;
-}
-
-.bg-accent {
-  background: mat.get-color-from-palette(map.get($color-config, 'accent'), A400);
-  // color: white;
-}
-.color-primary {
-  color: mat.get-color-from-palette(map.get($color-config, 'primary'), A700);
-}
-
-.color-accent {
-  color: mat.get-color-from-palette(map.get($color-config, 'accent'), A400);
-}
-.stroke-primary {
-  stroke: mat.get-color-from-palette(map.get($color-config, 'primary'), A700);
-}
-.stroke-accent {
-  stroke: mat.get-color-from-palette(map.get($color-config, 'accent'), A400);
-}
-
-.project-state-active {
-  color: #37843a !important;
-  border-color: #37843a !important;
-}
-.project-state-inactive {
-  color: #828282 !important;
-  border-color: #828282 !important;
-}
-.project-state-finished {
-  color: #375984 !important;
-  border-color: #375984 !important;
-}
-
-::ng-deep {
-  @media screen and (max-width: 500px) {
-    div.mat-list-item-content,
-    div.mat-list-text {
-      padding: 0 !important;
-    }
-  }
-}
+@include rime-theming($rime-default-theme, $rime-dark-theme);

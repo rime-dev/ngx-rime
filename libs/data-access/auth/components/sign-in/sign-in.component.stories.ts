@@ -7,7 +7,7 @@ import {RimeAuthTestingService} from '../../services/auth.mock.service';
 import {RimeAuthService} from '../../services/auth.service';
 import {RimeSignInComponent} from './sing-in.component';
 import {TranslocoModule} from '@ngneat/transloco';
-import {TranslocoRootModule} from './transloco-root.module';
+import {TranslocoRootModule} from '../../../../common/transloco-root.module';
 
 const authConfig: RimeAuthConfig = {
   disableRegister: true,
