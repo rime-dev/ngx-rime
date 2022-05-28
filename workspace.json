@@ -38,14 +38,14 @@
           }
         },
         "storybook": {
-          "executor": "@nrwl/storybook:storybook",
+          "builder": "@nrwl/storybook:storybook",
           "options": {
             "uiFramework": "@storybook/angular",
             "port": 4400,
-            "projectBuildConfig": "data-access:build-storybook",
             "config": {
               "configFolder": "libs/data-access/.storybook"
-            }
+            },
+            "projectBuildConfig": "data-access:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -54,20 +54,15 @@
           }
         },
         "build-storybook": {
-          "executor": "@nrwl/storybook:build",
+          "builder": "@nrwl/storybook:build",
           "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/data-access",
-            "styles": [
-              "node_modules/tailwindcss/base.css",
-              "node_modules/tailwindcss/components.css",
-              "node_modules/tailwindcss/utilities.css",
-              "libs/data-access/.storybook/styles.scss"
-            ],
             "config": {
               "configFolder": "libs/data-access/.storybook"
-            }
+            },
+            "projectBuildConfig": "data-access:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -116,46 +111,6 @@
         }
       },
       "tags": ["feature"]
-    },
-    "theming": {
-      "projectType": "library",
-      "root": "libs/theming",
-      "sourceRoot": "libs/theming",
-      "prefix": "rime",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "outputs": ["dist/libs/theming"],
-          "options": {
-            "project": "libs/theming/ng-package.json",
-            "tsConfig": "libs/theming/tsconfig.lib.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/theming/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "libs/theming/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/theming"],
-          "options": {
-            "jestConfig": "libs/theming/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/theming/**/*.ts", "libs/theming/**/*.html"]
-          }
-        }
-      },
-      "tags": ["theming"]
     },
     "ngx-rime-app": {
       "projectType": "application",
@@ -426,6 +381,46 @@
         }
       },
       "tags": []
+    },
+    "theming": {
+      "projectType": "library",
+      "root": "libs/theming",
+      "sourceRoot": "libs/theming",
+      "prefix": "rime",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/theming"],
+          "options": {
+            "project": "libs/theming/ng-package.json",
+            "tsConfig": "libs/theming/tsconfig.lib.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/theming/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/theming/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/theming"],
+          "options": {
+            "jestConfig": "libs/theming/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/theming/**/*.ts", "libs/theming/**/*.html"]
+          }
+        }
+      },
+      "tags": ["theming"]
     },
     "ui": {
       "projectType": "library",
