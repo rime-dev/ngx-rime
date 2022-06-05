@@ -1,0 +1,102 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+@include mat.core();
+@import '../../../libs/theming/styles/styles.scss';
+
+$mat-rime: (
+  0: #ffffff,
+  50: #f0f0f0,
+  100: #f0f0f0,
+  // lighter
+  200: #f0f0f0,
+  300: #607d8b,
+  400: #607d8b,
+  500: #607d8b,
+  600: #607d8b,
+  700: #375984,
+  800: #375984,
+  900: #843737,
+  A100: #607d8b,
+  A200: #607d8b,
+  A400: #ffffff,
+  A700: #375984,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: #375984,
+    A700: white,
+  ),
+);
+$mat-rime-dark: (
+  0: #ffffff,
+  50: #f0f0f0,
+  100: #f0f0f0,
+  // lighter
+  200: #f0f0f0,
+  300: #6c8ab1,
+  400: #375984,
+  500: #375984,
+  600: #375984,
+  700: #607d8b,
+  800: #607d8b,
+  900: #ad4848,
+  A100: #607d8b,
+  A200: #607d8b,
+  A400: #303030,
+  A700: #18273a,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  ),
+);
+
+$rime-default-primary: mat.define-palette($mat-rime, A700);
+$rime-default-accent: mat.define-palette($mat-rime, A400);
+$rime-default-warn: mat.define-palette($mat-rime, 900);
+
+$rime-dark-primary: mat.define-palette($mat-rime-dark, 300);
+$rime-dark-accent: mat.define-palette($mat-rime-dark, A400);
+$rime-dark-warn: mat.define-palette($mat-rime-dark, 900);
+
+$rime-default-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $rime-default-primary,
+      accent: $rime-default-accent,
+      warn: $rime-default-warn,
+    ),
+  )
+);
+$rime-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $rime-dark-primary,
+      accent: $rime-dark-accent,
+      warn: $rime-dark-warn,
+    ),
+  )
+);
+
+@include rime-theming($rime-default-theme, $rime-dark-theme);

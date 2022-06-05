@@ -56,6 +56,7 @@
     "run_story_for_ui": "nx run ui:storybook",
     "run_story_for_util": "nx run util:storybook",
     "generate_tailwind": "nx generate @ngneat/tailwind:nx-setup",
+    "generate_stotybook_config": "nx generate @nrwl/angular:storybook-configuration ui",
     "add_material": "ng add @angular/material",
     "generate_directive": "npx nx g directive lazy-load-image/lazy-load-image --project=util --export",
     "npm_only_pack_util": "cd dist/libs/util && npm pack",

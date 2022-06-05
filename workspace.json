@@ -62,7 +62,8 @@
             "config": {
               "configFolder": "libs/data-access/.storybook"
             },
-            "projectBuildConfig": "data-access:build-storybook"
+            "projectBuildConfig": "data-access:build-storybook",
+            "styles": ["libs/data-access/.storybook/styles.scss"]
           },
           "configurations": {
             "ci": {
@@ -483,7 +484,8 @@
             "config": {
               "configFolder": "libs/ui/.storybook"
             },
-            "projectBuildConfig": "ui:build-storybook"
+            "projectBuildConfig": "ui:build-storybook",
+            "styles": ["libs/ui/.storybook/styles.scss"]
           },
           "configurations": {
             "ci": {
@@ -555,7 +557,8 @@
             "config": {
               "configFolder": "libs/util/.storybook"
             },
-            "projectBuildConfig": "util:build-storybook"
+            "projectBuildConfig": "util:build-storybook",
+            "styles": ["libs/util/.storybook/styles.scss"]
           },
           "configurations": {
             "ci": {

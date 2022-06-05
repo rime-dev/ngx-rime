@@ -2,10 +2,11 @@
   display: block;
   .mat-drawer-container {
     height: 100vh;
+    width: 100%;
   }
   .mat-sidenav {
     width: 264px;
-
+    min-width: 264px;
     p.mat-line {
       font-size: 14px;
       line-height: 20px;
@@ -14,6 +15,7 @@
   }
   .fixed-sidenav-minimized {
     width: 64px;
+    min-width: 64px;
   }
   .mat-list-base .mat-list-item {
     color: inherit;
