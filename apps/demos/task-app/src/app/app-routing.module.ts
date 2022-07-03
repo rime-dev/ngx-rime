@@ -1,16 +1,16 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from '@ngx-rime/data-access/auth';
+import {RimeAuthGuard} from '@ngx-rime/data-access/auth';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'tasks',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {
-    path: 'tasks',
-    canActivate: [AuthGuard],
+    path: 'dashboard',
+    canActivate: [RimeAuthGuard],
     loadChildren: () => import('./modules/tasks/tasks.module').then((m) => m.TasksModule),
   },
 ];
