@@ -42,7 +42,7 @@
     "help": "nx help",
     "lint:all": "nx workspace-lint && nx run-many --projects=data-access,feature,ui,util --target=lint",
     "test:all": "nx run-many --projects=data-access,feature,ui,util  --target=test --browsers ChromeHeadless",
-    "build:all": "nx clear-cache && nx run-many --projects=data-access,feature,ui,util,theming  --target=build",
+    "build:all": "nx clear-cache && nx run-many --projects=data-access,feature,ui,util  --target=build",
     "check:ui": "nx lint ui && nx test ui --browsers ChromeHeadless && nx build ui",
     "check:util": "nx lint util && nx test util --browsers ChromeHeadless && nx build util",
     "check:feature": "nx lint feature && nx test feature --browsers ChromeHeadless && nx build feature",

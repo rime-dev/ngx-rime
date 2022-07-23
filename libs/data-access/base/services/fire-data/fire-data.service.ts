@@ -8,7 +8,7 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
 import {AngularFirestore, CollectionReference, FieldPath} from '@angular/fire/compat/firestore';
-import {Observable, of, throwError} from 'rxjs';
+import {from, Observable, of, throwError} from 'rxjs';
 import {catchError, delay, filter, map, switchMap, switchMapTo, tap, timeout} from 'rxjs/operators';
 import {ENTITY_CONFIG, ENTITY_NAME} from '../../constants/base.constant';
 import {
@@ -203,11 +203,15 @@ export class RimeFireDataService<T> {
    * @param collection The collection name
    */
   private getObservableFromSet(data: any, collection?: string) {
-    let action = null;
     if (collection) {
-      action = this.angularFirestore.collection(collection).add(data);
+      return from(this.angularFirestore.collection(collection).add(data)).pipe(
+        map((object) => {
+          const newData = {...data, uid: object.id};
+          return new RimeFireDataObject({id: object.id, data: () => newData});
+        })
+      );
     }
-    return of(); // Empty observable. It is not possible to set the new Doc obs.
+    return of();
   }
 
   /**
