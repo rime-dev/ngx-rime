@@ -4,9 +4,10 @@
   *ngIf="!userInfo"
   class="bg-contain bg-center mat-elevation-z0"
   color="primary"
+  [routerLink]="['/sign-in']"
 >
-  <span class="sr-only">Open user menu</span>
-  <mat-icon>person</mat-icon>
+  <span class="sr-only">Go to login</span>
+  <mat-icon>login</mat-icon>
 </button>
 <button
   type="button"

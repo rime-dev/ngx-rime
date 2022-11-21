@@ -83,7 +83,7 @@
     </mat-sidenav>
     <mat-sidenav-content>
       <div class="flex flex-col h-full w-full pl-2">
-        <div class="md:p-1.5">
+        <div class="p-1 md:p-1.5">
           <mat-toolbar
             #rimeToolbar
             class="w-full z-50 duration-150 rounded-2xl"
@@ -91,8 +91,8 @@
           >
             <!-- [class.mat-elevation-z2]="scrolled?.isScrolled" -->
             <div class="mx-auto px-2 sm:px-6 lg:px-8 w-full">
-              <div class="flex items-center justify-between h-16">
-                <div class="flex items-center w-full">
+              <div class="flex items-center justify-between h-16 w-full">
+                <div class="flex items-center overflow-hidden w-full whitespace-pre-wrap">
                   <div
                     *ngIf="sideRoutes && sideRoutes.length > 0"
                     class="flex-shrink-0 block md:hidden"
@@ -109,8 +109,8 @@
                   <div *ngIf="logo && !hasSidenav" class="flex-shrink-0 mr-4">
                     <img class="h-8 w-8" [src]="logo.src" [alt]="logo.alt" />
                   </div>
-                  <div *ngIf="appName && !hasSidenav" class="flex-shrink-0 mr-4">
-                    <span class="h-8 w-8 text-xl text">{{ appName }}</span>
+                  <div *ngIf="appName && !hasSidenav" class="flex-shrink-0 mr-4 flex pr-12">
+                    <span class="truncate md:text-xl text-base">{{ appName }}</span>
                   </div>
                   <ng-content select="[topBarItem]"></ng-content>
                   <!-- *ngIf="hasSidenav" -->

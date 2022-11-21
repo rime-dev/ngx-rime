@@ -9,16 +9,16 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
 import {AngularFirestore, CollectionReference, FieldPath} from '@angular/fire/compat/firestore';
 import {from, Observable, of, throwError} from 'rxjs';
-import {catchError, delay, filter, map, switchMap, switchMapTo, tap, timeout} from 'rxjs/operators';
+import {catchError, delay, map, switchMap, timeout} from 'rxjs/operators';
 import {ENTITY_CONFIG, ENTITY_NAME} from '../../constants/base.constant';
 import {
   ConditionalQueryFirestore,
-  RimeEntityState,
   FirebaseData,
   FirebaseMethods,
+  OrderByDirection,
+  RimeEntityState,
   RimeFireDataObject,
   RimeFireDataServiceError,
-  OrderByDirection,
   RimeStateEntityConfig,
 } from '../../models/base.model';
 
@@ -234,12 +234,8 @@ export class RimeFireDataService<T> {
     const conditions: any = {
       limit: (limit: number) => ref.limit(limit),
       limitToLast: (limit: number) => ref.limitToLast(limit),
-      where: (queries: ConditionalQueryFirestore[]) => {
-        queries.forEach((query: ConditionalQueryFirestore) => {
-          ref.where(query.fieldPath, query.opStr, query.value);
-        });
-        return ref;
-      },
+      where: (query: ConditionalQueryFirestore) =>
+        ref.where(query.fieldPath, query.opStr, query.value),
       orderBy: (fieldPath: string | FieldPath, directionStr?: OrderByDirection) =>
         ref.orderBy(fieldPath, directionStr),
       startAt: (uid: string) =>
@@ -254,9 +250,18 @@ export class RimeFireDataService<T> {
     for (const key in data) {
       if (Object.prototype.hasOwnProperty.call(data, key)) {
         const element = data[key];
-        ref = conditions[key](element);
+        if (key === 'where') {
+          for (const eachKey in element) {
+            if (Object.prototype.hasOwnProperty.call(element, eachKey)) {
+              ref = conditions[key](element[eachKey]);
+            }
+          }
+        } else {
+          ref = conditions[key](element);
+        }
       }
     }
+
     return ref;
   }
 
@@ -281,13 +286,23 @@ export class RimeFireDataService<T> {
         action = this.angularFirestore
           .collection(collection)
           .snapshotChanges()
-          .pipe(map((data0) => data0.map((object) => new RimeFireDataObject(object))));
+          .pipe(
+            catchError((error) => {
+              console.error(error);
+              return throwError(error);
+            }),
+            map((data0) => data0.map((object) => new RimeFireDataObject(object)))
+          );
       } else if (document && !data) {
         action = this.angularFirestore
           .collection(collection)
           .doc(document)
           .snapshotChanges()
           .pipe(
+            catchError((error) => {
+              console.error(error);
+              return throwError(error);
+            }),
             map((object) => {
               return new RimeFireDataObject(object);
             })
@@ -298,6 +313,10 @@ export class RimeFireDataService<T> {
         ref = this.getCollectionReferenceByConditions(ref, data);
         action = of(ref.get()).pipe(
           switchMap((promise) => promise),
+          catchError((error) => {
+            console.error(error);
+            return throwError(error);
+          }),
           map((objects) => objects.docs),
           map((data0) =>
             data0

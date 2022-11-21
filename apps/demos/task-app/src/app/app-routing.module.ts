@@ -5,13 +5,18 @@ import {RimeAuthGuard} from '@ngx-rime/data-access/auth';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'tasks',
     pathMatch: 'full',
   },
   {
-    path: 'dashboard',
+    path: 'tasks',
     canActivate: [RimeAuthGuard],
     loadChildren: () => import('./modules/tasks/tasks.module').then((m) => m.TasksModule),
+  },
+  {
+    path: 'events',
+    canActivate: [RimeAuthGuard],
+    loadChildren: () => import('./modules/events/events.module').then((m) => m.EventsModule),
   },
 ];
 

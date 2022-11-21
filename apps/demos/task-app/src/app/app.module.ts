@@ -9,6 +9,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
+import {RimeShellModule} from "@ngx-rime/ui/shell";
 
 const firebaseConfig = {
   options: environment.firebaseOptions,
@@ -27,6 +28,7 @@ const authConfig: RimeAuthConfig = {
     AppRoutingModule,
     RimeBaseModule.firebase(firebaseConfig),
     RimeAuthModule,
+    RimeShellModule
   ],
   providers: [
     {

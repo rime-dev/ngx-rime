@@ -6,16 +6,13 @@
 <main>
   <div class="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
     <div class="flex flex-row">
-      <p>Taks: {{ (tasks$ | async)?.length }}</p>
+      <p>Events: {{ (events$ | async)?.length }}</p>
       <div style="margin-left: auto">
-        <button mat-icon-button (click)="addTask()">
+        <button mat-icon-button (click)="addEvent()">
           <mat-icon *ngIf="!addMode">add</mat-icon>
           <mat-icon *ngIf="addMode">cancel</mat-icon>
         </button>
       </div>
-
-
-
     </div>
 
     <div class="flex flex-col mx-auto max-w-md" *ngIf="addMode">
@@ -43,23 +40,23 @@
         <button mat-raised-button type="submit" color="primary" class="relative w-full">Add</button>
       </form>
     </div>
-    <mat-list #tasks>
-      <ng-container *ngFor="let task of tasks$ | async">
-        <mat-list-item *ngIf="!editMode || selectedTask?.id !== task.id">
+    <mat-list>
+      <ng-container *ngFor="let event of events$ | async">
+        <mat-list-item *ngIf="!editMode || selectedEvent?.id !== event.id">
           <mat-icon mat-list-icon>folder</mat-icon>
           <div class="flex items-center w-full">
-            {{ task.data.title }}
+            {{ event.data.title }}
             <div style="margin-left: auto">
-              <button mat-icon-button (click)="editTask(task)">
+              <button mat-icon-button (click)="editEvent(event)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button (click)="removeTask(task)">
+              <button mat-icon-button (click)="removeEvent(event)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
           </div>
         </mat-list-item>
-        <mat-list-item *ngIf="editMode && selectedTask?.id === task.id">
+        <mat-list-item *ngIf="editMode && selectedEvent?.id === event.id">
           <mat-icon mat-list-icon>folder</mat-icon>
           <form [formGroup]="form" class="flex items-center w-full" (ngSubmit)="saveEdition()">
             <mat-form-field class="w-full" appearance="outline">
@@ -76,6 +73,17 @@
               <mat-error *ngIf="form.get('title')?.errors?.required"
                 >This field is required</mat-error
               >
+            </mat-form-field>
+            <mat-form-field class="w-full" appearance="outline">
+              <mat-label>description</mat-label>
+              <input
+                matInput
+                placeholder="Description"
+                name="description"
+                type="text"
+                formControlName="description"
+                autocomplete="description"
+              />
             </mat-form-field>
             <button mat-icon-button type="submit">
               <mat-icon>save</mat-icon>
