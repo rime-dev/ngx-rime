@@ -11,7 +11,7 @@
       [mode]="sidenavMode"
       [opened]="sidenavOpened"
       (keydown.escape)="sidenavOpened = false"
-      class="md:block"
+      class="md:block m-1.5 rounded-2xl"
       [attr.color]="'primary'"
       color="primary"
       [ngClass]="{
@@ -30,6 +30,7 @@
             <ng-container *ngIf="!route.children && route.path">
               <mat-list-item
                 [routerLink]="route.path"
+                (click)="onClickItem()"
                 [matTooltip]="!fixedSidenavOpened && route.text ? route.text : ''"
                 matTooltipPosition="right"
               >
@@ -53,6 +54,7 @@
               <ng-container *ngFor="let childRoute of route.children">
                 <mat-list-item
                   [routerLink]="childRoute.path"
+                  (click)="onClickItem()"
                   *ngIf="route.opened"
                   [matTooltip]="!fixedSidenavOpened ? '' + route.text : ''"
                   matTooltipPosition="right"
@@ -80,58 +82,66 @@
       </div>
     </mat-sidenav>
     <mat-sidenav-content>
-      <div class="flex flex-col h-full">
-        <mat-toolbar
-          #rimeToolbar
-          class="w-full z-50 duration-150"
-          [color]="toolbarColor ? toolbarColor : !hasSidenav ? 'primary' : 'accent'"
-          [class.mat-elevation-z2]="scrolled?.isScrolled"
-        >
-          <div class="mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div class="flex items-center justify-between h-16">
-              <div class="flex items-center w-full">
-                <div
-                  *ngIf="sideRoutes && sideRoutes.length > 0"
-                  class="flex-shrink-0 block md:hidden"
-                >
-                  <button
-                    mat-icon-button
-                    color="primary"
-                    class="dark:text-white"
-                    (click)="sidenavOpened = !sidenavOpened"
+      <div class="flex flex-col h-full w-full pl-2">
+        <div class="p-1 md:p-1.5">
+          <mat-toolbar
+            #rimeToolbar
+            class="w-full z-50 duration-150 rounded-2xl"
+            [color]="toolbarColor ? toolbarColor : !hasSidenav ? 'primary' : 'accent'"
+          >
+            <!-- [class.mat-elevation-z2]="scrolled?.isScrolled" -->
+            <div class="mx-auto px-2 sm:px-6 lg:px-8 w-full">
+              <div class="flex items-center justify-between h-16 w-full">
+                <div class="flex items-center overflow-hidden w-full whitespace-pre-wrap">
+                  <div
+                    *ngIf="sideRoutes && sideRoutes.length > 0"
+                    class="flex-shrink-0 block md:hidden"
                   >
-                    <mat-icon>menu</mat-icon>
-                  </button>
-                </div>
-                <div *ngIf="logo && !hasSidenav" class="flex-shrink-0 mr-4">
-                  <img class="h-8 w-8" [src]="logo.src" [alt]="logo.alt" />
-                </div>
-                <div *ngIf="appName && !hasSidenav" class="flex-shrink-0 mr-4">
-                  <span class="h-8 w-8 text-xl text">{{ appName }}</span>
-                </div>
-                <ng-content select="[topBarItem]"></ng-content>
-                <!-- *ngIf="hasSidenav" -->
-                <div *ngIf="topRoutes && topRoutes.length > 0">
-                  <div class="mr-4 flex items-baseline space-x-4">
-                    <button mat-button *ngFor="let route of topRoutes" [routerLink]="route.path">
-                      <mat-icon *ngIf="route.icon" class="mr-4">{{ route.icon }}</mat-icon>
-                      <span *ngIf="route.text">{{ route.text }}</span>
+                    <button
+                      mat-icon-button
+                      color="primary"
+                      class="dark:text-white"
+                      (click)="sidenavOpened = !sidenavOpened"
+                    >
+                      <mat-icon>menu</mat-icon>
                     </button>
                   </div>
+                  <div *ngIf="logo && !hasSidenav" class="flex-shrink-0 mr-4">
+                    <img class="h-8 w-8" [src]="logo.src" [alt]="logo.alt" />
+                  </div>
+                  <div *ngIf="appName && !hasSidenav" class="flex-shrink-0 mr-4 flex pr-12">
+                    <span class="truncate md:text-xl text-base">{{ appName }}</span>
+                  </div>
+                  <ng-content select="[topBarItem]"></ng-content>
+                  <!-- *ngIf="hasSidenav" -->
+                  <div *ngIf="topRoutes && topRoutes.length > 0">
+                    <div class="mr-4 flex items-baseline space-x-4">
+                      <button
+                        mat-button
+                        *ngFor="let route of topRoutes"
+                        [routerLink]="route.path"
+                        (click)="onClickItem()"
+                      >
+                        <mat-icon *ngIf="route.icon" class="mr-4">{{ route.icon }}</mat-icon>
+                        <span *ngIf="route.text">{{ route.text }}</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="block">
-                <div class="flex items-center">
-                  <div class="ml-3 relative">
-                    <div>
-                      <ng-content select="rime-user-account-popup"></ng-content>
+                <div class="block">
+                  <div class="flex items-center">
+                    <div class="ml-3 relative">
+                      <div>
+                        <ng-content select="rime-user-account-popup"></ng-content>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </mat-toolbar>
+          </mat-toolbar>
+        </div>
+
         <div class="relative w-full h-full overflow-auto" (scroll)="onScroll$.next($event)">
           <ng-content></ng-content>
         </div>

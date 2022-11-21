@@ -1,21 +1,22 @@
-import { BooleanInput } from '@angular/cdk/coercion';
+import {BooleanInput} from '@angular/cdk/coercion';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component, EventEmitter,
+  Component,
+  EventEmitter,
   HostListener,
   Input,
   NgZone,
   OnDestroy,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import { MatDrawerMode, MatSidenav } from '@angular/material/sidenav';
-import { MatToolbar } from '@angular/material/toolbar';
-import { Subject } from 'rxjs';
-import { debounceTime, takeUntil, tap } from 'rxjs/operators';
+import {MatDrawerMode, MatSidenav} from '@angular/material/sidenav';
+import {MatToolbar} from '@angular/material/toolbar';
+import {Subject} from 'rxjs';
+import {debounceTime, takeUntil, tap} from 'rxjs/operators';
 
 export interface RimeShellLogo {
   src: string;
@@ -198,7 +199,11 @@ export class RimeShellComponent implements OnInit, AfterContentInit, OnDestroy {
     this.scrolled = onScrollEvent;
     this.scrolledChange.emit(onScrollEvent);
   }
-
+  onClickItem() {
+    if (this.sidenavMode === 'over') {
+      this.sidenavOpened = false;
+    }
+  }
   updateSidenav(): void {
     setTimeout(() => {
       if (this.sidenav && this.sidenav._container) {

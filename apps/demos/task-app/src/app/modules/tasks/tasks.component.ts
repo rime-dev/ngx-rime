@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Update} from '@ngrx/entity';
-import {DataService} from '@ngx-rime/data-access/base';
+import {RimeDataService} from '@ngx-rime/data-access/base';
 import {RimeEntityState} from '@ngx-rime/data-access/base/models/base.model';
 import {Observable} from 'rxjs';
 
@@ -16,7 +15,7 @@ export class TasksComponent implements OnInit {
   public addMode = false;
   public editMode = false;
   public selectedTask!: RimeEntityState<any> | undefined;
-  constructor(private dataService: DataService, private formBuilder: FormBuilder) {
+  constructor(private dataService: RimeDataService, private formBuilder: FormBuilder) {
     this.tasks$ = this.dataService.select('Task').entities$;
     this.form = this.formBuilder.group({
       title: ['', [Validators.required]],

@@ -36,6 +36,40 @@
           "options": {
             "lintFilePatterns": ["libs/data-access/**/*.ts", "libs/data-access/**/*.html"]
           }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/data-access/.storybook"
+            },
+            "projectBuildConfig": "data-access:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/data-access",
+            "config": {
+              "configFolder": "libs/data-access/.storybook"
+            },
+            "projectBuildConfig": "data-access:build-storybook",
+            "styles": ["libs/data-access/.storybook/styles.scss"]
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
         }
       },
       "tags": []
@@ -349,6 +383,46 @@
       },
       "tags": []
     },
+    "theming": {
+      "projectType": "library",
+      "root": "libs/theming",
+      "sourceRoot": "libs/theming",
+      "prefix": "rime",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/theming"],
+          "options": {
+            "project": "libs/theming/ng-package.json",
+            "tsConfig": "libs/theming/tsconfig.lib.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/theming/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/theming/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/theming"],
+          "options": {
+            "jestConfig": "libs/theming/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/theming/**/*.ts", "libs/theming/**/*.html"]
+          }
+        }
+      },
+      "tags": ["theming"]
+    },
     "ui": {
       "projectType": "library",
       "root": "libs/ui",
@@ -410,7 +484,8 @@
             "config": {
               "configFolder": "libs/ui/.storybook"
             },
-            "projectBuildConfig": "ui:build-storybook"
+            "projectBuildConfig": "ui:build-storybook",
+            "styles": ["libs/ui/.storybook/styles.scss"]
           },
           "configurations": {
             "ci": {
@@ -482,7 +557,8 @@
             "config": {
               "configFolder": "libs/util/.storybook"
             },
-            "projectBuildConfig": "util:build-storybook"
+            "projectBuildConfig": "util:build-storybook",
+            "styles": ["libs/util/.storybook/styles.scss"]
           },
           "configurations": {
             "ci": {

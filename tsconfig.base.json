@@ -19,6 +19,7 @@
       "@ngx-rime/data-access/*": ["libs/data-access/*"],
       "@ngx-rime/feature": ["libs/feature/index.ts"],
       "@ngx-rime/feature/*": ["libs/feature/*"],
+      "@ngx-rime/theming": ["libs/theming/styles/styles.scss"],
       "@ngx-rime/ui": ["libs/ui/index.ts"],
       "@ngx-rime/ui/*": ["libs/ui/*"],
       "@ngx-rime/util": ["libs/util/index.ts"],

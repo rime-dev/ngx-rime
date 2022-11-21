@@ -1,17 +1,24 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {AuthModule} from '@ngx-rime/data-access/auth';
-import {BaseModule} from '@ngx-rime/data-access/base';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RimeAuthConfig, RimeAuthModule, RIME_AUTH_CONFIG} from '@ngx-rime/data-access/auth';
+import {RimeBaseModule} from '@ngx-rime/data-access/base';
 import {environment} from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
+import {RimeShellModule} from "@ngx-rime/ui/shell";
 
 const firebaseConfig = {
   options: environment.firebaseOptions,
   entityConfig: environment.firebaseEntityConfig,
 };
+const authConfig: RimeAuthConfig = {
+  disableRegister: true,
+};
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -19,10 +26,27 @@ const firebaseConfig = {
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AuthModule,
-    BaseModule.firebase(firebaseConfig),
+    RimeBaseModule.firebase(firebaseConfig),
+    RimeAuthModule,
+    RimeShellModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: {
+        minWidth: window.screen.availWidth > 640 ? '40vw' : '95vw',
+        minHeight: window.screen.availWidth > 640 ? '40vh' : '95vh',
+        width: window.screen.availWidth > 640 ? '40vw' : '95vw',
+        height: window.screen.availWidth > 640 ? '40vh' : '95vh',
+        hasBackdrop: true,
+        panelClass: 'mat-dialog-override',
+      },
+    },
+    {
+      provide: RIME_AUTH_CONFIG,
+      useValue: authConfig,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
