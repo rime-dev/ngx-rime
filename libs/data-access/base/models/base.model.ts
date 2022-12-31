@@ -127,5 +127,5 @@ export const filterOperator = {
 
 export const arrayFilter = (array: any[], query: ConditionalQueryFirestore) =>
   array.filter((doc: any) =>
-    filterOperator[query.opStr](doc.data[query?.fieldPath as string], query?.value)
+    filterOperator[query.opStr](doc.data?.[query?.fieldPath as string], query?.value)
   );
