@@ -59,8 +59,6 @@
                   [matTooltip]="!fixedSidenavOpened ? '' + route.text : ''"
                   matTooltipPosition="right"
                 >
-                  <!--                   [ngStyle]="{'paddingLeft': fixedSidenavOpened ? '48px' : '0px'}"
- -->
                   <mat-icon matListIcon>{{ childRoute.icon }}</mat-icon>
                   <p matLine>{{ childRoute.text }}</p>
                 </mat-list-item>
@@ -73,7 +71,6 @@
         <mat-action-list *ngIf="!isMobile" class="w-full p-0">
           <mat-divider></mat-divider>
           <mat-list-item mat-button (click)="toggleFixedSidenav()">
-            <span class="w-full"></span>
             <mat-icon>{{
               fixedSidenavOpened ? 'keyboard_arrow_left' : 'keyboard_arrow_right'
             }}</mat-icon>
