@@ -91,7 +91,11 @@ export class RimeFireDataService<T> {
     if (uid == null) {
       err = new Error(`No "${this.entityName}" key to delete`);
     }
-    return this.execute('delete', uid, err).pipe(map((result) => uid));
+    return this.execute('delete', uid, err).pipe(
+      map((result) => {
+        return {...result};
+      })
+    );
   }
 
   /**
@@ -159,7 +163,13 @@ export class RimeFireDataService<T> {
       id === null
         ? new Error(`No "${this.entityName}" update data or id`)
         : changesData || changesUpdate;
-    return this.execute('update', id, updateOrError);
+    console.log('UPDATE 0');
+    return this.execute('update', id, updateOrError).pipe(
+      map((result) => {
+        console.log('UPDATE 1');
+        return result;
+      })
+    );
   }
 
   /**
