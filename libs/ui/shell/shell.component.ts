@@ -21,6 +21,7 @@ import {debounceTime, takeUntil, tap} from 'rxjs/operators';
 export interface RimeShellLogo {
   src: string;
   alt?: string;
+  route?: string;
 }
 export type RimeToolbarColor = 'primary' | 'accent';
 export interface RimeRoutes {
