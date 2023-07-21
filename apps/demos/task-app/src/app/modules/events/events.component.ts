@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {RimeDataService} from '@ngx-rime/data-access/base';
+import {dataFilter, RimeDataService} from '@ngx-rime/data-access/base';
 import {
   ConditionalQueryFirestore,
   RimeEntityState,
@@ -19,7 +19,20 @@ export class EventsComponent implements OnInit {
   public editMode = false;
   public selectedEvent!: RimeEntityState<any> | undefined;
   constructor(private dataService: RimeDataService, private formBuilder: FormBuilder) {
-    this.events$ = this.dataService.select('Event').entities$;
+    this.events$ = this.dataService.select('Event').entities$.pipe(
+      dataFilter([
+        {
+          fieldPath: 'type',
+          opStr: '==',
+          value: '3',
+        },
+        {
+          fieldPath: 'ddd',
+          opStr: '!=',
+          value: '',
+        },
+      ])
+    );
     this.form = this.formBuilder.group({
       title: ['', [Validators.required]],
       description: ['', []],
@@ -33,7 +46,7 @@ export class EventsComponent implements OnInit {
         value: '3',
       },
       {
-        fieldPath: 'description',
+        fieldPath: 'title',
         opStr: '!=',
         value: '',
       },
@@ -72,6 +85,6 @@ export class EventsComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    this.dataService.select('Event').add(this.form.getRawValue());
+    this.dataService.select('Event').add({...this.form.getRawValue(), type: '3'});
   }
 }

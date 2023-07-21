@@ -1,5 +1,5 @@
-<mat-card
-  class="min-h-full rounded-none relative flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-neutral-50 dark:bg-neutral-800"
+<div
+  class="min-h-full rounded-none relative flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
 >
   <button mat-icon-button class="absolute top-0 left-0" routerLink="/">
     <mat-icon>arrow_back</mat-icon>
@@ -11,7 +11,7 @@
         src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
         alt="Logo"
       /> -->
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-300">
         {{ 'rimeAuth.signInToYourAccount' | transloco }}
       </h2>
     </div>
@@ -64,7 +64,7 @@
             <a
               mat-button
               routerLink="/register-user"
-              class="font-medium text-indigo-600 hover:text-indigo-500"
+              class="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500"
             >
               {{ 'rimeAuth.signUp' | transloco }}
             </a>
@@ -75,7 +75,7 @@
           <a
             mat-button
             routerLink="/forgot-password"
-            class="font-medium text-indigo-600 hover:text-indigo-500"
+            class="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500"
           >
             {{ 'rimeAuth.forgotPassword' | transloco }}
           </a>
@@ -114,4 +114,4 @@
       </div> -->
     </form>
   </mat-card>
-</mat-card>
+</div>
