@@ -1,6 +1,6 @@
 {
   "name": "ngx-rime",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Angular architecture utilities",
   "keywords": [
     "Angular"
@@ -63,7 +63,9 @@
     "npm_only_pack_ui": "cd dist/libs/ui && npm pack",
     "npm_only_pack_feature": "cd dist/libs/feature && npm pack",
     "npm_only_pack_data_access": "cd dist/libs/data-access && npm pack",
+    "npm_only_build_pack_data_access": "nx build data-access && cd dist/libs/data-access && npm version 0.2.1 && npm pack",
     "npm_only_pack_libs": "npm run npm_only_pack_util && npm run npm_only_pack_ui && npm run npm_only_pack_feature && npm run npm_only_pack_data_access",
+    "build&pack": "npm run build:all && npm run npm_only_pack_libs",
     "npm_publish_util": "cd dist/libs/util && npm version 0.1.2 && npm pack && npm publish",
     "npm_publish_ui": "cd dist/libs/ui && npm version 0.1.2 && npm pack && npm publish",
     "npm_publish_feature": "cd dist/libs/feature && npm version 0.1.2 && npm pack && npm publish",

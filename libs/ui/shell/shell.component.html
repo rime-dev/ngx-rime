@@ -104,9 +104,19 @@
                     </button>
                   </div>
                   <div *ngIf="logo && !hasSidenav" class="flex-shrink-0 mr-4">
-                    <img class="h-8 w-8" [src]="logo.src" [alt]="logo.alt" *ngIf="!logo.route" />
                     <img
-                      class="h-8 w-8 cursor-pointer"
+                      height="40"
+                      widht="40"
+                      style="height: 40px; width: 40px"
+                      [src]="logo.src"
+                      [alt]="logo.alt"
+                      *ngIf="!logo.route"
+                    />
+                    <img
+                      class="cursor-pointer"
+                      height="40"
+                      widht="40"
+                      style="height: 40px; width: 40px"
                       [src]="logo.src"
                       [alt]="logo.alt"
                       *ngIf="logo.route"
