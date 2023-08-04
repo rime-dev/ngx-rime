@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import {Observable} from 'rxjs';
 import {RimeAuthService} from '../services/auth.service';
 
 @Injectable({providedIn: 'root'})
-export class RimeAuthGuard implements CanActivate {
+export class RimeAuthGuard  {
   constructor(private router: Router, private rimeAuthService: RimeAuthService) {}
 
   canActivate(

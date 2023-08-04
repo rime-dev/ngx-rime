@@ -23,7 +23,8 @@
       "@ngx-rime/ui": ["libs/ui/index.ts"],
       "@ngx-rime/ui/*": ["libs/ui/*"],
       "@ngx-rime/util": ["libs/util/index.ts"],
-      "@ngx-rime/util/*": ["libs/util/*"]
+      "@ngx-rime/util/*": ["libs/util/*"],
+      "@ngx-rime/workspace-plugin": ["tools/workspace-plugin/src/index.ts"]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": true,

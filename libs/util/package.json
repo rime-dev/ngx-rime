@@ -2,7 +2,9 @@
   "name": "@ngx-rime/util",
   "version": "0.1.2",
   "description": "Common utilities",
-  "keywords": ["Angular"],
+  "keywords": [
+    "Angular"
+  ],
   "homepage": "https://github.com/rime-dev/ngx-rime",
   "author": "Carlos Bayarri Cebrecos",
   "license": "MIT",
