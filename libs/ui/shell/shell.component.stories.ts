@@ -8,26 +8,27 @@ import {RimeUserAccountPopupModule} from '../user-account-popup/user-account-pop
 
 const logoTemplate = {
   src: 'https://raw.githubusercontent.com/rime-dev/ngx-rime/main/images/ngx-rime-logo.png',
-  alt: 'NGX-RIME APP',
-} as RimeShellLogo;
+  alt: 'NGX-RIME APP'
+};
 
 const topRoutes = [
   {
     path: '/home',
-    text: 'Home',
+    text: 'Home'
   },
   {
     path: '/tasks',
-    text: 'Tasks',
-  },
+    text: 'Tasks'
+  }
 ];
+
 
 const sideRoutes = [
   {
     path: '/home',
     text: 'Home',
     icon: 'home',
-    divider: true,
+    divider: true
   },
   {
     text: 'Tools',
@@ -35,13 +36,13 @@ const sideRoutes = [
       {
         path: '/tasks',
         text: 'Tasks',
-        icon: 'build',
+        icon: 'build'
       },
     ],
   },
   {
     divider: true,
-  },
+  }
 ];
 
 @Component({

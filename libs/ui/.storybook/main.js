@@ -1,11 +1,7 @@
-rootMain.core = {builder: 'webpack5'};
 
-// Use the following syntax to add addons!
-// rootMain.addons.push('');
-
-module.exports = rootMain;
-module.exports.addons = ['@storybook/addon-essentials'];
-module.exports.stories = [
-  '../**/*.stories.@(js|jsx|ts|tsx)',
-  '../**/**/*.stories.@(js|jsx|ts|tsx)',
-];
+module.exports = {
+  core: { builder: 'webpack5' },
+  stories: ['../**/*.stories.@(js|jsx|ts|tsx)',
+    '../**/**/*.stories.@(js|jsx|ts|tsx)',],
+  addons: ['@storybook/addon-essentials'],
+};
