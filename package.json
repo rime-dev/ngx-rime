@@ -1,6 +1,6 @@
 {
   "name": "ngx-rime",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "Angular architecture utilities",
   "keywords": [
     "Angular"
@@ -170,4 +170,5 @@
     "ts-node": "10.9.1",
     "typescript": "5.1.6"
   }
+
 }
