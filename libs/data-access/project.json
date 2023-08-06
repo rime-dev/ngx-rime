@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
-      "outputs": ["{workspaceRoot}/dist/libs/data-access"],
+      "outputs": [
+        "{workspaceRoot}/dist/libs/data-access"
+      ],
       "options": {
         "project": "libs/data-access/ng-package.json",
         "updateBuildableProjectDepsInPackageJson": true
@@ -24,7 +26,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/data-access"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/data-access"
+      ],
       "options": {
         "jestConfig": "libs/data-access/jest.config.ts",
         "passWithNoTests": true
@@ -33,7 +37,10 @@
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/data-access/**/*.ts", "libs/data-access/**/*.html"]
+        "lintFilePatterns": [
+          "libs/data-access/**/*.ts",
+          "libs/data-access/**/*.html"
+        ]
       }
     },
     "storybook": {
@@ -52,9 +59,13 @@
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
-        "styles": ["libs/data-access/.storybook/styles.scss"],
+        "styles": [
+          "libs/data-access/.storybook/styles.scss"
+        ],
         "outputDir": "dist/storybook/data-access",
         "configDir": "libs/data-access/.storybook",
         "browserTarget": "data-access:build-storybook",
@@ -64,6 +75,12 @@
         "ci": {
           "quiet": true
         }
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional"
       }
     }
   },

@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
-      "outputs": ["{workspaceRoot}/dist/libs/theming"],
+      "outputs": [
+        "{workspaceRoot}/dist/libs/theming"
+      ],
       "options": {
         "project": "libs/theming/ng-package.json",
         "tsConfig": "libs/theming/tsconfig.lib.json",
@@ -25,7 +27,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/theming"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/theming"
+      ],
       "options": {
         "jestConfig": "libs/theming/jest.config.ts",
         "passWithNoTests": true
@@ -34,9 +38,20 @@
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/theming/**/*.ts", "libs/theming/**/*.html"]
+        "lintFilePatterns": [
+          "libs/theming/**/*.ts",
+          "libs/theming/**/*.html"
+        ]
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional"
       }
     }
   },
-  "tags": ["theming"]
+  "tags": [
+    "theming"
+  ]
 }

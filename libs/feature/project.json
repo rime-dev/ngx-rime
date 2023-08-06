@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
-      "outputs": ["{workspaceRoot}/dist/libs/feature"],
+      "outputs": [
+        "{workspaceRoot}/dist/libs/feature"
+      ],
       "options": {
         "project": "libs/feature/ng-package.json",
         "updateBuildableProjectDepsInPackageJson": true
@@ -24,7 +26,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/feature"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/feature"
+      ],
       "options": {
         "jestConfig": "libs/feature/jest.config.ts",
         "passWithNoTests": true
@@ -33,9 +37,20 @@
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/feature/**/*.ts", "libs/feature/**/*.html"]
+        "lintFilePatterns": [
+          "libs/feature/**/*.ts",
+          "libs/feature/**/*.html"
+        ]
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional"
       }
     }
   },
-  "tags": ["feature"]
+  "tags": [
+    "feature"
+  ]
 }
