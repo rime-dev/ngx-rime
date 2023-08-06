@@ -22,8 +22,7 @@
         "eslint-plugin-cypress",
         "eslint-plugin-node",
         "eslint-plugin-prefer-arrow",
-        "eslint-plugin-promise",
-        "eslint-plugin-standard"
+        "eslint-plugin-promise"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
