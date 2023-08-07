@@ -1,10 +1,10 @@
 import {Inject, Injectable, NgZone, OnDestroy} from '@angular/core';
 import {GoogleAuthProvider} from '@angular/fire/auth';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
-import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
+import {AngularFirestore, AngularFirestoreDocument, DocumentSnapshot} from '@angular/fire/compat/firestore';
 import {Router} from '@angular/router';
 import firebase from 'firebase/compat';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {RimeAuthConfig} from '../auth.module';
 import {User} from '../models/auth.model';
 import {RIME_AUTH_CONFIG} from '../models/auth.token';
@@ -151,7 +151,7 @@ export class RimeAuthService implements OnDestroy {
       merge: true,
     });
   }
-  public getUserData(user: User) {
+  public getUserData(user: User): Observable<any> {
     const userRef: AngularFirestoreDocument<unknown> = this.angularFirestore
       .collection('users')
       .doc(`${user.uid}`);

@@ -22,8 +22,7 @@
         "eslint-plugin-cypress",
         "eslint-plugin-node",
         "eslint-plugin-prefer-arrow",
-        "eslint-plugin-promise",
-        "eslint-plugin-standard"
+        "eslint-plugin-promise"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
@@ -131,9 +130,12 @@
     },
     {
       "files": ["*.html"],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {}
+    },
+    {
+      "files": "*.json",
+      "parser": "jsonc-eslint-parser",
       "rules": {}
     }
   ]

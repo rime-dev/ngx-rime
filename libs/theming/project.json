@@ -1,0 +1,57 @@
+{
+  "name": "theming",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/theming",
+  "prefix": "rime",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/theming"
+      ],
+      "options": {
+        "project": "libs/theming/ng-package.json",
+        "tsConfig": "libs/theming/tsconfig.lib.json",
+        "updateBuildableProjectDepsInPackageJson": true
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/theming/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/theming/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/theming"
+      ],
+      "options": {
+        "jestConfig": "libs/theming/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/theming/**/*.ts",
+          "libs/theming/**/*.html"
+        ]
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional"
+      }
+    }
+  },
+  "tags": [
+    "theming"
+  ]
+}

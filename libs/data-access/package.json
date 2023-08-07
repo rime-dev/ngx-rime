@@ -1,8 +1,10 @@
 {
   "name": "@ngx-rime/data-access",
-  "version": "0.1.2",
+  "version": "1.0.1",
   "description": "Back End utilities",
-  "keywords": ["Angular"],
+  "keywords": [
+    "Angular"
+  ],
   "homepage": "https://github.com/rime-dev/ngx-rime",
   "author": "Carlos Bayarri Cebrecos",
   "license": "MIT",

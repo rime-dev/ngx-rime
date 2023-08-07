@@ -1,0 +1,14 @@
+{
+  "generators": {
+    "auth-module": {
+      "implementation": "./src/generators/auth-module",
+      "schema": "./src/generators/auth-module/schema.json",
+      "description": "Generator auth-module"
+    },
+    "publish": {
+      "implementation": "./src/generators/publish",
+      "schema": "./src/generators/publish/schema.json",
+      "description": "Generator publish"
+    }
+  }
+}

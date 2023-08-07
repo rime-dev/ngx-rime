@@ -1,18 +1,19 @@
-module.exports = {
-  displayName: 'data-access',
+/* eslint-disable */
+export default {
+  displayName: 'feature',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
-      stringifyContentPathRegex: '\\.(html|svg)$',
-    },
-  },
-  coverageDirectory: '../../coverage/libs/data-access',
+  globals: {},
+  coverageDirectory: '../../coverage/libs/feature',
   transform: {
-    '^.+.(ts|mjs|js|html)$': 'jest-preset-angular',
+    '^.+.(ts|mjs|js|html)$': [
+      'jest-preset-angular',
+      {
+        tsconfig: '<rootDir>/tsconfig.spec.json',
+        stringifyContentPathRegex: '\\.(html|svg)$',
+      },
+    ],
   },
-  transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
   transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',

@@ -1,0 +1,23 @@
+{
+  "name": "workspace",
+  "targets": {
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional",
+        "target": "main",
+        "syncVersions": true,
+        "headerPattern": "^([A-Z]{3,}-\\d{1,5}):? (chore|build|ci|docs|feat|fix|perf|refactor|test)(?:\\(([\\w-]+)\\))?\\S* (.+)$",
+        "headerCorrespondence": ["ticketReference", "type", "scope", "subject"],
+        "skipCommitTypes": ["docs", "ci"],
+        "postTargets": ["workspace:publish"]
+      }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx generate publish ${version}"
+      }
+    }
+  }
+}

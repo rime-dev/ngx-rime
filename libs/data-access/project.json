@@ -1,0 +1,88 @@
+{
+  "name": "data-access",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/data-access",
+  "prefix": "rime",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/data-access"
+      ],
+      "options": {
+        "project": "libs/data-access/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": true
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/data-access/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/data-access/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/data-access"
+      ],
+      "options": {
+        "jestConfig": "libs/data-access/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/data-access/**/*.ts",
+          "libs/data-access/**/*.html"
+        ]
+      }
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "libs/data-access/.storybook",
+        "browserTarget": "data-access:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "styles": [
+          "libs/data-access/.storybook/styles.scss"
+        ],
+        "outputDir": "dist/storybook/data-access",
+        "configDir": "libs/data-access/.storybook",
+        "browserTarget": "data-access:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional"
+      }
+    }
+  },
+  "tags": []
+}

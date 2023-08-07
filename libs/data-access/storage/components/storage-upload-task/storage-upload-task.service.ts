@@ -10,6 +10,7 @@ import {
 import firebase from 'firebase/compat';
 import {Observable, of, Subject} from 'rxjs';
 import {RimeMockStorageReference} from './firebase-reference-mock';
+import {UploadTask} from "@angular/fire/compat/storage/interfaces";
 
 export abstract class RimeStorageMock {
   private static dataURL: string;
@@ -62,7 +63,7 @@ export class RimeStorageUploadTaskMockService extends RimeStorageMock implements
       this.file,
       RimeStorageUploadTaskMockService
     );
-    return angularFireUploadTaskMock;
+    return angularFireUploadTaskMock as AngularFireUploadTask;
   }
   delete(path: string) {
     return of(path);
@@ -70,7 +71,7 @@ export class RimeStorageUploadTaskMockService extends RimeStorageMock implements
 }
 
 class AngularFireUploadTaskMock implements AngularFireUploadTask {
-  task!: firebase.storage.UploadTask;
+  task!: UploadTask;
   path!: string;
   data: Blob;
   metadata?: typeof RimeStorageUploadTaskMockService;
@@ -115,7 +116,7 @@ class AngularFireUploadTaskMock implements AngularFireUploadTask {
     return false;
   }
   then(
-    onFulfilled?: ((a: firebase.storage.UploadTaskSnapshot) => any) | null,
+    onFulfilled?: ((a: any) => any) | null,
     onRejected?: ((a: Error) => any) | null
   ): Promise<any> {
     return new Promise(undefined as any);

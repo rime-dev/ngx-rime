@@ -10,20 +10,44 @@
     "importHelpers": true,
     "target": "ES2020",
     "module": "ES2020",
-    "lib": ["ES2020", "DOM"],
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ngx-rime/data-access": ["libs/data-access/index.ts"],
-      "@ngx-rime/data-access/*": ["libs/data-access/*"],
-      "@ngx-rime/feature": ["libs/feature/index.ts"],
-      "@ngx-rime/feature/*": ["libs/feature/*"],
-      "@ngx-rime/theming": ["libs/theming/styles/styles.scss"],
-      "@ngx-rime/ui": ["libs/ui/index.ts"],
-      "@ngx-rime/ui/*": ["libs/ui/*"],
-      "@ngx-rime/util": ["libs/util/index.ts"],
-      "@ngx-rime/util/*": ["libs/util/*"]
+      "@ngx-rime/data-access": [
+        "libs/data-access/index.ts"
+      ],
+      "@ngx-rime/data-access/*": [
+        "libs/data-access/*"
+      ],
+      "@ngx-rime/feature": [
+        "libs/feature/index.ts"
+      ],
+      "@ngx-rime/feature/*": [
+        "libs/feature/*"
+      ],
+      "@ngx-rime/theming": [
+        "libs/theming/styles/styles.scss"
+      ],
+      "@ngx-rime/ui": [
+        "libs/ui/index.ts"
+      ],
+      "@ngx-rime/ui/*": [
+        "libs/ui/*"
+      ],
+      "@ngx-rime/util": [
+        "libs/util/index.ts"
+      ],
+      "@ngx-rime/util/*": [
+        "libs/util/*"
+      ],
+      "@ngx-rime/workspace-plugin": [
+        "tools/workspace-plugin/src/index.ts"
+      ]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -40,5 +64,8 @@
     "strictMetadataEmit": true,
     "enableResourceInlining": true
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

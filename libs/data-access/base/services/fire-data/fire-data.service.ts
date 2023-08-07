@@ -233,7 +233,7 @@ export class RimeFireDataService<T> {
   private getObservableFromUpdate(entity?: RimeEntityState<T>, collection?: string) {
     let action = null;
     if (collection && entity) {
-      action = this.angularFirestore.collection(collection).doc(entity.id).update(entity.data);
+      action = this.angularFirestore.collection(collection).doc<T>(entity.id).update(entity.data);
     } else {
       action = new Error(`No "${this.entityName}" update data or id`);
     }

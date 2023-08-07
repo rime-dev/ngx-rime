@@ -10,6 +10,7 @@ import {AppComponent} from './app.component';
 
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {RimeShellModule} from "@ngx-rime/ui/shell";
+import {TranslocoRootModule} from "./transloco-root.module";
 
 const firebaseConfig = {
   options: environment.firebaseOptions,
@@ -28,7 +29,8 @@ const authConfig: RimeAuthConfig = {
     AppRoutingModule,
     RimeBaseModule.firebase(firebaseConfig),
     RimeAuthModule,
-    RimeShellModule
+    RimeShellModule,
+    TranslocoRootModule,
   ],
   providers: [
     {
