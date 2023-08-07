@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.0.1](https://github.com/rime-dev/ngx-rime/compare/v1.0.0...v1.0.1) (2023-08-07)
+
+
+### Bug Fixes
+
+* **quiz-app:** change code from migration ([a2ddae8](https://github.com/rime-dev/ngx-rime/commit/a2ddae8847e102c1bdc19a42ac626adac9583791))
+
 ## 1.0.0 (2023-08-06)
 
 

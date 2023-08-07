@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.0.1](https://github.com/rime-dev/ngx-rime/compare/v1.0.0...v1.0.1) (2023-08-07)
+
+
+### Bug Fixes
+
+* **data-access:** change code from migration ([eaed839](https://github.com/rime-dev/ngx-rime/commit/eaed83964eeb4aacb86d6ab695bc0cfdd6b3ad18))
+
 ## 1.0.0 (2023-08-06)
 
 
