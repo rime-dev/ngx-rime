@@ -52,3 +52,7 @@ debug.log
 **/environment.prod.ts
 
 .angular
+
+# Generated Docusaurus files
+.docusaurus/
+.cache-loader/
