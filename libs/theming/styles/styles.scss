@@ -185,7 +185,7 @@ $rime-dark-theme: mat.define-dark-theme(
   $warn: map.get($theme, warn);
   $foreground: map.get($theme, foreground);
   $background: map.get($theme, background);
-  .mat-card {
+  .mat-mdc-card {
     background: mat.get-color-from-palette($background, background);
     color: mat.get-color-from-palette($foreground, text);
     border-radius: 0.75rem !important;
@@ -211,14 +211,14 @@ $rime-dark-theme: mat.define-dark-theme(
       background: mat.get-color-from-palette($background, background);
     }
     border-radius: 14px;
-    &.mat-tooltip-panel {
+    &.mat-mdc-tooltip-panel {
       background: transparent;
     }
-    .mat-dialog-container {
+    .mat-mdc-dialog-container {
       border-radius: 12px;
 
       @media screen and (max-width: 500px) {
-        .mat-dialog-content {
+        .mat-mdc-dialog-content {
           // max-height: 80vh;
           height: 80vh;
         }
@@ -266,20 +266,26 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-mat-card.mat-card {
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
+mat-card.mat-mdc-card {
   border-radius: 8px;
   min-width: 16rem;
 }
-mat-chip.mat-chip {
+/* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.*/
+mat-chip.mat-mdc-chip {
   user-select: none;
 }
-mat-chip.mat-chip.mat-chip-selected {
+/* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.*/
+mat-chip.mat-mdc-chip.mat-chip-selected {
   cursor: pointer;
 }
 
 // This fixes https://github.com//issues/4609
+/* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version.*/
+/* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version.*/
 .mat-dialog-override {
   height: 0px;
+  /* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version.*/
   mat-dialog-container {
     > :first-child {
       display: flex;
@@ -296,6 +302,7 @@ mat-chip.mat-chip.mat-chip-selected {
 
 ::ng-deep {
   @media screen and (max-width: 500px) {
+    /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
     div.mat-list-item-content,
     div.mat-list-text {
       padding: 0 !important;

@@ -1,6 +1,6 @@
 <div class="flex flex-row">
   <mat-chip-listbox aria-label="Tags" class="ml-2 mb-4 block">
-    <mat-chip color="primary" selected *ngFor="let tag of question.tags">{{ tag }}</mat-chip>
+    <mat-chip-option color="primary" selected *ngFor="let tag of question.tags">{{ tag }}</mat-chip-option>
   </mat-chip-listbox>
   <span class="flex-auto"></span>
   <div>
