@@ -18,31 +18,516 @@
           "contentPathLocalized": "/Users/carlosbayarricebrecos/Projects/rime/ngx-rime/apps/docs-app/i18n/en/docusaurus-plugin-content-docs/current",
           "docs": [
             {
-              "unversionedId": "api",
-              "id": "api",
-              "title": "api",
+              "unversionedId": "api/config",
+              "id": "api/config",
+              "title": "config",
               "description": "",
-              "source": "@site/docs/api.md",
-              "sourceDirName": ".",
-              "slug": "/api",
-              "permalink": "/docs/api",
+              "source": "@site/docs/api/config.mdx",
+              "sourceDirName": "api",
+              "slug": "/api/config",
+              "permalink": "/docs/api/config",
               "draft": false,
+              "editUrl": null,
               "tags": [],
               "version": "current",
-              "frontMatter": {},
-              "sidebar": "tutorialSidebar",
+              "frontMatter": {
+                "custom_edit_url": null
+              },
+              "sidebar": "api",
               "previous": {
-                "title": "Translate your site",
-                "permalink": "/docs/tutorial-extras/translate-your-site"
+                "title": "VERSION",
+                "permalink": "/docs/api/VERSION"
+              },
+              "next": {
+                "title": "sidebars",
+                "permalink": "/docs/api/sidebars"
               }
             },
             {
-              "unversionedId": "intro",
-              "id": "intro",
-              "title": "Tutorial Intro",
+              "unversionedId": "api/createStorageRef",
+              "id": "api/createStorageRef",
+              "title": "createStorageRef",
+              "description": "Create an AngularFire wrapped Storage Reference. This objectcreates observable methods from promise based methods.",
+              "source": "@site/docs/api/createStorageRef.mdx",
+              "sourceDirName": "api",
+              "slug": "/api/createStorageRef",
+              "permalink": "/docs/api/createStorageRef",
+              "draft": false,
+              "editUrl": null,
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "custom_edit_url": null
+              },
+              "sidebar": "api",
+              "previous": {
+                "title": "createUploadTask",
+                "permalink": "/docs/api/createUploadTask"
+              }
+            },
+            {
+              "unversionedId": "api/createUploadTask",
+              "id": "api/createUploadTask",
+              "title": "createUploadTask",
+              "description": "Create an AngularFireUploadTask from a regular UploadTask from the Storage SDK.This method creates an observable of the upload and returns on object that providesmultiple methods for controlling and monitoring the file upload.",
+              "source": "@site/docs/api/createUploadTask.mdx",
+              "sourceDirName": "api",
+              "slug": "/api/createUploadTask",
+              "permalink": "/docs/api/createUploadTask",
+              "draft": false,
+              "editUrl": null,
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "custom_edit_url": null
+              },
+              "sidebar": "api",
+              "previous": {
+                "title": "FireEntityCollectionDataService",
+                "permalink": "/docs/api/FireEntityCollectionDataService"
+              },
+              "next": {
+                "title": "createStorageRef",
+                "permalink": "/docs/api/createStorageRef"
+              }
+            },
+            {
+              "unversionedId": "api/FireEntityCollectionDataService",
+              "id": "api/FireEntityCollectionDataService",
+              "title": "FireEntityCollectionDataService",
+              "description": "A service that performs FIREBASE-like CRUD data operations for an entity collection",
+              "source": "@site/docs/api/FireEntityCollectionDataService.mdx",
+              "sourceDirName": "api",
+              "slug": "/api/FireEntityCollectionDataService",
+              "permalink": "/docs/api/FireEntityCollectionDataService",
+              "draft": false,
+              "editUrl": null,
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "custom_edit_url": null
+              },
+              "sidebar": "api",
+              "previous": {
+                "title": "OrderByDirection",
+                "permalink": "/docs/api/OrderByDirection"
+              },
+              "next": {
+                "title": "createUploadTask",
+                "permalink": "/docs/api/createUploadTask"
+              }
+            },
+            {
+              "unversionedId": "api/OrderByDirection",
+              "id": "api/OrderByDirection",
+              "title": "OrderByDirection",
+              "description": "The direction of a Query.orderBy() clause is specified as 'desc' or 'asc'(descending or ascending).",
+              "source": "@site/docs/api/OrderByDirection.mdx",
+              "sourceDirName": "api",
+              "slug": "/api/OrderByDirection",
+              "permalink": "/docs/api/OrderByDirection",
+              "draft": false,
+              "editUrl": null,
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "custom_edit_url": null
+              },
+              "sidebar": "api",
+              "previous": {
+                "title": "WhereFilterOp",
+                "permalink": "/docs/api/WhereFilterOp"
+              },
+              "next": {
+                "title": "FireEntityCollectionDataService",
+                "permalink": "/docs/api/FireEntityCollectionDataService"
+              }
+            },
+            {
+              "unversionedId": "api/RimeBaseMockModule",
+              "id": "api/RimeBaseMockModule",
+              "title": "RimeBaseMockModule",
+              "description": "entity-data main module includes Firebase data services mockedConfigure with fake firebase.",
+              "source": "@site/docs/api/RimeBaseMockModule.mdx",
+              "sourceDirName": "api",
+              "slug": "/api/RimeBaseMockModule",
+              "permalink": "/docs/api/RimeBaseMockModule",
+              "draft": false,
+              "editUrl": null,
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "custom_edit_url": null
+              },
+              "sidebar": "api",
+              "previous": {
+                "title": "RimeBaseModule",
+                "permalink": "/docs/api/RimeBaseModule"
+              },
+              "next": {
+                "title": "RimeBaseTestingModule",
+                "permalink": "/docs/api/RimeBaseTestingModule"
+              }
+            },
+            {
+              "unversionedId": "api/RimeBaseModule",
+              "id": "api/RimeBaseModule",
+              "title": "RimeBaseModule",
+              "description": "entity-data main module includes Firebase data servicesConfigure with firebase.",
+              "source": "@site/docs/api/RimeBaseModule.mdx",
+              "sourceDirName": "api",
+              "slug": "/api/RimeBaseModule",
+              "permalink": "/docs/api/RimeBaseModule",
+              "draft": false,
+              "editUrl": null,
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "custom_edit_url": null
+              },
+              "sidebar": "api",
+              "next": {
+                "title": "RimeBaseMockModule",
+                "permalink": "/docs/api/RimeBaseMockModule"
+              }
+            },
+            {
+              "unversionedId": "api/RimeBaseTestingModule",
+              "id": "api/RimeBaseTestingModule",
+              "title": "RimeBaseTestingModule",
+              "description": "entity-data main module includes Firebase data services mockedConfigure with fake firebase.",
+              "source": "@site/docs/api/RimeBaseTestingModule.mdx",
+              "sourceDirName": "api",
+              "slug": "/api/RimeBaseTestingModule",
+              "permalink": "/docs/api/RimeBaseTestingModule",
+              "draft": false,
+              "editUrl": null,
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "custom_edit_url": null
+              },
+              "sidebar": "api",
+              "previous": {
+                "title": "RimeBaseMockModule",
+                "permalink": "/docs/api/RimeBaseMockModule"
+              },
+              "next": {
+                "title": "RimeStorageMockModule",
+                "permalink": "/docs/api/RimeStorageMockModule"
+              }
+            },
+            {
+              "unversionedId": "api/RimeStorageMockModule",
+              "id": "api/RimeStorageMockModule",
+              "title": "RimeStorageMockModule",
+              "description": "Storage mocked module to upload docsConfigure with fake firebase.",
+              "source": "@site/docs/api/RimeStorageMockModule.mdx",
+              "sourceDirName": "api",
+              "slug": "/api/RimeStorageMockModule",
+              "permalink": "/docs/api/RimeStorageMockModule",
+              "draft": false,
+              "editUrl": null,
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "custom_edit_url": null
+              },
+              "sidebar": "api",
+              "previous": {
+                "title": "RimeBaseTestingModule",
+                "permalink": "/docs/api/RimeBaseTestingModule"
+              },
+              "next": {
+                "title": "VERSION",
+                "permalink": "/docs/api/VERSION"
+              }
+            },
+            {
+              "unversionedId": "api/sidebars",
+              "id": "api/sidebars",
+              "title": "sidebars",
+              "description": "",
+              "source": "@site/docs/api/sidebars.mdx",
+              "sourceDirName": "api",
+              "slug": "/api/sidebars",
+              "permalink": "/docs/api/sidebars",
+              "draft": false,
+              "editUrl": null,
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "custom_edit_url": null
+              },
+              "sidebar": "api",
+              "previous": {
+                "title": "config",
+                "permalink": "/docs/api/config"
+              },
+              "next": {
+                "title": "User",
+                "permalink": "/docs/api/User"
+              }
+            },
+            {
+              "unversionedId": "api/User",
+              "id": "api/User",
+              "title": "User",
+              "description": "User interface from Firebase data authentication.",
+              "source": "@site/docs/api/User.mdx",
+              "sourceDirName": "api",
+              "slug": "/api/User",
+              "permalink": "/docs/api/User",
+              "draft": false,
+              "editUrl": null,
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "custom_edit_url": null
+              },
+              "sidebar": "api",
+              "previous": {
+                "title": "sidebars",
+                "permalink": "/docs/api/sidebars"
+              },
+              "next": {
+                "title": "WhereFilterOp",
+                "permalink": "/docs/api/WhereFilterOp"
+              }
+            },
+            {
+              "unversionedId": "api/VERSION",
+              "id": "api/VERSION",
+              "title": "VERSION",
+              "description": "This file is required for building this \"empty\" package.",
+              "source": "@site/docs/api/VERSION.mdx",
+              "sourceDirName": "api",
+              "slug": "/api/VERSION",
+              "permalink": "/docs/api/VERSION",
+              "draft": false,
+              "editUrl": null,
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "custom_edit_url": null
+              },
+              "sidebar": "api",
+              "previous": {
+                "title": "RimeStorageMockModule",
+                "permalink": "/docs/api/RimeStorageMockModule"
+              },
+              "next": {
+                "title": "config",
+                "permalink": "/docs/api/config"
+              }
+            },
+            {
+              "unversionedId": "api/WhereFilterOp",
+              "id": "api/WhereFilterOp",
+              "title": "WhereFilterOp",
+              "description": "Filter conditions in a Query.where() clause are specified using thestrings '=', '>', 'array-contains', 'in','array-contains-any', and 'not-in'.",
+              "source": "@site/docs/api/WhereFilterOp.mdx",
+              "sourceDirName": "api",
+              "slug": "/api/WhereFilterOp",
+              "permalink": "/docs/api/WhereFilterOp",
+              "draft": false,
+              "editUrl": null,
+              "tags": [],
+              "version": "current",
+              "frontMatter": {
+                "custom_edit_url": null
+              },
+              "sidebar": "api",
+              "previous": {
+                "title": "User",
+                "permalink": "/docs/api/User"
+              },
+              "next": {
+                "title": "OrderByDirection",
+                "permalink": "/docs/api/OrderByDirection"
+              }
+            },
+            {
+              "unversionedId": "changelog/changelog",
+              "id": "changelog/changelog",
+              "title": "CHANGELOG",
+              "description": "",
+              "source": "@site/docs/changelog/changelog.mdx",
+              "sourceDirName": "changelog",
+              "slug": "/changelog/",
+              "permalink": "/docs/changelog/",
+              "draft": false,
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1,
+                "title": "CHANGELOG"
+              }
+            },
+            {
+              "unversionedId": "docs/developer_guides/data-access",
+              "id": "docs/developer_guides/data-access",
+              "title": "Data access",
+              "description": "",
+              "source": "@site/docs/docs/developer_guides/data-access.mdx",
+              "sourceDirName": "docs/developer_guides",
+              "slug": "/docs/developer_guides/data-access",
+              "permalink": "/docs/docs/developer_guides/data-access",
+              "draft": false,
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 3,
+              "frontMatter": {
+                "sidebar_position": 3,
+                "title": "Data access"
+              },
+              "sidebar": "sidebar",
+              "previous": {
+                "title": "Feature",
+                "permalink": "/docs/docs/developer_guides/feature"
+              },
+              "next": {
+                "title": "Util",
+                "permalink": "/docs/docs/developer_guides/util"
+              }
+            },
+            {
+              "unversionedId": "docs/developer_guides/feature",
+              "id": "docs/developer_guides/feature",
+              "title": "Feature",
+              "description": "",
+              "source": "@site/docs/docs/developer_guides/feature.mdx",
+              "sourceDirName": "docs/developer_guides",
+              "slug": "/docs/developer_guides/feature",
+              "permalink": "/docs/docs/developer_guides/feature",
+              "draft": false,
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 2,
+              "frontMatter": {
+                "sidebar_position": 2,
+                "title": "Feature"
+              },
+              "sidebar": "sidebar",
+              "previous": {
+                "title": "UI",
+                "permalink": "/docs/docs/developer_guides/ui"
+              },
+              "next": {
+                "title": "Data access",
+                "permalink": "/docs/docs/developer_guides/data-access"
+              }
+            },
+            {
+              "unversionedId": "docs/developer_guides/ui",
+              "id": "docs/developer_guides/ui",
+              "title": "UI",
+              "description": "",
+              "source": "@site/docs/docs/developer_guides/ui.mdx",
+              "sourceDirName": "docs/developer_guides",
+              "slug": "/docs/developer_guides/ui",
+              "permalink": "/docs/docs/developer_guides/ui",
+              "draft": false,
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1,
+                "title": "UI"
+              },
+              "sidebar": "sidebar",
+              "previous": {
+                "title": "Developer guides",
+                "permalink": "/docs/category/developer-guides"
+              },
+              "next": {
+                "title": "Feature",
+                "permalink": "/docs/docs/developer_guides/feature"
+              }
+            },
+            {
+              "unversionedId": "docs/developer_guides/util",
+              "id": "docs/developer_guides/util",
+              "title": "Util",
+              "description": "",
+              "source": "@site/docs/docs/developer_guides/util.mdx",
+              "sourceDirName": "docs/developer_guides",
+              "slug": "/docs/developer_guides/util",
+              "permalink": "/docs/docs/developer_guides/util",
+              "draft": false,
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 4,
+              "frontMatter": {
+                "sidebar_position": 4,
+                "title": "Util"
+              },
+              "sidebar": "sidebar",
+              "previous": {
+                "title": "Data access",
+                "permalink": "/docs/docs/developer_guides/data-access"
+              }
+            },
+            {
+              "unversionedId": "docs/getting_started/manage-docs-versions",
+              "id": "docs/getting_started/manage-docs-versions",
+              "title": "Manage Docs Versions",
+              "description": "Docusaurus can manage multiple versions of your docs.",
+              "source": "@site/docs/docs/getting_started/manage-docs-versions.md",
+              "sourceDirName": "docs/getting_started",
+              "slug": "/docs/getting_started/manage-docs-versions",
+              "permalink": "/docs/docs/getting_started/manage-docs-versions",
+              "draft": false,
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1
+              },
+              "sidebar": "sidebar",
+              "previous": {
+                "title": "Getting started",
+                "permalink": "/docs/category/getting-started"
+              },
+              "next": {
+                "title": "Translate your site",
+                "permalink": "/docs/docs/getting_started/translate-your-site"
+              }
+            },
+            {
+              "unversionedId": "docs/getting_started/translate-your-site",
+              "id": "docs/getting_started/translate-your-site",
+              "title": "Translate your site",
+              "description": "Let's translate docs/intro.md to French.",
+              "source": "@site/docs/docs/getting_started/translate-your-site.md",
+              "sourceDirName": "docs/getting_started",
+              "slug": "/docs/getting_started/translate-your-site",
+              "permalink": "/docs/docs/getting_started/translate-your-site",
+              "draft": false,
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 2,
+              "frontMatter": {
+                "sidebar_position": 2
+              },
+              "sidebar": "sidebar",
+              "previous": {
+                "title": "Manage Docs Versions",
+                "permalink": "/docs/docs/getting_started/manage-docs-versions"
+              },
+              "next": {
+                "title": "Developer guides",
+                "permalink": "/docs/category/developer-guides"
+              }
+            },
+            {
+              "unversionedId": "docs/intro",
+              "id": "docs/intro",
+              "title": "Introduction",
               "description": "Let's discover Docusaurus in less than 5 minutes.",
-              "source": "@site/docs/intro.md",
-              "sourceDirName": ".",
+              "source": "@site/docs/docs/intro.md",
+              "sourceDirName": "docs",
               "slug": "/",
               "permalink": "/docs/",
               "draft": false,
@@ -53,320 +538,148 @@
                 "slug": "/",
                 "sidebar_position": 1
               },
-              "sidebar": "tutorialSidebar",
+              "sidebar": "sidebar",
               "next": {
-                "title": "Tutorial - Basics",
-                "permalink": "/docs/category/tutorial---basics"
-              }
-            },
-            {
-              "unversionedId": "tutorial-basics/congratulations",
-              "id": "tutorial-basics/congratulations",
-              "title": "Congratulations!",
-              "description": "You have just learned the basics of Docusaurus and made some changes to the initial template.",
-              "source": "@site/docs/tutorial-basics/congratulations.md",
-              "sourceDirName": "tutorial-basics",
-              "slug": "/tutorial-basics/congratulations",
-              "permalink": "/docs/tutorial-basics/congratulations",
-              "draft": false,
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 6,
-              "frontMatter": {
-                "sidebar_position": 6
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "Deploy your site",
-                "permalink": "/docs/tutorial-basics/deploy-your-site"
-              },
-              "next": {
-                "title": "Tutorial - Extras",
-                "permalink": "/docs/category/tutorial---extras"
-              }
-            },
-            {
-              "unversionedId": "tutorial-basics/create-a-blog-post",
-              "id": "tutorial-basics/create-a-blog-post",
-              "title": "Create a Blog Post",
-              "description": "Docusaurus creates a page for each blog post, but also a blog index page, a tag system, an RSS feed...",
-              "source": "@site/docs/tutorial-basics/create-a-blog-post.md",
-              "sourceDirName": "tutorial-basics",
-              "slug": "/tutorial-basics/create-a-blog-post",
-              "permalink": "/docs/tutorial-basics/create-a-blog-post",
-              "draft": false,
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 3,
-              "frontMatter": {
-                "sidebar_position": 3
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "Create a Document",
-                "permalink": "/docs/tutorial-basics/create-a-document"
-              },
-              "next": {
-                "title": "Markdown Features",
-                "permalink": "/docs/tutorial-basics/markdown-features"
-              }
-            },
-            {
-              "unversionedId": "tutorial-basics/create-a-document",
-              "id": "tutorial-basics/create-a-document",
-              "title": "Create a Document",
-              "description": "Documents are groups of pages connected through:",
-              "source": "@site/docs/tutorial-basics/create-a-document.md",
-              "sourceDirName": "tutorial-basics",
-              "slug": "/tutorial-basics/create-a-document",
-              "permalink": "/docs/tutorial-basics/create-a-document",
-              "draft": false,
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 2,
-              "frontMatter": {
-                "sidebar_position": 2
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "UI",
-                "permalink": "/docs/tutorial-basics/ui"
-              },
-              "next": {
-                "title": "Create a Blog Post",
-                "permalink": "/docs/tutorial-basics/create-a-blog-post"
-              }
-            },
-            {
-              "unversionedId": "tutorial-basics/create-a-page",
-              "id": "tutorial-basics/create-a-page",
-              "title": "Create a Page",
-              "description": "Add Markdown or React files to src/pages to create a standalone page:",
-              "source": "@site/docs/tutorial-basics/create-a-page.md",
-              "sourceDirName": "tutorial-basics",
-              "slug": "/tutorial-basics/create-a-page",
-              "permalink": "/docs/tutorial-basics/create-a-page",
-              "draft": false,
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 1,
-              "frontMatter": {
-                "sidebar_position": 1
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "Tutorial - Basics",
-                "permalink": "/docs/category/tutorial---basics"
-              },
-              "next": {
-                "title": "UI",
-                "permalink": "/docs/tutorial-basics/ui"
-              }
-            },
-            {
-              "unversionedId": "tutorial-basics/deploy-your-site",
-              "id": "tutorial-basics/deploy-your-site",
-              "title": "Deploy your site",
-              "description": "Docusaurus is a static-site-generator (also called Jamstack).",
-              "source": "@site/docs/tutorial-basics/deploy-your-site.md",
-              "sourceDirName": "tutorial-basics",
-              "slug": "/tutorial-basics/deploy-your-site",
-              "permalink": "/docs/tutorial-basics/deploy-your-site",
-              "draft": false,
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 5,
-              "frontMatter": {
-                "sidebar_position": 5
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "Markdown Features",
-                "permalink": "/docs/tutorial-basics/markdown-features"
-              },
-              "next": {
-                "title": "Congratulations!",
-                "permalink": "/docs/tutorial-basics/congratulations"
-              }
-            },
-            {
-              "unversionedId": "tutorial-basics/markdown-features",
-              "id": "tutorial-basics/markdown-features",
-              "title": "Markdown Features",
-              "description": "Docusaurus supports Markdown and a few additional features.",
-              "source": "@site/docs/tutorial-basics/markdown-features.mdx",
-              "sourceDirName": "tutorial-basics",
-              "slug": "/tutorial-basics/markdown-features",
-              "permalink": "/docs/tutorial-basics/markdown-features",
-              "draft": false,
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 4,
-              "frontMatter": {
-                "sidebar_position": 4
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "Create a Blog Post",
-                "permalink": "/docs/tutorial-basics/create-a-blog-post"
-              },
-              "next": {
-                "title": "Deploy your site",
-                "permalink": "/docs/tutorial-basics/deploy-your-site"
-              }
-            },
-            {
-              "unversionedId": "tutorial-basics/ui",
-              "id": "tutorial-basics/ui",
-              "title": "UI",
-              "description": "",
-              "source": "@site/docs/tutorial-basics/ui.mdx",
-              "sourceDirName": "tutorial-basics",
-              "slug": "/tutorial-basics/ui",
-              "permalink": "/docs/tutorial-basics/ui",
-              "draft": false,
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 1,
-              "frontMatter": {
-                "sidebar_position": 1
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "Create a Page",
-                "permalink": "/docs/tutorial-basics/create-a-page"
-              },
-              "next": {
-                "title": "Create a Document",
-                "permalink": "/docs/tutorial-basics/create-a-document"
-              }
-            },
-            {
-              "unversionedId": "tutorial-extras/manage-docs-versions",
-              "id": "tutorial-extras/manage-docs-versions",
-              "title": "Manage Docs Versions",
-              "description": "Docusaurus can manage multiple versions of your docs.",
-              "source": "@site/docs/tutorial-extras/manage-docs-versions.md",
-              "sourceDirName": "tutorial-extras",
-              "slug": "/tutorial-extras/manage-docs-versions",
-              "permalink": "/docs/tutorial-extras/manage-docs-versions",
-              "draft": false,
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 1,
-              "frontMatter": {
-                "sidebar_position": 1
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "Tutorial - Extras",
-                "permalink": "/docs/category/tutorial---extras"
-              },
-              "next": {
-                "title": "Translate your site",
-                "permalink": "/docs/tutorial-extras/translate-your-site"
-              }
-            },
-            {
-              "unversionedId": "tutorial-extras/translate-your-site",
-              "id": "tutorial-extras/translate-your-site",
-              "title": "Translate your site",
-              "description": "Let's translate docs/intro.md to French.",
-              "source": "@site/docs/tutorial-extras/translate-your-site.md",
-              "sourceDirName": "tutorial-extras",
-              "slug": "/tutorial-extras/translate-your-site",
-              "permalink": "/docs/tutorial-extras/translate-your-site",
-              "draft": false,
-              "tags": [],
-              "version": "current",
-              "sidebarPosition": 2,
-              "frontMatter": {
-                "sidebar_position": 2
-              },
-              "sidebar": "tutorialSidebar",
-              "previous": {
-                "title": "Manage Docs Versions",
-                "permalink": "/docs/tutorial-extras/manage-docs-versions"
-              },
-              "next": {
-                "title": "api",
-                "permalink": "/docs/api"
+                "title": "Getting started",
+                "permalink": "/docs/category/getting-started"
               }
             }
           ],
           "drafts": [],
           "sidebars": {
-            "tutorialSidebar": [
+            "sidebar": [
               {
                 "type": "doc",
-                "id": "intro"
+                "id": "docs/intro"
               },
               {
                 "type": "category",
-                "label": "Tutorial - Basics",
+                "label": "Getting started",
                 "collapsible": true,
                 "collapsed": true,
                 "items": [
                   {
                     "type": "doc",
-                    "id": "tutorial-basics/create-a-page"
+                    "id": "docs/getting_started/manage-docs-versions"
                   },
                   {
                     "type": "doc",
-                    "id": "tutorial-basics/ui"
-                  },
-                  {
-                    "type": "doc",
-                    "id": "tutorial-basics/create-a-document"
-                  },
-                  {
-                    "type": "doc",
-                    "id": "tutorial-basics/create-a-blog-post"
-                  },
-                  {
-                    "type": "doc",
-                    "id": "tutorial-basics/markdown-features"
-                  },
-                  {
-                    "type": "doc",
-                    "id": "tutorial-basics/deploy-your-site"
-                  },
-                  {
-                    "type": "doc",
-                    "id": "tutorial-basics/congratulations"
+                    "id": "docs/getting_started/translate-your-site"
                   }
                 ],
                 "link": {
                   "type": "generated-index",
-                  "description": "5 minutes to learn the most important Docusaurus concepts.",
-                  "slug": "/category/tutorial---basics",
-                  "permalink": "/docs/category/tutorial---basics"
+                  "slug": "/category/getting-started",
+                  "permalink": "/docs/category/getting-started"
                 }
               },
               {
                 "type": "category",
-                "label": "Tutorial - Extras",
+                "label": "Developer guides",
                 "collapsible": true,
-                "collapsed": true,
+                "collapsed": false,
                 "items": [
                   {
                     "type": "doc",
-                    "id": "tutorial-extras/manage-docs-versions"
+                    "id": "docs/developer_guides/ui"
                   },
                   {
                     "type": "doc",
-                    "id": "tutorial-extras/translate-your-site"
+                    "id": "docs/developer_guides/feature"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "docs/developer_guides/data-access"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "docs/developer_guides/util"
                   }
                 ],
                 "link": {
                   "type": "generated-index",
-                  "slug": "/category/tutorial---extras",
-                  "permalink": "/docs/category/tutorial---extras"
+                  "description": "Documentation about rime libraries",
+                  "slug": "/category/developer-guides",
+                  "permalink": "/docs/category/developer-guides"
                 }
+              }
+            ],
+            "api": [
+              {
+                "type": "category",
+                "label": "Class",
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "api/RimeBaseModule"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "api/RimeBaseMockModule"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "api/RimeBaseTestingModule"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "api/RimeStorageMockModule"
+                  }
+                ],
+                "collapsed": true,
+                "collapsible": true
               },
               {
-                "type": "doc",
-                "id": "api"
+                "type": "category",
+                "label": "Constant",
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "api/VERSION"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "api/config"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "api/sidebars"
+                  }
+                ],
+                "collapsed": true,
+                "collapsible": true
+              },
+              {
+                "type": "category",
+                "label": "Global",
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "api/User"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "api/WhereFilterOp"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "api/OrderByDirection"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "api/FireEntityCollectionDataService"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "api/createUploadTask"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "api/createStorageRef"
+                  }
+                ],
+                "collapsed": true,
+                "collapsible": true
               }
             ]
           }

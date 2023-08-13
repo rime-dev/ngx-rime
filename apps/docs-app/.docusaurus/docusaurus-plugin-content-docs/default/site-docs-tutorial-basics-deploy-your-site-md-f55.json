@@ -13,14 +13,5 @@
   "sidebarPosition": 5,
   "frontMatter": {
     "sidebar_position": 5
-  },
-  "sidebar": "tutorialSidebar",
-  "previous": {
-    "title": "Markdown Features",
-    "permalink": "/docs/tutorial-basics/markdown-features"
-  },
-  "next": {
-    "title": "Congratulations!",
-    "permalink": "/docs/tutorial-basics/congratulations"
   }
 }

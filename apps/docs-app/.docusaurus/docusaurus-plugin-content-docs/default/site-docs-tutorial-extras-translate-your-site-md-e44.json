@@ -13,14 +13,5 @@
   "sidebarPosition": 2,
   "frontMatter": {
     "sidebar_position": 2
-  },
-  "sidebar": "tutorialSidebar",
-  "previous": {
-    "title": "Manage Docs Versions",
-    "permalink": "/docs/tutorial-extras/manage-docs-versions"
-  },
-  "next": {
-    "title": "api",
-    "permalink": "/docs/api"
   }
 }

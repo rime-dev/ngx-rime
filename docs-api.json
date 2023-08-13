@@ -1,0 +1,7 @@
+{
+  "locales": [],
+  "outDir": "./apps/docs-app/docs/api",
+  "sidebar": "./apps/docs-app",
+  "jsdoc": "./jsdoc.json",
+  "bulma": false
+}

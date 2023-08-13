@@ -8,159 +8,298 @@
   "className": "docs-version-current",
   "isLast": true,
   "docsSidebars": {
-    "tutorialSidebar": [
+    "sidebar": [
       {
         "type": "link",
-        "label": "Tutorial Intro",
+        "label": "Introduction",
         "href": "/docs/",
-        "docId": "intro"
+        "docId": "docs/intro"
       },
       {
         "type": "category",
-        "label": "Tutorial - Basics",
-        "collapsible": true,
-        "collapsed": true,
-        "items": [
-          {
-            "type": "link",
-            "label": "Create a Page",
-            "href": "/docs/tutorial-basics/create-a-page",
-            "docId": "tutorial-basics/create-a-page"
-          },
-          {
-            "type": "link",
-            "label": "UI",
-            "href": "/docs/tutorial-basics/ui",
-            "docId": "tutorial-basics/ui"
-          },
-          {
-            "type": "link",
-            "label": "Create a Document",
-            "href": "/docs/tutorial-basics/create-a-document",
-            "docId": "tutorial-basics/create-a-document"
-          },
-          {
-            "type": "link",
-            "label": "Create a Blog Post",
-            "href": "/docs/tutorial-basics/create-a-blog-post",
-            "docId": "tutorial-basics/create-a-blog-post"
-          },
-          {
-            "type": "link",
-            "label": "Markdown Features",
-            "href": "/docs/tutorial-basics/markdown-features",
-            "docId": "tutorial-basics/markdown-features"
-          },
-          {
-            "type": "link",
-            "label": "Deploy your site",
-            "href": "/docs/tutorial-basics/deploy-your-site",
-            "docId": "tutorial-basics/deploy-your-site"
-          },
-          {
-            "type": "link",
-            "label": "Congratulations!",
-            "href": "/docs/tutorial-basics/congratulations",
-            "docId": "tutorial-basics/congratulations"
-          }
-        ],
-        "href": "/docs/category/tutorial---basics"
-      },
-      {
-        "type": "category",
-        "label": "Tutorial - Extras",
+        "label": "Getting started",
         "collapsible": true,
         "collapsed": true,
         "items": [
           {
             "type": "link",
             "label": "Manage Docs Versions",
-            "href": "/docs/tutorial-extras/manage-docs-versions",
-            "docId": "tutorial-extras/manage-docs-versions"
+            "href": "/docs/docs/getting_started/manage-docs-versions",
+            "docId": "docs/getting_started/manage-docs-versions"
           },
           {
             "type": "link",
             "label": "Translate your site",
-            "href": "/docs/tutorial-extras/translate-your-site",
-            "docId": "tutorial-extras/translate-your-site"
+            "href": "/docs/docs/getting_started/translate-your-site",
+            "docId": "docs/getting_started/translate-your-site"
           }
         ],
-        "href": "/docs/category/tutorial---extras"
+        "href": "/docs/category/getting-started"
       },
       {
-        "type": "link",
-        "label": "api",
-        "href": "/docs/api",
-        "docId": "api"
+        "type": "category",
+        "label": "Developer guides",
+        "collapsible": true,
+        "collapsed": false,
+        "items": [
+          {
+            "type": "link",
+            "label": "UI",
+            "href": "/docs/docs/developer_guides/ui",
+            "docId": "docs/developer_guides/ui"
+          },
+          {
+            "type": "link",
+            "label": "Feature",
+            "href": "/docs/docs/developer_guides/feature",
+            "docId": "docs/developer_guides/feature"
+          },
+          {
+            "type": "link",
+            "label": "Data access",
+            "href": "/docs/docs/developer_guides/data-access",
+            "docId": "docs/developer_guides/data-access"
+          },
+          {
+            "type": "link",
+            "label": "Util",
+            "href": "/docs/docs/developer_guides/util",
+            "docId": "docs/developer_guides/util"
+          }
+        ],
+        "href": "/docs/category/developer-guides"
+      }
+    ],
+    "api": [
+      {
+        "type": "category",
+        "label": "Class",
+        "items": [
+          {
+            "type": "link",
+            "label": "RimeBaseModule",
+            "href": "/docs/api/RimeBaseModule",
+            "docId": "api/RimeBaseModule"
+          },
+          {
+            "type": "link",
+            "label": "RimeBaseMockModule",
+            "href": "/docs/api/RimeBaseMockModule",
+            "docId": "api/RimeBaseMockModule"
+          },
+          {
+            "type": "link",
+            "label": "RimeBaseTestingModule",
+            "href": "/docs/api/RimeBaseTestingModule",
+            "docId": "api/RimeBaseTestingModule"
+          },
+          {
+            "type": "link",
+            "label": "RimeStorageMockModule",
+            "href": "/docs/api/RimeStorageMockModule",
+            "docId": "api/RimeStorageMockModule"
+          }
+        ],
+        "collapsed": true,
+        "collapsible": true
+      },
+      {
+        "type": "category",
+        "label": "Constant",
+        "items": [
+          {
+            "type": "link",
+            "label": "VERSION",
+            "href": "/docs/api/VERSION",
+            "docId": "api/VERSION"
+          },
+          {
+            "type": "link",
+            "label": "config",
+            "href": "/docs/api/config",
+            "docId": "api/config"
+          },
+          {
+            "type": "link",
+            "label": "sidebars",
+            "href": "/docs/api/sidebars",
+            "docId": "api/sidebars"
+          }
+        ],
+        "collapsed": true,
+        "collapsible": true
+      },
+      {
+        "type": "category",
+        "label": "Global",
+        "items": [
+          {
+            "type": "link",
+            "label": "User",
+            "href": "/docs/api/User",
+            "docId": "api/User"
+          },
+          {
+            "type": "link",
+            "label": "WhereFilterOp",
+            "href": "/docs/api/WhereFilterOp",
+            "docId": "api/WhereFilterOp"
+          },
+          {
+            "type": "link",
+            "label": "OrderByDirection",
+            "href": "/docs/api/OrderByDirection",
+            "docId": "api/OrderByDirection"
+          },
+          {
+            "type": "link",
+            "label": "FireEntityCollectionDataService",
+            "href": "/docs/api/FireEntityCollectionDataService",
+            "docId": "api/FireEntityCollectionDataService"
+          },
+          {
+            "type": "link",
+            "label": "createUploadTask",
+            "href": "/docs/api/createUploadTask",
+            "docId": "api/createUploadTask"
+          },
+          {
+            "type": "link",
+            "label": "createStorageRef",
+            "href": "/docs/api/createStorageRef",
+            "docId": "api/createStorageRef"
+          }
+        ],
+        "collapsed": true,
+        "collapsible": true
       }
     ]
   },
   "docs": {
-    "api": {
-      "id": "api",
-      "title": "api",
+    "api/config": {
+      "id": "api/config",
+      "title": "config",
       "description": "",
-      "sidebar": "tutorialSidebar"
+      "sidebar": "api"
     },
-    "intro": {
-      "id": "intro",
-      "title": "Tutorial Intro",
-      "description": "Let's discover Docusaurus in less than 5 minutes.",
-      "sidebar": "tutorialSidebar"
+    "api/createStorageRef": {
+      "id": "api/createStorageRef",
+      "title": "createStorageRef",
+      "description": "Create an AngularFire wrapped Storage Reference. This objectcreates observable methods from promise based methods.",
+      "sidebar": "api"
     },
-    "tutorial-basics/congratulations": {
-      "id": "tutorial-basics/congratulations",
-      "title": "Congratulations!",
-      "description": "You have just learned the basics of Docusaurus and made some changes to the initial template.",
-      "sidebar": "tutorialSidebar"
+    "api/createUploadTask": {
+      "id": "api/createUploadTask",
+      "title": "createUploadTask",
+      "description": "Create an AngularFireUploadTask from a regular UploadTask from the Storage SDK.This method creates an observable of the upload and returns on object that providesmultiple methods for controlling and monitoring the file upload.",
+      "sidebar": "api"
     },
-    "tutorial-basics/create-a-blog-post": {
-      "id": "tutorial-basics/create-a-blog-post",
-      "title": "Create a Blog Post",
-      "description": "Docusaurus creates a page for each blog post, but also a blog index page, a tag system, an RSS feed...",
-      "sidebar": "tutorialSidebar"
+    "api/FireEntityCollectionDataService": {
+      "id": "api/FireEntityCollectionDataService",
+      "title": "FireEntityCollectionDataService",
+      "description": "A service that performs FIREBASE-like CRUD data operations for an entity collection",
+      "sidebar": "api"
     },
-    "tutorial-basics/create-a-document": {
-      "id": "tutorial-basics/create-a-document",
-      "title": "Create a Document",
-      "description": "Documents are groups of pages connected through:",
-      "sidebar": "tutorialSidebar"
+    "api/OrderByDirection": {
+      "id": "api/OrderByDirection",
+      "title": "OrderByDirection",
+      "description": "The direction of a Query.orderBy() clause is specified as 'desc' or 'asc'(descending or ascending).",
+      "sidebar": "api"
     },
-    "tutorial-basics/create-a-page": {
-      "id": "tutorial-basics/create-a-page",
-      "title": "Create a Page",
-      "description": "Add Markdown or React files to src/pages to create a standalone page:",
-      "sidebar": "tutorialSidebar"
+    "api/RimeBaseMockModule": {
+      "id": "api/RimeBaseMockModule",
+      "title": "RimeBaseMockModule",
+      "description": "entity-data main module includes Firebase data services mockedConfigure with fake firebase.",
+      "sidebar": "api"
     },
-    "tutorial-basics/deploy-your-site": {
-      "id": "tutorial-basics/deploy-your-site",
-      "title": "Deploy your site",
-      "description": "Docusaurus is a static-site-generator (also called Jamstack).",
-      "sidebar": "tutorialSidebar"
+    "api/RimeBaseModule": {
+      "id": "api/RimeBaseModule",
+      "title": "RimeBaseModule",
+      "description": "entity-data main module includes Firebase data servicesConfigure with firebase.",
+      "sidebar": "api"
     },
-    "tutorial-basics/markdown-features": {
-      "id": "tutorial-basics/markdown-features",
-      "title": "Markdown Features",
-      "description": "Docusaurus supports Markdown and a few additional features.",
-      "sidebar": "tutorialSidebar"
+    "api/RimeBaseTestingModule": {
+      "id": "api/RimeBaseTestingModule",
+      "title": "RimeBaseTestingModule",
+      "description": "entity-data main module includes Firebase data services mockedConfigure with fake firebase.",
+      "sidebar": "api"
     },
-    "tutorial-basics/ui": {
-      "id": "tutorial-basics/ui",
+    "api/RimeStorageMockModule": {
+      "id": "api/RimeStorageMockModule",
+      "title": "RimeStorageMockModule",
+      "description": "Storage mocked module to upload docsConfigure with fake firebase.",
+      "sidebar": "api"
+    },
+    "api/sidebars": {
+      "id": "api/sidebars",
+      "title": "sidebars",
+      "description": "",
+      "sidebar": "api"
+    },
+    "api/User": {
+      "id": "api/User",
+      "title": "User",
+      "description": "User interface from Firebase data authentication.",
+      "sidebar": "api"
+    },
+    "api/VERSION": {
+      "id": "api/VERSION",
+      "title": "VERSION",
+      "description": "This file is required for building this \"empty\" package.",
+      "sidebar": "api"
+    },
+    "api/WhereFilterOp": {
+      "id": "api/WhereFilterOp",
+      "title": "WhereFilterOp",
+      "description": "Filter conditions in a Query.where() clause are specified using thestrings '=', '>', 'array-contains', 'in','array-contains-any', and 'not-in'.",
+      "sidebar": "api"
+    },
+    "changelog/changelog": {
+      "id": "changelog/changelog",
+      "title": "CHANGELOG",
+      "description": ""
+    },
+    "docs/developer_guides/data-access": {
+      "id": "docs/developer_guides/data-access",
+      "title": "Data access",
+      "description": "",
+      "sidebar": "sidebar"
+    },
+    "docs/developer_guides/feature": {
+      "id": "docs/developer_guides/feature",
+      "title": "Feature",
+      "description": "",
+      "sidebar": "sidebar"
+    },
+    "docs/developer_guides/ui": {
+      "id": "docs/developer_guides/ui",
       "title": "UI",
       "description": "",
-      "sidebar": "tutorialSidebar"
+      "sidebar": "sidebar"
     },
-    "tutorial-extras/manage-docs-versions": {
-      "id": "tutorial-extras/manage-docs-versions",
+    "docs/developer_guides/util": {
+      "id": "docs/developer_guides/util",
+      "title": "Util",
+      "description": "",
+      "sidebar": "sidebar"
+    },
+    "docs/getting_started/manage-docs-versions": {
+      "id": "docs/getting_started/manage-docs-versions",
       "title": "Manage Docs Versions",
       "description": "Docusaurus can manage multiple versions of your docs.",
-      "sidebar": "tutorialSidebar"
+      "sidebar": "sidebar"
     },
-    "tutorial-extras/translate-your-site": {
-      "id": "tutorial-extras/translate-your-site",
+    "docs/getting_started/translate-your-site": {
+      "id": "docs/getting_started/translate-your-site",
       "title": "Translate your site",
       "description": "Let's translate docs/intro.md to French.",
-      "sidebar": "tutorialSidebar"
+      "sidebar": "sidebar"
+    },
+    "docs/intro": {
+      "id": "docs/intro",
+      "title": "Introduction",
+      "description": "Let's discover Docusaurus in less than 5 minutes.",
+      "sidebar": "sidebar"
     }
   }
 }

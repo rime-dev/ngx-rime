@@ -37,9 +37,21 @@ export default {
       "items": [
         {
           "type": "doc",
-          "docId": "intro",
+          "docId": "docs/intro",
           "position": "left",
           "label": "Docs"
+        },
+        {
+          "type": "doc",
+          "docId": "api/config",
+          "label": "API",
+          "position": "left"
+        },
+        {
+          "type": "doc",
+          "docId": "changelog/changelog",
+          "label": "Changelog",
+          "position": "left"
         },
         {
           "href": "https://github.com/rime-dev/ngx-rime",

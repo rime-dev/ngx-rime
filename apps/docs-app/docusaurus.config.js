@@ -24,6 +24,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js')
           // Please change this to your repo.
           //editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
+
         },
         blog: false,
         theme: {
@@ -45,9 +46,21 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'docs/intro',
             position: 'left',
             label: 'Docs',
+          },
+          {
+            type: "doc",
+            docId: "api/config",
+            label: "API",
+            position: "left"
+          },
+          {
+            type: "doc",
+            docId: "changelog/changelog",
+            label: "Changelog",
+            position: "left"
           },
           // {to: '/blog', label: 'Blog', position: 'left'},
           {

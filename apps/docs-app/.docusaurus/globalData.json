@@ -8,80 +8,135 @@
           "label": "Next",
           "isLast": true,
           "path": "/docs",
-          "mainDocId": "intro",
+          "mainDocId": "docs/intro",
           "docs": [
             {
-              "id": "api",
-              "path": "/docs/api",
-              "sidebar": "tutorialSidebar"
+              "id": "api/config",
+              "path": "/docs/api/config",
+              "sidebar": "api"
             },
             {
-              "id": "intro",
+              "id": "api/createStorageRef",
+              "path": "/docs/api/createStorageRef",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/createUploadTask",
+              "path": "/docs/api/createUploadTask",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/FireEntityCollectionDataService",
+              "path": "/docs/api/FireEntityCollectionDataService",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/OrderByDirection",
+              "path": "/docs/api/OrderByDirection",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/RimeBaseMockModule",
+              "path": "/docs/api/RimeBaseMockModule",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/RimeBaseModule",
+              "path": "/docs/api/RimeBaseModule",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/RimeBaseTestingModule",
+              "path": "/docs/api/RimeBaseTestingModule",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/RimeStorageMockModule",
+              "path": "/docs/api/RimeStorageMockModule",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/sidebars",
+              "path": "/docs/api/sidebars",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/User",
+              "path": "/docs/api/User",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/VERSION",
+              "path": "/docs/api/VERSION",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/WhereFilterOp",
+              "path": "/docs/api/WhereFilterOp",
+              "sidebar": "api"
+            },
+            {
+              "id": "changelog/changelog",
+              "path": "/docs/changelog/"
+            },
+            {
+              "id": "docs/developer_guides/data-access",
+              "path": "/docs/docs/developer_guides/data-access",
+              "sidebar": "sidebar"
+            },
+            {
+              "id": "docs/developer_guides/feature",
+              "path": "/docs/docs/developer_guides/feature",
+              "sidebar": "sidebar"
+            },
+            {
+              "id": "docs/developer_guides/ui",
+              "path": "/docs/docs/developer_guides/ui",
+              "sidebar": "sidebar"
+            },
+            {
+              "id": "docs/developer_guides/util",
+              "path": "/docs/docs/developer_guides/util",
+              "sidebar": "sidebar"
+            },
+            {
+              "id": "docs/getting_started/manage-docs-versions",
+              "path": "/docs/docs/getting_started/manage-docs-versions",
+              "sidebar": "sidebar"
+            },
+            {
+              "id": "docs/getting_started/translate-your-site",
+              "path": "/docs/docs/getting_started/translate-your-site",
+              "sidebar": "sidebar"
+            },
+            {
+              "id": "docs/intro",
               "path": "/docs/",
-              "sidebar": "tutorialSidebar"
+              "sidebar": "sidebar"
             },
             {
-              "id": "tutorial-basics/congratulations",
-              "path": "/docs/tutorial-basics/congratulations",
-              "sidebar": "tutorialSidebar"
+              "id": "/category/getting-started",
+              "path": "/docs/category/getting-started",
+              "sidebar": "sidebar"
             },
             {
-              "id": "tutorial-basics/create-a-blog-post",
-              "path": "/docs/tutorial-basics/create-a-blog-post",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "tutorial-basics/create-a-document",
-              "path": "/docs/tutorial-basics/create-a-document",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "tutorial-basics/create-a-page",
-              "path": "/docs/tutorial-basics/create-a-page",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "tutorial-basics/deploy-your-site",
-              "path": "/docs/tutorial-basics/deploy-your-site",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "tutorial-basics/markdown-features",
-              "path": "/docs/tutorial-basics/markdown-features",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "tutorial-basics/ui",
-              "path": "/docs/tutorial-basics/ui",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "tutorial-extras/manage-docs-versions",
-              "path": "/docs/tutorial-extras/manage-docs-versions",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "tutorial-extras/translate-your-site",
-              "path": "/docs/tutorial-extras/translate-your-site",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "/category/tutorial---basics",
-              "path": "/docs/category/tutorial---basics",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "/category/tutorial---extras",
-              "path": "/docs/category/tutorial---extras",
-              "sidebar": "tutorialSidebar"
+              "id": "/category/developer-guides",
+              "path": "/docs/category/developer-guides",
+              "sidebar": "sidebar"
             }
           ],
           "draftIds": [],
           "sidebars": {
-            "tutorialSidebar": {
+            "sidebar": {
               "link": {
                 "path": "/docs/",
-                "label": "intro"
+                "label": "docs/intro"
+              }
+            },
+            "api": {
+              "link": {
+                "path": "/docs/api/RimeBaseModule",
+                "label": "api/RimeBaseModule"
               }
             }
           }

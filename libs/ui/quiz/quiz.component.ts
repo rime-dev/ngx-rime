@@ -17,6 +17,9 @@ import {RimeQuizQuestionComponent} from './components/quiz-question/quiz-questio
 import {RimeQuestion, RimeQuizMode} from './models/quiz.model';
 import {RimeQuizService} from './services/quiz.service';
 
+/**
+ * Component to create a quiz
+ */
 @Component({
   selector: 'rime-quiz',
   templateUrl: './quiz.component.html',
