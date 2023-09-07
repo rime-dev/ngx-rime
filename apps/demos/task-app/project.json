@@ -17,7 +17,10 @@
         "inlineStyleLanguage": "scss",
         "assets": ["apps/demos/task-app/src/favicon.ico", "apps/demos/task-app/src/assets"],
         "styles": ["apps/demos/task-app/src/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "stylePreprocessorOptions": {
+          "includePaths": ["node_modules/"]
+        }
       },
       "configurations": {
         "production": {

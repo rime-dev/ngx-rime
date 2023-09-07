@@ -4,7 +4,6 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import '@angular/material/theming';
 
 @mixin _palette-styles($palette) {
   background: mat.get-color-from-palette($palette, default);

@@ -1,8 +1,4 @@
-<header class="bg-white shadow">
-  <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-bold text-gray-900">Dashboard</h1>
-  </div>
-</header>
+
 <main>
   <div class="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
     <div class="flex flex-row">
@@ -43,7 +39,7 @@
     <mat-list>
       <ng-container *ngFor="let event of events$ | async">
         <mat-list-item *ngIf="!editMode || selectedEvent?.id !== event.id">
-          <mat-icon mat-list-icon>folder</mat-icon>
+          <mat-icon matListItemIcon>folder</mat-icon>
           <div class="flex items-center w-full">
             {{ event.data.title }}
             <div style="margin-left: auto">
@@ -57,7 +53,7 @@
           </div>
         </mat-list-item>
         <mat-list-item *ngIf="editMode && selectedEvent?.id === event.id">
-          <mat-icon mat-list-icon>folder</mat-icon>
+          <mat-icon matListItemIcon>folder</mat-icon>
           <form [formGroup]="form" class="flex items-center w-full" (ngSubmit)="saveEdition()">
             <mat-form-field class="w-full" appearance="outline">
               <mat-label>title</mat-label>

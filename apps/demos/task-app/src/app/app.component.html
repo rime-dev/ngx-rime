@@ -1,9 +1,11 @@
 <rime-shell
   [topRoutes]="topRoutes"
   [sideRoutes]="sideRoutes"
+  [toolbarColor]="'accent'"
   [appName]="title"
   [logo]="logo"
   [hasSidenav]="true"
 >
+   <span topBarItem> {{ titlePage | transloco }} </span>
   <router-outlet> </router-outlet>
 </rime-shell>

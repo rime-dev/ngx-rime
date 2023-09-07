@@ -21,7 +21,7 @@
       <div class="flex flex-col relative w-full h-full overflow-x-hidden">
         <mat-list>
           <mat-list-item>
-            <img *ngIf="logo" class="h-8 w-8" matListIcon [src]="logo.src" [alt]="logo.alt" />
+            <img *ngIf="logo" class="h-8 w-8" matListItemIcon [src]="logo.src" [alt]="logo.alt" />
             <p *ngIf="appName" class="text-xl" matLine>{{ appName }}</p>
           </mat-list-item>
         </mat-list>
@@ -34,8 +34,8 @@
                 [matTooltip]="!fixedSidenavOpened && route.text ? route.text : ''"
                 matTooltipPosition="right"
               >
-                <mat-icon matListIcon>{{ route.icon }}</mat-icon>
-                <p matLine>{{ route.text }}</p>
+                <mat-icon matListItemIcon>{{ route.icon }}</mat-icon>
+                <p matListItemLine>{{ route.text }}</p>
               </mat-list-item>
             </ng-container>
 
@@ -45,10 +45,10 @@
                 [matTooltip]="!fixedSidenavOpened ? '' + route.text : ''"
                 matTooltipPosition="right"
               >
-                <mat-icon matListIcon *ngIf="!fixedSidenavOpened"
+                <mat-icon matListItemIcon *ngIf="!fixedSidenavOpened"
                   ><span class="flex justify-center">·</span></mat-icon
                 >
-                <p matLine>{{ route.text }}</p>
+                <p matListItemLine>{{ route.text }}</p>
                 <mat-icon>{{ route.opened ? 'expand_less' : 'expand_more' }}</mat-icon>
               </mat-list-item>
               <ng-container *ngFor="let childRoute of route.children">
@@ -59,8 +59,8 @@
                   [matTooltip]="!fixedSidenavOpened ? '' + route.text : ''"
                   matTooltipPosition="right"
                 >
-                  <mat-icon matListIcon>{{ childRoute.icon }}</mat-icon>
-                  <p matLine>{{ childRoute.text }}</p>
+                  <mat-icon matListItemIcon>{{ childRoute.icon }}</mat-icon>
+                  <p matListItemLine>{{ childRoute.text }}</p>
                 </mat-list-item>
               </ng-container>
             </ng-container>
