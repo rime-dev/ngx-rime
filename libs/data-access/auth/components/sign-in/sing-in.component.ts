@@ -6,6 +6,7 @@ import {RimeAuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'rime-sign-in',
+  styles: ['::ng-deep { .mdc-notched-outline__notch { border-right: none; }}'],
   templateUrl: './sign-in.component.html',
 })
 export class RimeSignInComponent {

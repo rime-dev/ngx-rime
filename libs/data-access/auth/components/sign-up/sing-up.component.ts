@@ -6,6 +6,7 @@ import {RIME_AUTH_CONFIG} from '../../models/auth.token';
 
 @Component({
   selector: 'rime-sign-up',
+  styles: ['::ng-deep { .mdc-notched-outline__notch { border-right: none; }}'],
   templateUrl: './sign-up.component.html',
 })
 export class RimeSignUpComponent {

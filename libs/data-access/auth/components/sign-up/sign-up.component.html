@@ -5,7 +5,7 @@
   <button mat-icon-button class="absolute top-0 left-0" routerLink="/">
     <mat-icon>arrow_back</mat-icon>
   </button>
-  <mat-card appearance="outlined" class="max-w-lg w-full space-y-8 rounded-lg p-4 border mat-elevation-z2">
+  <mat-card appearance="outlined" class="max-w-lg w-full space-y-2 rounded-lg p-4 border mat-elevation-z2">
     <div>
       <!-- <img
         class="mx-auto h-12 w-auto"
@@ -16,9 +16,9 @@
         {{ 'rimeAuth.signUp' | transloco }}
       </h2>
     </div>
-    <form [formGroup]="form" class="mt-8 space-y-6" (ngSubmit)="submit()">
+    <form [formGroup]="form" class="mt-8 space-y-4" (ngSubmit)="submit()">
       <input type="hidden" name="remember" value="true" />
-      <div class="rounded-md -space-y-px">
+      <div class="rounded-md space-y-4 flex flex-col gap-4">
         <mat-form-field class="w-full" appearance="outline">
           <mat-label>{{ 'rimeAuth.email' | transloco }}</mat-label>
           <input

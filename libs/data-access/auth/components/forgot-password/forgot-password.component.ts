@@ -4,6 +4,7 @@ import {RimeAuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'rime-forgot-password',
+  styles: ['::ng-deep { .mdc-notched-outline__notch { border-right: none; }}'],
   templateUrl: './forgot-password.component.html',
 })
 export class RimeForgotPasswordComponent {

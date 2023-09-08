@@ -4,6 +4,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import '@angular/material/theming';
 
 @mixin _palette-styles($palette) {
   background: mat.get-color-from-palette($palette, default);
@@ -20,6 +21,9 @@
   .mat-sidenav-container {
     background: mat.get-color-from-palette($background, background);
     color: mat.get-color-from-palette($foreground, text);
+    mat-icon, .mdc-list-item__secondary-text, .mdc-list-item__primary-text {
+      color: inherit !important;
+    }
     &[color='primary'] {
       @include _palette-styles($primary);
     }
@@ -50,7 +54,7 @@
   $warn: map.get($theme, warn);
   $foreground: map.get($theme, foreground);
   $background: map.get($theme, background);
-  .mat-mdc-card {
+  .mat-card {
     background: mat.get-color-from-palette($background, background);
     color: mat.get-color-from-palette($foreground, text);
     &[color='primary'] {
@@ -75,14 +79,14 @@
       background: mat.get-color-from-palette($background, background);
     }
     border-radius: 14px;
-    &.mat-mdc-tooltip-panel {
+    &.mat-tooltip-panel {
       background: transparent;
     }
-    .mat-mdc-dialog-container {
+    .mat-dialog-container {
       border-radius: 12px;
 
       @media screen and (max-width: 500px) {
-        .mat-mdc-dialog-content {
+        .mat-dialog-content {
           // max-height: 80vh;
           height: 80vh;
         }
@@ -101,11 +105,8 @@
   }
 }
 // This fixes https://github.com//issues/4609
-/* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version.*/
-/* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version.*/
 .mat-dialog-override {
   height: 0px;
-  /* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version.*/
   mat-dialog-container {
     > :first-child {
       display: flex;
@@ -237,6 +238,7 @@ $elares-dark-theme: mat.define-dark-theme(
     ),
   )
 );
+@include mat.core-color($elares-default-theme);
 @include mat.all-component-themes($elares-default-theme);
 @include sidenav-component-theme($elares-default-theme);
 @include overlay-component-theme($elares-default-theme);
@@ -260,17 +262,14 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
-mat-card.mat-mdc-card {
+mat-card.mat-card {
   border-radius: 8px;
   min-width: 16rem;
 }
-/* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.*/
-mat-chip.mat-mdc-chip {
+mat-chip.mat-chip {
   user-select: none;
 }
-/* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.*/
-mat-chip.mat-mdc-chip.mat-chip-selected {
+mat-chip.mat-chip.mat-chip-selected {
   cursor: pointer;
 }
 
@@ -323,7 +322,6 @@ $color-config: mat.get-color-config($elares-default-theme);
 }
 ::ng-deep {
   @media screen and (max-width: 500px) {
-    /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
     div.mat-list-item-content,
     div.mat-list-text {
       padding: 0 !important;

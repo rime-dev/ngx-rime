@@ -5,6 +5,7 @@ import {RimeAuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'rime-verify-email',
+  styles: ['::ng-deep { .mdc-notched-outline__notch { border-right: none; }}'],
   templateUrl: './verify-email.component.html',
 })
 export class RimeVerifyEmailComponent {

@@ -30,8 +30,8 @@ const publishLibs = (version: string): Rule => {
     let command = '';
     command += 'cd dist/libs/' + lib;
     command += '&&';
-    //command += `npm version ${version}`;
-    //command += '&&';
+    command += `npm version ${version}`;
+    command += '&&';
     command += 'npm pack';
     command += '&&';
     command += 'npm publish';

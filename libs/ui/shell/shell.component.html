@@ -13,7 +13,6 @@
       (keydown.escape)="sidenavOpened = false"
       class="md:block m-1.5 rounded-2xl"
       [attr.color]="'primary'"
-      color="primary"
       [ngClass]="{
         'fixed-sidenav-minimized': !fixedSidenavOpened
       }"
@@ -22,7 +21,7 @@
         <mat-list>
           <mat-list-item>
             <img *ngIf="logo" class="h-8 w-8" matListItemIcon [src]="logo.src" [alt]="logo.alt" />
-            <p *ngIf="appName" class="text-xl" matLine>{{ appName }}</p>
+            <p *ngIf="appName" color="accent" class="text-xl" matListItemLine>{{ appName }}</p>
           </mat-list-item>
         </mat-list>
         <mat-action-list class="h-full w-full overflow-y-auto overflow-x-hidden">
@@ -35,7 +34,7 @@
                 matTooltipPosition="right"
               >
                 <mat-icon matListItemIcon>{{ route.icon }}</mat-icon>
-                <p matListItemLine>{{ route.text }}</p>
+                <p matListItemTitle>{{ route.text }}</p>
               </mat-list-item>
             </ng-container>
 
@@ -68,10 +67,10 @@
           </ng-container>
         </mat-action-list>
 
-        <mat-action-list *ngIf="!isMobile" class="w-full p-0">
+        <mat-action-list *ngIf="!isMobile" class="w-full p-0 color-accent">
           <mat-divider></mat-divider>
           <mat-list-item mat-button (click)="toggleFixedSidenav()">
-            <mat-icon>{{
+            <mat-icon matListItemIcon >{{
               fixedSidenavOpened ? 'keyboard_arrow_left' : 'keyboard_arrow_right'
             }}</mat-icon>
           </mat-list-item>
