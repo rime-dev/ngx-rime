@@ -27,7 +27,7 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nx generate publish ${version}"
+        "command": "nx workspace-generator publish ${version}"
       }
     }
   }
