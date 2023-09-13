@@ -2,6 +2,8 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.0](https://github.com/rime-dev/ngx-rime/compare/v15.0.0-alpha...v0.1.0) (2023-09-13)
+
 ## [1.0.1](https://github.com/rime-dev/ngx-rime/compare/v1.0.0...v1.0.1) (2023-08-07)
 
 
