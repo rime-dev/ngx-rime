@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+
 import {RimeLazyLoadImageDirective} from './lazy-load-image.directive';
 
 @NgModule({

@@ -1,8 +1,10 @@
 import {Injectable, NgZone, OnDestroy} from '@angular/core';
 import {GoogleAuthProvider} from '@angular/fire/auth';
 import {Router} from '@angular/router';
-import firebase from 'firebase/compat';
 import {BehaviorSubject, of, Subject} from 'rxjs';
+
+import firebase from 'firebase/compat';
+
 import {User} from '../models/auth.model';
 
 @Injectable()
@@ -32,7 +34,7 @@ export class RimeAuthTestingService implements OnDestroy {
   async signIn(email: string, password: string): Promise<void> {
     const user: User = {
       uid: 'ABC',
-      email: email,
+      email,
       displayName: 'carlos',
       photoURL: '',
       emailVerified: true,
@@ -48,7 +50,7 @@ export class RimeAuthTestingService implements OnDestroy {
   async signUp(email: string, password: string) {
     const user: User = {
       uid: 'ABC',
-      email: email,
+      email,
       displayName: 'carlos',
       photoURL: '',
       emailVerified: true,

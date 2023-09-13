@@ -23,6 +23,7 @@ export class RimeLazyLoadImageDirective implements AfterViewInit {
     timer(0)
       .pipe(take(1))
       .subscribe(() => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         this.canLazyLoad() ? this.lazyLoadImage() : this.loadImage();
       });
   }

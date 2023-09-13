@@ -1,13 +1,15 @@
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterTestingModule} from '@angular/router/testing';
+
+import {TranslocoModule} from '@ngneat/transloco';
 import {Meta, moduleMetadata, Story} from '@storybook/angular';
+
+import {TranslocoRootModule} from '../../../../common/transloco-root.module';
 import {RimeAuthComponentsModule, RimeAuthConfig} from '../../auth.module';
 import {RIME_AUTH_CONFIG} from '../../models/auth.token';
 import {RimeAuthTestingService} from '../../services/auth.mock.service';
 import {RimeAuthService} from '../../services/auth.service';
 import {RimeSignInComponent} from './sing-in.component';
-import {TranslocoModule} from '@ngneat/transloco';
-import {TranslocoRootModule} from '../../../../common/transloco-root.module';
 
 const authConfig: RimeAuthConfig = {
   disableRegister: true,

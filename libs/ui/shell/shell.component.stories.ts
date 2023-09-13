@@ -1,34 +1,35 @@
 import {Component} from '@angular/core';
-import {RouterTestingModule} from '@angular/router/testing';
-import {RimeRoutes, RimeShellLogo} from '@ngx-rime/ui/shell';
-import {Meta, moduleMetadata, Story} from '@storybook/angular';
-import {RimeShellModule} from './shell.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RouterTestingModule} from '@angular/router/testing';
+
+import {RimeRoutes} from '@ngx-rime/ui/shell';
+import {Meta, moduleMetadata, Story} from '@storybook/angular';
+
 import {RimeUserAccountPopupModule} from '../user-account-popup/user-account-popup.module';
+import {RimeShellModule} from './shell.module';
 
 const logoTemplate = {
   src: 'https://raw.githubusercontent.com/rime-dev/ngx-rime/main/images/ngx-rime-logo.png',
-  alt: 'NGX-RIME APP'
+  alt: 'NGX-RIME APP',
 };
 
 const topRoutes = [
   {
     path: '/home',
-    text: 'Home'
+    text: 'Home',
   },
   {
     path: '/tasks',
-    text: 'Tasks'
-  }
+    text: 'Tasks',
+  },
 ];
-
 
 const sideRoutes = [
   {
     path: '/home',
     text: 'Home',
     icon: 'home',
-    divider: true
+    divider: true,
   },
   {
     text: 'Tools',
@@ -36,13 +37,13 @@ const sideRoutes = [
       {
         path: '/tasks',
         text: 'Tasks',
-        icon: 'build'
+        icon: 'build',
       },
     ],
   },
   {
     divider: true,
-  }
+  },
 ];
 
 @Component({
@@ -165,7 +166,7 @@ TopMenu.args = {
     updatedAt: new Date(2022, 5, 22),
     logo: logoTemplate,
   },
-  topRoutes: topRoutes,
+  topRoutes,
   hasSidenav: false,
 };
 
@@ -178,7 +179,7 @@ TopMenuWithButtons.args = {
     updatedAt: new Date(2022, 5, 22),
     logo: logoTemplate,
   },
-  topRoutes: topRoutes,
+  topRoutes,
   hasSidenav: false,
   showUserPopup: true,
   showButton: false,
@@ -193,7 +194,7 @@ SideMenu.args = {
     updatedAt: new Date(2022, 5, 22),
     logo: logoTemplate,
   },
-  sideRoutes: sideRoutes,
+  sideRoutes,
   hasSidenav: true,
 };
 
@@ -206,7 +207,7 @@ SideMenuWithButtons.args = {
     updatedAt: new Date(2022, 5, 22),
     logo: logoTemplate,
   },
-  sideRoutes: sideRoutes,
+  sideRoutes,
   hasSidenav: true,
   showButton: true,
   showUserPopup: true,

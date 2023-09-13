@@ -10,6 +10,7 @@ import {Inject, Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {Observable, of, throwError} from 'rxjs';
 import {catchError, delay, map, timeout} from 'rxjs/operators';
+
 import {ENTITY_CONFIG, ENTITY_NAME} from '../../constants/base.constant';
 import {
   arrayFilter,
@@ -91,7 +92,7 @@ export class RimeFireDataMockService<T> {
    */
   delete(uid: string): Observable<string> {
     let err: Error | undefined;
-    if (uid == null) {
+    if (uid === null || uid === undefined) {
       err = new Error(`No "${this.entityName}" key to delete`);
     }
     return this.execute('delete', uid, err).pipe(map((result) => uid));
@@ -111,7 +112,7 @@ export class RimeFireDataMockService<T> {
    */
   getById(uid: string): Observable<T> {
     let err: Error | undefined;
-    if (uid == null) {
+    if (uid === null || uid === undefined) {
       err = new Error(`No "${this.entityName}" uid to get`);
     }
     return this.execute('get', uid, err);

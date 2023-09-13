@@ -1,5 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
+
 import {EntityCollectionServiceBase, EntityCollectionServiceElementsFactory} from '@ngrx/data';
+
 import {ENTITY_CONFIG} from '../../constants/base.constant';
 import {FireEntityCollectionDataService, RimeStateEntityConfig} from '../../models/base.model';
 

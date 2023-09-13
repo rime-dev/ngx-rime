@@ -2,12 +2,13 @@ import {
   AngularFireStorage,
   AngularFireStorageReference,
   AngularFireUploadTask,
-  fromTask
+  fromTask,
 } from '@angular/fire/compat/storage';
+import {of} from 'rxjs';
+import {map} from 'rxjs/operators';
+
 import firebase from 'firebase/compat';
-import { StringFormat, UploadMetadata } from 'firebase/storage';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {StringFormat, UploadMetadata} from 'firebase/storage';
 
 export class RimeangularFireStorage implements AngularFireStorage {
   storage!: firebase.storage.Storage;

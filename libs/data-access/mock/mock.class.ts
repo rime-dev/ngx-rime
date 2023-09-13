@@ -1,3 +1,4 @@
+import {coerceNumberProperty} from '@angular/cdk/coercion';
 import {
   HttpEvent,
   HttpHandler,
@@ -9,7 +10,6 @@ import {
 import {Inject, Injectable} from '@angular/core';
 import {Observable, of, throwError} from 'rxjs';
 import {delay, dematerialize, filter, materialize, mergeMap, switchMap} from 'rxjs/operators';
-import {coerceNumberProperty} from '@angular/cdk/coercion';
 @Injectable()
 export class RimeMockInterceptor implements HttpInterceptor {
   constructor(@Inject('VALUES') private _values: any) {}

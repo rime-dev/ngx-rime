@@ -10,6 +10,7 @@ import {Inject, Injectable} from '@angular/core';
 import {AngularFirestore, CollectionReference, FieldPath} from '@angular/fire/compat/firestore';
 import {from, Observable, of, throwError} from 'rxjs';
 import {catchError, delay, map, switchMap, timeout} from 'rxjs/operators';
+
 import {ENTITY_CONFIG, ENTITY_NAME} from '../../constants/base.constant';
 import {
   ConditionalQueryFirestore,
@@ -88,14 +89,10 @@ export class RimeFireDataService<T> {
    */
   delete(uid: string): Observable<string> {
     let err: Error | undefined;
-    if (uid == null) {
+    if (uid === null || uid === undefined) {
       err = new Error(`No "${this.entityName}" key to delete`);
     }
-    return this.execute('delete', uid, err).pipe(
-      map((result) => {
-        return {...result};
-      })
-    );
+    return this.execute('delete', uid, err).pipe(map((result) => ({...result})));
   }
 
   /**
@@ -112,7 +109,7 @@ export class RimeFireDataService<T> {
    */
   getById(uid: string): Observable<T> {
     let err: Error | undefined;
-    if (uid == null) {
+    if (uid === null || uid === undefined) {
       err = new Error(`No "${this.entityName}" uid to get`);
     }
     return this.execute('get', uid, err);
@@ -313,9 +310,7 @@ export class RimeFireDataService<T> {
               console.error(error);
               return throwError(error);
             }),
-            map((object) => {
-              return new RimeFireDataObject(object);
-            })
+            map((object) => new RimeFireDataObject(object))
           );
       } else if (!document && data) {
         let ref: CollectionReference<unknown>;

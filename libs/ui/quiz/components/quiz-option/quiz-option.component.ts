@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+
 import {RimeQuestion, RimeQuestionOption, RimeQuizMode} from '../../models/quiz.model';
 import {RimeQuizService} from '../../services/quiz.service';
 
@@ -42,9 +43,8 @@ export class RimeQuizOptionComponent implements OnInit {
   @HostBinding('option-selected') get valid() {
     if (this.option) {
       return this.option.response;
-    } else {
-      return;
     }
+    return undefined;
   }
 
   @Output() selected: EventEmitter<RimeQuestionOption> = new EventEmitter<RimeQuestionOption>();

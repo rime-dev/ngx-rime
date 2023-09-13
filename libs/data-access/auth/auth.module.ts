@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {APP_INITIALIZER, InjectionToken, NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -10,7 +10,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {Router, RouterModule, Routes} from '@angular/router';
+
 import {LangDefinition, Translation, TranslocoModule, TranslocoService} from '@ngneat/transloco';
+
 import {RimeForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 import {RimeSignInComponent} from './components/sign-in/sing-in.component';
 import {RimeSignUpComponent} from './components/sign-up/sing-up.component';

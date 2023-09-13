@@ -1,5 +1,6 @@
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+
 import {arrayFilter, ConditionalQueryFirestore, RimeEntityState} from '../models/base.model';
 
 export const dataFilter =

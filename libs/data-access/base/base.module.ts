@@ -3,6 +3,7 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import {AngularFireModule, FIREBASE_OPTIONS} from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFirestoreModule, ENABLE_PERSISTENCE} from '@angular/fire/compat/firestore';
+
 import {
   DefaultDataServiceFactory,
   EntityDataModule,
@@ -12,6 +13,7 @@ import {
 import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+
 import {ENTITY_CONFIG} from './constants/base.constant';
 import {FirebaseConfig} from './models/base.model';
 import {RimeDataService} from './services/data/data.service';

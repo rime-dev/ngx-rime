@@ -7,10 +7,12 @@ import {
   AngularFireStorageReference,
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
-import firebase from 'firebase/compat';
+import {UploadTask} from '@angular/fire/compat/storage/interfaces';
 import {Observable, of, Subject} from 'rxjs';
+
+import firebase from 'firebase/compat';
+
 import {RimeMockStorageReference} from './firebase-reference-mock';
-import {UploadTask} from "@angular/fire/compat/storage/interfaces";
 
 export abstract class RimeStorageMock {
   private static dataURL: string;
@@ -37,19 +39,30 @@ export class RimeStorageUploadTaskService {
 }
 
 @Injectable()
-export class RimeStorageUploadTaskMockService extends RimeStorageMock implements AngularFireStorage {
+export class RimeStorageUploadTaskMockService
+  extends RimeStorageMock
+  implements AngularFireStorage
+{
   storage!: never;
   private path!: string;
   private file!: Blob;
 
   ref(path: string): AngularFireStorageReference {
     this.path = path;
-    const reference = new RimeMockStorageReference(RimeStorageUploadTaskMockService, path, undefined);
+    const reference = new RimeMockStorageReference(
+      RimeStorageUploadTaskMockService,
+      path,
+      undefined
+    );
     return reference as unknown as AngularFireStorageReference;
   }
   refFromURL(path: string): AngularFireStorageReference {
     this.path = path;
-    const reference = new RimeMockStorageReference(RimeStorageUploadTaskMockService, path, undefined);
+    const reference = new RimeMockStorageReference(
+      RimeStorageUploadTaskMockService,
+      path,
+      undefined
+    );
     return reference as unknown as AngularFireStorageReference;
   }
   upload(

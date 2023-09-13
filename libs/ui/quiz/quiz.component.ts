@@ -13,6 +13,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
+
 import {RimeQuizQuestionComponent} from './components/quiz-question/quiz-question.component';
 import {RimeQuestion, RimeQuizMode} from './models/quiz.model';
 import {RimeQuizService} from './services/quiz.service';
@@ -75,7 +76,8 @@ export class RimeQuizComponent implements AfterViewInit, OnDestroy {
   @Output() finalized: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   // Query all child elements
-  @ViewChildren(RimeQuizQuestionComponent) questionsComponent!: QueryList<RimeQuizQuestionComponent>;
+  @ViewChildren(RimeQuizQuestionComponent)
+  questionsComponent!: QueryList<RimeQuizQuestionComponent>;
 
   @HostBinding('attr.tabIndex') tabIndex = 1;
 

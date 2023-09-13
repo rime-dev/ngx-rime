@@ -1,1 +1,6 @@
-node_modules
+# Add files here to ignore them from prettier formatting
+
+/dist
+/coverage
+/**/assets
+node_modules/
