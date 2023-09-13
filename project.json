@@ -1,5 +1,6 @@
 {
   "name": "workspace",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
   "targets": {
     "version": {
       "executor": "@jscutlery/semver:version",
@@ -8,9 +9,19 @@
         "target": "main",
         "syncVersions": true,
         "headerPattern": "^([A-Z]{3,}-\\d{1,5}):? (chore|build|ci|docs|feat|fix|perf|refactor|test)(?:\\(([\\w-]+)\\))?\\S* (.+)$",
-        "headerCorrespondence": ["ticketReference", "type", "scope", "subject"],
-        "skipCommitTypes": ["docs", "ci"],
-        "postTargets": ["workspace:publish"]
+        "headerCorrespondence": [
+          "ticketReference",
+          "type",
+          "scope",
+          "subject"
+        ],
+        "skipCommitTypes": [
+          "docs",
+          "ci"
+        ],
+        "postTargets": [
+          "workspace:publish"
+        ]
       }
     },
     "publish": {

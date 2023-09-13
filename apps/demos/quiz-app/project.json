@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/demos/quiz-app",
         "index": "apps/demos/quiz-app/src/index.html",
@@ -15,8 +17,13 @@
         "polyfills": "apps/demos/quiz-app/src/polyfills.ts",
         "tsConfig": "apps/demos/quiz-app/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/demos/quiz-app/src/favicon.ico", "apps/demos/quiz-app/src/assets"],
-        "styles": ["apps/demos/quiz-app/src/styles.scss"],
+        "assets": [
+          "apps/demos/quiz-app/src/favicon.ico",
+          "apps/demos/quiz-app/src/assets"
+        ],
+        "styles": [
+          "apps/demos/quiz-app/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -73,12 +80,17 @@
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/demos/quiz-app/src/**/*.ts", "apps/demos/quiz-app/src/**/*.html"]
+        "lintFilePatterns": [
+          "apps/demos/quiz-app/src/**/*.ts",
+          "apps/demos/quiz-app/src/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/apps/demos/quiz-app"],
+      "outputs": [
+        "{workspaceRoot}/coverage/apps/demos/quiz-app"
+      ],
       "options": {
         "jestConfig": "apps/demos/quiz-app/jest.config.ts",
         "passWithNoTests": true

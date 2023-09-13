@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/ngx-rime-app",
         "index": "apps/ngx-rime-app/src/index.html",
@@ -15,8 +17,13 @@
         "polyfills": "apps/ngx-rime-app/src/polyfills.ts",
         "tsConfig": "apps/ngx-rime-app/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/ngx-rime-app/src/favicon.ico", "apps/ngx-rime-app/src/assets"],
-        "styles": ["apps/ngx-rime-app/src/styles.scss"],
+        "assets": [
+          "apps/ngx-rime-app/src/favicon.ico",
+          "apps/ngx-rime-app/src/assets"
+        ],
+        "styles": [
+          "apps/ngx-rime-app/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -73,12 +80,17 @@
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/ngx-rime-app/src/**/*.ts", "apps/ngx-rime-app/src/**/*.html"]
+        "lintFilePatterns": [
+          "apps/ngx-rime-app/src/**/*.ts",
+          "apps/ngx-rime-app/src/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/apps/ngx-rime-app"],
+      "outputs": [
+        "{workspaceRoot}/coverage/apps/ngx-rime-app"
+      ],
       "options": {
         "jestConfig": "apps/ngx-rime-app/jest.config.ts",
         "passWithNoTests": true
