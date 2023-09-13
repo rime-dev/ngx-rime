@@ -1,6 +1,6 @@
 {
   "name": "ngx-rime",
-  "version": "0.1.0",
+  "version": "1.1.2",
   "description": "Angular architecture utilities",
   "keywords": [
     "Angular"
@@ -103,10 +103,10 @@
     "zone.js": "0.13.1"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "0.1502.4",
     "@angular-devkit/build-angular": "15.2.9",
     "@angular-devkit/core": "15.2.9",
     "@angular-devkit/schematics": "15.2.9",
+    "@angular-devkit/architect": "0.1502.4",
     "@angular-eslint/eslint-plugin": "15.2.1",
     "@angular-eslint/eslint-plugin-template": "15.2.1",
     "@angular-eslint/template-parser": "15.2.1",
@@ -115,7 +115,6 @@
     "@angular/language-service": "15.2.9",
     "@commitlint/cli": "17.6.7",
     "@commitlint/config-conventional": "17.6.7",
-    "@jscutlery/semver": "^3.1.0",
     "@ngneat/tailwind": "7.0.3",
     "@nrwl/tao": "16.5.5",
     "@nx/angular": "16.5.5",
