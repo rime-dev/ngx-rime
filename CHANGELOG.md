@@ -2,6 +2,14 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [15.1.0](https://github.com/rime-dev/ngx-rime/compare/v15.0.0...v15.1.0) (2023-09-13)
+
+
+### Features
+
+* add version ([9dda5de](https://github.com/rime-dev/ngx-rime/commit/9dda5de0e7fae9267a533ea064fa304b016d6af8))
+* change version command ([06aefad](https://github.com/rime-dev/ngx-rime/commit/06aefad2080c17be3d1810038a7c158a812ff44e))
+
 ## [1.0.1](https://github.com/rime-dev/ngx-rime/compare/v1.0.0...v1.0.1) (2023-08-07)
 
 

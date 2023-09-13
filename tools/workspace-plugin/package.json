@@ -1,6 +1,6 @@
 {
   "name": "@ngx-rime/workspace-plugin",
-  "version": "1.0.1",
+  "version": "15.1.0",
   "dependencies": {
     "tslib": "^2.3.0"
   },
