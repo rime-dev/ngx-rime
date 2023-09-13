@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/unbound-method */
+
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 import {RimeAuthService} from '../../services/auth.service';
 
 @Component({
@@ -20,6 +23,6 @@ export class RimeForgotPasswordComponent {
     if (this.form.invalid) {
       return;
     }
-    this.rimeAuthService.forgotPassword(this.form.controls.email.value);
+    void this.rimeAuthService.forgotPassword(this.form.controls.email.value);
   }
 }

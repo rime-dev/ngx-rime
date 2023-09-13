@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import {Component, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 import {RimeAuthConfig} from '../../auth.module';
-import {RimeAuthService} from '../../services/auth.service';
 import {RIME_AUTH_CONFIG} from '../../models/auth.token';
+import {RimeAuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'rime-sign-up',

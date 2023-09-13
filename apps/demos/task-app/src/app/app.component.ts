@@ -1,15 +1,14 @@
-import {Component, DestroyRef, inject, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {RimeRoutes, RimeShellLogo} from '@ngx-rime/ui/shell';
 import {NavigationEnd, Router} from "@angular/router";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {filter, tap} from "rxjs";
+import {filter, Subject, takeUntil, tap} from "rxjs";
 
 @Component({
   selector: 'rime-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent  {
+export class AppComponent implements OnDestroy {
   title = 'Task APP';
   titlePage = 'Task APP';
   logo: RimeShellLogo = {
@@ -31,7 +30,7 @@ export class AppComponent  {
       divider: true,
     },
   ];
-  private readonly destroy: DestroyRef = inject(DestroyRef);
+  private destroy = new Subject<void>();
 
   constructor(
     private router: Router,
@@ -46,10 +45,15 @@ export class AppComponent  {
             this.getTitlePage((event as NavigationEnd).url);
           },
         }),
-        takeUntilDestroyed(this.destroy)
+        takeUntil(this.destroy)
       )
       .subscribe();
   }
+  ngOnDestroy() {
+    this.destroy.next();
+    this.destroy.next();
+  }
+
   private getTitlePage(url: string) {
     const rimeRoute = this.sideRoutes.filter(
       (route) =>  route.path && url.includes(route.path) && route.text

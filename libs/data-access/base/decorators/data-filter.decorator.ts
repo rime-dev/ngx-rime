@@ -1,5 +1,6 @@
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+
 import {ConditionalQueryFirestore} from '../models/base.model';
 
 const filterOperator = {
@@ -35,16 +36,13 @@ export const DataFilter =
           (query as ConditionalQueryFirestore[]).map(
             (eachQuery) =>
               (propertyValue = propertyValue.pipe(
-                map((documents: any) =>
-                  arrayFilter(documents, eachQuery )
-                )
+                map((documents: any) => arrayFilter(documents, eachQuery))
               ))
           );
         } else {
           propertyValue = value;
           (query as ConditionalQueryFirestore[]).map(
-            (eachQuery) =>
-              (propertyValue = arrayFilter(propertyValue, eachQuery ))
+            (eachQuery) => (propertyValue = arrayFilter(propertyValue, eachQuery))
           );
         }
       } else {

@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/demos/task-app",
         "index": "apps/demos/task-app/src/index.html",
@@ -15,11 +17,18 @@
         "polyfills": "apps/demos/task-app/src/polyfills.ts",
         "tsConfig": "apps/demos/task-app/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/demos/task-app/src/favicon.ico", "apps/demos/task-app/src/assets"],
-        "styles": ["apps/demos/task-app/src/styles.scss"],
+        "assets": [
+          "apps/demos/task-app/src/favicon.ico",
+          "apps/demos/task-app/src/assets"
+        ],
+        "styles": [
+          "apps/demos/task-app/src/styles.scss"
+        ],
         "scripts": [],
         "stylePreprocessorOptions": {
-          "includePaths": ["node_modules/"]
+          "includePaths": [
+            "node_modules/"
+          ]
         }
       },
       "configurations": {
@@ -76,12 +85,17 @@
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/demos/task-app/src/**/*.ts", "apps/demos/task-app/src/**/*.html"]
+        "lintFilePatterns": [
+          "apps/demos/task-app/src/**/*.ts",
+          "apps/demos/task-app/src/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/apps/demos/task-app"],
+      "outputs": [
+        "{workspaceRoot}/coverage/apps/demos/task-app"
+      ],
       "options": {
         "jestConfig": "apps/demos/task-app/jest.config.ts",
         "passWithNoTests": true

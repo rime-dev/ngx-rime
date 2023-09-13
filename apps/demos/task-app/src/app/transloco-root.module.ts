@@ -19,7 +19,7 @@ import {
   FunctionalTranspiler,
   TRANSLOCO_MISSING_HANDLER,
   TranslocoConfig,
-  TranslocoMissingHandler, provideTransloco,
+  TranslocoMissingHandler, provideTransloco
 } from '@ngneat/transloco';
 
 import {environment} from '../environments/environment';

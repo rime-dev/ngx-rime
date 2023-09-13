@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import {from, Subject} from 'rxjs';
 import {delay, finalize, map, takeUntil, tap} from 'rxjs/operators';
+
 import {RimeQuestion, RimeQuestionOption} from '../../models/quiz.model';
 import {RimeQuizService} from '../../services/quiz.service';
 import {RimeQuizOptionComponent} from '../quiz-option/quiz-option.component';

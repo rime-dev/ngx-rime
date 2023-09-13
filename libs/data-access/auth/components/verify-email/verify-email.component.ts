@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs';
+
 import {User} from '../../models/auth.model';
 import {RimeAuthService} from '../../services/auth.service';
 
@@ -15,6 +16,6 @@ export class RimeVerifyEmailComponent {
   }
 
   sendVerificationMail() {
-    this.rimeAuthService.sendVerificationMail();
+    void this.rimeAuthService.sendVerificationMail();
   }
 }

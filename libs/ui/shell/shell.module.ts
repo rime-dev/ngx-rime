@@ -10,7 +10,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {RouterModule} from '@angular/router';
+
 import {RimeUserAccountPopupModule} from '@ngx-rime/ui/user-account-popup';
+
 import {RimeShellComponent} from './shell.component';
 
 @NgModule({

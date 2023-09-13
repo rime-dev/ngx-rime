@@ -11,6 +11,7 @@ import {AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/
 import {SafeUrl} from '@angular/platform-browser';
 import {Observable, of, Subject} from 'rxjs';
 import {finalize} from 'rxjs/operators';
+
 import {RimeStorageUploadTaskService} from './storage-upload-task.service';
 
 const STORAGE_UPLOADER_TOKEN = new InjectionToken<RimeStorageUploadTaskComponent>(
@@ -124,6 +125,9 @@ export class RimeStorageUploadTaskComponent implements OnInit, OnDestroy {
             };
             this.satinizedFileSubject.complete();
             this.finalize.emit(document);
+          })
+          .catch((error) => {
+            console.error(error);
           });
       })
     );

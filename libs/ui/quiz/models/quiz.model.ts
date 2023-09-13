@@ -1,7 +1,7 @@
 export class RimeQuestion {
   public index?: number;
   public title: string;
-  public options:RimeQuestionOption[];
+  public options: RimeQuestionOption[];
   public dirty?: boolean;
   public type: RimeQuestionType;
   public tags: string[];

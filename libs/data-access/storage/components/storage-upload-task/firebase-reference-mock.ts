@@ -57,9 +57,8 @@ export class RimeMockStorageReference<AngularFireStorageReference> {
     if (childPath) {
       if (paths.length === 0) {
         return this._children[childPath];
-      } else {
-        return this._children[childPath].child(paths.join('/'));
       }
+      return this._children[childPath].child(paths.join('/'));
     }
   }
 

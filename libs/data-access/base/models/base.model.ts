@@ -7,8 +7,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {FirebaseOptions} from '@angular/fire/app';
 import {FieldPath} from '@angular/fire/compat/firestore';
-import {EntityMetadataMap} from '@ngrx/data';
 import {Observable} from 'rxjs';
+
+import {EntityMetadataMap} from '@ngrx/data';
 
 export type FireEntityCollectionDataServiceBase<T> = FireEntityCollectionDataService<
   RimeEntityState<T>
