@@ -43,7 +43,9 @@ export class RimeAuthService implements OnDestroy {
       .then((result) => {
         const user = result.user as User;
         if (user) {
-          this.navigateTo('/dashboard');
+          setTimeout(() => {
+            this.navigateTo('/dashboard');
+          }, 0);
         }
       })
       .catch((error: Record<string, unknown>) => {
@@ -77,7 +79,9 @@ export class RimeAuthService implements OnDestroy {
     return this.angularFireAuth.currentUser
       .then((user) => user?.sendEmailVerification())
       .then(() => {
-        this.navigateTo('/verify-email-address');
+        setTimeout(() => {
+          this.navigateTo('/verify-email-address');
+        });
       });
   }
 
@@ -126,7 +130,9 @@ export class RimeAuthService implements OnDestroy {
       .signInWithPopup(provider)
       .then((result) => {
         if (result.user) {
-          this.navigateTo('/dashboard');
+          setTimeout(() => {
+            this.navigateTo('/dashboard');
+          });
           //await this.setUserData(result.user as User);
         }
       })
@@ -163,7 +169,9 @@ export class RimeAuthService implements OnDestroy {
   public signOut() {
     return this.angularFireAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.navigateTo('/sign-in');
+      setTimeout(() => {
+        this.navigateTo('/sign-in');
+      });
     });
   }
 

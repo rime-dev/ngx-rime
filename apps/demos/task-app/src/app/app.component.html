@@ -7,5 +7,7 @@
   [hasSidenav]="true"
 >
    <span topBarItem> {{ titlePage | transloco }} </span>
+  <rime-user-account-popup [userInfo]="user$ | async" [routes]="userRoutes"></rime-user-account-popup>
+
   <router-outlet> </router-outlet>
 </rime-shell>

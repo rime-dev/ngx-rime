@@ -1,18 +1,20 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 import {RimeAuthConfig, RimeAuthModule, RIME_AUTH_CONFIG} from '@ngx-rime/data-access/auth';
 import {RimeBaseModule} from '@ngx-rime/data-access/base';
+import {RimeShellModule} from '@ngx-rime/ui/shell';
+import {RimeUserAccountPopupModule} from '@ngx-rime/ui/user-account-popup';
+
 import {environment} from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-
-import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
-import {RimeShellModule} from "@ngx-rime/ui/shell";
-import {TranslocoRootModule} from "./transloco-root.module";
-import {MatButtonModule} from "@angular/material/button";
-import {MatToolbarModule} from "@angular/material/toolbar";
+import {TranslocoRootModule} from './transloco-root.module';
 
 const firebaseConfig = {
   options: environment.firebaseOptions,
@@ -35,6 +37,7 @@ const authConfig: RimeAuthConfig = {
     TranslocoRootModule,
     MatButtonModule,
     MatToolbarModule,
+    RimeUserAccountPopupModule,
   ],
   providers: [
     {

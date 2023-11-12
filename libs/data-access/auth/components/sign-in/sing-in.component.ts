@@ -26,13 +26,13 @@ export class RimeSignInComponent {
     });
     this.hide = true;
   }
-  submit(): void {
+  async submit(): Promise<void> {
     if (this.form.invalid) {
       return;
     }
     const email = this.form.controls.email.value as string;
     const password = this.form.controls.password.value as string;
-    void this.rimeAuthService.signIn(email, password);
+    await this.rimeAuthService.signIn(email, password);
   }
 
   loginWithGoogle(): void {
